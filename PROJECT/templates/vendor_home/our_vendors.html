@@ -1,0 +1,207 @@
+{% load static %}
+{% load lang_tran %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Eventinz Vendors </title>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous" />
+    <link rel="stylesheet" href="{%static 'main_home1/wedding_static/owlcarousel/assets/owl.carousel.min.css' %}" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="{%static 'main_home1/wedding_static/owlcarousel/assets/owl.theme.default.min.css' %}" />
+    <link rel="stylesheet" href="{%static 'main_home1/wedding_static/fonts/style.css' %}" />
+    <link rel="stylesheet" href="{%static 'main_home1/wedding_static/css/style.css' %}" />
+  {% include 'vendor_home/head.html' %}
+
+</head>
+
+<body>
+
+    {% include 'vendor_home/header.html' %}
+
+
+    <div class="main_cont">
+
+
+        <div>
+            <div class="deal_main_bg" style="background-image: url('{{BASE_URL}}/media/{{vendor_cms.background_image}}');">
+                <h3>{{vendor_cms.Header_Text|transl:is_french}}</h3>
+            </div>
+        </div>
+
+        <div class="container resp_cont">
+
+            <div class="row mt-5 mb-0 align-center ">
+                <div class="col-md-7">
+                    <div class="deal_title">
+                        {% comment %} <h3>Eventinz Vendors <span>({{vendor_cat_count}})</span> Found</h3> {% endcomment %}
+                        <h3>{{vendor_cms.Display_text|transl:is_french}}</h3>
+
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="filt_selc">
+                        <select name="filter" id="filt_category" class="filt_category">
+
+                            <option value="*">{{"No Filters Applied"|transl:is_french}}</option>
+                            {% for i in vendor_categories %}
+                            <option value=".{{i.id}}">{{i.category_name|title|transl:is_french}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-0 mb-5 resp_mrg filter-item">
+                {% for i in vendor_categories %}
+                
+                <div class="col-lg-4 item mt-5 {{i.id}}">
+                    <div class="deal_sec_1">
+                        <div class="deal_sec_bg deal_bg_1" style="background-image: url('{{BASE_URL}}/media/{{i.thumbnail_cover_image}}');background-size: cover;">
+                            <div class="deal_bg_overlay">
+                                <div class="elipse_1" style="background-color: white;">
+                                    <h4><img src="{{BASE_URL}}/media/{{i.category_icon}}" width="45" height="45"alt=""></h4>
+                                </div>
+                                <div class="deal_head">
+                                    <h3>{{i.category_name|transl:is_french}}</h3>
+                                    {% comment %} <p> <span>Reg $2,600</span> $2,470</p> {% endcomment %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="deal_sec_cont">
+                            <div class="deal_sec_title">
+                                <h5>Check {{i.category_name|transl:is_french}}</h5>
+                                <a class="email_vendor_btn" href="{%url 'vendor_home:our_vendors' %}{{i.category_name|urlencode}}" type="button">{{"Visit Now"|transl:is_french}}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+                
+            </div>
+
+           
+
+        </div>
+
+
+    </div>
+
+
+
+
+    {% include 'vendor_home/footer.html' %}
+
+
+    <!-- Modal -->
+    <div class="modal fade email-popup" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-body p-0">
+                    <div class="email-vendor-popup">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+                        <div class="popup-header">
+                            <div class="sign-col">
+                                <img src="{%static 'main_home1/wedding_static/images/sign.png' %}" alt="sign">
+                            </div>
+                            <div class="rating-col">
+                                <div class="rating-title">Ondi Studio</div>
+                                <div class="rating-reviews">
+                                    <div class="rating-stars">
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="tot-reviews">12 Reviews</div>
+                                </div>
+                            </div>
+                        </div>
+                        <form class="vendor-form">
+                            <div class="row row-cols-1 row-cols-lg-2 g-2 g-lg-3">
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="Andrew|*">
+                                </div>
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="Last Name *">
+                                </div>
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="Email Address *">
+                                </div>
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="Phone *">
+                                </div>
+                            </div>
+                            <div class="row-btn">
+                                <button type="button" class="btn form-btn">Request a Quote</button>
+                                <button type="button" class="btn form-btn aq-btn">Asked a Questions</button>
+                            </div>
+                            <textarea class="form-control comment" placeholder="Type your message"></textarea>
+                            <div class="attach-file">
+                                <div class="btn-wrap">
+                                    <button class="uplbtn"><img class="icon" src="{%static 'main_home1/wedding_static/images/attach-file.png' %}"
+                                            alt="Attach Icon"> Attach a photo</button>
+                                    <input type="file" name="myfile" />
+                                </div>
+                                <div class="upload-size">File must be less than 2 MB</div>
+                            </div>
+                            <div class="form-footer">
+                                <button type="button" class="btn send-btn btn-purple">Send Message</button>
+                            </div>
+                            <div class="check-row">
+                                <label class="cont-check">
+                                    Deliver a copy of this email to my inbox
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <script src="{%static 'main_home1/wedding_static/owlcarousel/jquery.min.js' %}"></script>
+    <script src="{%static 'main_home1/wedding_static/owlcarousel/owl.carousel.min.js' %}"></script>
+
+    <script src="{%static 'main_home1/wedding_static/js/main.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha512-Zq2BOxyhvnRFXu0+WE6ojpZLOU2jdnqbrM1hmVdGzyeCa1DgM3X5Q4A/Is9xA1IkbUeDd7755dNNI/PzSf2Pew==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    {% include 'vendor_home/index-js.html' %}
+
+    <script>
+        $('.filter-item').isotope({
+            itemSelector: '.item',
+            layoutMode: 'fitRows'
+        });
+        $('#filt_category').on('change',function(){
+            console.log('OK clicked');
+            var selector = $(this).val();
+            console.log(selector);
+            $('.filter-item').isotope({
+                filter: selector
+            });
+            return false;
+        });
+    </script>
+</body>
+
+</html>

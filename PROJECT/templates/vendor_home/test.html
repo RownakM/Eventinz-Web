@@ -1,0 +1,1136 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    <link rel="stylesheet" href="{%static 'main_home/assets/owlcarousel/assets/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{%static 'main_home/assets/owlcarousel/assets/owl.theme.default.min.css' %}">
+
+    <link rel="stylesheet" href="{%static 'main_home/assets/fonts/style.css' %}" />
+    <link rel="stylesheet" href="{%static 'main_home/assets/style2.css' %}" />
+
+    <title>Home</title>
+  </head>
+
+  <body>
+    <div class="main">
+      <div class="head_bg">
+        <div class="overly_bg" style="background-image: url('{%static 'main_home/assets/images/head_bg.png' %}');">
+          <div class="menu_header">
+            <div class="container">
+              <div class="row align-items-center">
+                <div class="col-md-2">
+                  <!-- <h3 class="logo_title">Eventinz</h3> -->
+                  <img src="{%static 'main_home/assets/images/logo.png' %}" alt="" />
+                </div>
+                <div class="col-md-10 left-nav header_left_pad">
+                  <nav class="navbar navbar-expand-lg navbar-light">
+                    <button
+                      class="navbar-toggler"
+                      type="button"
+                      data-toggle="collapse"
+                      data-target="#navbarNavDropdown"
+                      aria-controls="navbarNavDropdown"
+                      aria-expanded="false"
+                      aria-label="Toggle navigation"
+                    >
+                      <span class="navbar-toggler-icon"
+                        ><i class="fa fa-bars"></i
+                      ></span>
+                    </button>
+                    <div
+                      class="collapse navbar-collapse"
+                      id="navbarNavDropdown"
+                    >
+                      <ul class="navbar-nav">
+                        <li class="nav-item">
+                          <a class="nav-link" href="#">About</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="#">Venues</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="#">Events</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="#">Deals</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="#">Blog</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="#">Contact</a>
+                        </li>
+                        <li class="nav-item lgnml_50">
+                          <a class="nav-link" href="#">Login</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="#">Sign Up</a>
+                        </li>
+                        <li class="nav-item vendor_btn">
+                          <a class="nav-link px-3" href="ourfirm.html"
+                            >Are You A Vender</a
+                          >
+                        </li>
+                      </ul>
+                    </div>
+                  </nav>
+                </div>
+
+                <!-- <div class="col-md-4 pad_0 right-nav">
+                  <nav class="navbar navbar-expand-lg navbar-light">
+                    <button
+                      class="navbar-toggler"
+                      type="button"
+                      data-toggle="collapse"
+                      data-target="#navbarNavDropdown"
+                      aria-controls="navbarNavDropdown"
+                      aria-expanded="false"
+                      aria-label="Toggle navigation"
+                    >
+                      <span class="navbar-toggler-icon"
+                        ><i class="fa fa-bars"></i
+                      ></span>
+                    </button>
+                    <div
+                      class="collapse navbar-collapse"
+                      id="navbarNavDropdown"
+                    >
+                      <ul class="navbar-nav">
+                        <li class="nav-item">
+                          <a class="nav-link" href="home.html">Login</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="ourfirm.html">Sign Up</a>
+                        </li>
+                
+                          <li class="nav-item vendor_btn">
+                            <a class="nav-link px-3" href="ourfirm.html"
+                              >Are You A Vender</a
+                            >
+                          </li>
+
+                      </ul>
+                    </div>
+                  </nav>
+                </div>  -->
+
+              </div>
+            </div>
+          </div>
+
+          <div class="evnt_bk_sec">
+            <div class="evnt_txt">
+              <h3>Eventinz Your Event Your Way</h3>
+              <p>The Most Reliable Event Management Platform in West Africa</p>
+              <form action="#" class="frm_wiid">
+                <div class="row">
+                  <div class="col pad_0">
+                    <div class="inpt_pos">
+                      <i class="fa fa-search icn_pos"></i>
+                      <input
+                        type="search"
+                        class="serch_cont"
+                        name="search"
+                        id="search_evnt"
+                        placeholder="What you looking for"
+                      />
+                    </div>
+                  </div>
+                  <div class="col pad_0">
+                    <div class="inpt_pos">
+                      <select
+                        name="event_type"
+                        id="envt_type"
+                        class="serch_cont_1" style="background-image: url('{%static 'main_home/assets/images/selecticn.png' %}');">
+                        <option value="0">Event Type</option>
+                        <option value="1">Event Type</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col pad_0">
+                    <div class="inpt_pos">
+                      <input
+                        type="text"
+                        class="serch_cont_2"
+                        name="categories"
+                        id="Categories"
+                        placeholder="Categories"
+                      />
+                    </div>
+                  </div>
+                  <div class="col serch_wid pad_0">
+                    <div class="inpt_pos">
+                      <input type="button" value="Search" class="serch_btn" />
+                    </div>
+                  </div>
+                </div>
+              </form>
+
+              <div class="scrl_img">
+                <img src="{%static 'main_home/assets/images/scroll.png' %}" alt="" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="container">
+          <div class="vend_cat">
+            <div class="vand_cat_txt">
+              <h4>Vendor Categories</h4>
+              <p>
+                Find Everything you need in the Benin Republic, Nigeria, Togo &
+                Ivory coast for your Special Event.
+              </p>
+            </div>
+
+            <div class="mt_50">
+              <div class="owl-carousel owl-theme">
+                <div class="item">
+                  <div class="card1 h-100">
+                    <div class="card-body vend_cat_itm"  
+                    onMouseOver="this.style.backgroundImage= 'url({%static 'main_home/assets/images/catererimg.png' %})', this.style.backgroundColor='#000';"
+                    onMouseOut="this.style.backgroundColor='#fff', this.style.backgroundImage='none';">
+                      <img
+                        src="{%static 'main_home/assets/images/venue.png' %}"
+                        alt=""
+                        class="vend_cs_img"
+                      />
+                      <h6 class="itm_txt">Venues</h6>
+                      <div class="ttl_vnue_bg">
+                        <p>243 Venues</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="item">
+                  <div class="card1 h-100">
+                    <div class="card-body vend_cat_itm"
+                    onMouseOver="this.style.backgroundImage= 'url({%static 'main_home/assets/images/catererimg.png' %})', this.style.backgroundColor='#000';"
+                    onMouseOut="this.style.backgroundColor='#fff', this.style.backgroundImage='none';">
+                      <img
+                        src="{%static 'main_home/assets/images/music.png' %}"
+                        alt=""
+                        class="vend_cs_img"
+                      />
+                      <h6 class="itm_txt">Caterers</h6>
+                      <div class="ttl_vnue_bg">
+                        <p>243 Caterers</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="item">
+                  <div class="card1 h-100">
+                    <div class="card-body vend_cat_itm"
+                    onMouseOver="this.style.backgroundImage= 'url({%static 'main_home/assets/images/catererimg.png' %})', this.style.backgroundColor='#000';"
+                    onMouseOut="this.style.backgroundColor='#fff', this.style.backgroundImage='none';">
+                      <img
+                        src="{%static 'main_home/assets/images/photographer.png' %}"
+                        alt=""
+                        class="vend_cs_img"
+                      />
+                      <h6 class="itm_txt">Photographer</h6>
+                      <div class="ttl_vnue_bg">
+                        <p>560 Photographer Available</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="item">
+                  <div class="card1 h-100">
+                    <div class="card-body vend_cat_itm"
+                    onMouseOver="this.style.backgroundImage= 'url({%static 'main_home/assets/images/catererimg.png' %})', this.style.backgroundColor='#000';"
+                    onMouseOut="this.style.backgroundColor='#fff', this.style.backgroundImage='none';">
+                      <img
+                        src="{%static 'main_home/assets/images/music.png' %}"
+                        alt=""
+                        class="vend_cs_img"
+                      />
+                      <h6 class="itm_txt">Music & Bands</h6>
+                      <div class="ttl_vnue_bg">
+                        <p>28 Music & Live Bands Available</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="item">
+                  <div class="card1 h-100">
+                    <div class="card-body vend_cat_itm"
+                    onMouseOver="this.style.backgroundImage= 'url({%static 'main_home/assets/images/catererimg.png' %})', this.style.backgroundColor='#000';"
+                    onMouseOut="this.style.backgroundColor='#fff', this.style.backgroundImage='none';">
+                      <img
+                        src="{%static 'main_home/assets/images/photographer.png' %}"
+                        alt=""
+                        class="vend_cs_img"
+                      />
+                      <h6 class="itm_txt">Photographer</h6>
+                      <div class="ttl_vnue_bg">
+                        <p>560 Photographer Available</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="item">
+                  <div class="card1 h-100">
+                    <div class="card-body vend_cat_itm"
+                    onMouseOver="this.style.backgroundImage= 'url({%static 'main_home/assets/images/catererimg.png' %})', this.style.backgroundColor='#000';"
+                    onMouseOut="this.style.backgroundColor='#fff', this.style.backgroundImage='none';">
+                      <img
+                        src="{%static 'main_home/assets/images/music.png' %}"
+                        alt=""
+                        class="vend_cs_img"
+                      />
+                      <h6 class="itm_txt">Caterers</h6>
+                      <div class="ttl_vnue_bg">
+                        <p>243 Caterers</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="item">
+                  <div class="card1 h-100">
+                    <div class="card-body vend_cat_itm"
+                    onMouseOver="this.style.backgroundImage= 'url({%static 'main_home/assets/images/catererimg.png' %})', this.style.backgroundColor='#000';"
+                    onMouseOut="this.style.backgroundColor='#fff', this.style.backgroundImage='none';">
+                      <img
+                        src="{%static 'main_home/assets/images/venue.png' %}"
+                        alt=""
+                        class="vend_cs_img"
+                      />
+                      <h6 class="itm_txt">Venues</h6>
+                      <div class="ttl_vnue_bg">
+                        <p>243 Venues</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="item">
+                  <div class="card1 h-100">
+                    <div class="card-body vend_cat_itm"
+                    onMouseOver="this.style.backgroundImage= 'url(./assets/images/catererimg.png)', this.style.backgroundColor='#000';"
+                    onMouseOut="this.style.backgroundColor='#fff', this.style.backgroundImage='none';">
+                      <img
+                        src="{%static 'main_home/assets/images/music.png' %}"
+                        alt=""
+                        class="vend_cs_img"
+                      />
+                      <h6 class="itm_txt">Music & Bands</h6>
+                      <div class="ttl_vnue_bg">
+                        <p>28 Music & Live Bands Available</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="slider_nav">
+                <button class="am-prev car_nav_btn">
+                  <img src="{%static 'main_home/assets/images/arrowleft.png' %}" alt="" />
+                </button>
+                <button class="am-next car_nav_btn">
+                  <img src="{%static 'main_home/assets/images/arrowright.png' %}" alt="" />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="how_work">
+          <div class="how_wrk_bg" style="background-image: url('{%static 'main_home/assets/images/howwork.png' %}');">
+            <div class="container">
+              <div class="vand_cat_txt">
+                <h4>How Eventinz Works</h4>
+                <p>
+                  Eventinz helps you find your perfect vendor by searching for
+                  what matters most to you.
+                </p>
+              </div>
+
+              <div class="how_wrk_sec">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="how_wr_sec_bg">
+                      <div class="elip_img_bg">
+                        <img
+                          class="eli_img"
+                          src="{%static 'main_home/assets/images/calender.png'  %}"
+                          alt=""
+                        />
+                      </div>
+                      <div class="hw_txt">
+                        <h6>Select Event Type</h6>
+                      </div>
+                      <div class="hw_stp_txt">
+                        <h5>Step</h5>
+                        <h4>01</h4>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="how_wr_sec_bg">
+                      <div class="elip_img_bg">
+                        <img
+                          class="eli_img"
+                          src="{%static 'main_home/assets/images/catlist.png' %}"
+                          alt=""
+                        />
+                      </div>
+                      <div class="hw_txt">
+                        <h6>Select Vendor Category</h6>
+                      </div>
+                      <div class="hw_stp_txt">
+                        <h5>Step</h5>
+                        <h4>02</h4>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="how_wr_sec_bg">
+                      <div class="elip_img_bg">
+                        <img
+                          class="eli_img"
+                          src="{%static 'main_home/assets/images/connectuser.png' %}"
+                          alt=""
+                        />
+                      </div>
+                      <div class="hw_txt">
+                        <h6>Get Connected</h6>
+                      </div>
+                      <div class="hw_stp_txt">
+                        <h5>Step</h5>
+                        <h4>03</h4>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <section class="event-deal wt-bg py-5">
+        <div class="container py-5">
+          <div class="row align-items-center">
+            <div class="col">
+              <h4 class="title">Vendor Deals</h4>
+              <p class="sub-title">
+                Find Everything you need for your Special Event
+              </p>
+            </div>
+            <!-- <div class="col text-right">
+              <a class="otl-btn active px-4">Standard Packages</a>
+              <a class="otl-btn px-4">Special Deals</a>
+            </div>
+          </div> -->
+
+          <!-- <div class="row mt-4">
+            <div class="col-md-4 mb-4">
+              <div class="venue_deal rounded v1">
+                <div class="deal-details px-4 pb-4">
+                  <div class="fl">
+                    <h6>JP Fine Foods</h6>
+                    <p class="mb-0">Price stat at $15 - $225 Per Person</p>
+                  </div>
+                </div>
+                <div class="overlay rounded"></div>
+              </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+              
+              <div class="venue_deal rounded v2">
+                <div class="deal-details px-4 pb-4">
+                  <div class="fl">
+                    <h6>JP Fine Foods</h6>
+                    <p class="mb-0">Price stat at $15 - $225 Per Person</p>
+                  </div>
+                </div>
+                <div class="overlay rounded"></div>
+              </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+              <div class="venue_deal rounded v3">
+                <div class="deal-details px-4 pb-4">
+                  <div class="fl">
+                    <h6>JP Fine Foods</h6>
+                    <p class="mb-0">Price stat at $15 - $225 Per Person</p>
+                  </div>
+                </div>
+                <div class="overlay rounded"></div>
+              </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+              <div class="venue_deal rounded v4">
+                <div class="deal-details px-4 pb-4">
+                  <div class="fl">
+                    <h6>JP Fine Foods</h6>
+                    <p class="mb-0">Price stat at $15 - $225 Per Person</p>
+                  </div>
+                </div>
+                <div class="overlay rounded"></div>
+              </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+              <div class="venue_deal rounded v5">
+                <div class="deal-details px-4 pb-4">
+                  <div class="fl">
+                    <h6>JP Fine Foods</h6>
+                    <p class="mb-0">Price stat at $15 - $225 Per Person</p>
+                  </div>
+                </div>
+                <div class="overlay rounded"></div>
+              </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+              <div class="venue_deal rounded v6">
+                <div class="deal-details px-4 pb-4">
+                  <div class="fl">
+                    <h6>JP Fine Foods</h6>
+                    <p class="mb-0">Price stat at $15 - $225 Per Person</p>
+                  </div>
+                </div>
+                <div class="overlay rounded"></div>
+              </div>
+            </div>
+          </div> -->
+
+
+          <div class="buttons col text-right">
+            <a class="otl-btn spot_btn1 spot_active1 px-4" onclick="toggleVisibility('Menu1');">Standard Packages</a>
+            <a class="otl-btn spot_btn1 px-4" onclick="toggleVisibility('Menu2');">Special Deals</a>
+          </div>
+           
+        </div>
+
+
+        <div id="Menu1">
+          <div class="row mt-4">
+            <div class="col-md-4 mb-4">
+              <div class="venue_deal rounded" style="background-image: url('{%static 'main_home/assets/images/v1.jpg' %}');">
+                <div class="deal-details px-4 pb-4">
+                  <div class="fl">
+                    <h6>JP Fine Foods</h6>
+                    <p class="mb-0">Price stat at $15 - $225 Per Person</p>
+                  </div>
+                </div>
+                <div class="overlay rounded"></div>
+              </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+              
+              <div class="venue_deal rounded" style="background-image: url('{%static 'main_home/assets/images/v1.jpg' %}');">
+                <div class="deal-details px-4 pb-4">
+                  <div class="fl">
+                    <h6>JP Fine Foods</h6>
+                    <p class="mb-0">Price stat at $15 - $225 Per Person</p>
+                  </div>
+                </div>
+                <div class="overlay rounded"></div>
+              </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+              <div class="venue_deal rounded" style="background-image: url('{%static 'main_home/assets/images/v1.jpg' %}');">
+                <div class="deal-details px-4 pb-4">
+                  <div class="fl">
+                    <h6>JP Fine Foods</h6>
+                    <p class="mb-0">Price stat at $15 - $225 Per Person</p>
+                  </div>
+                </div>
+                <div class="overlay rounded"></div>
+              </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+              <div class="venue_deal rounded" style="background-image: url('{%static 'main_home/assets/images/v1.jpg' %}');">
+                <div class="deal-details px-4 pb-4">
+                  <div class="fl">
+                    <h6>JP Fine Foods</h6>
+                    <p class="mb-0">Price stat at $15 - $225 Per Person</p>
+                  </div>
+                </div>
+                <div class="overlay rounded"></div>
+              </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+              <div class="venue_deal rounded" style="background-image: url('{%static 'main_home/assets/images/v1.jpg' %}');">
+                <div class="deal-details px-4 pb-4">
+                  <div class="fl">
+                    <h6>JP Fine Foods</h6>
+                    <p class="mb-0">Price stat at $15 - $225 Per Person</p>
+                  </div>
+                </div>
+                <div class="overlay rounded"></div>
+              </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+              <div class="venue_deal rounded" style="background-image: url('{%static 'main_home/assets/images/v1.jpg' %}');">
+                <div class="deal-details px-4 pb-4">
+                  <div class="fl">
+                    <h6>JP Fine Foods</h6>
+                    <p class="mb-0">Price stat at $15 - $225 Per Person</p>
+                  </div>
+                </div>
+                <div class="overlay rounded"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div id="Menu2" style="display: none;">
+        
+          <div class="row mt-4">
+            <div class="col-md-4 mb-4">
+              <div class="venue_deal rounded" style="background-image: url('{%static 'main_home/assets/images/vend_deal.png'%}');">
+                <div class="deal-details px-4 pb-4">
+                  <div class="fl">
+                    <h6>JP Fine Foods</h6>
+                    <p class="mb-0">Price stat at $15 - $225 Per Person</p>
+                  </div>
+                </div>
+                <div class="overlay rounded"></div>
+              </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+              
+              <div class="venue_deal rounded" style="background-image: url('{%static 'main_home/assets/images/vend_deal.png' %}');">
+                <div class="deal-details px-4 pb-4">
+                  <div class="fl">
+                    <h6>JP Fine Foods</h6>
+                    <p class="mb-0">Price stat at $15 - $225 Per Person</p>
+                  </div>
+                </div>
+                <div class="overlay rounded"></div>
+              </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+              <div class="venue_deal rounded" style="background-image: url('{%static 'main_home/assets/images/vend_deal.png' %}');">
+                <div class="deal-details px-4 pb-4">
+                  <div class="fl">
+                    <h6>JP Fine Foods</h6>
+                    <p class="mb-0">Price stat at $15 - $225 Per Person</p>
+                  </div>
+                </div>
+                <div class="overlay rounded"></div>
+              </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+              <div class="venue_deal rounded" style="background-image: url('{%static 'main_home/assets/images/vend_deal.png' %}');">
+                <div class="deal-details px-4 pb-4">
+                  <div class="fl">
+                    <h6>JP Fine Foods</h6>
+                    <p class="mb-0">Price stat at $15 - $225 Per Person</p>
+                  </div>
+                </div>
+                <div class="overlay rounded"></div>
+              </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+              <div class="venue_deal rounded" style="background-image: url('{%static 'main_home/assets/images/vend_deal.png' %}');">
+                <div class="deal-details px-4 pb-4">
+                  <div class="fl">
+                    <h6>JP Fine Foods</h6>
+                    <p class="mb-0">Price stat at $15 - $225 Per Person</p>
+                  </div>
+                </div>
+                <div class="overlay rounded"></div>
+              </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+              <div class="venue_deal rounded" style="background-image: url('{%static 'main_home/assets/images/vend_deal.png' %}');">
+                <div class="deal-details px-4 pb-4">
+                  <div class="fl">
+                    <h6>JP Fine Foods</h6>
+                    <p class="mb-0">Price stat at $15 - $225 Per Person</p>
+                  </div>
+                </div>
+                <div class="overlay rounded"></div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+
+      </section>
+
+      
+
+      <section class="event-deal py-5">
+        <div class="container py-5">
+          <div class="row align-items-center">
+            <div class="col">
+              <h4 class="title">Event Host Pre-Pack Deal</h4>
+              <p class="sub-title">
+                Find Everything you need for your Special Event
+              </p>
+            </div>
+            <!-- <div class="col text-right">
+              <a class="otl-btn active px-4">Spotlight</a>
+              <a class="otl-btn px-4">New Listings</a>
+              <a class="otl-btn px-4">Recently Updated</a>
+            </div> -->
+
+            <div class="buttons col text-right">
+              <a class="otl-btn spot_btn spot_active px-4" onclick="toggleVisibility1('spotlight');">Spotlight</a>
+              <a class="otl-btn spot_btn px-4" onclick="toggleVisibility1('listings');">New Listings</a>
+              <a class="otl-btn spot_btn px-4" onclick="toggleVisibility1('reupdate');">Recently Updated</a>
+            </div>
+
+          </div>
+
+          <!-- <div class="row mt-4">
+            <div class="col-md-6">
+              <div class="left-deal rounded">
+                <div class="deal-details px-5 pb-4">
+                  <div class="fl">
+                    <h6>JP Fine Foods</h6>
+                    <p>Price stat at $15 - $225 Per Person</p>
+                  </div>
+                  <img class="deal-ico" src="./assets/images/deal-ic1.jpg" />
+                </div>
+                <div class="overlay rounded"></div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="right-deal mb-3">
+                <img
+                  class="bg-img img-fluid rounded"
+                  src="./assets/images/e2.jpg"
+                />
+                <div class="deal-details px-5 pb-4">
+                  <div class="fl">
+                    <h6>Classy Affairs</h6>
+                    <p>Price stat at  $1800 - $7500</p>
+                  </div>
+                  <img class="deal-ico" src="./assets/images/deal-ic1.jpg" />
+                </div>
+                <div class="overlay rounded"></div>
+              </div>
+              <div class="right-deal">
+                <img
+                  class="bg-img img-fluid rounded"
+                  src="./assets/images/e3.jpg"
+                />
+                <div class="deal-details px-5 pb-4">
+                  <div class="fl">
+                    <h6>Lauren Roy Entertainment</h6>
+                    <p> Price stat at  $800 - $5,000</p>
+                  </div>
+                  <img class="deal-ico" src="./assets/images/deal-ic1.jpg" />
+                </div>
+                <div class="overlay rounded"></div>
+              </div>
+            </div>
+          </div> -->
+
+
+          <div id="spotlight">
+            <div class="row mt-4">
+              <div class="col-md-6">
+                <div class="left-deal rounded" style="background-image: url('{%static 'main_home/assets/images/e1.jpg' %}');">
+                  <div class="deal-details px-5 pb-4">
+                    <div class="fl">
+                      <h6>JP Fine Foods</h6>
+                      <p>Price stat at $15 - $225 Per Person</p>
+                    </div>
+                    <img class="deal-ico" src="{%static 'main_home/assets/images/deal-ic1.jpg' %}" />
+                  </div>
+                  <div class="overlay rounded"></div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="right-deal mb-3">
+                  <img
+                    class="bg-img img-fluid rounded"
+                    src="{%static 'main_home/assets/images/e2.jpg' %}"
+                  />
+                  <div class="deal-details px-5 pb-4">
+                    <div class="fl">
+                      <h6>Classy Affairs</h6>
+                      <p>Price stat at  $1800 - $7500</p>
+                    </div>
+                    <img class="deal-ico" src="{%static 'main_home/assets/images/deal-ic1.jpg' %}" />
+                  </div>
+                  <div class="overlay rounded"></div>
+                </div>
+                <div class="right-deal">
+                  <img
+                    class="bg-img img-fluid rounded"
+                    src="{%static 'main_home/assets/images/e3.jpg' %}"
+                  />
+                  <div class="deal-details px-5 pb-4">
+                    <div class="fl">
+                      <h6>Lauren Roy Entertainment</h6>
+                      <p> Price stat at  $800 - $5,000</p>
+                    </div>
+                    <img class="deal-ico" src="{%static 'main_home/assets/images/deal-ic1.jpg' %}" />
+                  </div>
+                  <div class="overlay rounded"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="listings" style="display: none;">
+            <div class="row mt-4">
+              <div class="col-md-6">
+                <div class="left-deal rounded" style="background-image: url('{%static 'main_home/assets/images/e1.jpg' %}');">
+                  <div class="deal-details px-5 pb-4">
+                    <div class="fl">
+                      <h6>JP Foods Fine Foods </h6>
+                      <p>Price stat at $15 - $225 Per Person</p>
+                    </div>
+                    <img class="deal-ico" src="{%static 'main_home/assets/images/deal-ic1.jpg' %}" />
+                  </div>
+                  <div class="overlay rounded"></div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="right-deal mb-3">
+                  <img
+                    class="bg-img img-fluid rounded"
+                    src="{%static 'main_home/assets/images/e2.jpg' %}"
+                  />
+                  <div class="deal-details px-5 pb-4">
+                    <div class="fl">
+                      <h6>Classy Affairs Classy</h6>
+                      <p>Price stat at  $1800 - $7500</p>
+                    </div>
+                    <img class="deal-ico" src="{%static 'main_home/assets/images/deal-ic1.jpg' %}" />
+                  </div>
+                  <div class="overlay rounded"></div>
+                </div>
+                <div class="right-deal">
+                  <img
+                    class="bg-img img-fluid rounded"
+                    src="{%static 'main_home/assets/images/e3.jpg' %}"
+                  />
+                  <div class="deal-details px-5 pb-4">
+                    <div class="fl">
+                      <h6>Lauren Roy Entertainment</h6>
+                      <p> Price stat at  $800 - $5,000</p>
+                    </div>
+                    <img class="deal-ico" src="{%static 'main_home/assets/images/deal-ic1.jpg' %}" />
+                  </div>
+                  <div class="overlay rounded"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="reupdate" style="display: none;">
+            <div class="row mt-4">
+              <div class="col-md-6">
+                <div class="left-deal rounded" style="background-image: url('{%static 'main_home/assets/images/e1.jpg' %}');">
+                  <div class="deal-details px-5 pb-4">
+                    <div class="fl">
+                      <h6>Classy Affairs</h6>
+                      <p>Price stat at $15 - $225 Per Person</p>
+                    </div>
+                    <img class="deal-ico" src="{%static 'main_home/assets/images/deal-ic1.jpg' %}" />
+                  </div>
+                  <div class="overlay rounded"></div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="right-deal mb-3">
+                  <img
+                    class="bg-img img-fluid rounded"
+                    src="{%static 'main_home/assets/images/e2.jpg' %}"
+                  />
+                  <div class="deal-details px-5 pb-4">
+                    <div class="fl">
+                      <h6>JP Fine Foods</h6>
+                      <p>Price stat at  $1800 - $7500</p>
+                    </div>
+                    <img class="deal-ico" src="{%static 'main_home/assets/images/deal-ic1.jpg' %}" />
+                  </div>
+                  <div class="overlay rounded"></div>
+                </div>
+                <div class="right-deal">
+                  <img
+                    class="bg-img img-fluid rounded"
+                    src="{%static 'main_home/assets/images/e3.jpg' %}"
+                  />
+                  <div class="deal-details px-5 pb-4">
+                    <div class="fl">
+                      <h6>Lauren Entertainment Roy </h6>
+                      <p> Price stat at  $800 - $5,000</p>
+                    </div>
+                    <img class="deal-ico" src="{%static 'main_home/assets/images/deal-ic1.jpg' %}" />
+                  </div>
+                  <div class="overlay rounded"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </section>
+
+
+      
+       
+        
+
+      <section id="advert" class="py-5">
+        <div class="container py-5 pr_0_rep">
+          <div class="row g-0 rounded align-items-center">
+            <div class="col-md-7 pad_0 pl-5 py-5">
+              <div>
+                <h4>Advertise With Us</h4>
+                <p>Find Everything you need for your Special Event</p>
+                <a>Contact Us</a>
+              </div>
+            </div>
+            <div class="col-md-5 pad_0">
+              <img src="{%static 'main_home/assets/images/advert.jpg' %}" class="img-fluid img_rep" />
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div class="footer_sec">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <p class="mail_tit">Email Alerts</p>
+            <p class="sub_text">Subscribe our newsletter to get update</p>
+            <form action="">
+              <input
+                type="text"
+                placeholder="Enter email address"
+                class="search_input_box ps-3"
+              />
+            </form>
+            <div class="social_icons">
+              <i class="fa fa-instagram text-light" aria-hidden="true"></i>
+              <i class="fa fa-facebook text-light" aria-hidden="true"></i>
+              <i class="fa fa-linkedin text-light" aria-hidden="true"></i>
+              <i class="fa fa-twitter text-light" aria-hidden="true"></i>
+              <i class="fa fa-youtube-play text-light" aria-hidden="true"></i>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <h2 class="foot_tit">Company</h2>
+            <ul class="navbar-nav_foot">
+              <li class="nav-item">
+                <a class="nav-link_foot" href="#">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link_foot" href="#">Venues</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link_foot" href="#">Events</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link_foot" href="#">Deals</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link_foot" href="#">Blog</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link_foot" href="#">Contact</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-3 vend_sp">
+            <h2 class="foot_tit">Vendors</h2>
+            <ul class="navbar-nav_foot">
+              <li class="nav-item">
+                <a class="nav-link_foot" href="#">Caterers</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link_foot" href="#">Event planers</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link_foot" href="#">Photographers</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link_foot" href="#">Videographers</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link_foot" href="#">Music</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link_foot" href="#">Decor & Rentals</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-2">
+            <div class="logo_sec">
+              <!-- <div class="logo_sqr"></div>
+              <h3 class="logo_title">Eventinz</h3>
+              <div class="logo_dot"></div> -->
+              <img src="{%static 'main_home/assets/images/logo.png' %}" alt="" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+
+    <script src="{%static 'main_home/assets/owlcarousel/jquery.min.js' %}"></script>
+    <script src="{%static 'main_home/assets/owlcarousel/owl.carousel.min.js' %}"></script>
+
+    <script>
+      $(document).ready(function () {
+        $(".owl-carousel").owlCarousel({
+          items: 4,
+          loop: true,
+          margin: 15,
+          dots: false,
+          autoplay: false,
+          autoplayTimeout: 1000,
+          autoplayHoverPause: true,
+          nav: true,
+          navText: [$(".am-prev"), $(".am-next")],
+          responsiveClass: true,
+          responsive: {
+            0: {
+              items: 1,
+              nav: true,
+            },
+            600: {
+              items: 2,
+              nav: true,
+            },
+            1000: {
+              items: 3,
+              nav: true,
+              loop: true,
+              margin: 15,
+            },
+            1200: {
+              items: 4,
+              nav: true,
+              loop: true,
+              margin: 15,
+            },
+          },
+        });
+      });
+    </script>
+
+
+<script>
+
+var divs = ["Menu1", "Menu2"];
+var visibleDivId = null;
+function toggleVisibility(divId) {
+  if(visibleDivId === divId) {
+    //visibleDivId = null;
+  } else {
+    visibleDivId = divId;
+  }
+  hideNonVisibleDivs();
+}
+function hideNonVisibleDivs() {
+  var i, divId, div;
+  for(i = 0; i < divs.length; i++) {
+    divId = divs[i];
+    div = document.getElementById(divId);
+    if(visibleDivId === divId) {
+      div.style.display = "block";
+    } else {
+      div.style.display = "none";
+    }
+  }
+}
+
+</script>
+
+
+<script>
+
+  var divs1 = ["spotlight", "listings", "reupdate"];
+  var visibleDivId = null;
+  function toggleVisibility1(divId) {
+    if(visibleDivId === divId) {
+      //visibleDivId = null;
+    } else {
+      visibleDivId = divId;
+    }
+    hideNonVisibleDivs1();
+  }
+  function hideNonVisibleDivs1() {
+    var i, divId, div;
+    for(i = 0; i < divs1.length; i++) {
+      divId = divs1[i];
+      div = document.getElementById(divId);
+      if(visibleDivId === divId) {
+        div.style.display = "block";
+      } else {
+        div.style.display = "none";
+      }
+    }
+  }
+  
+  </script>
+
+  
+
+  <script>
+
+var selector = '.spot_btn';
+
+$(selector).on('click', function(){
+    $(selector).removeClass('spot_active');
+    $(this).addClass('spot_active');
+});
+
+  </script>
+
+<script>
+
+  var selector1 = '.spot_btn1';
+  
+  $(selector1).on('click', function(){
+      $(selector1).removeClass('spot_active1');
+      $(this).addClass('spot_active1');
+  });
+  
+    </script>
+
+
+  </body>
+</html>

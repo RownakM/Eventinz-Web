@@ -1,0 +1,50 @@
+{% load static %}
+{% load lang_tran %}
+<header>
+
+    <nav class="navbar navbar-expand-lg navbar-default bg-white p-0">
+
+        <div class="dashboard_nav">
+            <a class="navbar-brand" href="{%url 'vendor_home:vendor_home_index' %}"><img src="{%static 'user_dashboard_v2/assets/images/logo.png' %}" alt="" width="190"></a>
+            <div>
+                
+                <div class="pers_info">
+                    {% comment %} <div>
+                        <form action="">
+                            <div class="pos_rel">
+                                <input type="text" name="search" id="search" class="head_Search" placeholder="Search"> <img src="{%static 'user_dashboard_v2/assets/images/searchicn.png' %}" alt="" class="sercimg">
+                            </div>
+                        </form>
+                    </div> {% endcomment %}
+                    <div>
+                        <div>
+                            <button onclick="setlang({% if is_french == 'No' %} 'Yes' {% else %} 'No' {% endif %});" id="lang" class="crtevn_btn" style="font-size: 15px;">
+                                <span>{{"Switch To"|transl:is_french}} {% if is_french == 'No' %} {{"French"|transl:is_french}} {% else %} {{"English"|transl:is_french}} {% endif %}</span>
+                                
+                            </button> 
+                            {% comment %} <button class="crtevn_btn" onclick="window.location.href='{%url 'vendor_home:create_event' %}';"><span>+</span> {{"Create an Event"|transl:is_french}}</button> {% endcomment %}
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <button class="crtevn_btn" onclick="window.location.href='{%url 'vendor_home:create_event' %}';"><span>+</span> {{"Create an Event"|transl:is_french}}</button>
+                        </div>
+                    </div>
+                    <div class="nav-item1 dropdown">
+                        <a class="nav-link dropdown-toggle persinfd" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <h6 class="pers_info_txt">{{"Welcome"|transl:is_french}}! <span>{{user.fname}}</span></h6>
+                            <div class="admin_img">{{user.fname|make_list|first}}</div>
+                        </a>
+                        <ul class="dropdown-menu dropd_style" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">{{"Profile Info"|transl:is_french}}</a></li>
+                            <li><a class="dropdown-item" href="{%url 'vendor_home:user_profile_logout' %}?url={{ request.get_full_path|urlencode }}">{{"Logout"|transl:is_french}}</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+</header>

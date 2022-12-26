@@ -1,0 +1,123 @@
+{% comment %} {% load static %}
+{% load cool_num %}
+{% load get_event_type %}
+{% load country_data %}
+{% load event_currency_convert %}
+{% load get_head %}
+{% load get_currency_symbol %}
+
+<h3>Event Category = {{event_data.Event_Categories|event_type}}</h3>
+
+<h3>Heads = {{event_data.Heads|head_find}}</h3>
+{% with "vendor/"|add:event_data.Budget.country.name|add:"/user_country/"|add:location as template %}
+                                    
+<h3>{{event_data.Budget.country.name|currency_code:template|currency_icon}} {{event_data.Budget.Minimum_Value|currency_filter:template}} - {{event_data.Budget.Maximum_Value|currency_filter:template}}</h3>
+{% endwith %}
+<p>{{event_data.Event_Desc|safe}}</p>
+<hr>
+<form action="{%url 'save_event_proposal' %}" method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="event_id" value="{{event_id}}"/>
+<textarea placeholder="Enter Cover Letter and Quote here " name="cover_letter" rows="30" columns="10"></textarea>
+<br>
+<input type="number" placeholder="Amount" name="total_amount">
+<input type="submit" name="submit" value="submit">
+</form> {% endcomment %}
+
+<!doctype html>
+<html lang="en">
+ 
+<head>
+    <title>Add or Remove Input Fields Dynamically</title>
+    <link rel="stylesheet" href=
+"//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href=
+"https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    </script>
+ 
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            margin-top: 1%;
+            justify-content: center;
+            align-items: center;
+        }
+ 
+        #rowAdder {
+            margin-left: 17px;
+        }
+    </style>
+</head>
+ 
+<body>
+ 
+    <div>
+ 
+        <form action="{%url 'save_event_proposal' %}" method="POST">
+            {% csrf_token %}
+            <div class="">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <textarea class="form-control" placeholder="cover letter" name="cover_letter"></textarea>
+                        <input type="hidden" name="event_id" value="{{event_id}}"/>
+                    </div>
+                    <div class="col-lg-12">
+                        <div id="row">
+                            <div class="input-group m-3">
+                                <div class="input-group-prepend">
+                                    <button class="btn btn-danger"
+                                        id="DeleteRow" type="button">
+                                        <i class="bi bi-trash"></i>
+                                        Delete
+                                    </button>
+                                </div>
+                                <input type="text"
+                                    class="form-control m-input" name="description" placeholder="description" required>
+                                    <input type="text"
+                                    class="form-control m-input" name="qty" placeholder="qty" required>
+                                    <input type="text"
+                                    class="form-control m-input" name="unit" placeholder="unit" required>
+                                    <input type="text"
+                                    class="form-control m-input" name="rate" placeholder="rate" required>
+                                    <input type="text"
+                                    class="form-control m-input" name="total" placeholder="total" required>
+                            </div>
+                        </div>
+    
+                        <div id="newinput"></div>
+                        <button id="rowAdder" type="button"
+                            class="btn btn-dark">
+                            <span class="bi bi-plus-square-dotted">
+                            </span> ADD
+                        </button>
+                        <input type="number" placeholder="Amount" name="total_amount" class="form-control">
+                        <input type="submit" name="submit" value="submit" class="btn btn-success">
+                    </div>
+                    
+                </div>
+            </div>
+        </form>
+    </div>
+ 
+    <script type="text/javascript">
+ 
+        $("#rowAdder").click(function () {
+            newRowAdd =
+            '<div id="row"> <div class="input-group m-3">' +
+            '<div class="input-group-prepend">' +
+            '<button class="btn btn-danger" id="DeleteRow" type="button">' +
+            '<i class="bi bi-trash"></i> Delete</button> </div>' +
+            '<input type="text" class="form-control m-input" name="description" required><input type="text" class="form-control m-input" name="qty" required><input type="text" class="form-control m-input" name="unit" required><input type="text" class="form-control m-input" name="rate" required><input type="text" class="form-control m-input" name="total" required> </div> </div>';
+ 
+            $('#newinput').append(newRowAdd);
+        });
+ 
+        $("body").on("click", "#DeleteRow", function () {
+            $(this).parents("#row").remove();
+        })
+    </script>
+</body>
+ 
+</html>

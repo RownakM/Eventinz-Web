@@ -1,0 +1,501 @@
+{% load get_event_type %}
+{% load get_vendor_cat %}
+{% load lang_tran %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <!-- Bootstrap CSS -->
+    {% include 'vendor_dashboard_v2/head.html' %}
+    <style>
+        input, select {
+            font-size: 14px;
+            font-family: AktivGrotesk-Regular;
+            color: #000000;
+            border-bottom: 1px solid #ced4da;
+            padding: 9px;
+          }
+    </style>
+    <title>Dashboard Chat</title>
+</head>
+
+<body class="vendor_admin">
+    {% include 'vendor_dashboard_v2/top_header.html' %}
+    
+    
+    <div class="main-dash">
+        {% include 'vendor_dashboard_v2/aside.html' %}
+        <div class="dashboard flex-grow-1">
+
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">{{"Home"|transl:is_french}}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{"Event Details & Proposals"|transl:is_french}}</li>
+                </ol>
+            </nav>
+
+            <div class="create-quote shadow-sm">
+                <div class="quote-header d-flex align-items-center justify-content-between mb-4">
+                    <h4>{{event_data.Event_Categories|event_type|transl:is_french}}</h4>
+                    
+                </div>
+                {% if check_proposal_valid %}
+                <form action="{%url 'save_event_proposal_update' %}" method="POST">
+                    {% csrf_token %}
+
+                    <div class="quote-body">
+                        <div class="row mb-5">
+                            
+                            <div class="col-lg-9 col-md-9 mb-3">
+                                <div class="post-guests box-2 h-100">
+                                    <h5>{{"Requirements"|transl:is_french}}</h5>
+                                    <p style="font-size: 18px;"><span>{{event_data.Event_Desc}}</p>
+                                    {% comment %} <h3>30 July 2022</h3> {% endcomment %}
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 mb-3">
+                                <div class="post-guests box-2 h-100">
+                                    <h5>{{"Vendor Category"|transl:is_french}}</h5>
+                                    <p>
+                                        <style>
+                                            .tag_name h3{
+                                                background-color: #f0f4fb;
+                                                border: 1px solid #d4dceb;
+                                                font-size: 14px;
+                                                line-height: 24px;
+                                                color: #313131;
+                                                font-weight: 300;
+                                                border-radius: 100px;
+                                                text-align: center;
+                                                padding: 2px 12px;
+                                            }
+                                        </style>
+                                        <div class="tag d-flex justify-content-start align-content-center px-4 flex-wrap">
+                                            {% for i in event_data.vendor_type|getvList %}
+                                            <div class="tag_name" >
+                                                <h3 style="font-size:14px; color: #313131; padding-top: 2px; font-family: Arial;">{{i|get_v_vat|transl:is_french}}</h3>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+
+                                    </p>
+                                    <h5>{{"Date Created"|transl:is_french}}</h5>
+                                    <p style="font-size: 18px;"><span>
+                                        {{event_data.created_on|date:"d-M-Y"}}
+
+                                    </p>
+                                    {% comment %} <h3>30 July 2022</h3> {% endcomment %}
+                                </div>
+                            </div>
+                            {% comment %} <div class="col-lg col-md-6 mb-3">
+                                <div class="post-guests box-3 h-100">
+                                    <h5>Posted On</h5>
+                                    <p>Requested Date</p>
+                                    <h3>30 July 2022</h3>
+                                </div>
+                            </div> {% endcomment %}
+                            <!-- <div class="col-lg col-md-6 mb-3">
+                                <div class="box-4 h-100">
+                                    <h5>Host Requirements</h5>
+                                    <p>Hi there- we found you on Eventinz and would love more informat</p>
+                                </div>
+                            </div> -->
+                        </div>
+                        <div class="update-box mb-5">
+                            <div class="box-border">
+                                <h5 class="detail-title mb-0">{{"Cover Letter"|transl:is_french}}</h5>
+                                <p class="m-0 p-2"><textarea name="cover_letter" id="ptc" cols="10" rows="4" class="form-control border-0" placeholder="{{'Write A Cover Letter To The Host'|transl:is_french}}">{{db.cover_letter}}</textarea></p>
+                                <input type="hidden" name="event_id" value="{{event_id}}"/>
+
+                            </div>
+                        </div>
+                        <div class="update-box mb-5">
+                            <div class="box-border">
+                                <h5 class="detail-title mb-0">{{"Service & Description"|transl:is_french}}</h5>
+
+                                <!--
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div id="row">
+                                                <div class="input-group m-3">
+                                                    <div class="input-group-prepend">
+                                                        <button class="btn btn-solid"
+                                                            id="DeleteRow" type="button">
+                                                            <i class="bi bi-trash"></i>
+                                                            Delete
+                                                        </button>
+                                                    </div>
+                                                    <input type="text"
+                                                        class="form-control m-input" name="description" placeholder="Description" required>
+                                                        <input type="text"
+                                                        class="form-control m-input" name="qty" placeholder="Quantity" required>
+                                                        <input type="text"
+                                                        class="form-control m-input" name="unit" placeholder="Unit" required>
+                                                        <input type="text"
+                                                        class="form-control m-input" name="rate" placeholder="Rate" required>
+                                                        <input type="text"
+                                                        class="form-control m-input" name="total" placeholder="Total" required>
+                                                </div>
+                                            </div>
+                        
+                                            <div id="newinput"></div>
+                                            <div id="row">
+                                                <div class="input-group m-3">
+                                                    <div class="input-group-prepend">
+                                                
+                                                    <button id="rowAdder" type="button"
+                                                        class="btn btn-solid">
+                                                        <span class="bi bi-plus-square-dotted">
+                                                        </span> ADD
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                            <input type="hidden" placeholder="Amount" name="total_amount" class="form-control">
+                                            {% comment %} <input type="submit" name="submit" value="submit" class="btn btn-solid"> {% endcomment %}
+                                        </div>
+                                    </div>
+                                    -->
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <button id="rowAdder" type="button"
+                                                class="btn btn-solid w-25 btn-sm" style="float: right;">
+                                                {{"ADD"|transl:is_french}}
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-2 newRowAdd">
+                                        {% comment %} <button class="btn btn-solid"
+                                                            id="DeleteRow" type="button">
+                                                            <i class="bi bi-trash"></i>
+                                                            Delete
+                                        </button> {% endcomment %}
+                                        {% for a in proposal_items %}
+                                    <div class="col-lg-12" >
+                                        <div class="row" id="row">
+                                            <div class="form-group rounded-0 col-md-4 mb-3">
+                                                <label>{{"Service & Description"|transl:is_french}}</label>
+                                                <textarea type="text" class="form-control rounded-0"
+                                                    placeholder="Enter Your Service Description Here" name="description" required>{{a.item}}</textarea>
+                                            </div>
+                                            <div class="form-group col-md-1 mb-3">
+                                                <label>{{"Quantity"|transl:is_french}}</label>
+                                                <input type="text" class="form-control rounded-0 qty"
+                                                    placeholder="Quantity" name="qty" min="0" oninput="validity.valid||(value='');" required value="{{a.qty}}">
+                                            </div>
+                                            <div class="form-group col-md-2 mb-3">
+                                                <label>{{"Unit"|transl:is_french}}</label>
+                                            
+                                                    <select name="unit" id="unit" class="form-control rounded-0" required>
+                                                        <option value="" disabled>{{"Select Unit"|transl:is_french}}</option>
+                                                        
+                                                        <option value="Per Event" {% if a.unit == "Per Event" %}selected{% endif %}>{{"Per Event"|transl:is_french}}</option>
+                                                        <option value="Per Person" {% if a.unit == "Per Person" %}selected{% endif %}>{{"Per Person"|transl:is_french}}</option>
+                                                        <option value="Per Hour" {% if a.unit == "Per Hour" %}selected{% endif %}>{{"Per Hour"|transl:is_french}}</option>
+                                                        <option value="Per units" {% if a.unit == "Per units" %}selected{% endif %}>{{"Per Units"|transl:is_french}}</option>
+                                                        <option value=" Per Day" {% if a.unit == "Per Day" %}selected{% endif %}>{{"Per Day"|transl:is_french}}</option>
+                                                        
+                                    
+                                                    </select>
+                                            </div>
+                                            <div class="form-group col-md-2 mb-3">
+                                                <label>{{"Rate"|transl:is_french}}</label>
+                                                <input type="text" class="form-control rounded-0 rate"
+                                                    placeholder="in {{currency}}" name="rate" required value="{{a.rate}}">
+                                            </div>
+                                            <div class="form-group col-md-2 mb-3">
+                                                <label>{{"Total"|transl:is_french}}</label>
+                                                <input type="text" class="form-control rounded-0 total"
+                                                    placeholder="in {{currency}}" name="total" readonly required value="{{a.total}}">
+                                            </div>
+                                            <div class="form-group col-md-1 mb-3">
+                                                <label>{{"Action"|transl:is_french}}</label>
+                                                <button class="btn btn-outline-danger"
+                                                                id="DeleteRow" type="button">
+                                                                <i class="bi bi-trash"></i>
+                                                                
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                        
+                                        
+                                    </div>
+                                
+                                    <div id="newinput"></div>
+                                    {% comment %} <div id="row">
+                                        <div class="input-group m-3">
+                                        
+                                        
+                                            
+                                        </div>
+                                    </div> {% endcomment %}
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                        <div class="row d-flex flex-row-reverse">
+                                                <div class="form-group col-md-2 my-2">
+                                                    {% comment %} <label>Total Amount</label> {% endcomment %}
+                                                    <input type="text" class="form-control rounded-0" readonly id="nettotal">
+                                                    
+                                                
+                                                </div>
+                                                <div class="form-group col-md-2 text-center my-auto">
+                                                    <label>{{"Total Amount"|transl:is_french}}</label>
+                                                    
+                                                    
+                                                    
+                                                
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                        <div class="row d-flex flex-row-reverse">
+                                                <div class="form-group col-md-2">
+                                                <input type="number" name="state_tax" class="d-none form-control rounded-0" id="state_tax" min="0" oninput="validity.valid||(value='');" placeholder="in %">
+                                                    {% comment %} <select class="form-control rounded-0" name="state_tax" id="state_tax">
+                                                        <option value="0">No Tax</option>
+
+                                                        <option value="9">9% </option>
+
+                                                        <option value="18">18% </option>
+                                                    </select> {% endcomment %}
+                                                    <span id="state_tax_amt"></span>
+
+                                                    
+                                                </div>
+                                                <div class="form-group col-md-2 text-center my-auto d-none">
+                                                    <label>State Tax</label>
+                                                    
+                                                    
+                                                
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                        <div class="row d-flex flex-row-reverse">
+                                                <div class="form-group col-md-2 text-center my-2">
+                                                
+                                                    <input type="text" class="form-control rounded-0" readonly id="grand_total" name="gtotal">
+
+                                                
+                                                </div>
+                                                <div class="form-group col-md-2 text-center my-auto">
+                                                    <label>{{"Grand Total"|transl:is_french}}</label>
+                                                
+
+                                                
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                        
+                                                <button type="submit" class="btn btn-solid w-25" style="float: right;">{{"Proceed"|transl:is_french}}</button>
+                                    {% comment %} <button type="button" class="btn btn-line">Select Host To Continue</button> {% endcomment %}
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </form>
+                {% else %}
+                <div class="quote-body">
+                    <div class="row mb-5">
+                        {{"Oops ! You Have Already Submitted A Proposal !"|transl:is_french}}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <div class="footer_sec p-0">
+        <div class="copyrights m-0 text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <p>© {{"2022 Eventinz, Inc All Rights Reserved"|transl:is_french}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+
+        <script type="text/javascript">
+ 
+            $("#rowAdder").click(function () {
+                newRowAdd =
+                `
+                    <div class="col-lg-12" >
+                        <div class="row" id="row" >
+                            <div class="form-group col-md-4 mb-3">
+                                <label>{{'Service & Description'|transl:is_french}}</label>
+                                <textarea type="text" class="form-control rounded-0"
+                                    placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit. " name="description" required></textarea>
+                            </div>
+                            <div class="form-group col-md-1 mb-3">
+                                <label>{{'Quantity'|transl:is_french}}</label>
+                                <input type="text" class="form-control rounded-0 qty"
+                                    placeholder="1" name="qty" min="0" oninput="validity.valid||(value='');" required>
+                            </div>
+                            <div class="form-group col-md-2 mb-3">
+                                <label>{{'Unit'|transl:is_french}}</label>
+                                
+                                    <select name="unit" id="unit" class="form-control rounded-0" required>
+                                        <option value="" disabled selected>--</option>
+                                        
+                                        <option value="Per Event">{{'Event'|transl:is_french}}</option>
+                                        <option value="Per Person">{{'Person'|transl:is_french}}</option>
+                                        <option value="Per Hour">{{'Hour'|transl:is_french}}</option>
+                                        <option value="Per units">{{'units'|transl:is_french}}</option>
+                                        <option value=" Per Day">{{'Day'|transl:is_french}}</option>
+                                        
+                    
+                                      </select>
+                            </div>
+                            <div class="form-group col-md-2 mb-3">
+                                <label>{{'Rate'|transl:is_french}}</label>
+                                <input type="text" class="form-control rounded-0 rate"
+                                    placeholder="00" name="rate" required>
+                            </div>
+                            <div class="form-group col-md-2 mb-3">
+                                <label>{{'Total'|transl:is_french}}</label>
+                                <input type="text" class="form-control rounded-0 total"
+                                    placeholder="900.00" name="total" readonly required>
+                            </div>
+                            <div class="form-group col-md-1 mb-3">
+                                <label>{{'Action'|transl:is_french}}</label>
+                                <button class="btn btn-outline-danger"
+                                                id="DeleteRow" type="button">
+                                                <i class="bi bi-trash"></i>
+                                                
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+               `;
+     
+                $('.newRowAdd').append(newRowAdd);
+            });
+     
+            $("body").on("click", "#DeleteRow", function () {
+                console.log("OK");
+                console.log($(this).parents("#row"));
+                $(this).parents("#row").remove();
+            });
+            $("body").on("input",'.rate',function(){
+
+                console.log($(this).index());
+                var rate = parseFloat($(this).parents("#row").find(".rate").val());
+                var qty = parseFloat($(this).parents("#row").find(".qty").val());
+                if(isNaN(rate) == true){
+                    rate = 0
+                }
+                if(isNaN(qty) == true){
+                    qty = 0
+                }
+                var a = $(this).parents("#row").find(".total").val((parseFloat(rate*qty)).toFixed(2));
+
+                console.log("SELECTED");
+                console.log($(this).parents("#row"));
+                checksum();
+                //alert(a);
+                //var b = $(this).parent("#newinput #row").find(".total").val(parseFloat(rate*qty));
+                //console.log(b);
+            });
+
+            $("body").on("input",'.qty',function(){
+
+                console.log($(this).index());
+                var rate = parseFloat($(this).parents("#row").find(".rate").val());
+                var qty = parseFloat($(this).parents("#row").find(".qty").val());
+                if(isNaN(rate) == true){
+                    rate = 0
+                }
+                if(isNaN(qty) == true){
+                    qty = 0
+                }
+                var a = $(this).parents("#row").find(".total").val((parseFloat(rate*qty)).toFixed(2));
+
+                console.log("SELECTED");
+                console.log($(this).parents("#row"));
+
+                checksum();
+                //alert(a);
+                //var b = $(this).parent("#newinput #row").find(".total").val(parseFloat(rate*qty));
+                //console.log(b);
+            });
+            function checksum(){
+            
+                var sum = 0;
+                $('.total').each(function(){
+                    sum += parseFloat(this.value);
+                });
+
+                $("#nettotal").val((sum).toFixed(2));
+                var tax = parseFloat($('#state_tax').val());
+                var net_amount = parseFloat($('#nettotal').val());
+                var tax_amount = parseFloat((net_amount*(tax/100)));
+                $('#state_tax_amt').html(((tax_amount).toFixed(2)));
+                var grand=(net_amount+(net_amount*(tax/100))).toFixed(2);
+
+                $('#grand_total').val(grand);
+            
+            };
+            $('#state_tax').on('change',function(){
+                var tax = parseFloat($(this).val());
+                var net_amount = parseFloat($('#nettotal').val());
+                var tax_amount = parseFloat((net_amount*(tax/100)));
+                $('#state_tax_amt').html(((tax_amount).toFixed(2)));
+                var grand=(net_amount+(net_amount*(tax/100))).toFixed(2);
+
+                $('#grand_total').val(grand);
+            })
+            function onin(){
+                console.log($(this).index());
+                var rate = parseFloat($(this).parents("#row").find(".rate").val());
+                var qty = parseFloat($(this).parents("#row").find(".qty").val());
+                if(isNaN(rate) == true){
+                    rate = 0
+                }
+                if(isNaN(qty) == true){
+                    qty = 0
+                }
+                var a = $(this).parents("#row").find(".total").val(parseFloat(rate*qty));
+
+                console.log("SELECTED");
+                console.log($(this).parents("#row"));
+            }
+        </script>
+</body>
+
+</html>

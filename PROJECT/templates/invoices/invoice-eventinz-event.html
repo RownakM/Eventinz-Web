@@ -1,0 +1,380 @@
+{% load static %}
+{% load country_data %}
+{% load qr_code %}
+{% load currency_convert %}
+{% load cool_num %}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Invoice eventinz</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css">
+
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            font-family: "Akkurat";
+            box-sizing: border-box;
+        }
+
+        @font-face {
+            font-family: "Akkurat";
+            src: url("{%static 'invoices//fonts/Akkurat.eot' %}");
+            src: url("{%static 'invoices/fonts/Akkurat.eot' %}?#iefix") format("embedded-opentype"), url("{%static 'invoices/fonts/Akkurat.woff2' %}") format("woff2"), url("{%static 'invoices/fonts/Akkurat.woff' %}") format("woff"), url("{%static 'invoices/fonts/Akkurat.ttf' %}") format("truetype"), url("{%static 'invoices/fonts/Akkurat.svg' %}") format("svg");
+        }
+
+        body {
+            background: #fbf9f9;
+        }
+
+        .invoice-wrap {
+            max-width: 100%;
+            width: 100%;
+            margin: 0 auto;
+            height: 842px;
+            background: #fff;
+            font-size: 12px;
+            line-height: 13px;
+        }
+
+        .invoice-head {
+            padding: 10px 35px;
+        }
+
+        .invoice-logo {
+            max-width: 135px;
+            width: 100%;
+        }
+
+        .invoice-logo img {
+            width: 100%;
+        }
+
+        .invoice-id-bar {
+            background: #ff614d;
+            height: 32px;
+            padding: 0 35px;
+            overflow: hidden;
+        }
+
+        .invoice-id {
+            float: left;
+            font-size: 14px;
+            color: #fff;
+            padding: 8px 0;
+        }
+
+        .invoice-image {
+            float: right;
+        }
+
+        .invoice-content {
+            margin: 35px 35px 0;
+            
+        }
+
+        .invoice-col {
+            border: 1px solid #d8d8d8;
+            padding: 25px;
+            position: relative;
+            width: calc(50% - 15px);
+            float: left;
+            box-sizing: border-box;
+        }
+
+        a {
+            color: #9f007d;
+            text-decoration: none;
+        }
+
+        .ml-15 {
+            margin-left: 15px;
+        }
+
+        .mr-15 {
+            margin-right: 15px;
+        }
+
+        .mb-0 {
+            margin-bottom: 0px !important;
+        }
+
+        .invoice-title {
+            position: absolute;
+            top: -7px;
+            background: #fff;
+            padding: 0 10px;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+
+        h1,
+        h2 {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin-bottom: 10px;
+        }
+
+        .invoice-table-wrap {
+            padding: 55px 0;
+            clear: both;
+           
+        }
+
+        .invoice-table {
+            width: 100%;
+            text-align: center;
+            border: 1px solid #acacac;
+        }
+
+        .invoice-table thead th {
+            background-color: #4a4a4a;
+            padding: 10px;
+            color: #fff;
+        }
+
+        .invoice-table tbody td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        .invoice-table tbody tr:nth-child(even) {
+            background-color: #f4f4f4;
+        }
+
+        .w-50 {
+            width: 50px;
+        }
+
+        .w-16 {
+            width: 16.6666%;
+        }
+
+        .tble-footer {
+            display: flex;
+            justify-content: right;
+        }
+        .ptc{
+            
+            border: 1px solid #d8d8d8;
+            width: 50%;
+            padding: 25px;
+        }
+        .tble-footer .tbl-col {
+            width: 16.6666%;
+            text-align: center;
+            background-color: #ff614d;
+            color: #fff;
+            padding: 10px 0;
+            font-weight: bold;
+        }
+
+        .tble-footer .to-pri {
+            text-align: left;
+            padding-left: 10px;
+        }
+
+        .thanks {
+            background-color: #f4f4f4;
+            padding: 55px 35px 35px 35px;
+        }
+
+        .thanks p {
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .invoice-footer {
+            padding: 0 35px;
+            font-size: 13px;
+            border-top: 20px solid #f4f4f4;
+            clear: both;
+        }
+
+        .footer-web {
+            float: left;
+            padding: 10px 0;
+        }
+
+        .footer-email {
+            float: left;
+            padding: 10px 0;
+            margin-left: 28px;
+        }
+
+        .footer-no {
+            float: right;
+            padding: 10px 0;
+        }
+      
+    </style>
+    
+</head>
+
+<body>
+    <div class="invoice-wrap" id="main">
+        <div id="main_body">
+            
+       
+        <div class="invoice-head">
+            <div class="invoice-logo">
+                <img src="{%static 'invoices/images/logo.jpg' %}" alt="Logo">
+            </div>
+        </div>
+        <div class="invoice-id-bar">
+            <div class="invoice-id">Quotation ID : {{quotes_data.quote_id}} | Valid Till : {{quotes_data.valid_till}}</div>
+            <img class="invoice-image" src="{%static 'invoices/images/invoice.jpg' %}" alt="Image">
+        </div>
+        <div class="invoice-content">
+            <div class="invoice-col mr-15">
+                <div class="invoice-title">Invoice to</div>
+                <h1>{{vendor_event_proposal_data.event_id.First_Name}} {{vendor_event_proposal_data.event_id.Last_Name}}</h1>
+                <p>{{vendor_event_proposal_data.event_id.State|state_filter:vendor_event_proposal_data.event_id.Country}}<br>
+                    {{vendor_event_proposal_data.event_id.Country|country_filter}} </p>
+                <p class="mb-0">Phone : {{vendor_event_proposal_data.event_id.Mobile}}</p>
+                <a href="mailto:{{vendor_event_proposal_data.event_id.Email}}">{{vendor_event_proposal_data.event_id.Email}}</a>
+            </div>
+
+            <div class="invoice-col ml-15">
+                <div class="invoice-title">Invoice From</div>
+                <h1>{{vendor_event_proposal_data.vendor_id.Company_Name|title}}</h1>
+                <p>{{vendor_event_proposal_data.vendor_id.Company_Address}}<br>{{vendor_event_proposal_data.vendor_id.state_code|state_filter:vendor_event_proposal_data.vendor_id.country_code}} {{vendor_event_proposal_data.vendor_id.country_code|country_filter}}</p>
+                <p class="mb-0">Phone : {{vendor_event_proposal_data.vendor_id.Mobile}}</p>
+                <a href="mailto:{{vendor_event_proposal_data.vendor_id.Email}}">{{vendor_event_proposal_data.vendor_id.Email}}</a>
+            </div>
+
+            <div class="invoice-table-wrap w-100">
+                <table class="table invoice-table  table-borderless w-100" cellspacing="0">
+                    <thead>
+                        <tr class="w-100">
+                            <th align="left">S.No</th>
+                            <th align="left">Description</th>
+                            <th>Qty</th>
+                            <th>Unit</th>
+                            {% with "vendor/"|add:vendor_event_proposal_data.vendor_id.country_code|add:"/user_country/"|add:get_user_location as template %}
+
+                            <th>Rate ( {{vendor_event_proposal_data.vendor_id.Mobile|currency_code:template}} )</th>
+                            <th align="left">Total ( {{vendor_event_proposal_data.vendor_id.Mobile|currency_code:template}} )</th>
+                            {% endwith %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        {% for j in vendor_event_proposal_items %}
+                        <tr>
+                            {% comment %} {% with "vendor/"|add:quotes_data.vendor_id.country_code|add:"/user_country/"|add:get_user_location as template %}
+                      
+                            <input type="hidden" name="" value="{{template}}">
+                            {% endwith %} {% endcomment %}
+                                
+                            
+                            <td align="left">{{forloop.counter}}</td>
+                            <td align="left">{{j.item}}</td>
+                            <td>{{j.qty}}</td>
+                            <td>{{j.unit}}</td>
+                            <td>
+                                {% with "vendor/"|add:vendor_event_proposal_data.vendor_id.country_code|add:"/user_country/"|add:get_user_location as template %}
+
+                                {{j.rate|currency_filter:template}}
+                                {% endwith %}
+                            </td>
+                            <td align="left">
+                                {% with "vendor/"|add:vendor_event_proposal_data.vendor_id.country_code|add:"/user_country/"|add:get_user_location as template %}
+
+                                {{j.total|currency_filter:template}}
+                                {% endwith %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                     
+                       
+                    </tbody>
+                </table>
+                 <div class="tble-footer">
+                    <div class="tbl-col mx-2 mb-2">Total Amount</div>
+                    <div class="tbl-col to-pri mb-2">
+                        {% with "vendor/"|add:vendor_event_proposal_data.vendor_id.country_code|add:"/user_country/"|add:get_user_location as template %}
+
+                       {{vendor_event_proposal_data.total_amount|currency_filter:template}}
+                       {% endwith %}
+                    </div>
+                 </div> 
+                 <div class="tble-footer d-none">
+                    <div class="tbl-col mx-2">Tax ({{vendor_event_proposal_data.state_tax}} %)</div>
+                    <div class="tbl-col to-pri">
+                        {% with "vendor/"|add:vendor_event_proposal_data.vendor_id.country_code|add:"/user_country/"|add:get_user_location as template %}
+
+                       {{vendor_event_proposal_data.state_tax|multiply_amount:vendor_event_proposal_data.total_amount|currency_filter:template}}
+                       {% endwith %}
+                    </div>
+                 </div> 
+                 <div class="tble-footer mb-2">
+                    <div class="tbl-col mx-2">Grand Total</div>
+                    <div class="tbl-col to-pri">
+                        {% with "vendor/"|add:vendor_event_proposal_data.vendor_id.country_code|add:"/user_country/"|add:get_user_location as template %}
+
+                       {{vendor_event_proposal_data.grand_total|currency_filter:template}}
+                       {% endwith %}
+                    </div>
+                 </div> 
+                {% comment %} <div class="invoice-col mr-15 w-100 mt-2" style="float: none;">
+                    <div class="invoice-title">Payment Terms & Conditions</div>
+                    <p align="justify">{{quotes_data.payment_terms}}</p>
+                </div> {% endcomment %}
+                <br>
+                <br><br>
+                
+            </div>
+        </div>
+        </div>
+        <div class="thanks">
+            <div class="row">
+                <div class="col-lg-6">
+                    <p>Thanks & Regards</p><br>
+                    <h1>{{vendor_event_proposal_data.vendor_id.Company_Name|title}}</h1>
+                    <img src="https://eventinz.com{{BASE_URL}}/media/{{vendor_event_proposal_data.vendor_id.Profile_Img}}" class="img-fluid w-25"/>
+                </div>
+               
+            </div>
+           
+        </div>
+        <div class="invoice-footer">
+            <span class="footer-web">www.eventinz.com</span>
+            <span class="footer-email">sales@eventinz.com</span>
+            <span class="footer-no">+123 456 7890543</span>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/0.9.0rc1/jspdf.min.js"></script>
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    function generatePDF() {
+        var opt = {
+            jsPDF:{ unit: 'cm', format: 'a4', orientation: 'portrait'},
+            filename:'invoice.pdf',
+            image:{ type: 'jpeg', quality: 1 },   
+            html2canvas: {dpi: 72, letterRendering: true},
+            margin:[1.3, 0, 1, 0],
+             
+            
+          };
+        // Choose the element that our invoice is rendered in.
+        const element = document.getElementById('main_body');
+        // Choose the element and save the PDF for our user.
+        html2pdf().set(opt).from(element).save();
+    };
+    generatePDF();
+</script>
+</body>
+
+</html>

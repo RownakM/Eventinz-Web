@@ -1,0 +1,1163 @@
+{% load static %}
+{% load currency_convert %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{company_details.Company_Name}} on Eventinz.com | Eventinz | Your Event Your Way</title>
+  <!-- CSS only -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+  integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous" />
+  <link rel="stylesheet" href="{%static 'main_home1/wedding_static/owlcarousel/assets/owl.carousel.min.css' %}" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="{%static 'main_home1/wedding_static/owlcarousel/assets/owl.theme.default.min.css' %}" />
+  <link rel="stylesheet" href="{%static 'main_home1/wedding_static/fonts/style.css' %}" />
+  {% include 'vendor_home/head.html' %}
+  <link rel="stylesheet" href="{%static 'main_home1/wedding_static/css/style.css' %}" />
+</head>
+
+<body>
+
+  {% include 'vendor_home/header.html' %}
+
+  <!--<div class="modal fade loginSign-form" id="exampleModalToggle4" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered signinForm">
+        <div class="modal-content" style="background-image: url({%static 'main_home1/assets/images/login-bg.png' %}); background-color:#fcfcfc; background-size: 100%; background-position: bottom center; background-repeat: no-repeat;">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-header d-block text-center">
+                <h5 class="modal-title">Request A Quote</h5>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row g-2 mb-4">
+                        <div class="col-md-12">
+                            <div class="form-field">
+                                <input type="text" class="form-control" name="" id="" placeholder="Email">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-field">
+                                <input type="text" class="form-control" name="" id="" placeholder="Password">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3 custom-check">
+                        <input type="checkbox" id="html2" checked>
+                        <label for="html2">Remember Me</label>
+                    </div>
+
+                    <div class="row g-2 mb-3">
+                        <div class="col-md-12">
+                            <div class="form-field">
+                                <input type="submit" name="login_btn" id="login_btn" value="Login" class="w-100">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="or text-center mb-3">
+                        <span>OR</span>
+                    </div>
+                    <div class="row g-2 mb-3" id="g_div_login">
+                        <div class="col-md-12">
+                            <div class="form-field">
+                                {% comment %} <style>
+                                    #fb_btn{
+                                        display:none;
+                                    }
+                                </style> {% endcomment %}
+                                <div id="fb-root"></div>
+                                <a class="social-btn w-100" href="javaScript:void()" onclick="fb_action(login)" id="fb_big_btn"><i class="fa fa-facebook" aria-hidden="true"></i> Signin With Facebook</a>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-field">
+                                <div id="g_id_onload"
+                                data-client_id="780861556101-778h6d5rurk9dp9jv2rk49fkeqh6ff7i.apps.googleusercontent.com"
+                                data-callback="handleCredentialResponse">
+                                </div>
+
+
+                                <div class="g_id_signin"
+                                    data-type="standard"
+                                    data-shape="rectangular"
+                                    data-theme="outline"
+                                    data-text="signin_with"
+                                    data-size="large"
+                                    data-logo_alignment="left">
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="row g-2">
+                        <div class="col-md-12">
+                            <div class="form-field text-center">
+                                <p>Don't have an account? <a href="" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Create New</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+  </div> !-->
+  {% if user_login %}
+  <div class="modal fade email-popup" id="exampleModalToggle4" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-body p-0">
+                    <div class="email-vendor-popup">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+                        <div class="popup-header">
+                            <div class="sign-col">
+                                <img src="{{BASE_URL}}/media/{{company_details.Profile_Img}}" class="img-fluid w-50"alt="sign">
+                            </div>
+                            <div class="rating-col">
+                                <div class="rating-title">{{company_details.Company_Name}}</div>
+                                <div class="rating-reviews">
+                                    <div class="rating-stars">
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="tot-reviews">12 Reviews</div>
+                                </div>
+                            </div>
+                        </div>
+                        <form class="vendor-form">
+                            <div class="row row-cols-1 row-cols-lg-2 g-2 g-lg-3">
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="First Name " id="req_fname" value="{{user_acc.fname}}" readonly>
+                                </div>
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="Last Name *" id="req_lname" value="{{user_acc.lname}}" readonly>
+                                </div>
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="Email Address *" value="{{user_acc.Email}}" readonly id="req_email">
+                                </div>
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="Phone *" id="phone" value="{{user_acc.mobile}}" readonly>
+                                    <input type="hidden" name="vendor_id" id="vendor_id" value="{{company_details.id}}">
+                                </div>
+                            </div>
+                            <div class="row-btn">
+                                <button type="button" class="btn form-btn" id="requote">Request a Quote</button>
+                                <button type="button" class="btn form-btn aq-btn" id="question">Ask a Question</button>
+                            </div>
+                            <textarea class="form-control comment question my-2" placeholder="Type your message"></textarea>
+                            <div class="row row-cols-1 row-cols-lg-2 g-2 g-lg-3 quote">
+                              <div class="col">
+                                 <select name="request_type" id="request_type" class="form-control" required>
+                                  <option value="" disabled>{{company_details.Company_Name}} Services</option>
+                                  {% for i in vendor_category %}
+                                    <option value="{{i}}">{{i}}</option>
+                                  {% endfor %}
+                                  {% comment %} <option value="">Wedding</option> {% endcomment %}
+                                 </select>
+                              </div>
+                              <div class="col">
+                                  <input type="date" class="form-control" placeholder="Date" id="req_date">
+                              </div>
+                              <div class="col-lg-12">
+                                  <input type="number" class="form-control" placeholder="Number of Guests" id="req_guest">
+                                  <input type="hidden" name="v_link" id="v_link" value="{{venue_type}}">
+                              </div>
+                              {% comment %} <div class="col">
+                                  <input type="text" class="form-control" placeholder="Phone *">
+                              </div> {% endcomment %}
+                              <div class="col-lg-12">
+
+                                <textarea class="form-control comment my-2" placeholder="Type your message" id="req_message">Hi there - we found you on Eventinz and would love more information about your venue!</textarea>
+                              </div>
+
+                          </div>
+                          <div class="my-2"></div>
+                            <div class="attach-file question">
+                                <div class="btn-wrap ">
+                                    <button class="uplbtn"><img class="icon" src="{%static 'main_home1/wedding_static/images/attach-file.png' %}"
+                                            alt="Attach Icon"> Attach a photo</button>
+                                    <input type="file" name="myfile" />
+                                </div>
+                                <div class="upload-size">File must be less than 2 MB</div>
+                            </div>
+                            <div class="form-footer">
+                                <button type="button" class="btn send-btn btn-purple" id="sendmsg">Send Message</button>
+                                <button type="button" class="btn send-btn btn-purple" id="askquote">Ask For Quote</button>
+
+                                
+                            </div>
+                            <div class="check-row">
+                                <label class="cont-check">
+                                    Deliver a copy of this email to my inbox
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+  </div>
+  {% endif %}
+
+<div class="main_cont">
+
+    <div class="main pos_rel">
+        <div class="vrn_bg_img">
+          <div class="vrn_bg_over"></div>
+        </div>
+
+        <div class="prf_part">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="prf_img_bg">
+                            <img src="{{BASE_URL}}/media/{{company_details.Profile_Img}}" class="img-fluid" alt="">
+                        </div>
+                    </div>
+                    <div class="col-md-7 al_center">
+                        <div class="wed_rev_1">
+                            <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                            <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                            <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                            <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                            <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                            <span class="rev_txt_1">3 Reviews</span>
+                            <h4>{{company_details.Company_Name}}</h4>
+                          </div>
+                    </div>
+                    <div class="col-md-3 al_center">
+                        <div class="wecg_txt_1">
+                            <img src="{%static 'main_home1/wedding_static/images/heart.png' %}" alt="" />
+                          <button class="book_event_1">Write a review</button>
+                          
+                        </div>
+                      </div>
+                </div>
+                <div class="row">
+                    <div class="">
+                        <div class="loc_bg">
+                            <div class="ven_titl_txt_1 w-25">
+                                <p>
+                                  <img src="{%static 'main_home1/wedding_static/images/map-marker.png' %}" alt="" />
+                                  {{company_details.Company_Address|truncatechars:38}}
+                                </p>
+                              </div>
+                              <div class="ven_titl_txt_1">
+                                <p>
+                                  <img src="{%static 'main_home1/wedding_static/images/img_icn.png' %}" alt="" />
+                                  {{get_gallery_count}} Images
+                                </p>
+                              </div>
+                              <div class="ven_titl_txt_1">
+                                <p>
+                                  <img src="{%static 'main_home1/wedding_static/images/vid_icn.png' %}" alt="" />
+                                  2 Video
+                                </p>
+                              </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+      </div>
+
+     <div class="rep_spca">
+
+      <div class="container">
+
+        <div class="row mt-5 rever_rw">
+
+            <div class="txt_wid">
+                <div class="txt_csds mb-5 me-4">
+                    {{company_details.Company_description}}
+                </div>
+
+                <div class="brd_b_sep"></div>
+
+                <div class="row event-deal">
+                    <div class="col-md-6">
+                        <h4 class="gal_txt">Gallery</h4>
+                    </div>
+                    <div class="col-md-6 buttons filtersbutton text-end">
+                        <a class="otl-btn spot_btn px-4 grd_ev gal_btn grid_active" onclick="divVisibility('photos');">Photos</a>
+                        <a class="otl-btn spot_btn px-4 grd_ev gal_btn" onclick="divVisibility('tours');">360 Tours</a>
+                    </div>
+                </div>
+
+               <div>
+
+                  <div class="mt-4 mb-5" id="photos">
+
+                    <div class="gal_img main_img">
+                      {% for i in get_gallery %}
+                      {% if forloop.first %}
+                        <img src="{{BASE_URL}}/media/{{i.photo_src}}" alt="">
+                        {% endif %}
+                        {% empty %}
+                       <p class="text-center"> No Image Found</p>
+                        {% endfor %}
+                    </div>
+                      <div class="tab_sm_img">
+                        {% for i in get_gallery %}
+                        <img src="{{BASE_URL}}/media/{{i.photo_src}}" alt="" width="83" class="im_thumb">
+                        
+                        {% endfor %}
+                      </div>
+
+                  </div>
+                      
+                  <div id="tours" style="display: none;">...</div>
+
+               </div>
+
+               <div class="rev_sep"></div>
+
+               <div>
+                <div class="row event-deal mb-4">
+                    <div class="col-md-6">
+                        <h4 class="gal_txt">Reviews <span>02 Reviews</span></h4>
+                    </div>
+                </div>
+
+                <div class="top_dl_bg1">
+                  <div class="">
+              
+                        <div class="mb-4">
+                          <div class="owl-carousel review_carousel owl-theme">
+
+                            <div class="item">
+                              <div class="rev_bg">
+                                <div class="wed_rev">
+                                  <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                                  <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                                  <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                                  <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                                  <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                                </div>
+                                <div class="mt-3 mb-2">
+                                  <p class="rewsl_txt">We received excellent service for a wedding at this hotel. The staff were very efficient. The food was amazing! Smooth sailing on a very important day. <img src="./assets/images/quote.png" alt=""> </p>
+                                </div>
+                                <div class="revcs_name">
+                                  <p><span>N</span> Nancy L </p>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="item">
+                              <div class="rev_bg">
+                                <div class="wed_rev">
+                                  <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                                  <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                                  <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                                  <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                                  <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                                </div>
+                                <div class="mt-3 mb-2">
+                                  <p class="rewsl_txt">We received excellent service for a wedding at this hotel. The staff were very efficient. The food was amazing! Smooth sailing on a very important day. <img src="./assets/images/quote.png" alt=""> </p>
+                                </div>
+                                <div class="revcs_name">
+                                  <p><span>N</span> Nancy L </p>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="item">
+                              <div class="rev_bg">
+                                <div class="wed_rev">
+                                  <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                                  <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                                  <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                                  <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                                  <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                                </div>
+                                <div class="mt-3 mb-2">
+                                  <p class="rewsl_txt">We received excellent service for a wedding at this hotel. The staff were very efficient. The food was amazing! Smooth sailing on a very important day. <img src="./assets/images/quote.png" alt=""> </p>
+                                </div>
+                                <div class="revcs_name">
+                                  <p><span>N</span> Nancy L </p>
+                                </div>
+                              </div>
+                            </div>
+            
+            
+                          </div>
+                        </div>
+                    
+                  </div>
+                </div>
+
+               </div>
+
+            <div class="rev_sep"></div>
+
+               <div>
+
+                <div class="row event-deal">
+                  <div class="col-md-4">
+                      <h4 class="gal_txt">Overview</h4>
+                  </div>
+                  <div class="col-md-8 buttons filtersbutton text-end">
+                      <a class="otl-btn spot_btn px-4 grd_ev_1 gal_btn grid_active" onclick="overviewvisibility('details');">Detail</a>
+                      <a class="otl-btn spot_btn px-4 grd_ev_1 gal_btn" onclick="overviewvisibility('faqs');">FAQ’s</a>
+                      <a class="otl-btn spot_btn px-4 grd_ev_1 gal_btn" onclick="overviewvisibility('pricing');">Pricing</a>
+                  </div>
+              </div>
+
+              <div>
+
+                <div class="mt-4 mb-5" id="details">
+
+                  <div class="mt-5">
+
+                    <div class="con_info_brd mt-4 mb-4">
+                      {% if req_status %}
+                      <div class="row mrg_l_r_0">
+
+                        <div class="col-md-4 cont_in_bg">
+                          <h5 class="con_intxt">Contact <br> Information</h5>
+                        </div>
+                        <div class="col-md-4 txt_pad pe-0">
+                          <div>
+                            <p class="labelname">Name</p>
+                            <p class="lbname_txt">{{company_details.First_Name}} {{company_details.Last_Name}}</p>
+                          </div>
+                          <div>
+                            <p class="labelname">Designation</p>
+                            <p class="lbname_txt">Director of Sales</p>
+                          </div>
+                        </div>
+                        <div class="col-md-4 txt_pad ps-0">
+                          <div>
+                            <p class="labelname">Contact</p>
+                            <p class="lbname_txt"><a href="tel:{{company_details.Mobile}}">({{company_details.phone_code}}) {{company_details.Mobile}}</a></p>
+                          </div>
+                          <div>
+                            <p class="labelname">Email </p>
+                            <p class="lbname_txt email_txt"><a href="mailto:{{company_details.Email}}">{{company_details.Email}}</a></p>
+                          </div>
+                        </div>
+
+                      </div>
+                      {% endif %}
+                    </div>
+
+                    <div class="con_info_brd mt-4 mb-4">
+                      <div class="row mrg_l_r_0">
+
+                        <div class="col-md-4 cont_in_bg">
+                          <h5 class="con_intxt">Venue <br> Features</h5>
+                        </div>
+                        <div class="col-md-8 txt_pad_1 pb-4">
+                          <div class="row">
+                          {% for key,value in get_features_list.items %}
+                          {% comment %} {% if forloop.counter <= 4 %} {% endcomment %}
+                          <div class="col-md-6">
+                            
+                            <p class="lbname_txt"> <img src="{{BASE_URL}}/media/{{value}}" alt=""> {{key}} </p>
+                            
+                            {% comment %} <p class="lbname_txt"> <img src="{%static 'main_home1/wedding_static/images/venf_2.png' %}" alt=""> Parking </p> {% endcomment %}
+                          </div>
+                          {% comment %} {% else %} {% endcomment %}
+                          {% comment %} 8 more {% endcomment %}
+                         {% comment %} {% endif %} {% endcomment %}
+                          {% empty %}
+                          <div class="col-md-12 text-center">
+                           
+                            No Features Found
+                          </div>
+                          {% endfor %}
+                        </div>
+                        </div>
+                        {% comment %} <div class="col-md-4 txt_pad_1 ps-2">
+                          <div>
+                            <p class="lbname_txt"> <img src="{%static 'main_home1/wedding_static/images/venf_5.png' %}" alt=""> Wheelchair Access </p>
+                            <p class="lbname_txt"> <img src="{%static 'main_home1/wedding_static/images/venf_6.png' %}" alt=""> Audio/Visual </p>
+                          </div>
+                          <div>
+                            <p class="lbname_txt"> <img src="{%static 'main_home1/wedding_static/images/venf_7.png' %}" alt=""> Outdoor Facilities </p>
+                          </div>
+                        </div> {% endcomment %}
+
+                      </div>
+
+                    </div>
+
+                    <div class="con_info_brd mt-4 mb-4">
+                      <div class="row mrg_l_r_0">
+
+                        <div class="col-md-4 cont_in_bg">
+                          <h5 class="con_intxt">Catering <br> Information </h5>
+                        </div>
+                        <div class="col-md-8 txt_pad_1 pb-4">
+                          <div class="row">
+                            {% for key,value in get_cater_list.items %}
+                            {% comment %} {% if forloop.counter <= 4 %} {% endcomment %}
+                            <div class="col-md-6">
+                              
+                              <p class="lbname_txt"> <img src="{{BASE_URL}}/media/{{value}}" alt=""> {{key}} </p>
+                              
+                              {% comment %} <p class="lbname_txt"> <img src="{%static 'main_home1/wedding_static/images/venf_2.png' %}" alt=""> Parking </p> {% endcomment %}
+                            </div>
+                            {% comment %} {% else %} {% endcomment %}
+                            {% comment %} 8 more {% endcomment %}
+                           {% comment %} {% endif %} {% endcomment %}
+                            {% empty %}
+                            <div class="col-md-12 text-center">
+                             
+                              No Features Found
+                            </div>
+                            {% endfor %}
+                          </div>
+                        </div>
+                       
+
+                      </div>
+
+                    </div>
+
+                    <div class="con_info_brd mt-4 mb-4">
+                      <div class="row mrg_l_r_0">
+
+                        <div class="col-md-4 cont_in_bg">
+                          <h5 class="con_intxt">Capacity <br> Information </h5>
+                        </div>
+                        
+                        <div class="col-md-8 txt_pad_1 mb-4">
+
+                          <div class="row">
+
+                            <div class="col-md-6">
+                              <div class="grt_txt">
+                                <p class="grt_pr">Great Lakes Ballroom </p>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <p class="lbname_txt_1">Max Standing  <span class="nmb_txt">350</span></p>
+                              <p class="lbname_txt_1">Max Seated <span class="nmb_txt">260</span></p>
+                            </div>
+                            <!-- <div class="col-md-2">
+                              <p class="nmb_txt">350</p>
+                              <p class="nmb_txt">260</p>
+                            </div> -->
+
+                          </div>
+
+                          <div class="row mt-3 mb-3">
+
+                            <div class="col-md-6">
+                              <div class="grt_txt">
+                                <p class="grt_pr">Superior Meeting Room </p>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <p class="lbname_txt_1">Max Standing  <span class="nmb_txt">60</span></p>
+                              <p class="lbname_txt_1">Max Seated <span class="nmb_txt">40</span></p>
+                            </div>
+                            <!-- <div class="col-md-2">
+                              <p class="nmb_txt">60</p>
+                              <p class="nmb_txt">40</p>
+                            </div> -->
+
+                          </div>
+
+                          <div class="row mt-3 mb-3">
+
+                            <div class="col-md-6">
+                              <div class="grt_txt">
+                                <p class="grt_pr">Huron Boardroom </p>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <p class="lbname_txt_1">Max Standing <span class="nmb_txt">10</span></p>
+                              <p class="lbname_txt_1">Max Seated <span class="nmb_txt">10</span></p>
+                            </div>
+                            <!-- <div class="col-md-2">
+                              <p class="nmb_txt">10</p>
+                              <p class="nmb_txt">10</p>
+                            </div> -->
+
+                          </div>
+
+                        </div>
+
+                      </div>
+
+                    </div>
+
+                    <div class="con_info_brd mt-4 mb-4">
+                      <div class="row mrg_l_r_0">
+
+                        <div class="col-md-4 cont_in_bg">
+                          <h5 class="con_intxt">Our <br> Awards </h5>
+                        </div>
+                        
+                        <div class="col-md-8 txt_pad_1 mb-4">
+
+                          <div>
+                            <img src="{%static 'main_home1/wedding_static/images/badge.png' %}" alt="">
+                          </div>
+
+                        </div>
+
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+                <div id="faqs" style="display: none;">...</div>
+
+                <div id="pricing" style="display: none;">---</div>
+
+
+
+              </div>
+
+
+
+               </div>
+
+               <div>
+
+                <div class="row event-deal mb-4">
+                  <div class="col-md-6">
+                      <h4 class="gal_txt">Deals & Packages</h4>
+                  </div>
+                </div>
+
+                <div>
+                  {% for i in vendor_package %}
+                  <div class="row dedl_brg mrg_l_r_0 my-2">
+                    <div class="col-md-4 ps-0  del_p_bg">
+                      <!-- <div class="del_p_bg"><img src="./assets/images/dealpackage.png" alt=""></div> -->
+                    </div>
+
+                    <div class="col-md-8 ps-4">
+                      <div class="row mt-2">
+                        <div class="col-md-6">
+                          <div><p class="ex_date">Expiration: {{i.valid_till|date:"d / F /Y"}}</p></div>
+                        </div>
+                        <div class="col-md-6">
+                          <div>
+                            <p class="disc_per"><span>${{i.package_price}}</span></p></div>
+                        </div>
+                      </div>
+                      <div class="del_pa_txt">
+                        <h4>{{i.package_name}}</h4>
+                        <p>{{i.what_included|striptags|truncatewords:30}}
+                          
+                        </p>
+                          <button class="cont_vend">Contact Vendor</button>
+                      </div>
+                    </div>
+
+                  </div>
+                  {% empty %}
+                  <div class="row dedl_brg mrg_l_r_0 my-2">
+                   
+
+                    <div class="col-md-12 ps-4">
+                      No Packages / Deals Found
+                    </div>
+
+                  </div>
+                  {% endfor %}
+                  
+                </div>
+
+               </div>
+
+               <div>
+
+                <div class="row event-deal mt-5 mb-4">
+                  <div class="col-md-6">
+                      <h4 class="gal_txt">On the Blog</h4>
+                  </div>
+                </div>
+
+                <div class="row blog_pad">
+                  <div class="col-md-6 pe-3">
+                    <div class="blog_bg">
+                      <div class="blog_img">
+                        <img src="{%static 'main_home1/wedding_static/images/blogimg.png' %}" alt="">
+                      </div>
+                        <div class="row blg_brd mrg_l_r_0">
+                          <div class="col-md-3 pos_rel">
+                            <div class="dt_bg_1 ">
+                              <p class="dt_txt">09</p>
+                              <p class="mnyr_txt">04, 22</p>
+                            </div>
+                          </div>
+                          <div class="col-md-9">
+                            <div class="blgtxt">
+                              <p>Nullam eget orci at velit tempor lobortis. Cras elit justo, </p>
+                              <a href="#">Read More</a>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6 ps-3">
+                    <div class="blog_bg">
+                      <div class="blog_img">
+                        <img src="{%static 'main_home1/wedding_static/images/blogimg.png' %}" alt="">
+                      </div>
+                        <div class="row blg_brd mrg_l_r_0">
+                          <div class="col-md-3 pos_rel">
+                            <div class="dt_bg_1 ">
+                              <p class="dt_txt">09</p>
+                              <p class="mnyr_txt">04, 22</p>
+                            </div>
+                          </div>
+                          <div class="col-md-9">
+                            <div class="blgtxt">
+                              <p>Nullam eget orci at velit tempor lobortis. Cras elit justo, </p>
+                              <a href="#">Read More</a>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+
+               </div>
+
+
+
+
+
+
+
+            </div>
+
+            
+            <div class="spce_wid"></div>
+
+            <div class="side_b_wid">
+
+                <div class="pln_evnt">
+                    <div class="pln_evnt_bg">
+                        <p class="fea_txt">FEATURED</p>
+                        <h5 class="prc_txt">
+                          {% with "vendor/"|add:company_details.country_code|add:"/user_country/"|add:get_user_location as template %}
+                      
+                      <input type="hidden" name="" value="{{template}}">
+                          {{i.country_code|currency_code:template}} {{company_details.min_budget|currency_filter:template}} - {{i.country_code|currency_code:template}} {{company_details.max_budget|currency_filter:template}}
+                        {% endwith %}
+                        </h5>
+                        <h3 class="tlt_hed">{{company_details.Company_Name}}</h3>
+                        
+                        
+                        {% if user_login %}
+                        <button class="pln_en_btn mt-3" data-bs-toggle="modal" href="#exampleModalToggle4" id="req_quote_main">Request A Quote</button>
+                        
+
+                        {% elif not user_login %}
+                        <button class="pln_en_btn mt-3" data-bs-toggle="modal" href="#exampleModalToggle">Login To Continue</button>
+                        
+                        {% endif %}
+                    </div>
+                    <div class="mt-5">
+                        <div>
+                          {% comment %} <p class="phn_txt mb-4">Place A Quote Request To Continue</p> {% endcomment %}
+                            {% if req_status %}
+                            <p class="phn_txt mb-4"><a href="tel:{{company_details.phone_code}}">({{company_details.phone_code}}) {{company_details.Mobile}}</a></p>
+                            {% endif %}
+                          </div>
+                        <div>
+                            <p class="soc_share">We are on</p>
+                            <div class="soc_gap mb-4">
+                                <span class="soc_brd btn" onclick="window.location.href='{{company_details.facebook_url}}';"><img src="{%static 'main_home1/wedding_static/images/fb.png' %}" alt=""></span>
+                                <span class="soc_brd btn" onclick="window.location.href='{{company_details.instagram_url}}'"><img src="{%static 'main_home1/wedding_static/images/insta.png' %}" alt=""></span>
+                                <span class="soc_brd btn" onclick="window.location.href='{{company_details.twitter_url}}';"><img src="{%static 'main_home1/wedding_static/images/twitter.png' %}" alt=""></span>
+                                {% comment %} <span class="soc_brd btn"><img src="{%static 'main_home1/wedding_static/images/pintrest.png' %}" alt=""></span> {% endcomment %}
+                            </div>
+                        </div>
+                        <div class="brd_t_bok">
+                            <p class="bookmark_txt"><img src="{%static 'main_home1/wedding_static/images/left_ar.png' %}" alt=""> Bookmark this vendor</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-4 mb-4">
+
+                  <div class="map_img_wid">
+                    <img src="{%static 'main_home1/wedding_static/images/map_img.png' %}" alt="">
+                  </div>
+
+                  <div class="map_brd">
+
+                    <div class="map_txt">
+                      <h5>Map</h5>
+                      <p>{{company_details.Company_Address}}<br>{{company_details.country_name}}</p>
+                    </div>
+
+                  </div>
+
+                </div>
+
+                <div class="mt-4 mb-4">
+
+                  <div class="map_brd_1">
+
+                    <div class="map_txt">
+                      <h5>Search by Tags</h5>
+                      <div class="mt-3">
+                        <button class="tag_btns"><span>Hotel</span></button>
+                        <button class="tag_btns"><span>Special Event Venu</span></button>
+                        <button class="tag_btns"><span>Seat</span></button>
+                        <button class="tag_btns"><span>Mississauga Hotel</span></button>
+                        <button class="tag_btns"><span>Events</span></button>
+                      </div>
+                    </div>
+
+                  </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+     </div>
+
+    </div>
+
+     <div class="top_dl_bg">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 mrg_t_b_50">
+            <div class="dl_head_1">
+              <h3>You Might Be Interested</h3>
+            </div>
+  
+            <div class="mt_50">
+              <div class="owl-carousel vendor_carousel owl-theme">
+                <div class="item">
+                  <div class="we_ve_card">
+                    <img src="{%static 'main_home1/wedding_static/images/list_img_2.png' %}" alt="" class="we_ve_img" />
+                    <div class="eve_p">
+                      <div class="ven_titl_txt_eve">
+                        <h3>Crystal Grand Hall</h3>
+                        <div class="wed_rev_eve">
+                          <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                          <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                          <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                          <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                          <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                          <span class="rev_txt">12 Reviews</span>
+                        </div>
+                        <p class="mt-2">
+                          <img src="./assets/images/map-marker.png" alt="" />
+                          Line B Technology Village, Bwari Lagos
+                        </p>
+                      </div>
+                      <div class="brd_sep"></div>
+                      <p class="prc_nm_we_ve">
+                        Price <span>$20 - $200</span>/Person
+                      </p>
+                    </div>
+                    <button class="book_event_wed_ev">Book Event</button>
+                  </div>
+                </div>
+
+                <div class="item">
+                  <div class="we_ve_card">
+                    <img src="{%static 'main_home1/wedding_static/images/list_img_2.png' %}" alt="" class="we_ve_img" />
+                    <div class="eve_p">
+                      <div class="ven_titl_txt_eve">
+                        <h3>Crystal Grand Hall</h3>
+                        <div class="wed_rev_eve">
+                          <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                          <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                          <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                          <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                          <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                          <span class="rev_txt">12 Reviews</span>
+                        </div>
+                        <p class="mt-2">
+                          <img src="{%static 'main_home1/wedding_static/images/map-marker.png' %}" alt="" />
+                          Line B Technology Village, Bwari Lagos
+                        </p>
+                      </div>
+                      <div class="brd_sep"></div>
+                      <p class="prc_nm_we_ve">
+                        Price <span>$20 - $200</span>/Person
+                      </p>
+                    </div>
+                    <button class="book_event_wed_ev">Book Event</button>
+                  </div>
+                </div>
+
+                <div class="item">
+                  <div class="we_ve_card">
+                    <img src="{%static 'main_home1/wedding_static/images/list_img_2.png' %}" alt="" class="we_ve_img" />
+                    <div class="eve_p">
+                      <div class="ven_titl_txt_eve">
+                        <h3>Crystal Grand Hall</h3>
+                        <div class="wed_rev_eve">
+                          <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                          <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                          <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                          <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                          <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                          <span class="rev_txt">12 Reviews</span>
+                        </div>
+                        <p class="mt-2">
+                          <img src="{%static 'main_home1/wedding_static/images/map-marker.png' %}" alt="" />
+                          Line B Technology Village, Bwari Lagos
+                        </p>
+                      </div>
+                      <div class="brd_sep"></div>
+                      <p class="prc_nm_we_ve">
+                        Price <span>$20 - $200</span>/Person
+                      </p>
+                    </div>
+                    <button class="book_event_wed_ev">Book Event</button>
+                  </div>
+                </div>
+
+                <div class="item">
+                  <div class="we_ve_card">
+                    <img src="{%static 'main_home1/wedding_static/images/list_img_2.png' %}" alt="" class="we_ve_img" />
+                    <div class="eve_p">
+                      <div class="ven_titl_txt_eve">
+                        <h3>Crystal Grand Hall</h3>
+                        <div class="wed_rev_eve">
+                          <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                          <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                          <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                          <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                          <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                          <span class="rev_txt">12 Reviews</span>
+                        </div>
+                        <p class="mt-2">
+                          <img src="{%static 'main_home1/wedding_static/images/map-marker.png' %}" alt="" />
+                          Line B Technology Village, Bwari Lagos
+                        </p>
+                      </div>
+                      <div class="brd_sep"></div>
+                      <p class="prc_nm_we_ve">
+                        Price <span>$20 - $200</span>/Person
+                      </p>
+                    </div>
+                    <button class="book_event_wed_ev">Book Event</button>
+                  </div>
+                </div>
+
+                <div class="item">
+                  <div class="we_ve_card">
+                    <img src="{%static 'main_home1/wedding_static/images/list_img_2.png' %}" alt="" class="we_ve_img" />
+                    <div class="eve_p">
+                      <div class="ven_titl_txt_eve">
+                        <h3>Crystal Grand Hall</h3>
+                        <div class="wed_rev_eve">
+                          <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                          <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                          <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                          <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                          <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                          <span class="rev_txt">12 Reviews</span>
+                        </div>
+                        <p class="mt-2">
+                          <img src="{%static 'main_home1/wedding_static/images/map-marker.png' %}" alt="" />
+                          Line B Technology Village, Bwari Lagos
+                        </p>
+                      </div>
+                      <div class="brd_sep"></div>
+                      <p class="prc_nm_we_ve">
+                        Price <span>$20 - $200</span>/Person
+                      </p>
+                    </div>
+                    <button class="book_event_wed_ev">Book Event</button>
+                  </div>
+                </div>
+
+                <div class="item">
+                  <div class="we_ve_card">
+                    <img src="{%static 'main_home1/wedding_static/images/list_img_2.png' %}" alt="" class="we_ve_img" />
+                    <div class="eve_p">
+                      <div class="ven_titl_txt_eve">
+                        <h3>Crystal Grand Hall</h3>
+                        <div class="wed_rev_eve">
+                          <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                          <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                          <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                          <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                          <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                          <span class="rev_txt">12 Reviews</span>
+                        </div>
+                        <p class="mt-2">
+                          <img src="{%static 'main_home1/wedding_static/images/map-marker.png' %}" alt="" />
+                          Line B Technology Village, Bwari Lagos
+                        </p>
+                      </div>
+                      <div class="brd_sep"></div>
+                      <p class="prc_nm_we_ve">
+                        Price <span>$20 - $200</span>/Person
+                      </p>
+                    </div>
+                    <button class="book_event_wed_ev">Book Event</button>
+                  </div>
+                </div>
+
+                <div class="item">
+                  <div class="we_ve_card">
+                    <img src="{%static 'main_home1/wedding_static/images/list_img_2.png' %}" alt="" class="we_ve_img" />
+                    <div class="eve_p">
+                      <div class="ven_titl_txt_eve">
+                        <h3>Crystal Grand Hall</h3>
+                        <div class="wed_rev_eve">
+                          <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                          <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                          <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                          <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                          <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                          <span class="rev_txt">12 Reviews</span>
+                        </div>
+                        <p class="mt-2">
+                          <img src="{%static 'main_home1/wedding_static/images/map-marker.png' %}" alt="" />
+                          Line B Technology Village, Bwari Lagos
+                        </p>
+                      </div>
+                      <div class="brd_sep"></div>
+                      <p class="prc_nm_we_ve">
+                        Price <span>$20 - $200</span>/Person
+                      </p>
+                    </div>
+                    <button class="book_event_wed_ev">Book Event</button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+     
+
+</div>
+
+
+
+
+
+
+
+
+
+
+  </div>
+{% include 'vendor_home/footer.html' %}
+
+
+  <!-- JavaScript Bundle with Popper -->
+ <!-- JavaScript Bundle with Popper -->
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+    crossorigin="anonymous"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+
+  <script src="{%static 'main_home1/wedding_static/owlcarousel/jquery.min.js' %}"></script>
+  <script src="{%static 'main_home1/wedding_static/owlcarousel/owl.carousel.min.js' %}"></script>
+
+  <script src="{%static 'main_home1/wedding_static/js/main.js' %}"></script>
+  {% include 'vendor_home/index-js.html' %}
+
+<script>
+  $('.im_thumb').click(function(){
+    var old_images = $('.main_img img').attr('src');
+    //alert(old_images);      
+    var newSrc = $(this).attr('src');
+    $('.main_img img[src="' + old_images + '"]').attr('src', newSrc);
+  });
+</script>
+
+<script>
+  $( document ).ready(function() {
+   $('.quote').hide();
+   $('#askquote').hide();
+
+   function requote(){
+    $('#requote').addClass('aq-btn');
+    $('#question').removeClass('aq-btn');
+    $('.quote').show();
+    $('.question').hide();
+    $('#askquote').show();
+    $('#sendmsg').hide();
+
+   };
+   function question(){
+    $('#question').addClass('aq-btn');
+    $('#requote').removeClass('aq-btn');
+    $('.quote').hide();
+    $('.question').show();
+    $('#sendmsg').show();
+    $('#askquote').hide();
+
+   }
+   $('#requote').on('click',function(){
+    requote();
+   });
+   $('#question').on('click',function(){
+    question();
+   });
+   $('#askquote').on('click',function(){
+    $(this).attr('disabled',true);
+   })
+});
+</script>
+
+<!--REQUEST A QUOTE-->
+<script>
+  $(document).ready(function(){
+    $("#askquote").click(function(e){
+      e.preventDefault();
+      $(this).html("Please Wait...");
+      var fname=$('#req_fname').val();
+      var lname=$('#req_lname').val();
+      var email=$('#req_email').val();
+      var event_type=$('#request_type').val();
+      var event_date=$('#req_date').val();
+      var guests=$('#req_guest').val();
+      var msg=$('#req_message').val();
+      var vendor_id=$('#vendor_id').val();
+      var v_link=$('#v_link').val();
+      $.ajax({url: "{%url 'vendor_home:request_quote' %}"+"?email="+email+"&fname="+fname+"&lname="+lname+"&event_type="+event_type+"&event_date="+event_date+"&guests="+guests+"&msg="+msg+"&vendor_id="+vendor_id+"&v_link="+v_link, success: function(result){
+        //$("#div1").html(result);
+        window.location.href="{%url 'vendor_home:user_profile' %}";
+        //$('#askquote').html("Done");
+        //$('#askquote').focusout();
+        console.log(result);
+      }});
+    });
+
+    $('#req_quote_main').click(function(){
+      $('#requote').click();
+      console.log("click");
+    })
+  });
+  </script>
+</body>
+
+</html>

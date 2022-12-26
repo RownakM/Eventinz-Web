@@ -1,0 +1,534 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    {% include 'user_dashboard_v2/head.html' %}
+
+
+    <title>Dashboard User Statistics</title>
+</head>
+
+<body>
+
+
+    {% include "user_dashboard_v2/top-nav.html" %}
+
+    <div class="main-dash">
+        {% include "user_dashboard_v2/aside.html" %}
+
+
+        <div class="dashboard main_daswid">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item" aria-current="page"><a href="dashboard.html">Dashboard</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">User Statistics</li>
+                </ol>
+            </nav>
+
+            <div class="row pb-4 respwid">
+
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="ttler_card_bg">
+
+                        <div class="totlrhed">
+                            <h5>Total Earnings</h5>
+                        </div>
+                        <div class="totlrcont">
+                            <div class="ovraler">
+                                <div class="ovrcont">
+                                    <div class="imdsec">
+                                        <span class="img_bg"><img src="{%static 'user_dashboard_v2/assets/images/money.png' %}" alt=""></span>
+                                    </div>
+                                    <div class="ovrtxtsec">
+                                        <p> Overall Total Earning </p>
+                                        <h5>53,962.61</h5>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="lastern">
+                                <div class="ovrcont">
+                                    <div class="imdsec">
+                                        <span class="img_bg"><img src="{%static 'user_dashboard_v2/assets/images/money1.png' %}" alt=""></span>
+                                    </div>
+                                    <div class="ovrtxtsec">
+                                        <p> The Last 30 Days Earning </p>
+                                        <h5>1,546.92</h5>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="ttler_card_bg">
+
+                        <div class="totlrhed">
+                            <h5>Job Proficiency</h5>
+                        </div>
+                        <div class="totlrcont">
+                            
+                            <div class="job_profi">
+                                <div class="job_profici">
+                                    <li>
+                                        <p>Completed Jobs</p>
+                                        <span class="bar"><span class="compjob"></span></span> <span class="bar_per">90%</span>
+                                    </li>
+                                
+                                    <li>
+                                        <p>On Times Job </p><span class="bar"><span class="ontjob"></span></span> <span class="bar_per">85%</span>
+                                    </li>
+                                
+                                    <li>
+                                        <p>On Budget Jobs</p><span class="bar"><span class="onbjob"></span></span> <span class="bar_per">85%</span>
+                                    </li>
+                                
+                                    <li>
+                                        <p>Rehire Rate</p><span class="bar"><span class="rehrate"></span></span> <span class="bar_per">15%</span>
+                                    </li>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="ttler_card_bg">
+
+                        <div class="totlrhed">
+                            <h5>Bid Conversion</h5>
+                        </div>
+                        <div class="totlrcont">
+                            
+                            <div class="chart_data">
+
+                                <div class="bids_yr">
+                                    <div class="bids_txt">
+                                        <p><span class="bid_1"></span> Bids Awarded To You </p>
+                                        <p><span class="bid_2"></span> Bids On Awarded Projects</p>
+                                        <p><span class="bid_1"></span> Bids Placed</p>
+                                    </div>
+                                    <div class="yr_sel">
+                                        <select name="year" class="year_select">
+                                            <option value="0">2020</option>
+                                            <option value="1">2021</option>
+                                            <option value="2">2022</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <canvas id="myChart" style="width:100%;max-width:600px;max-height:350px;"></canvas>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="ttler_card_bg">
+
+                        <div class="totlrhed">
+                            <h5>Earning Over Time</h5>
+                        </div>
+                        <div class="totlrcont">
+                            
+                            <div class="chart_data">
+
+                                <div class="bids_yr">
+                                    <div class="bids_txt">
+                                        <p><span class="bid_2"></span> Amount Earned</p>
+                                    </div>
+                                    <div class="yr_sel">
+                                        <select name="year" class="year_select">
+                                            <option value="0">2020</option>
+                                            <option value="1">2021</option>
+                                            <option value="2">2022</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <canvas id="myLineChart" style="width:100%;max-width:600px;max-height:350px;"></canvas>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="ttler_card_bg">
+
+                        <div class="totlrhed">
+                            <h5>Rating Per Skill</h5>
+                        </div>
+                        <div class="totlrcont">
+                            
+                            <div class="rating_data">
+
+                                <div class="corpdis">
+                                    <p class="corp_txt"><span>1</span>Corporate Event Planners</p>
+                                    <div class="staricns rating-stars">
+                                        <ul id='stars'>
+                                            <li class='star' title='Poor' data-value='1'>
+                                                <i class='fa fa-star'></i>
+                                            </li>
+                                            <li class='star' title='Fair' data-value='2'>
+                                                <i class='fa fa-star'></i>
+                                            </li>
+                                            <li class='star' title='Good' data-value='3'>
+                                                <i class='fa fa-star'></i>
+                                            </li>
+                                            <li class='star' title='Excellent' data-value='4'>
+                                                <i class='fa fa-star'></i>
+                                            </li>
+                                            <li class='star' title='WOW!!!' data-value='5'>
+                                                <i class='fa fa-star'></i>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="corpdis">
+                                    <p class="corp_txt"><span>2</span>Wedding Planners</p>
+                                    <div class="staricns rating-stars">
+                                        <ul id='stars'>
+                                            <li class='star' title='Poor' data-value='1'>
+                                                <i class='fa fa-star'></i>
+                                            </li>
+                                            <li class='star' title='Fair' data-value='2'>
+                                                <i class='fa fa-star'></i>
+                                            </li>
+                                            <li class='star' title='Good' data-value='3'>
+                                                <i class='fa fa-star'></i>
+                                            </li>
+                                            <li class='star' title='Excellent' data-value='4'>
+                                                <i class='fa fa-star'></i>
+                                            </li>
+                                            <li class='star' title='WOW!!!' data-value='5'>
+                                                <i class='fa fa-star'></i>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="corpdis">
+                                    <p class="corp_txt"><span>3</span>Social Event Planners</p>
+                                    <div class="staricns rating-stars">
+                                        <ul id='stars'>
+                                            <li class='star' title='Poor' data-value='1'>
+                                                <i class='fa fa-star'></i>
+                                            </li>
+                                            <li class='star' title='Fair' data-value='2'>
+                                                <i class='fa fa-star'></i>
+                                            </li>
+                                            <li class='star' title='Good' data-value='3'>
+                                                <i class='fa fa-star'></i>
+                                            </li>
+                                            <li class='star' title='Excellent' data-value='4'>
+                                                <i class='fa fa-star'></i>
+                                            </li>
+                                            <li class='star' title='WOW!!!' data-value='5'>
+                                                <i class='fa fa-star'></i>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="corpdis">
+                                    <p class="corp_txt"><span>4</span>Meeting Planners</p>
+                                    <div class="staricns rating-stars">
+                                        <ul id='stars'>
+                                            <li class='star' title='Poor' data-value='1'>
+                                                <i class='fa fa-star'></i>
+                                            </li>
+                                            <li class='star' title='Fair' data-value='2'>
+                                                <i class='fa fa-star'></i>
+                                            </li>
+                                            <li class='star' title='Good' data-value='3'>
+                                                <i class='fa fa-star'></i>
+                                            </li>
+                                            <li class='star' title='Excellent' data-value='4'>
+                                                <i class='fa fa-star'></i>
+                                            </li>
+                                            <li class='star' title='WOW!!!' data-value='5'>
+                                                <i class='fa fa-star'></i>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="corpdis">
+                                    <p class="corp_txt"><span>5</span>Esther Marcus Events</p>
+                                    <div class="staricns rating-stars">
+                                        <ul id='stars'>
+                                            <li class='star' title='Poor' data-value='1'>
+                                                <i class='fa fa-star'></i>
+                                            </li>
+                                            <li class='star' title='Fair' data-value='2'>
+                                                <i class='fa fa-star'></i>
+                                            </li>
+                                            <li class='star' title='Good' data-value='3'>
+                                                <i class='fa fa-star'></i>
+                                            </li>
+                                            <li class='star' title='Excellent' data-value='4'>
+                                                <i class='fa fa-star'></i>
+                                            </li>
+                                            <li class='star' title='WOW!!!' data-value='5'>
+                                                <i class='fa fa-star'></i>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="ttler_card_bg">
+
+                        <div class="totlrhed">
+                            <h5>Bid Summary</h5>
+                        </div>
+                        <div class="totlrcont">
+                            
+                            <div class="chart_data">
+
+                                <div class="bids_yr">
+                                    <div class="bids_txt">
+                                        <p><span class="bid_2"></span>Bids Remaining</p>
+                                        <p><span class="bid_3"></span>Unearned Bids</p>
+                                    </div>
+                                    <div class="yr_sel">
+                                        <select name="year" class="year_select">
+                                            <option value="0">2020</option>
+                                            <option value="1">2021</option>
+                                            <option value="2">2022</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <main>
+                                    <section class="piealign">
+                                      <div class="pieID pie">
+                                        
+                                      </div>
+                                      <ul class="pieID legend">
+                                        <li>
+                                          <em>Amount</em>
+                                          <span>500</span>
+                                        </li>
+                                        <li>
+                                          <em>Dogs</em>
+                                          <span>1200</span>
+                                        </li>
+                                        <li>
+                                          <em>Aliens</em>
+                                          <span>1200</span>
+                                        </li>
+                                      </ul>
+                                    </section>
+                                  </main>
+                                 
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+    <div class="footer_sec p-0">
+        <div class="copyrights m-0 text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <p>© 2022 Eventinz, Inc All Rights Reserved</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+    <script>
+      var xValues = ["Mar", "Apr", "May", "Jun", "Jul", "Aug"];
+      var yValues = [3.0, 4.0, 0,0];
+      var barColors = ["#ff2d0a", "#9f007e", ""];
+      
+      new Chart("myChart", {
+        type: "bar",
+        data: {
+          labels: xValues,
+          datasets: [{
+            backgroundColor: barColors,
+            data: yValues
+          }]
+        },
+        options: {
+          legend: {display: false},
+          title: {
+            display: false,
+            text: ""
+          }
+        }
+      });
+      </script>
+
+<script>
+    var xValues = ["Mar", "Apr", "May", "Jun", "Jul", "Aug"];
+    var yValues = [16000,0,0,6000,2000,0];
+    
+    new Chart("myLineChart", {
+      type: "line",
+      data: {
+        labels: xValues,
+        datasets: [{
+          fill: false,
+          lineTension: 0,
+          backgroundColor: "#9f007e",
+          borderColor: "#9f007e",
+          data: yValues
+        }]
+      },
+      options: {
+        legend: {display: false},
+        scales: {
+          yAxes: [{ticks: {min: 0, max:18000}}],
+        }
+      }
+    });
+    </script>
+
+    <script>
+        function sliceSize(dataNum, dataTotal) {
+  return (dataNum / dataTotal) * 360;
+}
+function addSlice(sliceSize, pieElement, offset, sliceID, color) {
+  $(pieElement).append("<div class='slice "+sliceID+"'><span></span></div>");
+  var offset = offset - 1;
+  var sizeRotation = -179 + sliceSize;
+  $("."+sliceID).css({
+    "transform": "rotate("+offset+"deg) translate3d(0,0,0)"
+  });
+  $("."+sliceID+" span").css({
+    "transform"       : "rotate("+sizeRotation+"deg) translate3d(0,0,0)",
+    "background-color": color
+  });
+}
+function iterateSlices(sliceSize, pieElement, offset, dataCount, sliceCount, color) {
+  var sliceID = "s"+dataCount+"-"+sliceCount;
+  var maxSize = 179;
+  if(sliceSize<=maxSize) {
+    addSlice(sliceSize, pieElement, offset, sliceID, color);
+  } else {
+    addSlice(maxSize, pieElement, offset, sliceID, color);
+    iterateSlices(sliceSize-maxSize, pieElement, offset+maxSize, dataCount, sliceCount+1, color);
+  }
+}
+function createPie(dataElement, pieElement) {
+  var listData = [];
+  $(dataElement+" span").each(function() {
+    listData.push(Number($(this).html()));
+  });
+  var listTotal = 0;
+  for(var i=0; i<listData.length; i++) {
+    listTotal += listData[i];
+  }
+  var offset = 0;
+  var color = [
+    "#eceded", 
+    "#9f007e",
+  ];
+  for(var i=0; i<listData.length; i++) {
+    var size = sliceSize(listData[i], listTotal);
+    iterateSlices(size, pieElement, offset, i, 0, color[i]);
+    $(dataElement+" li:nth-child("+(i+1)+")").css("border-color", color[i]);
+    offset += size;
+  }
+}
+createPie(".pieID.legend", ".pieID.pie");
+
+    </script>
+
+    
+<script>
+    $(document).ready(function(){
+  
+  /* 1. Visualizing things on Hover - See next part for action on click */
+  $('#stars li').on('mouseover', function(){
+    var onStar = parseInt($(this).data('value'), 10); // The star currently mouse on
+   
+    // Now highlight all the stars that's not after the current hovered star
+    $(this).parent().children('li.star').each(function(e){
+      if (e < onStar) {
+        $(this).addClass('hover');
+      }
+      else {
+        $(this).removeClass('hover');
+      }
+    });
+    
+  }).on('mouseout', function(){
+    $(this).parent().children('li.star').each(function(e){
+      $(this).removeClass('hover');
+    });
+  });
+  
+  
+  /* 2. Action to perform on click */
+  $('#stars li').on('click', function(){
+    var onStar = parseInt($(this).data('value'), 10); // The star currently selected
+    var stars = $(this).parent().children('li.star');
+    
+    for (i = 0; i < stars.length; i++) {
+      $(stars[i]).removeClass('selected');
+    }
+    
+    for (i = 0; i < onStar; i++) {
+      $(stars[i]).addClass('selected');
+    }
+    
+  });
+  
+  
+});
+
+</script>
+      
+
+</body>
+
+</html>

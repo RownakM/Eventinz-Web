@@ -1,0 +1,89 @@
+Hello
+System check identified some issues:
+
+WARNINGS:
+vendor_admin.Vendor_Users.caterer_field: (fields.W904) django.contrib.postgres.fields.JSONField is deprecated. Support for it (except in historical migrations) will be removed in Django 4.0.
+	HINT: Use django.db.models.JSONField instead.
+vendor_admin.Vendor_Users.event_category_serve: (fields.W904) django.contrib.postgres.fields.JSONField is deprecated. Support for it (except in historical migrations) will be removed in Django 4.0.
+	HINT: Use django.db.models.JSONField instead.
+vendor_admin.Vendor_Users.question_field: (fields.W904) django.contrib.postgres.fields.JSONField is deprecated. Support for it (except in historical migrations) will be removed in Django 4.0.
+	HINT: Use django.db.models.JSONField instead.
+vendor_admin.Vendor_Users.vendor_categories: (fields.W904) django.contrib.postgres.fields.JSONField is deprecated. Support for it (except in historical migrations) will be removed in Django 4.0.
+	HINT: Use django.db.models.JSONField instead.
+vendor_admin.vendor_quote_invoice.quotation_items: (fields.W904) django.contrib.postgres.fields.JSONField is deprecated. Support for it (except in historical migrations) will be removed in Django 4.0.
+	HINT: Use django.db.models.JSONField instead.
+Hello
+System check identified some issues:
+
+WARNINGS:
+vendor_admin.Vendor_Users.caterer_field: (fields.W904) django.contrib.postgres.fields.JSONField is deprecated. Support for it (except in historical migrations) will be removed in Django 4.0.
+	HINT: Use django.db.models.JSONField instead.
+vendor_admin.Vendor_Users.event_category_serve: (fields.W904) django.contrib.postgres.fields.JSONField is deprecated. Support for it (except in historical migrations) will be removed in Django 4.0.
+	HINT: Use django.db.models.JSONField instead.
+vendor_admin.Vendor_Users.question_field: (fields.W904) django.contrib.postgres.fields.JSONField is deprecated. Support for it (except in historical migrations) will be removed in Django 4.0.
+	HINT: Use django.db.models.JSONField instead.
+vendor_admin.Vendor_Users.vendor_categories: (fields.W904) django.contrib.postgres.fields.JSONField is deprecated. Support for it (except in historical migrations) will be removed in Django 4.0.
+	HINT: Use django.db.models.JSONField instead.
+vendor_admin.vendor_quote_invoice.quotation_items: (fields.W904) django.contrib.postgres.fields.JSONField is deprecated. Support for it (except in historical migrations) will be removed in Django 4.0.
+	HINT: Use django.db.models.JSONField instead.
+Hello
+System check identified some issues:
+
+WARNINGS:
+vendor_admin.Vendor_Users.caterer_field: (fields.W904) django.contrib.postgres.fields.JSONField is deprecated. Support for it (except in historical migrations) will be removed in Django 4.0.
+	HINT: Use django.db.models.JSONField instead.
+vendor_admin.Vendor_Users.event_category_serve: (fields.W904) django.contrib.postgres.fields.JSONField is deprecated. Support for it (except in historical migrations) will be removed in Django 4.0.
+	HINT: Use django.db.models.JSONField instead.
+vendor_admin.Vendor_Users.question_field: (fields.W904) django.contrib.postgres.fields.JSONField is deprecated. Support for it (except in historical migrations) will be removed in Django 4.0.
+	HINT: Use django.db.models.JSONField instead.
+vendor_admin.Vendor_Users.vendor_categories: (fields.W904) django.contrib.postgres.fields.JSONField is deprecated. Support for it (except in historical migrations) will be removed in Django 4.0.
+	HINT: Use django.db.models.JSONField instead.
+vendor_admin.vendor_quote_invoice.quotation_items: (fields.W904) django.contrib.postgres.fields.JSONField is deprecated. Support for it (except in historical migrations) will be removed in Django 4.0.
+	HINT: Use django.db.models.JSONField instead.
+Hello
+System check identified some issues:
+
+WARNINGS:
+vendor_admin.Vendor_Users.caterer_field: (fields.W904) django.contrib.postgres.fields.JSONField is deprecated. Support for it (except in historical migrations) will be removed in Django 4.0.
+	HINT: Use django.db.models.JSONField instead.
+vendor_admin.Vendor_Users.event_category_serve: (fields.W904) django.contrib.postgres.fields.JSONField is deprecated. Support for it (except in historical migrations) will be removed in Django 4.0.
+	HINT: Use django.db.models.JSONField instead.
+vendor_admin.Vendor_Users.question_field: (fields.W904) django.contrib.postgres.fields.JSONField is deprecated. Support for it (except in historical migrations) will be removed in Django 4.0.
+	HINT: Use django.db.models.JSONField instead.
+vendor_admin.Vendor_Users.vendor_categories: (fields.W904) django.contrib.postgres.fields.JSONField is deprecated. Support for it (except in historical migrations) will be removed in Django 4.0.
+	HINT: Use django.db.models.JSONField instead.
+vendor_admin.vendor_quote_invoice.quotation_items: (fields.W904) django.contrib.postgres.fields.JSONField is deprecated. Support for it (except in historical migrations) will be removed in Django 4.0.
+	HINT: Use django.db.models.JSONField instead.
+System check identified some issues:
+
+WARNINGS:
+vendor_admin.Vendor_Users.caterer_field: (fields.W904) django.contrib.postgres.fields.JSONField is deprecated. Support for it (except in historical migrations) will be removed in Django 4.0.
+	HINT: Use django.db.models.JSONField instead.
+vendor_admin.Vendor_Users.event_category_serve: (fields.W904) django.contrib.postgres.fields.JSONField is deprecated. Support for it (except in historical migrations) will be removed in Django 4.0.
+	HINT: Use django.db.models.JSONField instead.
+vendor_admin.Vendor_Users.question_field: (fields.W904) django.contrib.postgres.fields.JSONField is deprecated. Support for it (except in historical migrations) will be removed in Django 4.0.
+	HINT: Use django.db.models.JSONField instead.
+vendor_admin.Vendor_Users.vendor_categories: (fields.W904) django.contrib.postgres.fields.JSONField is deprecated. Support for it (except in historical migrations) will be removed in Django 4.0.
+	HINT: Use django.db.models.JSONField instead.
+vendor_admin.vendor_quote_invoice.quotation_items: (fields.W904) django.contrib.postgres.fields.JSONField is deprecated. Support for it (except in historical migrations) will be removed in Django 4.0.
+	HINT: Use django.db.models.JSONField instead.
+Traceback (most recent call last):
+  File "/opt/bitnami/projects/PROJECT/manage.py", line 22, in <module>
+    main()
+  File "/opt/bitnami/projects/PROJECT/manage.py", line 18, in main
+    execute_from_command_line(sys.argv)
+  File "/opt/bitnami/python/lib/python3.8/site-packages/django/core/management/__init__.py", line 419, in execute_from_command_line
+    utility.execute()
+  File "/opt/bitnami/python/lib/python3.8/site-packages/django/core/management/__init__.py", line 413, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/opt/bitnami/python/lib/python3.8/site-packages/django/core/management/base.py", line 354, in run_from_argv
+    self.execute(*args, **cmd_options)
+  File "/opt/bitnami/python/lib/python3.8/site-packages/django/core/management/base.py", line 398, in execute
+    output = self.handle(*args, **options)
+  File "/opt/bitnami/python/lib/python3.8/site-packages/django_crontab/management/commands/crontab.py", line 29, in handle
+    Crontab().run_job(options['jobhash'])
+  File "/opt/bitnami/python/lib/python3.8/site-packages/django_crontab/crontab.py", line 126, in run_job
+    job = self.__get_job_by_hash(job_hash)
+  File "/opt/bitnami/python/lib/python3.8/site-packages/django_crontab/crontab.py", line 171, in __get_job_by_hash
+    raise RuntimeError(
+RuntimeError: No job with hash 1c1fff55ba497d05b18cdafca369b026 found. It seems the crontab is out of sync with your settings.CRONJOBS. Run "python manage.py crontab add" again to resolve this issue!

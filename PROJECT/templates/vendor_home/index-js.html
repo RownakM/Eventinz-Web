@@ -1,0 +1,554 @@
+ {% load lang_tran %}
+ <style>
+  #credential_picker_container{
+    display: none;
+  }
+ </style>
+ <script>
+  $('#logoutbtn').on('click',function(){
+      document.getElementById("logoutbtn").style.pointerEvents = "none";
+
+  })
+</script>
+ {% if modal_active %}
+    <script>
+        $( document ).ready(function() {
+            document.getElementById("signbtn1").click();            
+            //console.log( "ready!" );
+        });
+    </script>
+    {% endif %}
+    <script>
+        $( document ).ready(function() {
+            //$('#signup_btn').prop('disabled',true);
+            $('#re_password').on('input',function(){
+               // console.log('changed');
+               var re_password_val=$(this).val();
+               var password_val=$('#password').val();
+               if (password_val==re_password_val){
+                   
+                   $('#re_password_check').html('<i class="fa fa-check fa-fw text-success"></i> {{"Password Matched !"|transl:is_french}}');
+               }
+               else{
+                $('#re_password_check').html('<i class="fa fa-times fa-fw text-danger"></i> {{"Password Do Not Matched"|transl:is_french}} !');
+
+               }
+            });
+            var settings = {
+                "url": "https://api.countrystatecity.in/v1/countries",
+                "method": "GET",
+                "headers": {
+                  "X-CSCAPI-KEY": "UktWSUFIa0VSazU1V1ZpZnRKN0IzNFVlWjRtWlR4bDl0Tm43RFcyNA=="
+                },
+              };
+              
+              $.ajax(settings).done(function (response) {
+               // console.log(response);
+                var table = document.getElementById('countries');
+                for (var i = 0; i < response.length; i++){
+                    var row = `<option value="${response[i].iso2}">${response[i].name}</option>`
+                    table.innerHTML += row
+        
+        
+                }
+                $.ajax(settings).done(function (response) {
+                    //console.log('NEW HERE');
+                    //console.log(response);
+                    //console.log("NEW END");
+                    var table = document.getElementById('countries1');
+                    for (var i = 0; i < response.length; i++){
+                        var row = `<option value="${response[i].iso2}">${response[i].name}</option>`
+                        table.innerHTML += row
+            
+            
+                    }
+                
+              });
+
+              $('#countries').on('change',function(){
+                  var country_selected=$(this).val();
+                  $('#state').html('<option value="">--{{"Select State"|transl:is_french}}--</option>');
+                var settings = {
+                    "url": "https://api.countrystatecity.in/v1/countries/"+country_selected+"/states",
+                    "method": "GET",
+                    "headers": {
+                      "X-CSCAPI-KEY": "UktWSUFIa0VSazU1V1ZpZnRKN0IzNFVlWjRtWlR4bDl0Tm43RFcyNA=="
+                    },
+                  };
+                  
+                  $.ajax(settings).done(function (response) {
+                    
+                    //console.log(response);
+                    var table = document.getElementById('state');
+                for (var i = 0; i < response.length; i++){
+                    var row = `<option value="${response[i].iso2}">${response[i].name}</option>`
+                    table.innerHTML += row
+        
+        
+                }
+                  });
+              });
+              $('#countries1').on('change',function(){
+                var country_selected=$(this).val();
+                $('#state1').html('<option value="">--Select State--</option>');
+              var settings = {
+                  "url": "https://api.countrystatecity.in/v1/countries/"+country_selected+"/states",
+                  "method": "GET",
+                  "headers": {
+                    "X-CSCAPI-KEY": "UktWSUFIa0VSazU1V1ZpZnRKN0IzNFVlWjRtWlR4bDl0Tm43RFcyNA=="
+                  },
+                };
+                
+                $.ajax(settings).done(function (response) {
+                  
+                  console.log(response);
+                  var table = document.getElementById('state1');
+              for (var i = 0; i < response.length; i++){
+                  var row = `<option value="${response[i].iso2}">${response[i].name}</option>`
+                  table.innerHTML += row
+      
+      
+              }
+                });
+            });
+              $('#state').on('change',function(){
+               var state_selected=$(this).val();
+               var country_selected=$('#countries').val();
+               $('#city').html('<option value="">--{{"Select City"|transl:is_french}}--</option>');
+                var settings = {
+                    "url": "https://api.countrystatecity.in/v1/countries/"+country_selected+"/states/"+state_selected+"/cities",
+                    "method": "GET",
+                    "headers": {
+                      "X-CSCAPI-KEY": "UktWSUFIa0VSazU1V1ZpZnRKN0IzNFVlWjRtWlR4bDl0Tm43RFcyNA=="
+                    },
+                  };
+                  
+                  $.ajax(settings).done(function (response) {
+                    //console.log(response);
+                    var table = document.getElementById('city');
+                for (var i = 0; i < response.length; i++){
+                    var row = `<option value="${response[i].iso2}">${response[i].name}</option>`
+                    table.innerHTML += row
+        
+        
+                }
+                  });
+              });
+
+              $("#signup_form").submit(function(e){
+                //e.preventDefault();
+                var name=$('#name').val();
+                var Email=$('#email').val();
+                var password=$('#password').val();
+                var dialcode=$('.selected-dial-code').html();
+                $('#mno_code').val(dialcode);
+                //var show=$('#mno_code').val();
+                //alert(show);
+                //var re_password
+                //console.log('clicked');
+                $('#signup_btn').html(`
+                <div class="spinner-border spinner-border-sm text-light" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                  Please Wait... 
+                `);
+            });
+
+
+
+
+
+            $('#state1').on('change',function(){
+                var state_selected=$(this).val();
+                var country_selected=$('#countries1').val();
+                $('#city1').html('<option value="">--Select City--</option>');
+                 var settings = {
+                     "url": "https://api.countrystatecity.in/v1/countries/"+country_selected+"/states/"+state_selected+"/cities",
+                     "method": "GET",
+                     "headers": {
+                       "X-CSCAPI-KEY": "UktWSUFIa0VSazU1V1ZpZnRKN0IzNFVlWjRtWlR4bDl0Tm43RFcyNA=="
+                     },
+                   };
+                   
+                   $.ajax(settings).done(function (response) {
+                    // console.log(response);
+                     var table = document.getElementById('city1');
+                 for (var i = 0; i < response.length; i++){
+                     var row = `<option value="${response[i].id}">${response[i].name}</option>`
+                     table.innerHTML += row
+         
+         
+                 }
+                   });
+               });
+ 
+               $("#signup_form").submit(function(e){
+                 //e.preventDefault();
+                 var name=$('#name').val();
+                 var Email=$('#email').val();
+                 var password=$('#password').val();
+                 //var re_password
+                // console.log('clicked');
+                 $('#signup_btn').html(`
+                 <div class="spinner-border spinner-border-sm text-light" role="status">
+                     <span class="visually-hidden">Loading...</span>
+                   </div>
+                   Please Wait... 
+                 `);
+             });
+            $('#id_captcha_1').attr('placeholder',"{{'Enter Captcha to continue'|transl:is_french}}...");
+            $('#id_captcha_1').width("350px");
+            $('#id_captcha_1').attr('required',true);
+            
+
+        });
+    })
+    </script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script>
+        function decodeJwtResponse (token) {
+            var base64Url = token.split('.')[1];
+            var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+            var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+            }).join(''));
+        
+            return JSON.parse(jsonPayload);
+        };
+        function handleCredentialResponse(response) {
+            //console.log(response);
+           // decodeJwtResponse() is a custom function defined by you
+           // to decode the credential response.
+           const responsePayload = decodeJwtResponse(response.credential);
+      
+           //console.log("ID: " + responsePayload.sub);
+           //console.log('Full Name: ' + responsePayload.name);
+           //console.log('Given Name: ' + responsePayload.given_name);
+           $('#fname').val(responsePayload.given_name);
+           $('#lname').val(responsePayload.family_name);
+           $('#email').val(responsePayload.email);
+           
+          makefieldenable();
+
+           //console.log('Family Name: ' + responsePayload.family_name);
+           //console.log("Image URL: " + responsePayload.picture);
+           //console.log("Email: " + responsePayload.email);
+        }
+        $('.btn-close').click(function(){
+            
+           makefielddisable();
+        })
+
+        function makefieldenable(){
+            document.getElementById("fname").readOnly = true;
+           document.getElementById("lname").readOnly = true;
+           document.getElementById("email").readOnly = true;
+           $('#g_div_login').hide();
+           $('#g_div_signup').hide();
+           $('#signup_or').hide();
+          
+          $('#messagebox').show();
+        }
+        function makefielddisable(){
+            document.getElementById("fname").readOnly = false;
+           document.getElementById("lname").readOnly = false;
+           document.getElementById("email").readOnly = false;
+           $('#g_div_login').show();
+           $('#g_div_signup').show();
+           $('#fname').val('');
+           $('#lname').val('');
+           $('#email').val('');
+          
+        }
+      </script>    
+
+      <script src="https://connect.facebook.net/en_US/sdk.js" nonce="HG25bW8Q"></script>
+      <script nonce="HG25bW8Q">
+        $(document).ready(function(){
+              console.log("DOM Ready")
+              FB.init({
+                appId   : '429226305282959',
+                status  : true,
+                xfbml   : true,
+                version : 'v15.0'
+              });
+              console.log("FB Init Done");
+              
+      });
+      function fb_action(action_type){
+            
+        console.log("OK 1");
+        FB.AppEvents.logPageView();
+        console.log("OK 2");
+
+        FB.login(function(response) {
+          console.log(response);
+          if (response.authResponse) {
+          console.log('Welcome!  Fetching your information.... ');
+          FB.api('/me',{locale : 'en_US',fields: 'name, email'}, function(response) {
+                console.log(response);
+                //console.log(response.email);
+              //console.log('Good to see you, ' + response.name + '.');
+              $('#email').val(response.email);
+              var fname=response.name.split(" ")[0];
+              var lname=response.name.split(" ")[1];
+
+              $('#fname').val(fname);
+              $('#lname').val(lname);
+              makefieldenable();
+
+            });
+            } else {
+            console.log('User cancelled login or did not fully authorize.');
+            }
+        });
+        //FB.logout(function(response) {
+            // user is now logged out
+          //});
+    }
+        </script>
+    <script>
+        $('#fb_big_btn').click(function(){
+            $('#fb_btn').click();
+        })
+    </script>
+    <script>
+        $('#ev_cat').on('change',function(){
+            var event_categories=$(this).val();
+            $('#ev_subcat').html('<option value="">--Select Event Sub Categories--</option>');
+          var settings = {
+              "url": "{%url 'vendor_home:get_sub_cat' %}?id="+event_categories,
+              "method": "GET",
+              
+            };
+            
+            $.ajax(settings).done(function (response) {
+                //console.log(response);
+                const obj = JSON.parse(response);
+                console.log(obj);
+              
+              //console.log(response);
+              var table = document.getElementById('ev_subcat');
+         for (var i = 0; i < obj.length; i++){
+             var row = `<option value="${obj[i]['fields'].id}">${obj[i]['fields'].sub_category_name}</option>`
+             table.innerHTML += row
+  
+         }
+          })
+            });
+       
+    </script>
+    <script>
+        $('#validationCustom04').on('change',function(){
+            
+            var event_categories=$(this).val();
+            $('#validationCustom05').html('<option selected disabled value="">--Event Sub Categories--</option>');
+          var settings = {
+              "url": "./get-sub-cat/?id="+event_categories,
+              "method": "GET",
+              
+            };
+            
+            $.ajax(settings).done(function (response) {
+                //console.log(response);
+                const obj = JSON.parse(response);
+                console.log(obj);
+              
+              //console.log(response);
+              var table = document.getElementById('validationCustom05');
+         for (var i = 0; i < obj.length; i++){
+             var row = `<option value="${obj[i]['fields'].sub_category_name}">${obj[i]['fields'].sub_category_name}</option>`
+             table.innerHTML += row
+  
+         }
+          })
+            });
+
+
+
+            $('#validationCustom06').on('change',function(){
+            
+              var event_categories=$(this).val();
+              $('#validationCustom07').html('<option selected disabled value="">{{"Vendor Sub Category"|transl:is_french}}</option>');
+            var settings = {
+                "url": "./get-sub-cat-vendor/?id="+event_categories,
+                "method": "GET",
+                
+              };
+              
+              $.ajax(settings).done(function (response) {
+                  //console.log(response);
+                  const obj = JSON.parse(response);
+                  console.log(obj);
+                
+                //console.log(response);
+                var table = document.getElementById('validationCustom07');
+                table.innerHTML += `<option value="all">All</option>`;
+           for (var i = 0; i < obj.length; i++){
+               var row = `<option value="${obj[i].pk}">${obj[i]['fields'].sub_category_name}</option>`
+               table.innerHTML += row
+    
+           }
+            })
+              });
+    </script>
+
+    <script>
+      $('#ev_email').on('change', function() {
+			//	$('#state').html('<option value="">--Select State--');
+				var id=this.value;
+        console.log(id);
+				$.ajax({
+					type: "GET",
+					url: './get-email/',
+					data: "email="+id,
+					success: function(data){
+						console.log(data)
+						if (data.length <=0){
+							$('#email_message_ev').html('<font class="text-muted"><i class="fa fa-info-circle text-danger fa-fw"></i>Note : A New User Account will be created</font>');
+              $('#user_type_ev').val('New User');
+//							$('#next3').prop('disabled',false);
+
+						}
+						else if(data.length>0){
+							$('#email_message_ev').html('<font class="text-success"><i class="fa fa-info-circle text-success fa-fw"></i>Welcome Back !</font>');
+              $('#user_type_ev').val('Existing User');
+						//	$('#next3').prop('disabled',true);
+
+						}
+						
+					},
+        });
+      });
+    </script>
+    <script>
+      $('#ev_form_2').hide();
+
+      $('#ev_form_1').submit(function(e){
+        e.preventDefault();
+        country_selected=$('#countries1').val();
+        state_selected=$('#state1').val();
+        city_selected=$('#city1').val();
+        event_categories=$('#ev_cat').val();
+        event_sub_categories=$('#ev_subcat').val();
+        $('#event_step_1').hide();
+        $('#ev_form_2').show();
+
+      })
+    </script>
+    <script>
+      $('#navbarDarkDropdownMenuLink').on('click',function(){
+          console.log('clicked');
+          var link="{%url 'vendor_home:Venue'%}";
+          window.location.href = link;
+
+      })
+  </script>
+  <script>
+    const redirecterror = position => {
+      //alert(position.code);
+      if (position.code == '1'){
+        localStorage.setItem('location', 'no');
+        var url="{%url 'vendor_home:location_denied' %}";
+        $.ajax({
+          url: "{%url 'vendor_home:visitor_ip_address' %}",
+         // context: document.body
+        }).done(function(response) {
+         //alert(response)
+         var lat = response.lat;
+         var lon = response.lon;
+        // alert(url);
+        $.ajax({
+          url: "{%url 'vendor_home:track_me_new'%}"+lon+"/"+lat+"/",
+         // context: document.body
+        }).done(function(response) {
+         //alert(response)
+         console.log(response)
+        });
+         console.log(response)
+        });
+        //window.location.replace(url);
+      }
+      else{
+        var url="{%url 'vendor_home:vendor_home_index' %}";
+        window.location.replace(url);
+      }
+    }
+    const successfulLookup = position => {
+        const { latitude, longitude } = position.coords;
+       // console.log(latitude);
+      //  console.log(longitude);
+
+        var api_key = 'c8c4d13225914c19b28021ece8bc07da';
+   // var latitude = '51.0';
+   // var longitude = '7.0';
+  
+    var api_url = 'https://api.opencagedata.com/geocode/v1/json'
+  
+    var request_url = api_url
+      + '?'
+      + 'key=' + api_key
+      + '&q=' + encodeURIComponent(latitude + ',' + longitude)
+      + '&pretty=1'
+      + '&no_annotations=1';
+  
+    // see full list of required and optional parameters:
+    // https://opencagedata.com/api#forward
+  
+    var request = new XMLHttpRequest();
+    request.open('GET', request_url, true);
+  
+    request.onload = function() {
+      // see full list of possible response codes:
+      // https://opencagedata.com/api#codes
+  
+      if (request.status === 200){
+        // Success!
+        var data = JSON.parse(request.responseText);
+       // alert(data.results[0]["geometry"].lat);
+
+
+        var latitude=data.results[0]["geometry"].lat;
+        var longitude=data.results[0]["geometry"].lng;
+        //console.log(data); // print the location
+        //alert(data.results[0]);
+        console.log(data);
+        var url="{%url 'vendor_home:track_me_new'%}"+longitude+"/"+latitude+"/";
+        //alert(url);
+        $.ajax({
+          url: url,
+         // context: document.body
+        }).done(function(response) {
+         //alert(response)
+         //$('#state_name').html(response);
+         //location.reload();
+        });
+      } else if (request.status <= 500){
+        // We reached our target server, but it returned an error
+        alert("oops");
+        console.log("unable to geocode! Response code: " + request.status);
+        var data = JSON.parse(request.responseText);
+        console.log('error msg: ' + data.status.message);
+      } else {
+        console.log("server error");
+      }
+    };
+  
+    request.onerror = function() {
+      // There was a connection error of some sort
+      console.log("unable to connect to server");
+    };
+  
+    request.send();
+    }
+
+    
+    window.navigator.geolocation
+    .getCurrentPosition(successfulLookup, redirecterror);
+  </script>
+  
+
+
+
+
+

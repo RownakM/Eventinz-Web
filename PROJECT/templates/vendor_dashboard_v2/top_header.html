@@ -1,0 +1,53 @@
+{% load static %}
+{% load lang_tran %}
+<header>
+    <nav class="navbar navbar-expand-lg navbar-default bg-white p-0">
+
+        <div class="dashboard_nav justify-content-start">
+            <a class="navbar-brand" href="{%url 'vendor_home' %}"><img src="{%static 'vendor_dashboard_v2/assets/images/logo.png' %}" alt="" width="190"></a>
+            <div>
+
+                <div class="pers_info">
+                    <div>
+                        
+                    </div>
+                </div>
+            </div>
+            <button class="btn icon_btn position-relative me-3 ms-auto " id="lang" onclick="setlang({% if is_french == 'No' %} 'Yes' {% else %} 'No' {% endif %});">
+                <img src="https://img.icons8.com/ios/25/null/translation.png"/>
+                
+            </button>
+            <div class="nav-item1 dropdown">
+                <a class="nav-link dropdown-toggle persinfd" href="#" id="navbarDropdown" role="button"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    <h6 class="pers_info_txt">{{"Welcome!"|transl:is_french}} <span>{{u_data.First_Name|title}}</span></h6>
+                    <div class="admin_img">{{u_data.First_Name|make_list|first|title}}</div>
+                </a>
+                <ul class="dropdown-menu dropd_style" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="{%url 'vendor_logout' %}">{{"Logout"|transl:is_french}}</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<script>
+    function setlang(settype){
+        var data = settype;
+        $('#lang').html(`<div class="spinner-border spinner-border-sm text-light" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>&nbsp;Loading...
+          `);
+        axios.get("{%url 'vendor_home:set_lang' %}?active="+data)
+          .then(function (response) {
+            console.log(response);
+            location.reload();
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+        
+    }
+    </script>

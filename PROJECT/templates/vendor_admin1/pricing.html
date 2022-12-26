@@ -1,0 +1,164 @@
+{% load static %}
+{% load mathfilters %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>AdminKit Demo - Bootstrap 5 Admin Template</title>
+	{% include 'vendor_admin1/head.html' %}
+</head>
+
+<body>
+	<div class="wrapper">
+		{% include 'vendor_admin1/side_nav.html' %}
+
+		<div class="main">
+			{% include 'vendor_admin1/top_nav.html' %}
+
+			<main class="content">
+				<div class="container">
+                   
+                    <div class="row">
+                      <ul class="nav nav-pills justify-content-center" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                          <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Standard Vendor</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                          <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Enterprise Vendor</button>
+                        </li>
+                       
+                      </ul>
+                      <style>
+                        .select-style{
+                          padding: 20px;
+                          outline: none;
+                          font-size: 20px;
+                          
+                        }
+                        .select-style:focus{
+                          outline: 0px none #fff;
+                        }
+                        .form-control:focus{
+                          outline: 0px none #fff;
+
+                        }
+                        .select-span{
+                          font-family: "Times New Roman"
+                        }
+                      </style>
+                      <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                          <div class="row">
+                          {% for i in packages %}
+                          {% if not i.is_enterprise_vendor %}
+                          <div class="col-md-4">
+                            <div class="card pricing-card pricing-plan-basic">
+                              <div class="card-body">
+                                <i class="mdi mdi-cube-outline pricing-plan-icon"></i>
+                                <p class="pricing-plan-title">{{i.package_name}}</p>
+                                <form action="{%url 'payment_session'%}">
+                                  <input type="hidden" name="id" value="{{i.price}}">
+                                  <input type="hidden" name="pid" value="{{i.id}}">
+
+                                  <select name="oselect" id="" class="form-control select-style">
+                                    <option value="annual"><h3 class="pricing-plan-cost ml-auto">{{currency}} {{i.price|mul:conv_rate}} - <span class="select-span">1 Year</span></h3></option>
+                                    <option value="biannual"><h3 class="pricing-plan-cost ml-auto">{{currency}} {{i.price_biannual|mul:conv_rate}} - 6 Months</h3></option>
+                                    <option value="quarter"><h3 class="pricing-plan-cost ml-auto">{{currency}} {{i.price_quarter|mul:conv_rate}} - 3 Months</h3></option>
+                                  </select>
+                                  <ul class="pricing-plan-features">
+                                    {{i.package_features}}
+                                  </ul>
+                                  <button type="submit" class="btn pricing-plan-purchase-btn  btn-rounded">Subscribe  </button>
+                                  {% comment %} <a href="{%url 'payment_session'%}?id={{i.price}}&pid={{i.id}}" class="btn pricing-plan-purchase-btn btn-rounded">Subscribe</a> {% endcomment %}
+                              </form>
+
+                              </div>
+                            </div>
+                          </div>
+                          {% endif %}
+                          {% endfor %}
+                        </div>
+
+                        </div>
+                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                          <div class="row">
+                            {% for i in packages %}
+                            {% if i.is_enterprise_vendor %}
+                            <div class="col-md-4">
+                              <div class="card pricing-card pricing-plan-basic">
+                                <div class="card-body">
+                                  <i class="mdi mdi-cube-outline pricing-plan-icon"></i>
+                                  <p class="pricing-plan-title">{{i.package_name}}</p>
+                                  <form action="{%url 'payment_session'%}">
+                                    <input type="hidden" name="id" value="{{i.price}}">
+                                    <input type="hidden" name="pid" value="{{i.id}}">
+  
+                                    <select name="oselect" id="" class="form-control select-style">
+                                      <option value="annual"><h3 class="pricing-plan-cost ml-auto">{{currency}} {{i.price|mul:conv_rate}} - <span class="select-span">1 Year</span></h3></option>
+                                      <option value="biannual"><h3 class="pricing-plan-cost ml-auto">{{currency}} {{i.price_biannual|mul:conv_rate}} - 6 Months</h3></option>
+                                      <option value="quarter"><h3 class="pricing-plan-cost ml-auto">{{currency}} {{i.price_quarter|mul:conv_rate}} - 3 Months</h3></option>
+                                    </select>
+                                    <ul class="pricing-plan-features">
+                                      {{i.package_features}}
+                                    </ul>
+                                    <button type="submit" class="btn pricing-plan-purchase-btn  btn-rounded">Subscribe  </button>
+                                    {% comment %} <a href="{%url 'payment_session'%}?id={{i.price}}&pid={{i.id}}" class="btn pricing-plan-purchase-btn btn-rounded">Subscribe</a> {% endcomment %}
+                                </form>
+  
+                                </div>
+                              </div>
+                            </div>
+                            {% endif %}
+                            {% endfor %}
+                          </div>
+
+
+                        </div>
+                        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+                      </div>
+                      
+                    </div>
+                      {% comment %} <div class="col-md-4">
+                        <div class="card pricing-card pricing-card-highlighted  pricing-plan-pro">
+                          <div class="card-body">
+                              <i class="mdi mdi-trophy pricing-plan-icon"></i>
+                            <p class="pricing-plan-title">Pro</p>
+                            <h3 class="pricing-plan-cost ml-auto">$49</h3>
+                            <ul class="pricing-plan-features">
+                              <li>Unlimited conferences</li>
+                              <li>100 participants max</li>
+                              <li>Custom Hold Music</li>
+                              <li>10 participants max</li>
+                            </ul>
+                            <a href="#!" class="btn pricing-plan-purchase-btn">Purchase</a>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="card pricing-card pricing-plan-enterprise">
+                          <div class="card-body">
+                            <i class="mdi mdi-wallet-giftcard pricing-plan-icon"></i>
+                            <p class="pricing-plan-title">Enterprise</p>
+                            <h3 class="pricing-plan-cost ml-auto">$69</h3>
+                            <ul class="pricing-plan-features">
+                              <li>Unlimited conferences</li>
+                              <li>100 participants max</li>
+                              <li>Custom Hold Music</li>
+                              <li>10 participants max</li>
+                            </ul>
+                            <a href="#!" class="btn pricing-plan-purchase-btn">Purchase</a>
+                          </div>
+                        </div>
+                      </div> {% endcomment %}
+                    </div>
+                  
+			</main>
+
+			{% include 'vendor_admin1/footer.html' %}
+		</div>
+	</div>
+{% include 'vendor_admin1/js.html' %}
+
+</body>
+
+</html>

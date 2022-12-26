@@ -1,0 +1,184 @@
+{% load static %}
+{% load lang_tran %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <title>{{"About | Eventinz - Your Event Your Way"|transl:is_french}}</title>
+  {% include 'vendor_home/head.html' %}
+</head>
+
+<body>
+  {% include 'vendor_home/header.html' %}
+<div class="container-fluid baner-blog-section about-section">
+  <div class="baner-blog"><img src="{{BASE_URL}}/media/{{content_about.Header_Background}}" class="img-fluid" alt=""></div>
+  
+   <div class="blog-baner-title">
+    <div class="container">
+      <div class="row">
+        <h3>{{content_about.Header_Text|transl:is_french}}</h3>
+        <p>{{content_about.Header_subtext|transl:is_french}}</p>
+      </div>
+    </div>
+  </div> 
+  
+  
+</div>
+
+
+
+<div class="container-fluid who-we-are-section">
+<div class="container">
+<div class="row who-we-are-row">
+<div class="main-heading">
+<h2>{{content_about.Who_We_Are_Heading|transl:is_french}}</h2>
+<p align="left">{{content_about.Who_We_Are_Sub_Heading|safe|transl:is_french|safe}}</p><div class="about-img"><img src="{{BASE_URL}}/media/{{content_about.Who_We_Are_Image}}" class="img-fluid" alt=""></div>
+<p></p>
+</div>
+</div>
+</div>
+</div>
+
+ <div class="container-fluid eventinz-team-section">
+<div class="container">
+<div class="row eventinz-team-ro">
+
+  <div class="main-heading">
+    <h2>{{content_about.Eventinz_Teams_Header|transl:is_french}}</h2>    
+  </div>
+
+  {% for i in teams %}
+<div class="col-md-4">
+  <div class="eventinz-team-box">
+    <div class="back-img">
+      {% comment %} https://i.ibb.co/9pkZvf4/team-back-img-2.jpg {% endcomment %}
+      {% cycle '<img src="https://i.ibb.co/1ZQCSTZ/team-back-img.jpg" class="img-fluid" alt="">' '<img src="https://i.ibb.co/9pkZvf4/team-back-img-2.jpg" class="img-fluid" alt="">' %}
+      {% comment %} <img src="https://i.ibb.co/1ZQCSTZ/team-back-img.jpg" class="img-fluid" alt=""> {% endcomment %}
+    </div> 
+    <div class="eventinz-team-img">
+      <img src="{{BASE_URL}}/media/{{i.profile_image}}" class="img-fluid" alt=""> 
+    </div>
+    <div class="team-title">
+      <h3>{{i.Full_Name|title}} </h3>
+        <p>{{i.Designation}}</p>
+    </div>
+    {% if i.linkedin_url == None %}
+    <div class="linkedin-icon">
+      <a href="{{i.linkedin_url}}" style="visibility: hidden;"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+
+    </div>
+    {% else %}
+    <div class="linkedin-icon">
+      <a href="{{i.linkedin_url}}"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+    </div>
+
+    {% endif %}
+    <div class="row m-auto">
+      {% if i.certification_logo_1 %}
+      <div class="col-lg-3">
+        <div class="linkedin-icon w-100">
+          <a href="{{i.certification_link_1}}" target="_blank"><img src="{{BASE_URL}}/media/{{i.certification_logo_1}}" alt="" class="img-fluid w-100"></a>
+        </div>
+      </div>
+      {% endif %}
+      {% if i.certification_logo_2 %}
+      <div class="col-lg-3">
+        <div class="linkedin-icon w-100">
+          <a href="{{i.certification_link_2}}" target="_blank"><img src="{{BASE_URL}}/media/{{i.certification_logo_2}}" alt="" class="img-fluid w-100"></a>
+        </div>
+      </div>
+      {% endif %}
+      {% if i.certification_logo_3 %}
+      <div class="col-lg-3">
+        <div class="linkedin-icon w-100">
+          <a href="{{i.certification_link_3}}" target="_blank"><img src="{{BASE_URL}}/media/{{i.certification_logo_3}}" alt="" class="img-fluid w-100"></a>
+        </div>
+      </div>
+      {% endif %}
+      {% if i.certification_logo_4 %}
+      <div class="col-lg-3">
+        <div class="linkedin-icon w-100">
+          <a href="{{i.certification_link_4}}" target="_blank"><img src="{{BASE_URL}}/media/{{i.certification_logo_4}}" alt="" class="img-fluid w-100"></a>
+        </div>
+      </div>
+      {% endif %}
+      {% if i.certification_logo_5 %}
+      <div class="col-lg-3">
+        <div class="linkedin-icon w-100">
+          <a href="{{i.certification_link_5}}" target="_blank"><img src="{{BASE_URL}}/media/{{i.certification_logo_5}}" alt="" class="img-fluid w-100"></a>
+        </div>
+      </div>
+      {% endif %}
+      {% if i.certification_logo_6 %}
+      <div class="col-lg-3">
+        <div class="linkedin-icon w-100">
+          <a href="{{i.certification_link_6}}" target="_blank"><img src="{{BASE_URL}}/media/{{i.certification_logo_6}}" alt="" class="img-fluid w-100"></a>
+        </div>
+      </div>
+      {% endif %}
+      {% if i.certification_logo_7 %}
+      <div class="col-lg-3">
+        <div class="linkedin-icon w-100">
+          <a href="{{i.certification_link_7}}" target="_blank"><img src="{{BASE_URL}}/media/{{i.certification_logo_7}}" alt="" class="img-fluid w-100"></a>
+        </div>
+      </div>
+      {% endif %}
+      {% if i.certification_logo_8 %}
+      <div class="col-lg-3">
+        <div class="linkedin-icon w-100">
+          <a href="{{i.certification_link_8}}" target="_blank"><img src="{{BASE_URL}}/media/{{i.certification_logo_8}}" alt="" class="img-fluid w-100"></a>
+        </div>
+      </div>
+      {% endif %}
+
+    </div>
+    
+    
+  </div>
+</div>
+{% endfor %}
+
+
+
+</div>
+</div>
+</div>
+
+
+ <div class="container-fluid mission-section">
+<div class="row align-items-center">
+<div class="col-md-6">
+<div class="mission-section-img">
+  <img src="{%static 'main_home1/assets/images/mission-img.jpg' %}" class="img-fluid" alt=""> </div>
+</div>
+<div class="col-md-6">
+<div class="mission-section-title">
+<h3>{{content_about.Mission_Text|transl:is_french}}</h3>
+<p>{{content_about.Mission_Sub_Text|transl:is_french}}</p>
+<a href="#">{{"Contact Us"|transl:is_french}}</a> 
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+{% include 'vendor_home/footer.html' %}
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script> 
+
+<!-- <script src="assets/js/bootstrap.min.js"></script> --> 
+<script src="{%static 'main_home1/assets/js/slick.min.js' %}"></script>
+    <script src="{%static 'main_home1/assets/js/main.js' %}"></script>
+</body>
+</html>

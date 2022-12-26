@@ -1,0 +1,398 @@
+{% load static %}
+{% load get_request_a_quote_transaction %}
+{% load lang_tran %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    {% include 'vendor_dashboard_v2/head.html' %}
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/jszip-2.5.0/dt-1.12.1/b-2.2.3/b-colvis-2.2.3/b-html5-2.2.3/b-print-2.2.3/r-2.3.0/datatables.min.css"/>
+
+
+    <title>Dashboard Chat</title>
+</head>
+
+<body class="vendor_admin">
+    {% include 'vendor_dashboard_v2/top_header.html' %}
+
+
+    <div class="main-dash">
+        {% include 'vendor_dashboard_v2/aside.html' %}
+
+        <div class="dashboard flex-grow-1">
+
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">{{"Home"|transl:is_french}}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{"Quote Requests"|transl:is_french}}</li>
+                </ol>
+            </nav>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="request_quote shadow-sm ">
+                        <h2 class="heading">
+                            {{"Quote Requests"|transl:is_french}}
+                        </h2>
+                     
+
+                        <div class="table_row my-4">
+                            <div class="table-responsive-xxl">
+                                <table class="table table-borderless" id="quotetable">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">{{"Name"|transl:is_french}} </th>
+                                            <th scope="col">{{"Vendor Category"|transl:is_french}} </th>
+                                            <th scope="col">{{"Guests"|transl:is_french}} </th>
+                                            <th scope="col">{{"User Message"|transl:is_french}} </th>
+                                            <th scope="col">{{"Approx Event Date"|transl:is_french}} </th>
+                                            <th scope="col">{{"Requested On"|transl:is_french}} </th>
+                                            <th scope="col">{{"Action"|transl:is_french}} </th>
+                                        </tr>
+                                    </thead>
+                                    {% for i in quotes %}
+                                        <tr>
+                                            <td>
+                                                {{i.fname}} {{i.lname}}
+                                            </td>
+                                            <td>{{i.event_type|transl:is_french}} </td>
+                                            <td>{{i.no_of_guests}}</td>
+                                            <td>
+                                                <div class="content-text" style="max-width: 200px; word-break: break-all;">
+                                                    {{i.msg}}
+                                                </div>
+                                            </td>
+                                            <td>{{i.appx_date}}</td>
+                                            <td>{{i.created_on}}</td>
+                                            <td>
+                                                {% if i.status == 'accept' %}
+                                                <button class="icon_btn border-0 p-0 me-1"><i class="fa fa-check fa-fw"></i>{{"Quote Sent"|transl:is_french}}</button>
+                                                {% elif i.status == 'Done' %}
+                                                <button class="icon_btn border-0 p-0 me-1"><i class="fa fa-check fa-fw"></i>{{"Done"|transl:is_french}}</button>
+                                                {% elif i.status == 'Declined' %}
+                                                <button class="icon_btn border-0 p-0 me-1"><i class="fa fa-times fa-fw"></i>{{"Declined"|transl:is_french}}</button>
+                                                {% elif i.status == 'reject' %}
+
+                                                <button class="icon_btn border-0 p-0 me-1"><i class="fa fa-times fa-fw"></i>{{"Rejected"|transl:is_french}}</button>
+                                                {% elif i.status == 'Transaction Pending for Verification' %}
+                                                <button class="icon_btn border-0 p-0 me-1" onclick="window.location.href='{%url 'proposal_transactions' %}';"><i class="fa fa-chevron-right fa-fw"></i>{{"Check Status"|transl:is_french}}</button>
+
+
+                                                {% elif i.status == 'Milestone Paid' %}
+                                                <button class="icon_btn border-0 p-0 me-1"><i class="fa fa-check fa-fw"></i>{{"Milestone Paid"|transl:is_french}}</button>
+                                                {% comment %} <button class="btn btn-outline-primary btn-sm" onclick="request({{i.id}},{{i.quote_id.milestone|floatformat:"0"}},'{{i.quote_id.milestone_type}}',{{i.quote_id.total_amt}});">Request Remaining Amount</button> {% endcomment %}
+                                                <button class="icon_btn border-0 p-2 me-1 {% if i.pay_num == '2' %} d-none {% endif %} bg-dark text-white" onclick="request1234({{i.id}},{{i.quote_id.milestone|floatformat:"0"}},'{{i.quote_id.milestone_type}}',{{i.quote_id.total_amt}});">{{"Request"|transl:is_french}}</button>
+                                                {% elif i.status == '2nd Milestone requested' %}
+                                                <button class="icon_btn border-0 p-0 me-1"><i class="fa fa-check fa-fw"></i>{{"Amount Requested"|transl:is_french}}</button>
+
+                                                {% elif i.status == '2nd Milestone Paid' %}
+                                                <button class="icon_btn border-0 p-0 me-1"><i class="fa fa-check fa-fw"></i>{{"Amount Recieved"|transl:is_french}}</button>
+
+                                                {% else %}
+                                                
+                                                <button class="icon_btn border-0 p-0 me-1 engage" onclick="engage({{i.id}});">
+                                                    <img src="{%static 'vendor_dashboard_v2/img/eye.png' %}" alt="" data-bs-toggle="tooltip" data-bs-placement="top" title="View">
+                                                </button>
+                                                <button class="icon_btn border-0 p-0 me-1" onclick="reject({{i.id}});">
+                                                    <img src="{%static 'vendor_dashboard_v2/img/close.png' %}" alt="" data-bs-toggle="tooltip" data-bs-placement="top" title="Close">
+                                                </button>
+                                                {% endif %}
+                                              
+                                            </td>
+
+                                        </tr>
+                                    {% endfor %}
+
+                                </table>
+                            </div>
+                        </div>
+
+                        
+
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="footer_sec p-0">
+        <div class="copyrights m-0 text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <p>© {{"2022 Eventinz, Inc All Rights Reserved"|transl:is_french}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+    crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jszip-2.5.0/dt-1.12.1/b-2.2.3/b-colvis-2.2.3/b-html5-2.2.3/b-print-2.2.3/r-2.3.0/datatables.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+        <script>
+            function request(id,amount,type,total){
+              //alert(id);
+              if (type=='amt'){
+                var rem_amt=total-amount;
+                //alert(rem_amt);
+                swal({
+                  title: "Are you sure?",
+                  text: "Do You Want to Request Remaining Amount ? ( "+rem_amt+" )",
+                  icon: "warning",
+                  buttons: true,
+                  dangerMode: true,
+                })
+                .then((willDelete) => {
+                  if (willDelete) {
+                    
+                    $.ajax({
+                      url: "{%url 'request_rem_amt' %}?id="+id, 
+                      success: function(result){
+                        if(result=='OK'){
+                          //window.location.href ="{%url 'vendor_billing' %}";
+                          console.log("OK")
+                          location.reload();
+                        }
+                        else{
+                          swal(result);
+                        }
+                
+                      //$("#div1").html(result);
+                        //$('#askquote').html("Done");
+                      //$('#askquote').focusout();
+                        //alert(result);
+                    }
+                  });
+                    
+                  } else {
+                    swal("Cancelled !");
+                  }
+                });
+              }
+            }
+          
+            function request1234(id,amount,type,total){
+              //alert(id);
+              if (type=='amt'){
+                var rem_amt=total-amount;
+                console.log(rem_amt);
+                //alert(rem_amt);
+                swal({
+                  title: "Are you sure?",
+                  text: "Do You Want to Request Remaining Amount ? ( "+rem_amt+" )",
+                  icon: "warning",
+                  buttons: true,
+                  dangerMode: true,
+                })
+                .then((willDelete) => {
+                  if (willDelete) {
+                    
+                    $.ajax({
+                      url: "{%url 'request_rem_amt' %}?id="+id, 
+                      success: function(result){
+                        if(result=='OK'){
+                          //window.location.href ="{%url 'vendor_billing' %}";
+                          console.log("OK")
+                          location.reload();
+                        }
+                        else{
+                          swal(result);
+                        }
+                
+                      //$("#div1").html(result);
+                        //$('#askquote').html("Done");
+                      //$('#askquote').focusout();
+                        //alert(result);
+                    }
+                  });
+                    
+                  } else {
+                    swal("Cancelled !");
+                  }
+                });
+              }else if (type == 'percent'){
+                var rem_amt=total-amount;
+                console.log(rem_amt);
+                //alert(rem_amt);
+                swal({
+                  title: "Are you sure?",
+                  text: "Do You Want to Request Remaining Amount ? ( "+rem_amt+" )",
+                  icon: "warning",
+                  buttons: true,
+                  dangerMode: true,
+                })
+                .then((willDelete) => {
+                  if (willDelete) {
+                    
+                    $.ajax({
+                      url: "{%url 'request_rem_amt' %}?id="+id, 
+                      success: function(result){
+                        if(result=='OK'){
+                          //window.location.href ="{%url 'vendor_billing' %}";
+                          console.log("OK")
+                          location.reload();
+                        }
+                        else{
+                          swal(result);
+                        }
+                
+                      //$("#div1").html(result);
+                        //$('#askquote').html("Done");
+                      //$('#askquote').focusout();
+                        //alert(result);
+                    }
+                  });
+                    
+                  } else {
+                    swal("Cancelled !");
+                  }
+                });
+              }
+            }
+          </script>
+          <script>
+            $(document).ready( function () {
+              $('#quotetable').DataTable({
+                responsive: true,
+                //paging: false,
+                pagingType: 'simple_numbers',
+                ordering:  true,
+                order: [[5,"asc"]]
+                
+          
+              });
+            } );
+          </script>
+          <script>
+            function getcontent(id)
+            {
+                console.log("OK");
+                id=id;
+                $.ajax({
+                    url: "{%url 'get_content' %}",
+                    data: "id=" + id,
+                    success: function(msg){
+                      console.log(msg);
+                      swal(msg);
+          
+                              }
+                });
+            }
+          </script>
+          <script>
+              $('#sbtn').on('click',function(){
+                  $(this).prop('disabled',true);
+                  $(this).html(`
+                  <div class="spinner-border spinner-border-sm text-light" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                    </div> Please Wait...
+                  `);
+                  $('#pupdate').submit()
+              })
+          </script>
+          <script>
+              tinymce.init({
+                selector: 'textarea',
+                plugins: 'advlist autolink lists link image charmap preview anchor pagebreak',
+                toolbar_mode: 'floating',
+                menubar:false,
+                statusbar:false
+              });
+            </script>
+          <script>
+            $( document ).ready(function() {
+              console.log("OK");
+              
+              
+            });
+          </script>
+          
+          <script>
+            function engage(id){
+              
+              var type='accept';
+              $.ajax({
+                url: "{%url 'change_quote_state' %}"+"?type="+type+"&id="+id, 
+                success: function(result){
+                  if(result=='ok'){
+                    window.location.href ="{%url 'vendor_billing' %}?id="+id;
+          
+                  }
+                  else{
+                    swal(result);
+                  }
+          
+                //$("#div1").html(result);
+                  //$('#askquote').html("Done");
+                //$('#askquote').focusout();
+                  //alert(result);
+              }
+            })
+              // alert("Accept : " + id);
+            }
+            function reject(id){
+              var type='reject';
+              $.ajax({
+                url: "{%url 'change_quote_state' %}"+"?type="+type+"&id="+id, 
+                success: function(result){
+                //$("#div1").html(result);
+                 // $('#askquote').html("Done");
+                //$('#askquote').focusout();
+                 // alert(result);
+                 location.reload();
+              }
+            });
+             // alert("Reject : " + id);
+            }
+          </script>
+          <script>
+            $('.content-text').each(function(){
+              var words = $(this).text().trim().split(/\s+/);
+                var maxWords = 6;
+                
+                if(words.length > maxWords){
+                    html = words.slice(0,maxWords) +'<span class="more_text" style="display:none;"> '+words.slice(maxWords, words.length)+'</span>' + '<a href="#" class="read_more">...<br/>Read More</a>'
+                    console.log(html);
+                    $(this).html(html)
+                
+                  $(this).find('a.read_more').click(function(event){
+                        $(this).toggleClass("less");
+                        event.preventDefault();
+                        if($(this).hasClass("less")){
+                          $(this).html("<br/>Read Less")
+                            $(this).parent().find(".more_text").show();
+                        }else{
+                          $(this).html("...<br/>[Read More]")
+                            $(this).parent().find(".more_text").hide();
+                        }
+                    })
+                
+                }
+                
+            })
+          </script>
+
+</body>
+
+</html>

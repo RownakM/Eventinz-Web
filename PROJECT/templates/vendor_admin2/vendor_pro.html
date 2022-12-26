@@ -1,0 +1,720 @@
+{% load static %}
+{% load count_vendor %}
+{% load lang_tran %}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="{%static 'main_home1/wedding_static/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{%static 'main_home1/wedding_static/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{%static 'main_home1/wedding_static/css/custom.css' %}">
+  {% include 'vendor_home/head.html' %}
+
+    <link rel="stylesheet" href="{%static 'main_home1/wedding_static/css/style.css' %}">
+    <title>Vendor Pro</title>
+</head>
+
+<body>
+
+   {% include 'vendor_home/header_vendor.html' %}
+
+    <section class="joinus_mnsec">
+        <div class="container">
+            <div class="row mn_center">
+                <div class="col-lg-7">
+                    <div class="joinbs_txt">
+                        <h2 class="joinbs_title_txt">{{vendor_header_data.Title|safe|transl:is_french|safe}}</h2>
+                        <h5 class="joinbs_sbttl">{{vendor_header_data.Sub_Title|safe|transl:is_french|safe}}</h5>
+                        <p class="joinbs_p_txt">{{vendor_header_data.Short_Text|safe|transl:is_french|safe}}</p>
+                    </div>
+                </div>
+                <div class="col-lg-5 pe-0">
+                    <div class="em_bg">
+                        <div><h4 class="getst_txt">{{"Lets Get Started"|transl:is_french|safe}} </h4></div>
+                        <div>
+                            <form action="{%url 'vendor_login' %}" method="POST">
+                                {% csrf_token %}
+                                
+                                <div>
+                                    <input type="email" name="email" class="email_add" placeholder="{{'Email Address'|transl:is_french}}" required>
+                                </div>
+                                <div>
+                                    <input type="password" name="password" class="email_add" placeholder="{{'Password'|transl:is_french}}" required>
+                                </div>
+                                <div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            {% comment %} <p class="rem_txt"><input type="checkbox" name="rempas" class="remembr"> <span>Remember Me</span></p> {% endcomment %}
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p class="frg_txt"><a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">{{"Forgot Password"|transl:is_french|safe}}</a></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% for message in messages %}
+                                <div class="p-2 mt-2 mb-2 bg-white">
+                                    <span class="text-danger"><b>{{message|transl:is_french|safe}}</b></span>
+                                </div>
+                                {% endfor %}
+                                <div>
+                                    <div><button class="ven_logbtn" type="submit">{{"Login"|transl:is_french|safe}}</button></div>
+                                </div>
+                            </form>
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="exampleModalLabel">{{"Forgot Password"|transl:is_french|safe}}</h5>
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body" id="div1">
+                                    
+                                            <div class="mb-3">
+                                              <label for="exampleInputEmail1" class="form-label">{{"Email address"|transl:is_french|safe}}</label>
+                                              <input type="email" class="form-control" id="email_reg" aria-describedby="emailHelp" placeholder="abc@xyz.com">
+                                              <div id="emailHelp" class="form-text"></div>
+                                            </div>
+                                            
+                                            
+                                            <button class="ven_logbtn" id="nxt_otp_forgot">{{"Next"|transl:is_french|safe}}</button>
+                                         
+                                    </div>
+                                    <div class="modal-body" id="div2">
+                                    
+                                        <div class="mb-3">
+                                          <label for="exampleInputEmail1" class="form-label">{{"Enter OTP"|transl:is_french|safe}}</label>
+                                          <input type="text" class="form-control" id="otp" aria-describedby="emailHelp" placeholder="">
+                                          <div id="next_pwd_help" class="form-text"></div>
+                                        </div>
+                                        
+                                        
+                                        <button class="ven_logbtn" id="nxt_pwd_forgot">{{"Next"|transl:is_french|safe}}</button>
+                                     
+                                    </div>
+                                    <div class="modal-body" id="div3">
+                                    
+                                        <div class="mb-3">
+                                          <label for="exampleInputEmail1" class="form-label">{{"Enter New Password"|transl:is_french|safe}}</label>
+                                          <input type="text" class="form-control" id="fgt_password" aria-describedby="emailHelp" placeholder="">
+                                          <label for="exampleInputEmail1" class="form-label">{{"Re-Enter Password"|transl:is_french|safe}}</label>
+                                          <input type="text" class="form-control" id="fgt_password_confirm" aria-describedby="emailHelp" placeholder="">
+                                          <div class="form-text" id="fgt_help"></div>
+                                        </div>
+                                        
+                                        
+                                        <button class="ven_logbtn" id="nxt_pwd_submit">{{"Reset Password"|transl:is_french|safe}}</button>
+                                     
+                                    </div>
+                                    
+                                  </div>
+                                </div>
+                              </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>  
+
+    <section class="special-events">
+        <div class="container">
+            <h1 class="section-title text-center m-auto">
+                {{vendor_leads_CMS_main_data.Heading|safe|transl:is_french|safe}}
+            </h1>
+            <div class="sec-subtitle text-center"> {{vendor_leads_CMS_main_data.SubTitle|transl:is_french|safe}}</div>
+            <div class="timeline">
+                <div class="timeline-head text-center">
+                    <a class="tab active" href="#">{{vendor_leads_CMS_main_data.button_text|transl:is_french|safe}}</a>
+                </div>
+                {% for i in vendor_leads_steps_data %}
+                <div class="event ebnt_{{i.step_no}}">
+                    <span class="eve-no">{{i.step_no}}</span>
+                    <div class="event-icon">
+                        <img src="{{BASE_URL}}/media/{{i.image}}" alt="Location icon">
+                    </div>
+                    <div class="event-desc">
+                        <h2 class="event-title">{{i.Heading|transl:is_french|safe}}</h2>
+                        <p class="event-text">{{i.Sub_Text|transl:is_french|safe}}</p>
+                        <a href="{%url 'vendor_signup' %}" class="btn eve-btn">{{"Get Started"|transl:is_french|safe}}</a>
+                    </div>
+                </div>
+                {% endfor %}
+               
+            </div>
+        </div>
+    </section>
+
+    <section class="online-platform">
+        <div class="container">
+            <h3 class="section-title text-center m-auto">
+                {{vendor_category_CMS_data.Heading|transl:is_french|safe}}
+            </h3>
+            <div class="sec-subtitle text-center">{{vendor_category_CMS_data.Sub_Heading|transl:is_french|safe}}
+            </div>
+            <div class="op-row regular">
+                {% for i in vendor_categories %}
+                <a href="{%url 'vendor_home:our_vendors' %}{{i.category_name|urlencode}}" class="text-dark">
+                    <div class="op-col">
+                        <img src="{{BASE_URL}}/media/{{i.category_cover_image}}" style="height: 217px;" alt="background">
+                        <div class="col-cap">
+                            <div class="cap-icon">
+                                <img src="{{BASE_URL}}/media/{{i.category_icon}}" class="img-fluid" style="width: 64px; height: 64px;" alt="Venu icon">
+                                <div class="icon-title">{{i.category_name|transl:is_french|safe}}</div>
+                            </div>
+                            <div class="cap-foot">
+                                {{i.category_name|count_vendor_num|transl:is_french|safe}} {{"Vendors"|transl:is_french|safe}}
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                {% endfor %}
+                {% comment %} <div class="op-col">
+                    <img src="{%static 'main_home1/wedding_static/images/vendrpro/bg-1.jpg' %}" alt="background">
+                    <div class="col-cap">
+                        <div class="cap-icon">
+                            <img src="{%static 'main_home1/wedding_static/images/vendrpro/venu-icon.png' %}" alt="Venu icon">
+                            <div class="icon-title">Caterers</div>
+                        </div>
+                        <div class="cap-foot">
+                            243 Venues
+                        </div>
+                    </div>
+                </div>
+
+                <div class="op-col">
+                    <img src="{%static 'main_home1/wedding_static/images/vendrpro/bg-1.jpg' %}" alt="background">
+                    <div class="col-cap">
+                        <div class="cap-icon">
+                            <img src="{%static 'main_home1/wedding_static/images/vendrpro/photographer.png' %}" alt="Photographer icon">
+                            <div class="icon-title">Photographer</div>
+                        </div>
+                        <div class="cap-foot">
+                            560 Photographer Available
+                        </div>
+                    </div>
+                </div> {% endcomment %}
+
+                {% comment %} <div class="op-col">
+                    <img src="./assets/images/vendrpro/bg-1.jpg" alt="background">
+                    <div class="col-cap">
+                        <div class="cap-icon">
+                            <img src="./assets/images/vendrpro/music-icon.png" alt="Music icon">
+                            <div class="icon-title">Music & Bands</div>
+                        </div>
+                        <div class="cap-foot">
+                            28 Music & Live Bands Available
+                        </div>
+                    </div>
+                </div>
+                <div class="op-col">
+                    <img src="./assets/images/vendrpro/bg-1.jpg" alt="background">
+                    <div class="col-cap">
+                        <div class="cap-icon">
+                            <img src="./assets/images/vendrpro/venu-icon.png" alt="Venu icon">
+                            <div class="icon-title">Venues</div>
+                        </div>
+                        <div class="cap-foot">
+                            243 Venues
+                        </div>
+                    </div>
+                </div>
+
+                <div class="op-col">
+                    <img src="./assets/images/vendrpro/bg-1.jpg" alt="background">
+                    <div class="col-cap">
+                        <div class="cap-icon">
+                            <img src="./assets/images/vendrpro/venu-icon.png" alt="Venu icon">
+                            <div class="icon-title">Caterers</div>
+                        </div>
+                        <div class="cap-foot">
+                            243 Venues
+                        </div>
+                    </div>
+                </div>
+
+                <div class="op-col">
+                    <img src="./assets/images/vendrpro/bg-1.jpg" alt="background">
+                    <div class="col-cap">
+                        <div class="cap-icon">
+                            <img src="./assets/images/vendrpro/photographer.png" alt="Photographer icon">
+                            <div class="icon-title">Photographer</div>
+                        </div>
+                        <div class="cap-foot">
+                            560 Photographer Available
+                        </div>
+                    </div>
+                </div>
+
+                <div class="op-col">
+                    <img src="./assets/images/vendrpro/bg-1.jpg" alt="background">
+                    <div class="col-cap">
+                        <div class="cap-icon">
+                            <img src="./assets/images/vendrpro/music-icon.png" alt="Music icon">
+                            <div class="icon-title">Music & Bands</div>
+                        </div>
+                        <div class="cap-foot">
+                            28 Music & Live Bands Available
+                        </div>
+                    </div>
+                </div> {% endcomment %}
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonial d-none">
+        <h4 class="section-title text-center m-auto">
+            {{"What customers says about us"|transl:is_french|safe}}
+        </h4>
+        <div class="testi-row">
+            <div class="testi-col text-center">
+                <div class="rating">
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                </div>
+                <p>A2D2 has seen such tremendous
+                    value being on EventSource! If you are in the events industry being on this site is a MUST!
+                    A big thanks to Jon and his incredible
+                    customer service!
+                </p>
+                <div class="author">
+                    <span class="first-letter">J</span> -Judie K
+                </div>
+            </div>
+
+            <div class="testi-col text-center">
+                <div class="rating">
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                </div>
+                <p>A2D2 has seen such tremendous
+                    value being on EventSource! If you are in the events industry being on this site is a MUST!
+                    A big thanks to Jon and his incredible
+                    customer service!
+                </p>
+                <div class="author">
+                    <span class="first-letter">J</span> -Judie K
+                </div>
+            </div>
+
+            <div class="testi-col text-center">
+                <div class="rating">
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                </div>
+                <p>A2D2 has seen such tremendous
+                    value being on EventSource! If you are in the events industry being on this site is a MUST!
+                    A big thanks to Jon and his incredible
+                    customer service!
+                </p>
+                <div class="author">
+                    <span class="first-letter">J</span> -Judie K
+                </div>
+            </div>
+
+            <div class="testi-col text-center">
+                <div class="rating">
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                </div>
+                <p>A2D2 has seen such tremendous
+                    value being on EventSource! If you are in the events industry being on this site is a MUST!
+                    A big thanks to Jon and his incredible
+                    customer service!
+                </p>
+                <div class="author">
+                    <span class="first-letter">J</span> -Judie K
+                </div>
+            </div>
+
+            <div class="testi-col text-center">
+                <div class="rating">
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                </div>
+                <p>A2D2 has seen such tremendous
+                    value being on EventSource! If you are in the events industry being on this site is a MUST!
+                    A big thanks to Jon and his incredible
+                    customer service!
+                </p>
+                <div class="author">
+                    <span class="first-letter">J</span> -Judie K
+                </div>
+            </div>
+
+            <div class="testi-col text-center">
+                <div class="rating">
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                </div>
+                <p>A2D2 has seen such tremendous
+                    value being on EventSource! If you are in the events industry being on this site is a MUST!
+                    A big thanks to Jon and his incredible
+                    customer service!
+                </p>
+                <div class="author">
+                    <span class="first-letter">J</span> -Judie K
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="client_sec">
+
+        <div class="container">
+            <div class="cltl_bg"><h4 class="cls_title">{{vendor_clients_cms.Heading|transl:is_french}}</h4></div>
+            <div class="cls_brd">
+                <div>
+                    <div class="row mrg_l_r_0 mt-5 mb-5">
+                        {% for i in vendor_clients_data %}
+                        <div class="col-md-3 text-center clal_center">
+                            <img src="{{BASE_URL}}/media/{{i.image}}" alt="{{i.caption}}" title="{{i.caption}}">
+                        </div>
+                        {% endfor %}
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <section class="our_mission">
+
+        <div class="row">
+            <div class="col-md-6 msn_bg"></div>
+            <div class="col-md-6">
+                <div class="ormns_txt">
+                    <h4 class="msn_title">{{"Our Mission"|transl:is_french|safe}}</h4>
+                    <p class="msn_text">{{"We set out to create  West Africa's most <br>targeted, up-to-date, and comprehensive special event planning guide. We pride ourselves on working extra close with vendors like you toward a shared goal of success."|safe|transl:is_french|safe}}</p>
+                        <button class="mission_conbtn">{{"Contact Us"|transl:is_french|safe}}</button>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <section class="launch_prf_sec">
+
+        <div class="container">
+            <div class="get_sec">
+                <h4 class="get_sec_title">{{"Ready to Get Started?"|transl:is_french|safe}}</h4>
+                <p class="get_sec_txt">{{"Launch your profile today and get yourself up and running! "|transl:is_french|safe}}</p>
+                <button class="get_sec_btn" onclick="window.location.href='{%url 'vendor_signup' %}';">{{"Lets Get Started"|transl:is_french|safe}}</button>
+            </div>
+        </div>
+
+    </section>
+
+
+    
+
+
+  </div>
+
+{% include 'vendor_home/footer.html' %}
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+  crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+  integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+  crossorigin="anonymous"></script>
+  {% include 'vendor_home/index-js.html' %}
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="{%static 'main_home1/wedding_static/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.js"></script>
+    <script type="text/javascript">
+        $(document).on('ready', function () {
+            $(".regular").slick({
+                dots: false,
+                infinite: true,
+                slidesToShow: 4,
+                autoplay: true,
+                slidesToScroll: 1,
+                responsive: [
+                    {
+                        breakpoint: 480,
+                        settings: {
+                            arrows: false,
+                            dots: true,
+                            slidesToShow: 1
+                        }
+                    },
+                    {
+                        breakpoint: 830,
+                        settings: {
+                            arrows: false,
+                            dots: true,
+                            slidesToShow: 2
+                        }
+                    },
+                    {
+                        breakpoint: 1100,
+                        settings: {
+                            arrows: true,
+                            dots: false,
+                            slidesToShow: 3
+                        }
+                    },
+                ]
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(document).on('ready', function () {
+            $(".testi-row").slick({
+                dots: true,
+                prevArrow: false,
+                nextArrow: false,
+                centerMode: true,
+                infinite: true,
+                infinite: true,
+                slidesToShow: 2,
+                autoplay: true,
+                slidesToScroll: 1,
+                responsive: [
+                    {
+                        breakpoint: 480,
+                        settings: {
+                            arrows: false,
+                            slidesToShow: 1
+                        }
+                    },
+                    {
+                        breakpoint: 830,
+                        settings: {
+                            arrows: false,
+                            slidesToShow: 2
+                        }
+                    },
+                ]
+            });
+        });
+    </script>
+
+
+<script>
+    $(window).scroll(function(){
+    if ($(this).scrollTop() > 700) {
+       $('.ebnt_1').addClass('eve-active');
+    } else {
+       $('.ebnt_1').removeClass('eve-active');
+    }
+});
+</script>
+
+<script>
+    $(window).scroll(function(){
+    if ($(this).scrollTop() > 1000) {
+       $('.ebnt_2').addClass('eve-active');
+    } else {
+       $('.ebnt_2').removeClass('eve-active');
+    }
+});
+</script>
+
+<script>
+    $(window).scroll(function(){
+    if ($(this).scrollTop() > 1300) {
+       $('.ebnt_3').addClass('eve-active');
+    } else {
+       $('.ebnt_3').removeClass('eve-active');
+    }
+});
+</script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<script>
+
+    $('#nxt_otp_forgot').html('Enter Email to Continue');
+    $('#nxt_otp_forgot').prop('disabled',true);
+    $('#div2').hide();
+    $('#div3').hide();
+
+    $('#email_reg').on('input', function() {
+        
+        var id=this.value;
+        $.ajax({
+            type: "GET",
+            url: "{%url 'Get_Email' %}",
+            data: "email="+id,
+            success: function(data){
+                console.log(data)
+                if (data.length <=0){
+                    $('#emailHelp').html('<font color="red"><i class="fa fa-times fa-fw"></i><b>Vendor Not Available</b></font>');
+                    $('#nxt_otp_forgot').prop('disabled',true);
+                    $('#nxt_otp_forgot').html('Enter Registered Email to Continue');
+
+                    
+
+                }
+                else if(data.length>0){
+                    $('#emailHelp').html('<font color="green"><i class="fa fa-check fa-fw"></i><b>Vendor Available</b></font>');
+                    $('#nxt_otp_forgot').prop('disabled',false);
+                    $('#nxt_otp_forgot').html('Next');
+
+
+                   
+
+                }
+                //console.log(data)
+                //for (var i = 0; i < data.length; i++){
+                //	//console.log(data[i].fields)
+                //	var state_id=data[i].fields.state_code;
+                //	var state_name=data[i].fields.name;
+                //	var option_tag=document.getElementById('state')
+                //	var row=`<option value="${state_id}">${state_name}</option>`;
+                //	option_tag.innerHTML+=row
+                    //var row = `<tr>
+                    //				<td>${cno}</td>
+                    //				<td>${data[i].recharge_short_desc}</td>
+                    //				<td>${data[i].recharge_validity}</td>
+                    //  <td>${data[i].recharge_long_desc}</td>
+                    //  <td><button onclick="pay_now(${data[i].recharge_amount})">${data[i].recharge_amount}.00</button></td>
+                    //		  </tr>`
+                    //table.innerHTML += row
+        
+        
+                //}
+                //$('#statelabel').show();
+
+                //$('#state').show();
+            },
+        });
+    });
+    $('#nxt_otp_forgot').on('click',function(e){
+        e.preventDefault();
+        var id = $('#email_reg').val();
+        console.log("OK");
+        $.ajax({
+            type: "GET",
+            url: "{%url 'vendor_send_otp' %}",
+            data: "email="+id,
+            success: function(data){
+                console.log(data)
+                
+                $('#div1').hide();
+                $('#div2').show();
+
+                   
+
+                
+                //console.log(data)
+                //for (var i = 0; i < data.length; i++){
+                //	//console.log(data[i].fields)
+                //	var state_id=data[i].fields.state_code;
+                //	var state_name=data[i].fields.name;
+                //	var option_tag=document.getElementById('state')
+                //	var row=`<option value="${state_id}">${state_name}</option>`;
+                //	option_tag.innerHTML+=row
+                    //var row = `<tr>
+                    //				<td>${cno}</td>
+                    //				<td>${data[i].recharge_short_desc}</td>
+                    //				<td>${data[i].recharge_validity}</td>
+                    //  <td>${data[i].recharge_long_desc}</td>
+                    //  <td><button onclick="pay_now(${data[i].recharge_amount})">${data[i].recharge_amount}.00</button></td>
+                    //		  </tr>`
+                    //table.innerHTML += row
+        
+        
+                //}
+                //$('#statelabel').show();
+
+                //$('#state').show();
+            },
+        });
+
+    });
+    $('#nxt_pwd_forgot').on('click',function(e){
+        e.preventDefault();
+        var otp = $('#otp').val();
+        $.ajax({
+            type: "GET",
+            url: "{%url 'vendor_check_otp' %}",
+            data: "otp="+otp,
+            success: function(data){
+                console.log(data)
+                if (data == 'OK'){
+                    $('#div2').hide();
+                    $('#div3').show();
+                }
+                else{
+                    $('#next_pwd_help').html('<font color="red"><i class="fa fa-times fa-fw"></i><b>Incorrect OTP ! Please Check !</b></font>')
+                }
+                
+                
+            }
+        });
+        
+    });
+    $('#nxt_pwd_submit').on('click',function(e){
+        e.preventDefault();
+        var password = $('#fgt_password').val();
+        var confirm_password=$('#fgt_password_confirm').val();
+        console.log("OK enter");
+
+        if (password == confirm_password){
+            console.log("OK enter1");
+
+            $.ajax({
+                type: "GET",
+                url: "{%url 'vendor_update_pwd' %}",
+                data: "password="+password,
+                success: function(data){
+                    //console.log(data)
+                    if (data == 'Done'){
+                        $('#fgt_help').html('<font color="green"><i class="fa fa-check fa-fw"></i><b>Password Saved Succefully !</b></font>');
+                        
+                        swal("Success !", "Password Reset Successfully", "success")
+                        .then((value) => {
+                              location.reload();
+                        });
+                    }
+                    
+                    
+                }
+            });
+        }
+        else{
+            console.log("OK enter 2");
+
+            $('#fgt_help').html('<font color="red"><i class="fa fa-times fa-fw"></i><b>Password Does Not Match</b></font>');
+        }
+        
+        
+    });
+</script>
+
+</body>
+
+</html>

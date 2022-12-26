@@ -1,0 +1,580 @@
+{% load static %}
+{% load cool_num %}
+{% load get_event_type %}
+{% load country_data %}
+{% load event_currency_convert %}
+{% load get_head %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    {% include 'vendor_home/head.html' %}
+
+    <link rel="stylesheet" href="{%static 'main_home1/user_dashboard/css/style.css' %}">
+    <link rel="stylesheet" href="{%static 'main_home1/user_dashboard/fonts/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/jszip-2.5.0/dt-1.12.1/b-2.2.3/b-colvis-2.2.3/b-html5-2.2.3/b-print-2.2.3/cr-1.5.6/r-2.3.0/sb-1.3.4/sp-2.0.2/datatables.min.css"/>
+
+    <style>
+        html,body{
+            overflow-x: visible;
+        }
+        .page-link{
+            background-color: black;
+        }
+    </style>
+    
+
+    <title>{{user.fname}} {{user.lname|make_list|first}} Profile | Eventinz.com | Your Event Your Way</title>
+</head>
+
+<body>
+
+
+
+
+    <header>
+
+        <nav class="navbar navbar-expand-lg navbar-default bg-white p-0">
+
+            <div class="dashboard_nav">
+                <a class="navbar-brand" href="{%url 'vendor_home:vendor_home_index' %}"><img src="{%static 'main_home1/assets/images/logo-desktop.png' %}" alt="" width="190"></a>
+                <div>
+                    <div class="pers_info">
+                        <div class="nav-item dropdown bg-transparent">
+                            <a class="nav-link dropdown-toggle persinfd bg-transparent" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <h6 class="pers_info_txt bg-transparent">Welcome!  <span>{{user.fname}}</span></h6> 
+                                <div class="admin_img">{{user.fname|make_list|first}}</div>
+                            </a>
+                            <ul class="dropdown-menu dropd_style" aria-labelledby="navbarDropdown">
+                              <li><a class="dropdown-item" href="#">Profile Info</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+    </header>
+    <div class="modal fade" id="updateprofile" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Update Profile</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="loginSign-form" action="{%url 'vendor_home:update_user_profile' %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="mb-3 form-field">
+                      <label for="exampleInputEmail1" class="form-label">Email address</label>
+                      <input type="email" class="form-control" id="usermail" aria-describedby="emailHelp" value="{{user.Email}}" readonly>
+                      
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3 form-field">
+                                <label for="exampleInputEmail1" class="form-label">First Name</label>
+                                <input type="text" class="form-control" id="fname" name="fname" aria-describedby="emailHelp" value="{{user.fname}}">
+    
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3 form-field">
+                                <label for="exampleInputEmail1" class="form-label">Last Name</label>
+                                <input type="text" class="form-control" id="lname" name="lname" aria-describedby="emailHelp" value="{{user.lname}}">
+                                <input type="hidden" name="user_id" value="{{user.id}}">
+    
+                            </div>
+                        </div>
+                    </div>
+                
+                    
+                    
+                    <div class="mb-3">
+                      <label for="exampleInputPassword1" class="form-label">Password</label>
+                      <input type="password" class="form-control" id="pwd" name="pwd" value="{{user.password}}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Profile Image (1 : 1 Photo)</label>
+                        <input type="file" class="form-control" id="image" name="image" value="{{user.profile_image}}">
+                      </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-sm">Save</button>
+                </form>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    <div>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  Milestone Amount to Pay : <span id="amt"></span>
+                  <div id="smart-button-container">
+                    <div style="text-align: center;">
+                      <div id="paypal-button-container"></div>
+                    </div>
+                  </div>
+                </div>
+               
+              </div>
+            </div>
+          </div>
+        <div>
+        <div class="main">
+            <div class="main_bg">
+                <div class="container">
+                    <div class="row pt-5 pb-5">
+                        {% include 'user_profile/side_panel.html' %}
+
+                        <div class="col-lg-8">
+                            <div class="main_panel">
+
+                                
+                                       
+                                        <div id="MyEvent">
+                                            
+                                          
+
+
+                                            <div class="myevent_brd">
+                                                <div class="row al_center">
+                                                    <div class="col-md-6">
+                                                        <div class="myevent_txt">
+                                                            <h4>All Events</h4>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>
+                                                <div class="mt-4">
+                                                    <table class="table table-striped display responsive nowrap" id="all_events_table">
+                                                        <thead>
+                                                          <tr>
+                                                            <th scope="col" class="text-center">#</th>
+                                                            <th scope="col" class="text-center">Event Category</th>
+                                                            <th scope="col" class="text-center">Heads</th>
+                                                            <th scope="col" class="text-center">D.O.E</th>
+                                                            <th scope="col" class="text-center">Status</th>
+                                                            <th scope="col" class="text-center">Description</th>
+                                                            <th scope="col" class="text-center">Action</th>
+
+                                                          </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            {% for i in events %}
+                                                          <tr>
+                                                            <th scope="row">{{forloop.counter}}</th>
+                                                            <td>{{i.Event_Categories|event_type}}</td>
+                                                            <td>{{i.Heads|head_find}}</td>
+                                                            <td>{{i.DOE}}</td>
+                                                            <td>
+                                                                {% if i.status == "draft" %}
+                                                                Published
+                                                                {% endif %}
+                                                                {% if i.status == "closed" %}
+                                                                Closed
+                                                                {% endif %}
+                                                            </td>
+                                                            <td>
+                                                                <button class="btn btn-link p-0 m-0" id="viewbtn" onclick="getdesc({{forloop.counter}});">
+                                                                    View
+                                                                </button>
+                                                                {% comment %} {{i.Event_Desc}} {% endcomment %}
+                                                            </td>
+                                                            <td>
+                                                                <a class="btn btn-link p-0 m-0" href="{%url 'vendor_home:close_event' %}?id={{i.id}}">Close Event</a>
+                                                            </td>
+                                                          </tr>
+                                                          {% empty %}
+                                                          <tr>
+                                                            <td colspan="7" class="text-center">No Events</td>
+                                                          </tr>
+                                                          {% endfor %}
+
+                                                          
+                                                        </tbody>
+                                                      </table>
+                                                </div>
+                                            </div>
+                                        
+                                        </div>
+
+
+                                       
+                                
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+    </div>
+  
+
+
+    {% comment %} <div class="footer_sec">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 email_alert">
+                    <h2 class="mail_tit">E-mail Alerts</h2>
+                    <p class="sub_text">Subscribe our newsletter to get update.</p>
+                    <form action="">
+                        <div class="pos_rel">
+                            <input type="text" placeholder="Enter email address" class="search_input_box ps-3" />
+                            <img src="./assets/images/email_icn.png" alt="" class="img_oos" />
+                        </div>
+                    </form>
+                    <div class="social_icons">
+                        <a href="#"> <i class="fa fa-instagram text-light" aria-hidden="true"></i></a>
+                        <a href="#"> <i class="fa fa-facebook text-light" aria-hidden="true"></i></a>
+                        <a href="#"> <i class="fa fa-linkedin text-light" aria-hidden="true"></i></a>
+                        <a href="#"> <i class="fa fa-twitter text-light" aria-hidden="true"></i></a>
+                        <a href="#"> <i class="fa fa-youtube-play text-light" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h2 class="foot_tit">Company</h2>
+                            <ul class="navbar-nav_foot">
+                                <li class="nav-item">
+                                    <a class="nav-link_foot" href="#">About Us</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link_foot" href="#">Venues</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link_foot" href="#">Events</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link_foot" href="#">Deal</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link_foot" href="#">Blog & News</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link_foot" href="#">Contact</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4 vend_sp">
+                            <h2 class="foot_tit">Vendors</h2>
+                            <ul class="navbar-nav_foot">
+                                <li class="nav-item">
+                                    <a class="nav-link_foot" href="#">Caterers</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link_foot" href="#">Event Planners</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link_foot" href="#">Photographers</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link_foot" href="#">Videographers</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link_foot" href="#">Music</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link_foot" href="#">Decor & Rentals</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="logo_sec">
+                                <img src="./assets/images/footer_logo.png" alt="" />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+
+        <div class="copyrights">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>© 2022 Eventinz, Inc All Rights Reserved</p>
+                    </div>
+                    <div class="col-md-6 text-end">
+                        <ul>
+                            <li><a href="">Terms of use</a></li>
+                            <li><a href="">Privacy Policy</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div> {% endcomment %}
+   {% include 'vendor_home/footer.html' %}
+   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+        <script src="{%static 'main_home1/user_dashboard/js/main.js' %}"></script>
+<script>
+    $( document ).ready(function() {
+
+        $('#live-chat header').on('click', function() {
+    
+            $('.chat').slideToggle(300, 'swing');
+            $('.chat-message-counter').fadeToggle(300, 'swing');
+    
+        });
+    
+        $('.chat-close').on('click', function(e) {
+    
+            e.preventDefault();
+            $('#live-chat').fadeOut(300);
+    
+        });
+    
+    });
+   
+</script>
+<script>
+    function acceptquote(id){
+        var id=id;
+        $.ajax({
+            url: "{%url 'vendor_home:accept_quote'%}?id="+id,
+          }).done(function(response) {
+            console.log("OK");
+            console.log(response);
+            swal({
+                title: "Congrats !",
+                text: "Thanks for making this a great deal !",
+                icon: "success",
+                button: "Welcome !",
+              }).then(function() {
+                location.reload();
+            });
+            //location.reload();
+
+          });
+    }
+    function rejectquote(id){
+        var id=id;
+        $.ajax({
+            url: "{%url 'vendor_home:reject_quote'%}?id="+id,
+          }).done(function(response) {
+            console.log("OK");
+            console.log(response);
+            swal({
+                title: "Sorry !",
+                text: "We Are sorry , we could not make it !",
+                icon: "https://img.icons8.com/fluency/48/000000/sad.png",
+                button: "No Problem !",
+              }).then(function() {
+                location.reload();
+            });
+            //location.reload();
+
+          });
+    }
+   
+</script>
+<script>
+    $('#live-chat').hide();
+$('.chatbtn').on('click',function(){
+    
+    $('#live-chat').fadeIn(300);
+
+})
+</script>
+
+<input type="hidden" name="selected_mile_amt" id="selected_mile_amt">
+<input type="hidden" name="selected_quote_id" id="selected_quote_id">
+<input type="hidden" name="pay_type" id="pay_type" val="">
+
+<script src="https://www.paypal.com/sdk/js?client-id=sb&enable-funding=venmo&currency=USD" data-sdk-integration-source="button-factory"></script>
+<script>
+function getquote(quote_id,amt){
+  //  alert(quote_id);
+  //alert(amt);
+  $('#amt').html(amt);
+  $('#selected_mile_amt').val(amt);
+  $('#paypal-button-container').html('');
+  $('#selected_quote_id').val(quote_id);
+  var pay_type='1';
+  $('#pay_type').val(pay_type);
+  initPayPalButton();
+
+  
+}
+
+function getquote2(quote_id,amt,total){
+    //  alert(quote_id);
+    //alert(amt);
+    $('#amt').html(total-amt);
+    $('#selected_mile_amt').val(total-amt);
+    $('#paypal-button-container').html('');
+    $('#selected_quote_id').val(quote_id);
+    var pay_type='2';
+    $('#pay_type').val(pay_type);
+
+    initPayPalButton();
+  
+    
+  }
+  
+
+function initPayPalButton() {
+  var amt = $('#selected_mile_amt').val();
+  var id = $('#selected_quote_id').val();
+  var pay_type=$('#pay_type').val();
+  //console.log(amt);
+  //console.log(id);
+  var transaction_type='paypal';
+
+
+    paypal.Buttons({
+      style: {
+        shape: 'rect',
+        color: 'gold',
+        layout: 'horizontal',
+        label: 'pay',
+        
+      },
+
+      createOrder: function(data, actions) {
+        return actions.order.create({
+          purchase_units: [{"amount":{"currency_code":"USD","value":amt}}]
+        });
+      },
+
+      onApprove: function(data, actions) {
+        return actions.order.capture().then(function(orderData) {
+        //  var result=JSON.parse(orderData);
+         // console.log(JSON.stringify(orderData,null,2));
+          var trans_id=orderData.id;
+          var status=orderData.status;
+          if(status == 'COMPLETED' ){
+            var transaction_id=trans_id;
+            console.log(transaction_id);
+            console.log(id);
+            console.log(amt);
+            console.log(transaction_type);
+            //alert("DONE");
+            $.ajax({
+                url: "{%url 'vendor_home:save_transaction'%}?quote_id="+id+"&transaction_id="+transaction_id+"&amount="+amt+"&transaction_type="+transaction_type+"&pay_type="+pay_type,
+              }).done(function(response) {
+                console.log("OK");
+                console.log(response);
+                swal({
+                    title: "Successfull !",
+                    text: "Thanks for Paying !",
+                    icon: "success",
+                    button: "Okay !",
+                  }).then(function() {
+                    location.reload();
+                });
+                
+                //location.reload();
+    
+              });
+
+          }
+
+          // Full available details
+          //console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+
+          // Show a success message within this page, e.g.
+        //  const element = document.getElementById('paypal-button-container');
+       //   element.innerHTML = '';
+//          element.innerHTML = '<h3>Thank you for your payment!</h3>';
+
+          // Or go to another URL:  actions.redirect('thank_you.html');
+          
+        });
+      },
+
+      onError: function(err) {
+        console.log(err);
+      }
+    }).render('#paypal-button-container');
+  }
+  initPayPalButton();
+</script>
+<script>
+    function checkstatus(type){
+        if (type=='accept'){
+            var i = 'info'
+        }
+        if (type=='Milestone Paid'){
+            var i = 'success'
+        }
+        if (type=='reject'){
+            var i = 'error'
+        }
+        swal({
+            title: "Status",
+            text: type,
+            icon: i,
+            button: "Okay!",
+          });
+    }
+</script>
+<script>
+    function getdesc(id){
+        const desc = [
+        {% for i in events%}
+        `{{i.Event_Desc}}`,
+        {% endfor %}
+        ];
+        swal({
+            text: desc[id-1],
+          });
+        
+    }
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jszip-2.5.0/dt-1.12.1/b-2.2.3/b-colvis-2.2.3/b-html5-2.2.3/b-print-2.2.3/cr-1.5.6/r-2.3.0/sb-1.3.4/sp-2.0.2/datatables.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#all_events_table').DataTable({
+            pagingType: 'full_numbers',
+        });
+    });
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,188 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Deals</title>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous" />
+    <link rel="stylesheet" href="{%static 'main_home1/wedding_static/owlcarousel/assets/owl.carousel.min.css' %}" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="{%static 'main_home1/wedding_static/owlcarousel/assets/owl.theme.default.min.css' %}" />
+    <link rel="stylesheet" href="{%static 'main_home1/wedding_static/fonts/style.css' %}" />
+    <link rel="stylesheet" href="{%static 'main_home1/wedding_static/css/style.css' %}" />
+  {% include 'vendor_home/head.html' %}
+
+</head>
+
+<body>
+
+    {% include 'vendor_home/header.html' %}
+
+
+    <div class="main_cont">
+
+
+        <div>
+            <div class="deal_main_bg">
+                <h3>Deals</h3>
+            </div>
+        </div>
+
+        <div class="container resp_cont">
+
+            <div class="row mt-5 mb-5 align-center ">
+                <div class="col-md-7">
+                    <div class="deal_title">
+                        <h3>West Africa top <span>(25)</span> deals founds</h3>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="filt_selc">
+                        <select name="filter" id="" class="filt_category">
+                            <option value="0">Filter by categories</option>
+                            <option value="1">Filter by categories1</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-5 mb-5 resp_mrg">
+                {% for deal in deals %}
+                <div class="col-lg-4">
+                    <div class="deal_sec_1">
+                        <div class="deal_sec_bg deal_bg_1">
+                            <div class="deal_bg_overlay">
+                                <div class="elipse_1">
+                                    <h4>{{deal.deal_price}}% <span>OFF</span></h4>
+                                </div>
+                                <div class="deal_head">
+                                    <h3>{{deal.deal_name}}</h3>
+                                    {% comment %} <p> <span>Reg $2,600</span> $2,470</p> {% endcomment %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="deal_sec_cont">
+                            <div class="deal_sec_title">
+                                {% comment %} <h5>Hosting At A Venue We Love?</h5> {% endcomment %}
+                                <button class="email_vendor_btn" type="button" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal">Email this vendor</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+                
+
+            </div>
+
+            
+
+        </div>
+
+
+    </div>
+
+
+
+
+    {% include 'vendor_home/footer.html' %}
+
+
+    <!-- Modal -->
+    <div class="modal fade email-popup" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-body p-0">
+                    <div class="email-vendor-popup">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+                        <div class="popup-header">
+                            <div class="sign-col">
+                                <img src="{%static 'main_home1/wedding_static/images/sign.png' %}" alt="sign">
+                            </div>
+                            <div class="rating-col">
+                                <div class="rating-title">Ondi Studio</div>
+                                <div class="rating-reviews">
+                                    <div class="rating-stars">
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="tot-reviews">12 Reviews</div>
+                                </div>
+                            </div>
+                        </div>
+                        <form class="vendor-form">
+                            <div class="row row-cols-1 row-cols-lg-2 g-2 g-lg-3">
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="Andrew|*">
+                                </div>
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="Last Name *">
+                                </div>
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="Email Address *">
+                                </div>
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="Phone *">
+                                </div>
+                            </div>
+                            <div class="row-btn">
+                                <button type="button" class="btn form-btn">Request a Quote</button>
+                                <button type="button" class="btn form-btn aq-btn">Asked a Questions</button>
+                            </div>
+                            <textarea class="form-control comment" placeholder="Type your message"></textarea>
+                            <div class="attach-file">
+                                <div class="btn-wrap">
+                                    <button class="uplbtn"><img class="icon" src="{%static 'main_home1/wedding_static/images/attach-file.png' %}"
+                                            alt="Attach Icon"> Attach a photo</button>
+                                    <input type="file" name="myfile" />
+                                </div>
+                                <div class="upload-size">File must be less than 2 MB</div>
+                            </div>
+                            <div class="form-footer">
+                                <button type="button" class="btn send-btn btn-purple">Send Message</button>
+                            </div>
+                            <div class="check-row">
+                                <label class="cont-check">
+                                    Deliver a copy of this email to my inbox
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+
+    <script src="{%static 'main_home1/wedding_static/owlcarousel/jquery.min.js' %}"></script>
+    <script src="{%static 'main_home1/wedding_static/owlcarousel/owl.carousel.min.js' %}"></script>
+
+    <script src="{%static 'main_home1/wedding_static/js/main.js' %}"></script>
+    {% include 'vendor_home/index-js.html' %}
+
+
+</body>
+
+</html>

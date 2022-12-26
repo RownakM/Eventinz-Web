@@ -1,0 +1,250 @@
+{% load static %}
+{% load lang_tran %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eventinz Blogs | Your Event Your Way</title>
+{% include 'vendor_home/head.html' %}
+</head>
+
+<body>
+  {% include 'vendor_home/header.html' %}
+<div class="container-fluid baner-blog-section">
+  <div class="baner-blog"><img src="{{BASE_URL}}/media/{{blog_cms.Title_Image}}" class="img-fluid" alt=""></div>
+  <div class="blog-baner-title">
+    <div class="container">
+      <div class="row">
+        <h3>{{blog_cms.Title|transl:is_french}}</h3>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid blog-categories-section">
+  <div class="container">
+    <div class="row">
+      <div class="main-heading">
+        <h2>{{blog_cms.category_heading|transl:is_french}}</h2>
+        <p>{{blog_cms.category_sub_heading|transl:is_french}}</p>
+      </div>
+      <div class="blogtop-categories-slider">
+        {% for i in blog_category %}
+        <div class="blogtop-categories-slider__item">
+          <div class="blog-categories-box">
+            <div class="blog-categories-img"><a href="{%url 'vendor_home:vendor_blog' %}category/{{i.id}}/{{i.category_name}}/"><img src="{{BASE_URL}}/media/{{i.category_img}}" class="img-fluid" alt=""></a></div>
+            <div class="blog-categories-title">
+              <h3><a href="{%url 'vendor_home:vendor_blog' %}category/{{i.id}}/{{i.category_name}}/">{{i.category_name|transl:is_french}}</a></h3>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+        {% comment %} <div class="blogtop-categories-slider__item">
+          <div class="blog-categories-box">
+            <div class="blog-categories-img"><a href="#"><img src="{%static 'main_home1/assets/images/blog-catering-img.jpg' %}"  class="img-fluid" alt=""></a></div>
+            <div class="blog-categories-title">
+              <h3><a href="#">Catering</a></h3>
+            </div>
+          </div>
+        </div>
+        <div class="blogtop-categories-slider__item">
+          <div class="blog-categories-box">
+            <div class="blog-categories-img"><a href="#"><img src="{%static 'main_home1/assets/images/blog-wedding-img.jpg' %}" class="img-fluid" alt=""></a></div>
+            <div class="blog-categories-title">
+              <h3><a href="#">Wedding</a></h3>
+            </div>
+          </div>
+        </div>
+        <div class="blogtop-categories-slider__item">
+          <div class="blog-categories-box">
+            <div class="blog-categories-img"><a href="#"><img src="{%static 'main_home1/assets/images/blog-event-img.jpg' %}" class="img-fluid" alt=""></a></div>
+            <div class="blog-categories-title">
+              <h3><a href="#">Event & Coverage</a></h3>
+            </div>
+          </div>
+        </div>
+        <div class="blogtop-categories-slider__item">
+          <div class="blog-categories-box">
+            <div class="blog-categories-img"><a href="#"><img src="{%static 'main_home1/assets/images/blog-covid-img.jpg' %}" class="img-fluid" alt=""></a></div>
+            <div class="blog-categories-title">
+              <h3><a href="#">Covid -19</a></h3>
+            </div>
+          </div>
+        </div>
+        <div class="blogtop-categories-slider__item">
+          <div class="blog-categories-box">
+            <div class="blog-categories-img"><a href="#"><img src="{%static 'main_home1/assets/images/blog-catering-img.jpg' %}"  class="img-fluid" alt=""></a></div>
+            <div class="blog-categories-title">
+              <h3><a href="#">Catering</a></h3>
+            </div>
+          </div>
+        </div>
+        <div class="blogtop-categories-slider__item">
+          <div class="blog-categories-box">
+            <div class="blog-categories-img"><a href="#"><img src="{%static 'main_home1/assets/images/blog-wedding-img.jpg' %}" class="img-fluid" alt=""></a></div>
+            <div class="blog-categories-title">
+              <h3><a href="#">Wedding</a></h3>
+            </div>
+          </div>
+        </div>
+        <div class="blogtop-categories-slider__item">
+          <div class="blog-categories-box">
+            <div class="blog-categories-img"><a href="#"><img src="{%static 'main_home1/assets/images/blog-event-img.jpg' %}" class="img-fluid" alt=""></a></div>
+            <div class="blog-categories-title">
+              <h3><a href="#">Event & Coverage</a></h3>
+            </div>
+          </div>
+        </div> {% endcomment %}
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid blog-update-section">
+  <div class="container">
+    <div class="row">
+      <div class="main-heading">
+        <h2>{{"Latest Updates"|transl:is_french}}</h2>
+      </div>
+      {% for i in blog_content %}
+      <div class="col-md-4">
+        <div class="blog-update-box">
+          <div class="blog-update-img"><img src="{{BASE_URL}}/media/{{i.cover_image}}" class="img-fluid"  alt=""></div>
+          <div class="blog-update-title"> <a href="#">{{i.author}}</a>
+            <h3>{{i.title}} </h3>
+          </div>
+          <div class="row blog-update-more-row">
+            <div class="col-6">
+              <div class="blog-update-more a1">
+                <h5><a href="{{i.blog_id}}/{{i.title}}/">{{"Read More"|transl:is_french}}</a></h5>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="blog-update-more">
+                <h5>{{i.created_on}}</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      {% comment %} <div class="col-md-4">
+        <div class="blog-update-box">
+          <div class="blog-update-img"><img src="{%static 'main_home1/assets/images/blog-update-img-2.jpg' %}" class="img-fluid"  alt=""></div>
+          <div class="blog-update-title"> <a href="#">wedding</a>
+            <h3>Lorem ipsum dolor 
+              sit amet, consectetur adipiscing elit. </h3>
+          </div>
+          <div class="row blog-update-more-row">
+            <div class="col-6">
+              <div class="blog-update-more a1">
+                <h5><a href="#">Read More</a></h5>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="blog-update-more">
+                <h5>May 13, 2022</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="blog-update-box">
+          <div class="blog-update-img"><img src="{%static 'main_home1/assets/images/blog-update-img-3.jpg' %}" class="img-fluid"  alt=""></div>
+          <div class="blog-update-title"> <a href="#">catering</a>
+            <h3>Lorem ipsum dolor 
+              sit amet, consectetur adipiscing elit. </h3>
+          </div>
+          <div class="row blog-update-more-row">
+            <div class="col-6">
+              <div class="blog-update-more a1">
+                <h5><a href="#">Read More</a></h5>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="blog-update-more">
+                <h5>May 13, 2022</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="blog-update-box">
+          <div class="blog-update-img"><img src="{%static 'main_home1/assets/images/blog-update-img-1.jpg' %}" class="img-fluid"  alt=""></div>
+          <div class="blog-update-title"> <a href="#">EVENT</a>
+            <h3>Lorem ipsum dolor 
+              sit amet, consectetur adipiscing elit. </h3>
+          </div>
+          <div class="row blog-update-more-row">
+            <div class="col-6">
+              <div class="blog-update-more a1">
+                <h5><a href="#">Read More</a></h5>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="blog-update-more">
+                <h5>May 13, 2022</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="blog-update-box">
+          <div class="blog-update-img"><img src="{%static 'main_home1/assets/images/blog-update-img-2.jpg' %}" class="img-fluid"  alt=""></div>
+          <div class="blog-update-title"> <a href="#">wedding</a>
+            <h3>Lorem ipsum dolor 
+              sit amet, consectetur adipiscing elit. </h3>
+          </div>
+          <div class="row blog-update-more-row">
+            <div class="col-6">
+              <div class="blog-update-more a1">
+                <h5><a href="#">Read More</a></h5>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="blog-update-more">
+                <h5>May 13, 2022</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="blog-update-box">
+          <div class="blog-update-img"><img src="{%static 'main_home1/assets/images/blog-update-img-3.jpg' %}" class="img-fluid"  alt=""></div>
+          <div class="blog-update-title"> <a href="#">EVENT</a>
+            <h3>Lorem ipsum dolor 
+              sit amet, consectetur adipiscing elit. </h3>
+          </div>
+          <div class="row blog-update-more-row">
+            <div class="col-6">
+              <div class="blog-update-more a1">
+                <h5><a href="#">Read More</a></h5>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="blog-update-more">
+                <h5>May 13, 2022</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> {% endcomment %}
+    </div>
+  </div>
+</div>
+{% include 'vendor_home/footer.html' %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script> 
+{% load static %}
+<!-- <script src="assets/js/bootstrap.min.js"></script> --> 
+<script src="{%static 'main_home1/assets/js/slick.min.js' %}"></script>
+<script src="{%static 'main_home1/assets/js/main.js' %}"></script>
+{% include 'vendor_home/index-js.html' %}
+</body>
+</html>

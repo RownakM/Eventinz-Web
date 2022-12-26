@@ -1,0 +1,90 @@
+{% load static %}
+{% load mathfilters %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>AdminKit Demo - Bootstrap 5 Admin Template</title>
+	{% include 'vendor_admin1/head.html' %}
+</head>
+
+<body>
+	<div class="wrapper">
+		{% include 'vendor_admin1/side_nav.html' %}
+
+		<div class="main">
+			{% include 'vendor_admin1/top_nav.html' %}
+
+			<main class="content">
+				<div class="container">
+                   
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <h4 class="mb-3">Verify to Continue</h4>
+                        <form class="needs-validation" action="{%url 'vendor_auth_otp' %}" method="POST">
+
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="mb-3">
+                                    <div class="alert alert-success" role="alert">
+                                       A 6-Digit OTP has been sent to {{code_1}}********@{{domain}}
+                                      </div>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label for="firstName">Enter OTP</label>
+                                    <input type="text" name="otp" class="form-control" id="otp" placeholder="OTP">
+                                    <div class="invalid-feedback"> Valid OTP is required. </div>
+                                </div>
+                                <div class="col-md-11 mb-3">
+                                    
+                                    <input type="submit" class="btn btn-primary" id="otp" placeholder="OTP" value="Verify">
+                                  
+                                </div>
+                            </div>
+                        </form>
+                      </div>
+                    </div>
+                      {% comment %} <div class="col-md-4">
+                        <div class="card pricing-card pricing-card-highlighted  pricing-plan-pro">
+                          <div class="card-body">
+                              <i class="mdi mdi-trophy pricing-plan-icon"></i>
+                            <p class="pricing-plan-title">Pro</p>
+                            <h3 class="pricing-plan-cost ml-auto">$49</h3>
+                            <ul class="pricing-plan-features">
+                              <li>Unlimited conferences</li>
+                              <li>100 participants max</li>
+                              <li>Custom Hold Music</li>
+                              <li>10 participants max</li>
+                            </ul>
+                            <a href="#!" class="btn pricing-plan-purchase-btn">Purchase</a>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="card pricing-card pricing-plan-enterprise">
+                          <div class="card-body">
+                            <i class="mdi mdi-wallet-giftcard pricing-plan-icon"></i>
+                            <p class="pricing-plan-title">Enterprise</p>
+                            <h3 class="pricing-plan-cost ml-auto">$69</h3>
+                            <ul class="pricing-plan-features">
+                              <li>Unlimited conferences</li>
+                              <li>100 participants max</li>
+                              <li>Custom Hold Music</li>
+                              <li>10 participants max</li>
+                            </ul>
+                            <a href="#!" class="btn pricing-plan-purchase-btn">Purchase</a>
+                          </div>
+                        </div>
+                      </div> {% endcomment %}
+                    </div>
+                  
+			</main>
+
+			{% include 'vendor_admin1/footer.html' %}
+		</div>
+	</div>
+{% include 'vendor_admin1/js.html' %}
+
+</body>
+
+</html>

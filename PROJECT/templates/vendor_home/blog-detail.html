@@ -1,0 +1,181 @@
+<!DOCTYPE html> {% load static %} <html lang="en">
+  <head>
+    <title>{{blog_content.title}}</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> {% include 'vendor_home/head.html' %}
+  </head>
+  <body> {% include 'vendor_home/header.html' %} <div class="container-fluid baner-blog-section blog-details-section">
+      <div class="baner-blog">
+        <img src="{{BASE_URL}}/media/{{blog_content.cover_image}}" class="img-fluid" style="object-fit: cover;" alt="">
+      </div>
+      <div class="blog-baner-title">
+        <div class="container">
+          <div class="row">
+            <div class="baner-btn">
+              <a href="#">{{blog_content.category}}</a>
+            </div>
+            <h3>{{blog_content.title}} {% comment %} <span>Open House</span>
+            </h3> {% endcomment %}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid blog-update-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 blog-detaile-row">
+            <div class="row">
+              <div class="blog-andrew-box">
+                <div class="andrew-img">
+                  <img src="https://eventinz.com/static/main_home1/assets/images/logo-footer.png" class="img-fluid w-50" alt="">
+                </div>
+                <div class="andrew-title">
+                  <h3>{{blog_content.author}}</h3>
+                  <ul>
+                    <li>
+                      <span>
+                        <img src="assets/images/calendar-img.png" class="img-fluid" alt="">{{blog_content.created_on|date:"F d, Y"}}</span>
+                    </li>
+                    {% comment %} <li class="comments">(0) Comments</li> {% endcomment %}
+                    <li>Share On </li>
+                    <li>
+                      <a href="#">
+                        <i class="fa fa-facebook" aria-hidden="true"></i>
+                      </a>
+                      <a href="#">
+                        <i class="fa fa-instagram" aria-hidden="true"></i>
+                      </a>
+                      <a href="#">
+                        <i class="fa fa-pinterest" aria-hidden="true"></i>
+                      </a>
+                      <a href="#">
+                        <i class="fa fa-twitter" aria-hidden="true"></i>
+                      </a>
+                      <a href="#">
+                        <i class="fa fa-linkedin" aria-hidden="true"></i>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="main-heading event-info">
+                {{blog_content.content|safe}}
+              </div>
+            </div>
+            <div class="row blog-details-imgs-row"> {% for i in photos %} {% if forloop.counter == 3 %} <div class="col-12">
+                <div class="blog-details-imgs">
+                  <img src="{{BASE_URL}}/media/{{i.images}}" style="object-fit: cover;" alt="">
+                </div>
+              </div> {% else %} <div class="col-6">
+                <div class="blog-details-imgs">
+                  <img src="{{BASE_URL}}/media/{{i.images}}" style="object-fit: cover;" alt="">
+                </div>
+              </div> {% endif %} {% endfor %} {% comment %} <div class="col-6">
+                <div class="blog-details-imgs">
+                  <img src="{%static 'main_home1/assets/images/blog-details-img-2.jpg' %}" class="img-fluid" alt="">
+                </div>
+              </div>
+              <div class="blog-detailsimg">
+                <img src="{%static 'main_home1/assets/images/blog-details-img-5.jpg' %}" class="img-fluid" alt="">
+              </div>
+              <div class="col-6">
+                <div class="blog-details-imgs">
+                  <img src="{%static 'main_home1/assets/images/blog-details-img-1.jpg' %}" class="img-fluid" alt="">
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="blog-details-imgs">
+                  <img src="{%static 'main_home1/assets/images/blog-details-img-2.jpg' %}" class="img-fluid" alt="">
+                </div>
+              </div> {% endcomment %} 
+              
+            </div>
+          </div>
+          <div class="col-md-4 blog-rightbar d-none">
+            <div class="blog-search-bar topnav2 ">
+              <h3>Search</h3>
+              <div class="search-container">
+                <input type="text" placeholder="Search for vendor">
+                <button type="button">
+                  <i class="fa fa-search"></i>
+                </button>
+              </div>
+            </div>
+            <div class="blog-search-bar topnav2">
+              <h3>Category</h3>
+              <select id="country" name="country">
+                <option value="australia">Select Category</option>
+                <option value="canada">Canada</option>
+                <option value="usa">USA</option>
+              </select>
+            </div>
+            <div class="blog-search-bar topnav2 d-none">
+              <h3>Recently Featured</h3>
+              <div class="blog-recently-box">
+                <div class="blog-recently-img">
+                  <img src="{%static 'main_home1/assets/images/recently-img-1.jpg' %}" class="img-fluid" alt="">
+                </div>
+                <div class="blog-recently-text">
+                  <h4>Hyatt Place </h4>
+                </div>
+              </div>
+              <div class="blog-recently-box">
+                <div class="blog-recently-img">
+                  <img src="{%static 'main_home1/assets/images/recently-img-2.jpg' %}" class="img-fluid" alt="">
+                </div>
+                <div class="blog-recently-text">
+                  <h4>A Celebrity Limousine </h4>
+                </div>
+              </div>
+              <div class="blog-recently-box">
+                <div class="blog-recently-img">
+                  <img src="{%static 'main_home1/assets/images/recently-img-2.jpg' %}" class="img-fluid" alt="">
+                </div>
+                <div class="blog-recently-text">
+                  <h4>Photo Mosaic Media </h4>
+                </div>
+              </div>
+              <div class="blog-recently-box">
+                <div class="blog-recently-img">
+                  <img src="{%static 'main_home1/assets/images/recently-img-3.jpg' %}" class="img-fluid" alt="">
+                </div>
+                <div class="blog-recently-text">
+                  <h4> Detailz Couture Event Rentals </h4>
+                </div>
+              </div>
+              <div class="blog-recently-box">
+                <div class="blog-recently-img">
+                  <img src="{%static 'main_home1/assets/images/recently-img-1.jpg' %}" class="img-fluid" alt="">
+                </div>
+                <div class="blog-recently-text">
+                  <h4>Hyatt Place </h4>
+                </div>
+              </div>
+              <div class="blog-recently-box">
+                <div class="blog-recently-img">
+                  <img src="{%static 'main_home1/assets/images/recently-img-2.jpg' %}" class="img-fluid" alt="">
+                </div>
+                <div class="blog-recently-text">
+                  <h4>A Celebrity Limousine </h4>
+                </div>
+              </div>
+              <div class="blog-recently-box">
+                <div class="blog-recently-img">
+                  <img src="{%static 'main_home1/assets/images/recently-img-3.jpg' %}" class="img-fluid" alt="">
+                </div>
+                <div class="blog-recently-text">
+                  <h4>A Celebrity Limousine </h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> {% include 'vendor_home/footer.html' %} <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script> {% load static %}
+    <!-- <script src="assets/js/bootstrap.min.js"></script> -->
+    <script src="{%static 'main_home1/assets/js/slick.min.js' %}"></script>
+    <script src="{%static 'main_home1/assets/js/main.js' %}"></script> {% include 'vendor_home/index-js.html' %}
+  </body>
+</html>

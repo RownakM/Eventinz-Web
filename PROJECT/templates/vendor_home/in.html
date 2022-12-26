@@ -1,0 +1,153 @@
+
+{% load static %}
+{% load country_data %}
+{% load qr_code %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<link rel="stylesheet" href="{%static 'main_home1/invoice/assets/css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{%static 'main_home1/invoice/assets/css/slick.css' %}">
+<link rel="stylesheet" href="{%static 'main_home1/invoice/assets/css/style.css' %}">
+<link rel="stylesheet" href="{%static 'main_home1/invoice/assets/css/font-awesome.min.css' %}">
+<link rel="stylesheet" href="{%static 'main_home1/invoice/assets/css/responsive.css' %}">
+{% comment %} <style>
+    @import url('https://fonts.googleapis.com/css2?family=Maven+Pro&display=swap');body{font-family: 'Maven Pro', sans-serif;background-color: #f12369}hr{color: #0000004f;margin-top: 5px;margin-bottom: 5px}.add td{color: #c5c4c4;text-transform: uppercase;font-size: 12px}.content{font-size: 14px}
+</style> {% endcomment %}
+</head>
+
+<body>
+    <div class="container-fluid mt-2 mb-1">
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="d-flex flex-row p-2"> 
+                        {% comment %} <img src="https://i.ibb.co/6tSTMzs/logo-footer.png" class="img-fluid" width="48"> {% endcomment %}
+                        {% comment %} <span class="flex-right"><img src="https://i.ibb.co/6tSTMzs/logo-footer.png" width="48"></span> {% endcomment %}
+                        <div class="d-flex flex-column p-2 mx-0 me-auto"><img src="https://i.ibb.co/6tSTMzs/logo-footer.png" class="img-fluid w-50"> </div>
+                        <div class="d-flex flex-column p-2 "> <span class="font-weight-bold">Quotation </span> <small>EV/{{quotes_data.quote_id}}</small> </div>
+                        <div class="d-flex flex-column p-2 mx-0 ms-auto"><img src="https://eventinz.com/media/vendors/profile/images/Buy_Professional_3D_Models.jpg" width="50" class="img-fluid"> </div>
+
+                    </div>
+                    
+                    <hr>
+                    <div class="table-responsive p-2">
+                        <table class="table table-borderless">
+                            <tbody>
+                                <tr class="add">
+                                    <td>To</td>
+                                    <td>From</td>
+                                </tr>
+                                <tr class="content">
+                                    <td class="font-weight-bold">{{quotes_data.quote_user.fname}} {{quotes_data.quote_user.lname}} <br>{{quotes_data.quote_user.state|state_filter:quotes_data.quote_user.country}}<br>{{quotes_data.quote_user.country|country_filter}} <br>{{quotes_data.quote_user.mobile}}<br>{{quotes_data.quote_user.Email}}</td>
+                                    <td class="font-weight-bold">{{quotes_data.vendor_id.Company_Name}} <br> {{quotes_data.vendor_id.Company_Address}} <br> {{quotes_data.vendor_id.state_code|state_filter:quotes_data.vendor_id.country_code}}<br>{{quotes_data.vendor_id.country_code|country_filter}}<br>{{quotes_data.vendor_id.Mobile}}<br>{{quotes_data.vendor_id.Email}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <hr>
+                    <div class="products p-2">
+                        <table class="table table-borderless table-hover">
+                            <thead>
+                                <tr class="add bg-dark text-white round">
+                                    <td>Sl. No </td>
+                                    <td>Description</td>
+                                    <td>Quantity</td>
+                                    <td>Unit</td>
+                                    <td>Rate</td>
+
+                                    <td class="text-center">Total</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                {% for i in quotes_data_set %}
+                                {% for j in i.quotation_items %}
+                                <tr class="content">
+                                    <td>{{forloop.parentloop.counter}}</td>
+                                    
+                                    <td>{{j.Description}}</td>
+                                    
+                                  <td>{{j.Quantity}}</td>
+                                  <td>{{j.Unit}}</td>
+                                  <td>{{j.Rate}}</td>
+                                  <td class="text-center total">{{j.Total}}</td>
+                                 
+                                   
+                               
+                                    
+
+                                    {% comment %} <td class="text-center">$22,500</td> {% endcomment %}
+                                    
+                                </tr>
+                                {% endfor %}
+                                {% endfor %}
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                    <hr>
+                    <div class="products p-2">
+                        <table class="table table-borderless">
+                            <tbody>
+                                <tr class="add">
+                                    <td></td>
+                                    <td>Subtotal</td>
+                                    {% comment %} <td>GST(10%)</td> {% endcomment %}
+                                    <td class="text-center">Total</td>
+                                </tr>
+                                <tr class="content">
+                                    <td></td>
+                                    <td>$40,000</td>
+                                    {% comment %} <td>2,500</td> {% endcomment %}
+                                    <td class="text-center">$42,500</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <hr>
+                    <div class="address p-2">
+                        <div class="row">
+                            <div class="col-lg-9">
+                        <table class="table table-borderless">
+                            <tbody>
+                                <tr class="add">
+                                    <td>Bank Details</td>
+                                </tr>
+                                <tr class="content">
+                                    <td> Bank Name : ADS BANK <br> Swift Code : ADS1234Q <br> Account Holder : Jelly Pepper <br> Account Number : 5454542WQR <br> </td>
+                                    
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-lg-3">
+                        <img src="{% qr_url_from_text quotes_data.short_link size=2 version=10 image_format='png' %}" alt="Hello World!" style="float: right;">
+                    </div>
+                    </div>
+                    
+                    </div>
+                    <hr>
+                    <div class="container-fluid text-center text-muted">
+                        Quotation ID : {{quotes_data.quote_id}} | View At : {{quotes_data.short_link}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script> 
+
+<!-- <script src="assets/js/bootstrap.min.js"></script> --> 
+<script src="{%static 'main_home1/invoice/assets/js/slick.min.js' %}"></script> 
+<script src="{%static 'main_home1/invoice/assets/js/main.js' %}"></script>
+</body>
+</html>

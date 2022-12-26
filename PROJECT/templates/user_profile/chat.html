@@ -1,0 +1,675 @@
+{% load static %}
+{% load cool_num %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    {% include 'vendor_home/head.html' %}
+
+    <link rel="stylesheet" href="{%static 'main_home1/user_dashboard/css/style.css' %}">
+    <link rel="stylesheet" href="{%static 'main_home1/user_dashboard/fonts/style.css' %}">
+    
+    <style>
+        #display{
+            
+            overflow-y: scroll;
+            height: 500px;
+        }
+        #display::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        #display::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+            border-radius: 10px;
+        }
+        
+        #display::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+        }
+    </style>
+
+    <title>{{user.fname}} {{user.lname|make_list|first}} Profile | Eventinz.com | Your Event Your Way</title>
+</head>
+
+<body>
+
+
+
+
+    <header>
+
+        <nav class="navbar navbar-expand-lg navbar-default bg-white p-0">
+
+            <div class="dashboard_nav">
+                <a class="navbar-brand" href="{%url 'vendor_home:vendor_home_index' %}"><img src="{%static 'main_home1/assets/images/logo-desktop.png' %}" alt="" width="190"></a>
+                <div>
+                    <div class="pers_info">
+                        <div class="nav-item dropdown bg-transparent">
+                            <a class="nav-link dropdown-toggle persinfd bg-transparent" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <h6 class="pers_info_txt bg-transparent">Welcome!  <span>{{user.fname}}</span></h6> 
+                                <div class="admin_img">{{user.fname|make_list|first}}</div>
+                            </a>
+                            <ul class="dropdown-menu dropd_style" aria-labelledby="navbarDropdown">
+                              <li><a class="dropdown-item" href="#">Profile Info</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+    </header>
+
+    <div>
+
+        <div class="main">
+            <div class="main_bg">
+                <div class="container">
+                    <div class="row pt-5 pb-5">
+                        <div class="col-lg-4">
+                            <div class="sidepanel_wd">
+                                <div class="side_panel">
+                                    <div class="personal_info">
+                                        <div class="edit_icon btn_right"><img src="{%static 'main_home1/user_dashboard/images/edit_icn.png' %}" alt=""></div>
+                                        <div class="prf_iamge">
+                                            <img src="{%static 'main_home1/user_dashboard/images/profile_image.png' %}" alt="" class="prf_iamge_circle">
+                                            <h5 class="maanas_txt">{{user.fname}} {{user.lname|make_list|first}}</h5>
+                                            <div class="rev_txt">
+                                                <img src="{%static 'main_home1/user_dashboard/images/rev_star.png' %}" alt=""> <span class="numb_txt">5</span> <span class="rev_num_txt">( 3 Reviews )</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="pers_address">
+                                        <div class="address_txt">
+                                            <p class="add_img_txt"><img src="{%static 'main_home1/user_dashboard/images/address_icn.png' %}" alt=""> <span>From</span></p>
+                                            <p class="add_end_txt">{{country}}</p>
+                                        </div>
+                                        <div class="address_txt">
+                                            <p class="add_img_txt"><img src="{%static 'main_home1/user_dashboard/images/member_icn.png' %}" alt=""> <span>Member since</span></p>
+                                            <p class="add_end_txt">{{user.created_on|date:'d M Y'}}</p>
+                                        </div>
+                                        {% comment %} <div class="address_txt">
+                                            <p class="add_img_txt"><img src="{%static 'main_home1/user_dashboard/images/delivery_icn.png' %}" alt=""> <span>Last Delivery</span></p>
+                                            <p class="add_end_txt">2 week ago</p>
+                                        </div> {% endcomment %}
+                                        {% comment %} <div class="address_txt">
+                                            <p class="add_img_txt"><img src="{%static 'main_home1/user_dashboard/images/clock_icn.png' %}" alt=""> <span>Availability</span></p>
+                                            <p class="add_end_txt"><input type="range" name="range" id="" min="0" max="1" value="0" class="input_rang"></p>
+                                        </div> {% endcomment %}
+                                    </div>
+                                </div>
+        
+                                <div class="side_acord">
+                                    <div class="accordion" id="accordionFilter">
+                                        <!-- Item -->
+                                        <div class="accordion-item">
+                                          <h2 class="accordion-header" id="headingOne">
+                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                                              aria-expanded="false" aria-controls="collapseOne">
+                                              About
+                                            </button>
+                                          </h2>
+                                          <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+                                            data-bs-parent="#accordionFilter">
+                                            <div class="accordion-body">
+                                                <div class="map_txt">
+                                                    <div class="mb-4">
+                                                      <button class="tag_btns"><span>Hotel</span></button>
+                                                      <button class="tag_btns"><span>Special Event Venu</span></button>
+                                                      <button class="tag_btns"><span>Seat</span></button>
+                                                      <button class="tag_btns"><span>Mississauga Hotel</span></button>
+                                                      <button class="tag_btns"><span>Events</span></button>
+                                                    </div>
+                                                    <div class="add_new_btn mb-3">Add New</div>
+                                                  </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                              
+                                        <!-- Item -->
+                                        <div class="accordion-item">
+                                          <h2 class="accordion-header" id="headingTwo">
+                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+                                              aria-expanded="true" aria-controls="collapseTwo">
+                                              Specializations
+                                            </button>
+                                          </h2>
+                                          <div id="collapseTwo" class="accordion-collapse collapse show" data-bs-parent="#accordionFilter">
+                                            <div class="accordion-body">
+                                                <div class="map_txt">
+                                                    <div class="mb-4">
+                                                      <button class="tag_btns"><span>Hotel</span></button>
+                                                      <button class="tag_btns"><span>Special Event Venu</span></button>
+                                                      <button class="tag_btns"><span>Seat</span></button>
+                                                      <button class="tag_btns"><span>Mississauga Hotel</span></button>
+                                                      <button class="tag_btns"><span>Events</span></button>
+                                                    </div>
+                                                    <div class="add_new_btn mb-3">Add New</div>
+                                                  </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                              
+                                        <!-- Item -->
+                                        <div class="accordion-item">
+                                          <h2 class="accordion-header" id="headingThree">
+                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" aria-expanded="false"
+                                              data-bs-target="#collapseThree" aria-controls="collapseThree">
+                                              Certifications
+                                            </button>
+                                          </h2>
+                                          <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFilter">
+                                            <div class="accordion-body">
+                                                <div class="map_txt">
+                                                    <div class="mb-4">
+                                                      <button class="tag_btns"><span>Hotel</span></button>
+                                                      <button class="tag_btns"><span>Special Event Venu</span></button>
+                                                      <button class="tag_btns"><span>Seat</span></button>
+                                                      <button class="tag_btns"><span>Mississauga Hotel</span></button>
+                                                      <button class="tag_btns"><span>Events</span></button>
+                                                    </div>
+                                                    <div class="add_new_btn mb-3">Add New</div>
+                                                  </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                              
+                                      </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                        <div class="col-lg-8">
+                            <div class="main_panel">
+
+                                <div class="evnt_vend">
+                                    <div class="Event_btn">
+                                        <span class="event_vendor_btn event_vend_active" onclick="toggleVisibility('MyEvent');">Chats</span>
+                                        {% comment %} <span class="event_vendor_btn" onclick="toggleVisibility('VendorProposal');">Vendor Proposal</span> {% endcomment %}
+                                        {% comment %} <span class="event_vendor_btn" onclick="toggleVisibility('quotereq');">Quote Requests</span> {% endcomment %}
+
+                                    </div>
+                                </div>
+                                       
+                                        <div id="MyEvent">
+                                            
+                                            <div class="myevent_brd mt-4 mb-4 h-100">
+                                                <div id="display">
+
+                                                    <div class="container darker">
+                                                   
+                                                   </div>
+                                                   
+                                                   </div>
+                                                   <div id="form-div">
+                                                    <form id="post-form">
+                                                        {% csrf_token %}
+                                                        <input type="hidden" name="username" id="username" value="{{username}}"/>
+                                                        <input type="hidden" name="room_id" id="room_id" value="{{room_details.id}}"/>
+                                                        <input type="hidden" name="quote_id" id="quote_id" value="{{quote_id}}"/>
+                                                        <div class="row mt-4">
+                                                            <div class="col-md-9">
+
+                                                                <input class="form-control create_event" aria-label="With textarea" type="text" name="message" id="message" style="text-align: left;" placeholder="Write Your Message Here...">
+                                                            </div>
+                                                            <div class="col-md-3">
+
+                                                                <input type="submit" value="Send" class="create_event btn w-75" id="cbtn">
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                {% comment %} <div class="row al_center">
+                                                    <div class="col-md-6">
+                                                        <div class="myevent_txt">
+                                                            <h4>My Events</h4>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 create_event_right">
+                                                        <button class="create_event">+ Create a Event</button>
+                                                    </div>
+                                                </div>
+                                                <div class="bday_cel mt-4">
+                                                    <h5 class="bday_cel_txt">Birthday Celebration <span>ACTIVE</span></h5>
+                                                    <p class="bday_primary">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec fringilla mi. Praesent luctus feugiat lectus ac bibendum</p>
+                                                </div>
+                                                <div class="bday_loc">
+                                                    <p class="bday_loc_txt"><img src="{%static 'main_home1/user_dashboard/images/cal_icn.png' %}" alt=""> <span>June 20, 2022</span></p>
+                                                    <p class="bday_loc_txt"><img src="{%static 'main_home1/user_dashboard/images/map_icn.png' %}" alt=""> <span>Chandigarh</span></p>
+                                                    <p class="bday_loc_txt"><img src="{%static 'main_home1/user_dashboard/images/dollar_icn.png' %}" alt=""> <span>$1500 USD</span></p>
+                                                    <p class="bday_loc_txt"><img src="{%static 'main_home1/user_dashboard/images/mail_icn.png' %}" alt=""> <span>Not more than 5 </span></p>
+                                                </div> {% endcomment %}
+                                            </div>
+
+                                            {% comment %} <div class="myevent_brd">
+                                                <div class="row al_center">
+                                                    <div class="col-md-6">
+                                                        <div class="myevent_txt">
+                                                            <h4>Reviews</h4>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 create_event_right">
+                                                        <select name="sortby" id="" class="create_event">
+                                                            <option value="0">Sort by</option>
+                                                            <option value="1">Sort by1</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="mt-4">
+                                                    <div class="review_sec">
+                                                        <div class="rev_img">
+                                                            <p class="rev_img_text">H</p>
+                                                        </div>
+                                                        <div class="review_secti_text">
+                                                            <p class="rev_primary_txt">Huckleb</p>
+                                                            <img src="{%static 'main_home1/user_dashboard/images/rev_star.png' %}" alt="">
+                                                            <h6 class="rewew_titl_txt">I expected great results based off of other reviews 
+                                                                and got just what I wanted. Great job, 
+                                                                thank you!</h6>
+                                                                <p class="rev_small_txt">2 days ago</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="review_sec">
+                                                        <div class="rev_img">
+                                                            <p class="rev_img_text">A</p>
+                                                        </div>
+                                                        <div class="review_secti_text">
+                                                            <p class="rev_primary_txt">Abco2015</p>
+                                                            <img src="{%static 'main_home1/user_dashboard/images/rev_star.png' %}" alt="">
+                                                            <h6 class="rewew_titl_txt">Nice experience working with this vendor.</h6>
+                                                                <p class="rev_small_txt">5 months ago</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="review_sec">
+                                                        <div class="rev_img">
+                                                            <p class="rev_img_text">H</p>
+                                                        </div>
+                                                        <div class="review_secti_text">
+                                                            <p class="rev_primary_txt">Huckleb</p>
+                                                            <img src="{%static 'main_home1/user_dashboard/images/rev_star.png' %}" alt="">
+                                                            <h6 class="rewew_titl_txt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultricies lacus ornare justo cursus, eget egestas augue faucibus.</h6>
+                                                                <p class="rev_small_txt">9 months ago</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div> {% endcomment %}
+                                        
+                                        </div>
+
+<!--
+                                        <div id="VendorProposal" style="display: none;">
+                                            <div class="vendor_proposal mt-4 mb-4">
+                                                <div class="row al_center">
+                                                    <div class="col-md-12">
+                                                        <div class="vendorproposal_txt">
+                                                            <h4>Vendor Proposals</h4>
+                                                            <p class="vendProp_txt">20 Vendors shows interest  <span class="vendspan">Average price $1200 USD</span></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="vend_event_bg mt-4 mb-4">
+                                                    <div class="btn_right">
+                                                        <button class="vend_price_btn">$1200 USD</button>
+                                                    </div>
+                                                    <div class="evnt_det_box">
+                                                        <div class="evnt_iamge">
+                                                            <img src="{%static 'main_home1/user_dashboard/images/event_img_1.png' %}" alt="">
+                                                        </div>
+                                                        <div class="event_ven_txt">
+                                                            <div>
+                                                                <h6 class="evnt_vend_title">Matrimony Events </h6>
+                                                                <div class="rev_txt">
+                                                                    <img src="{%static 'main_home1/user_dashboard/images/rev_star.png' %}" alt=""> <span class="numb_txt">5</span>
+                                                                    <span class="success_rate"><img src="{%static 'main_home1/user_dashboard/images/rev_suc.png' %}" alt="">99% Success rate</span>
+                                                                    <span class="nigeria"><img src="{%static 'main_home1/user_dashboard/images/nigeria.png' %}" alt="">Nigeria</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="brd_b_sep"></div>
+                                                            <div>
+                                                                <p class="vend_primary_txt">We an Intimate Wedding & Design Boutique for across the Western Africa</p>
+                                                                <div>
+                                                                    <button class="morede_btn me-2">More Detail</button> <button class="morede_btn">Chat </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="vend_event_bg mt-4 mb-4">
+                                                    <div class="btn_right">
+                                                        <button class="vend_price_btn">$1295 USD</button>
+                                                    </div>
+                                                    <div class="evnt_det_box">
+                                                        <div class="evnt_iamge">
+                                                            <img src="{%static 'main_home1/user_dashboard/images/event_img_2.png' %}" alt="">
+                                                        </div>
+                                                        <div class="event_ven_txt">
+                                                            <div>
+                                                                <h6 class="evnt_vend_title">Impresario Events </h6>
+                                                                <div class="rev_txt">
+                                                                    <img src="{%static 'main_home1/user_dashboard/images/rev_star.png' %}" alt=""> <span class="numb_txt">5</span>
+                                                                    <span class="success_rate"><img src="{%static 'main_home1/user_dashboard/images/rev_suc.png' %}" alt="">99% Success rate</span>
+                                                                    <span class="nigeria"><img src="{%static 'main_home1/user_dashboard/images/nigeria.png' %}" alt="">Nigeria</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="brd_b_sep"></div>
+                                                            <div>
+                                                                <p class="vend_primary_txt">Whether your perfect wedding is a simple & intimate celebration or a lavish affair</p>
+                                                                <div>
+                                                                    <button class="morede_btn me-2">More Detail</button> <button class="morede_btn">Chat </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="vend_event_bg mt-4 mb-4">
+                                                    <div class="btn_right">
+                                                        <button class="vend_price_btn">$1400 USD</button>
+                                                    </div>
+                                                    <div class="evnt_det_box">
+                                                        <div class="evnt_iamge">
+                                                            <img src="{%static 'main_home1/user_dashboard/images/event_img_1.png' %}" alt="">
+                                                        </div>
+                                                        <div class="event_ven_txt">
+                                                            <div>
+                                                                <h6 class="evnt_vend_title">Matrimony Events </h6>
+                                                                <div class="rev_txt">
+                                                                    <img src="{%static 'main_home1/user_dashboard/images/rev_star.png' %}" alt=""> <span class="numb_txt">5</span>
+                                                                    <span class="success_rate"><img src="{%static 'main_home1/user_dashboard/images/rev_suc.png' %}" alt="">99% Success rate</span>
+                                                                    <span class="nigeria"><img src="{%static 'main_home1/user_dashboard/images/nigeria.png' %}" alt="">Nigeria</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="brd_b_sep"></div>
+                                                            <div>
+                                                                <p class="vend_primary_txt">We an Intimate Wedding & Design Boutique for across the Western Africa</p>
+                                                                <div>
+                                                                    <button class="morede_btn me-2">More Detail</button> <button class="morede_btn">Chat </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div><p  class="load_more_txt">Loading more...</p></div>
+
+                                            </div>
+                                        </div>
+                                        <div id="quotereq" style="display: none;">
+                                            <div class="vendor_proposal mt-4 mb-4">
+                                                <div class="row al_center">
+                                                    <div class="col-md-12">
+                                                        <div class="vendorproposal_txt">
+                                                            <h4>Quote Requests</h4>
+                                                            <p class="vendProp_txt">{{user_quote_req_count}} Requests To Quote  
+                                                                {% comment %} <span class="vendspan"></span> {% endcomment %}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                {% for i in get_quotes %}
+                                                <div class="vend_event_bg mt-4 mb-4">
+                                                    <div class="btn_right">
+                                                        <button class="vend_price_btn">{{i.appx_date}}</button>
+                                                    </div>
+                                                    <div class="evnt_det_box">
+                                                        <div class="evnt_iamge">
+                                                            <img src="{{BASE_URL}}/media/{{i.vendor_id.Profile_Img}}" style="width: 85px; height: 70px;" alt="">
+                                                        </div>
+                                                        <div class="event_ven_txt">
+                                                            <div>
+                                                                <h6 class="evnt_vend_title">{{i.vendor_id}} </h6>
+                                                                <div class="rev_txt my-2">
+                                                                    <span class="success_rate">{{i.no_of_guests}} Appx Guests</span>
+
+                                                                    <span class="success_rate"><img src="{%static 'main_home1/user_dashboard/images/rev_suc.png' %}" alt="">{{i.vendor_id.max_budget|cool_number}} Max Budget</span>
+                                                                    <span class="nigeria">
+                                                                        <i class="fa fa-globe"></i>
+                                                                        {{i.vendor_id.country_name}}</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="brd_b_sep"></div>
+                                                            <div>
+                                                                <p class="vend_primary_txt">{{i.msg}}</p>
+                                                                <div>
+                                                                    <div class="row">
+                                                                        <div class="col-md-8">
+                                                                    <button class="morede_btn me-2 w-100" onclick="window.location.href='{%url 'vendor_home:Venue' %}{{i.v_link}}/{{i.vendor_id.id}}/{{i.vendor_id}}'">Read About {{i.vendor_id}}</button>
+                                                                            
+                                                                        </div>
+                                                                        <div class="col-md-4 m-0" style="padding-left: 0px;">
+                                                                            <button class="morede_btn btn-link w-100">Status: {{i.status}}</button>
+                                                                        </div>
+                                                                        <div class="col-md-12">
+                                                                            <button class="morede_btn btn-link w-100 py-2 my-2 chatbtn">Chat </button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                {% empty %}
+                                                <div class="vend_event_bg mt-4 mb-4">
+                                                    No Quote Requests
+                                                </div>
+                                                {% endfor %}
+
+                                               
+                                                
+                                                {% comment %} <div><p  class="load_more_txt">Loading more...</p></div> {% endcomment %}
+
+                                            </div>
+                                        </div>
+                                
+-->
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+    </div>
+  
+
+   
+
+
+    {% comment %} <div class="footer_sec">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 email_alert">
+                    <h2 class="mail_tit">E-mail Alerts</h2>
+                    <p class="sub_text">Subscribe our newsletter to get update.</p>
+                    <form action="">
+                        <div class="pos_rel">
+                            <input type="text" placeholder="Enter email address" class="search_input_box ps-3" />
+                            <img src="./assets/images/email_icn.png" alt="" class="img_oos" />
+                        </div>
+                    </form>
+                    <div class="social_icons">
+                        <a href="#"> <i class="fa fa-instagram text-light" aria-hidden="true"></i></a>
+                        <a href="#"> <i class="fa fa-facebook text-light" aria-hidden="true"></i></a>
+                        <a href="#"> <i class="fa fa-linkedin text-light" aria-hidden="true"></i></a>
+                        <a href="#"> <i class="fa fa-twitter text-light" aria-hidden="true"></i></a>
+                        <a href="#"> <i class="fa fa-youtube-play text-light" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h2 class="foot_tit">Company</h2>
+                            <ul class="navbar-nav_foot">
+                                <li class="nav-item">
+                                    <a class="nav-link_foot" href="#">About Us</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link_foot" href="#">Venues</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link_foot" href="#">Events</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link_foot" href="#">Deal</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link_foot" href="#">Blog & News</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link_foot" href="#">Contact</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4 vend_sp">
+                            <h2 class="foot_tit">Vendors</h2>
+                            <ul class="navbar-nav_foot">
+                                <li class="nav-item">
+                                    <a class="nav-link_foot" href="#">Caterers</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link_foot" href="#">Event Planners</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link_foot" href="#">Photographers</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link_foot" href="#">Videographers</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link_foot" href="#">Music</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link_foot" href="#">Decor & Rentals</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="logo_sec">
+                                <img src="./assets/images/footer_logo.png" alt="" />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+
+        <div class="copyrights">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>© 2022 Eventinz, Inc All Rights Reserved</p>
+                    </div>
+                    <div class="col-md-6 text-end">
+                        <ul>
+                            <li><a href="">Terms of use</a></li>
+                            <li><a href="">Privacy Policy</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div> {% endcomment %}
+   {% include 'vendor_home/footer.html' %}
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+        <script src="{%static 'main_home1/user_dashboard/js/main.js' %}"></script>
+
+<script>
+    $('#live-chat').hide();
+$('.chatbtn').on('click',function(){
+    
+    $('#live-chat').fadeIn(300);
+
+})
+</script>
+<script>
+    $(document).ready(function(){
+        $("#display").html(`<div class="text-center"><div class="spinner-border spinner-border-sm text-dark" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div> Loading...</div>`);
+    setInterval(function(){
+        $.ajax({
+            type: 'GET',
+            url : "https://eventinz.com/chat/getMessages/{{room}}/{{quote_id}}/",
+            success: function(response){
+                //console.log(response);
+                $("#display").empty();
+                for (var key in response.messages)
+                {
+                    var temp="<hr><div class='container darker mt-2'><p><b>"+response.messages[key].user+"<span class='text-muted text-sm' style='float: right;'>"+response.messages[key].date+"</span></p></b><p>"+response.messages[key].value+"</p></div>";
+                    $("#display").append(temp);
+                }
+            },
+            error: function(response){
+                // alert('An error occurred')
+            }
+        });
+    },1000);
+    })
+    </script>
+    <script type="text/javascript">
+        $(document).on('submit','#post-form',function(e){
+        e.preventDefault();
+        $('#cbtn').val("Sending...");
+    
+        $.ajax({
+          type:'POST',
+          url:'https://eventinz.com/chat/send',
+          data:{
+              username:$('#username').val(),
+              room_id:$('#room_id').val(),
+              message:$('#message').val(),
+              quote_id:$('#quote_id').val(),
+            csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+          },
+          success: function(data){
+            $('#cbtn').val("Send");
+             // alert(data)
+          },
+          error: function(res){
+            //alert(res);
+            $('#cbtn').val("Send");
+
+          }
+        });
+        document.getElementById('message').value = ''
+      });
+    </script>
+</body>
+
+</html>

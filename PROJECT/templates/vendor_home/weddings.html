@@ -1,0 +1,1286 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  {% load static %}
+  {% load currency_convert %}
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{venue_type}} Venues | Eventinz - Your Event Your Way</title>
+  <!-- CSS only -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+  integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous" />
+  <link rel="stylesheet" href="{%static 'main_home1/wedding_static/owlcarousel/assets/owl.carousel.min.css' %}" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="{%static 'main_home1/wedding_static/owlcarousel/assets/owl.theme.default.min.css' %}" />
+  <link rel="stylesheet" href="{%static 'main_home1/wedding_static/fonts/style.css' %}" />
+  <link rel="stylesheet" href="{%static 'main_home1/wedding_static/css/style.css' %}" />
+  {% include 'vendor_home/head.html' %}
+  
+  <style>
+    body {
+      font-family: var(--primary-font);
+      background: var(--bgcolor-white);
+      color: var(--text-color-dark);
+      overflow-y: visible;
+      scrollbar-width: thin;
+      -ms-overflow-style: none;
+    }
+  </style>
+</head>
+
+<body>
+
+ {% include 'vendor_home/header.html' %}
+
+
+ <div class="main_cont">
+
+  <div class="main">
+    <div class="mn_bg_img" style="background-image: url({{BASE_URL}}/media/{{venue_contents.venue_image}});">
+      <div class="">
+        <div class="venue_title">
+          <h2>{{venue_type}} Venues</h2>
+          <p>{{venue_contents.venue_subheading}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-lg-3 ">
+        <div class="accordion" id="accordionFilter">
+          <!-- Item -->
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                aria-expanded="true" aria-controls="collapseOne">
+                Show Vendors With
+              </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+              data-bs-parent="#accordionFilter">
+              <div class="accordion-body">
+                <ul>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1" />
+                    <label class="form-check-label" for="flexCheckDefault1">
+                      Pricing Info
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault2" />
+                    <label class="form-check-label" for="flexCheckDefault2">
+                      Packages
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault3" />
+                    <label class="form-check-label" for="flexCheckDefault3">
+                      Deals
+                    </label>
+                  </div>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item -->
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwo">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+                aria-expanded="false" aria-controls="collapseTwo">
+                Event Type
+              </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFilter">
+              <div class="accordion-body">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1" />
+                  <label class="form-check-label" for="flexCheckDefault1">
+                    Pricing Info
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault2" />
+                  <label class="form-check-label" for="flexCheckDefault2">
+                    Packages
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault3" />
+                  <label class="form-check-label" for="flexCheckDefault3">
+                    Deals
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item -->
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingThree">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" aria-expanded="false"
+                data-bs-target="#collapseThree" aria-controls="collapseThree">
+                Venue Type
+              </button>
+            </h2>
+            <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFilter">
+              <div class="accordion-body">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1" />
+                  <label class="form-check-label" for="flexCheckDefault1">
+                    Pricing Info
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault2" />
+                  <label class="form-check-label" for="flexCheckDefault2">
+                    Packages
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault3" />
+                  <label class="form-check-label" for="flexCheckDefault3">
+                    Deals
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item -->
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingFour">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" aria-expanded="false"
+                data-bs-target="#collapseFour" aria-controls="collapseFour">
+                Capacity
+              </button>
+            </h2>
+            <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionFilter">
+              <div class="accordion-body">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1" />
+                  <label class="form-check-label" for="flexCheckDefault1">
+                    Pricing Info
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault2" />
+                  <label class="form-check-label" for="flexCheckDefault2">
+                    Packages
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault3" />
+                  <label class="form-check-label" for="flexCheckDefault3">
+                    Deals
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item -->
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingFive">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive"
+                aria-expanded="false" aria-controls="collapseFive">
+                Region
+              </button>
+            </h2>
+            <div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionFilter">
+              <div class="accordion-body">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1" />
+                  <label class="form-check-label" for="flexCheckDefault1">
+                    Pricing Info
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault2" />
+                  <label class="form-check-label" for="flexCheckDefault2">
+                    Packages
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault3" />
+                  <label class="form-check-label" for="flexCheckDefault3">
+                    Deals
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item -->
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingSix">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" aria-expanded="false"
+                data-bs-target="#collapseSix" aria-controls="collapseSix">
+                Features
+              </button>
+            </h2>
+            <div id="collapseSix" class="accordion-collapse collapse" data-bs-parent="#accordionFilter">
+              <div class="accordion-body">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1" />
+                  <label class="form-check-label" for="flexCheckDefault1">
+                    Pricing Info
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault2" />
+                  <label class="form-check-label" for="flexCheckDefault2">
+                    Packages
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault3" />
+                  <label class="form-check-label" for="flexCheckDefault3">
+                    Deals
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item -->
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingSeven">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" aria-expanded="false"
+                data-bs-target="#collapseSeven" aria-controls="collapseSeven">
+                Atmosphere
+              </button>
+            </h2>
+            <div id="collapseSeven" class="accordion-collapse collapse" data-bs-parent="#accordionFilter">
+              <div class="accordion-body">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1" />
+                  <label class="form-check-label" for="flexCheckDefault1">
+                    Pricing Info
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault2" />
+                  <label class="form-check-label" for="flexCheckDefault2">
+                    Packages
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault3" />
+                  <label class="form-check-label" for="flexCheckDefault3">
+                    Deals
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-9">
+        <section class="event-deal">
+          <div class="row align-items-center">
+            <div class="col-md-5 pad_l_r_0">
+              <h4 class="title"><span id="state_name"></span> {{venue_type}} Venues ({{get_user_count}})</h4>
+            </div>
+
+            <div class="buttons filtersbutton col-md-7 text-end">
+              <a class="otl-btn spot_btn spot_active">
+                <select name="sort" id="" class="sort_by">
+                  <option value="0">Sort by</option>
+                  <option value="1">Sort by</option>
+                </select>
+              </a>
+
+              {% comment %} <a class="px-4 otl-btn spot_btn grd_ev grid_list_btn list_btn grid_active"
+                onclick="togg('list_view')">List View</a>
+              <a class="px-4 otl-btn spot_btn grd_ev grid_list_btn grid_btn " onclick="togg('grid')">Grid View</a>
+
+              <a class="otl-btn spot_btn px-4 grd_ev" onclick="togg('map')">Map View</a> {% endcomment %}
+            </div>
+          </div>
+        </section>
+
+        <div id="list_view">
+          {% for i in get_user_venues %}
+          <div class="row list_brd mrg_t_b_30">
+            <div class="col-lg-4 pad_l_r_0 list_img_bg" style="background-image: url({{BASE_URL}}/media/{{i.Profile_Img}}); background-size: contain;">
+              {% comment %} <img src="./assets/images/list_img_1.png" alt="" class="lst_img_mob"> {% endcomment %}
+            </div>
+
+            <div class="col-lg-8 pad_r_0 pad_l_30 pad_l_mob">
+              <div class="row mrg_l_r_0">
+                <div class="col-md-7 pad_l_r_0">
+                  <div class="wed_rev">
+                    <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                    <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                    <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                    <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                    <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                    <span class="rev_txt">12 Reviews</span>
+                  </div>
+                  <div class="ven_titl_txt">
+                    <h3>{{i.Company_Name}}</h3>
+                    <p>
+                      {% comment %} <i class="fa-light fa-location-dot"></i> {% endcomment %}
+                      {% comment %} <i class="fa fa-location-dot fa-fw"></i> {% endcomment %}
+                      <img src="{%static 'main_home1/wedding_static/icon/location-dot-solid.svg' %}" width="20" height="20" style="margin-top: 4px;"alt="" />
+                      {{i.Company_Address|truncatechars:40}}
+                    </p>
+                  </div>
+                </div>
+
+                <div class="col-md-5 pad_l_r_0">
+                  <div class="prcbtn">
+                    <p class="prc_st">Price start at</p>
+                    <p class="prc_nm currency text-sm">
+                      {% with "vendor/"|add:i.country_code|add:"/user_country/"|add:get_user_location as template %}
+                      
+                      <input type="hidden" name="" value="{{template}}">
+                      {{i.country_code|currency_code:template}} 
+                      {{i.min_budget|currency_filter:template}} - {{i.country_code|currency_code:template}} {{i.max_budget|currency_filter:template}}/Person</p>
+                      {% endwith %}
+
+                  </div>
+                </div>
+              </div>
+
+              <div class="brd_sep"></div>
+
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="list_cap">
+                    <img src="{%static 'main_home1/wedding_static/images/cap_icn.png' %}" alt="" />
+                    <span>300 Maximum Capacity</span>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="list_cap">
+                    <img src="{%static 'main_home1/wedding_static/images/catering_icn.png' %}" alt="" />
+                    <span>Allows Outside Catering</span>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="list_cap lst_pdr">
+                    <img src="{%static 'main_home1/wedding_static/images/facility_icn.png' %}" alt="" />
+                    <span>Outdoor Facilities</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="brd_sep"></div>
+
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="wecg_txt">
+                    {% comment %} <p>Wedding Pckage <span>50+Guests</span> <span>$7,500</span>  + 8 more</p> {% endcomment %}
+                    <button class="book_event" onclick="location.href='{{i.id}}/{{i.Company_Name}}/';">Book Event</button>
+                    <img src="{%static 'main_home1/wedding_static/images/whishlist.png' %}" alt="" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% empty %}
+          <div class="row list_brd mrg_t_b_30">
+            <div class="col-lg-12 pad_l_r_0 text-center">
+              No Result Found
+            </div>
+          </div>
+          {% endfor %}
+          {% comment %} <div class="row list_brd mrg_t_b_30">
+            <div class="col-lg-4 pad_l_r_0 list_img_bg_1">
+              <img src="{%static 'main_home1/wedding_static/images/list_img_2.png' %}" alt="" class="lst_img_mob">
+              <p class="feat_txt">FEATURED</p>
+            </div>
+
+            <div class="col-lg-8 pad_r_0 pad_l_30 pad_l_mob">
+              <div class="row mrg_l_r_0">
+                <div class="col-md-7 pad_l_r_0">
+                  <div class="wed_rev">
+                    <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                    <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                    <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                    <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                    <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                    <span class="rev_txt">12 Reviews</span>
+                  </div>
+                  <div class="ven_titl_txt">
+                    <h3>Crystal Grand Hall</h3>
+                    <p>
+                      <img src="{%static 'main_home1/wedding_static/icon/location-dot-solid.svg' %}" width="20" height="20" style="margin-top: 4px;"alt="" />
+
+                      Line B Technology Village, Bwari Lagos
+                    </p>
+                  </div>
+                </div>
+
+                <div class="col-md-5 pad_l_r_0">
+                  <div class="prcbtn">
+                    <p class="prc_st">Price start at</p>
+                    <p class="prc_nm">$50 - $200/Person</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="brd_sep"></div>
+
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="list_cap">
+                    <img src="{%static 'main_home1/wedding_static/images/cap_icn.png' %}" alt="" />
+                    <span>300 Max Capacity</span>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="list_cap">
+                    <img src="{%static 'main_home1/wedding_static/images/catering_icn.png' %}" alt="" />
+                    <span>Allows Outside Catering</span>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="list_cap lst_pdr">
+                    <img src="{%static 'main_home1/wedding_static/images/facility_icn.png' %}" alt="" />
+                    <span>Outdoor Facilities</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="brd_sep"></div>
+
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="wecg_txt">
+                    <p>Wedding Pckage 50+Guests <span>$7,500</span></p>
+                    <button class="book_event">Book Event</button>
+                    <img src="{%static 'main_home1/wedding_static/images/whishlist.png' %}" alt="" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> {% endcomment %}
+
+          {% comment %} <div class="row list_brd mrg_t_b_30">
+            <div class="col-lg-4 pad_l_r_0 list_img_bg">
+              <img src="./assets/images/list_img_1.png" alt="" class="lst_img_mob">
+            </div>
+
+            <div class="col-lg-8 pad_r_0 pad_l_30 pad_l_mob">
+              <div class="row mrg_l_r_0">
+                <div class="col-md-7 pad_l_r_0">
+                  <div class="wed_rev">
+                    <img src="./assets/images/star.png" alt="" />
+                    <img src="./assets/images/star.png" alt="" />
+                    <img src="./assets/images/star.png" alt="" />
+                    <img src="./assets/images/star.png" alt="" />
+                    <img src="./assets/images/star.png" alt="" />
+                    <span class="rev_txt">12 Reviews</span>
+                  </div>
+                  <div class="ven_titl_txt">
+                    <h3>
+                      Royal Venetian <br />
+                      Mansion
+                    </h3>
+                    <p>
+                      <img src="./assets/images/map-marker.png" alt="" />
+                      Line B Technology Village, Bwari Lagos
+                    </p>
+                  </div>
+                </div>
+
+                <div class="col-md-5 pad_l_r_0">
+                  <div class="prcbtn">
+                    <p class="prc_st">Price start at</p>
+                    <p class="prc_nm">$50 - $200/Person</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="brd_sep"></div>
+
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="list_cap">
+                    <img src="./assets/images/cap_icn.png" alt="" />
+                    <span>300 Max Capacity</span>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="list_cap">
+                    <img src="./assets/images/catering_icn.png" alt="" />
+                    <span>Allows Outside Catering</span>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="list_cap lst_pdr">
+                    <img src="./assets/images/facility_icn.png" alt="" />
+                    <span>Outdoor Facilities</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="brd_sep"></div>
+
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="wecg_txt">
+                    <p>Wedding Pckage 50+Guests <span>$7,500</span></p>
+                    <button class="book_event">Book Event</button>
+                    <img src="./assets/images/whishlist.png" alt="" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row list_brd mrg_t_b_30">
+            <div class="col-lg-4 pad_l_r_0 list_img_bg_2">
+              <img src="./assets/images/list_img_3.png" alt="" class="lst_img_mob">
+            </div>
+
+            <div class="col-lg-8 pad_r_0 pad_l_30 pad_l_mob">
+              <div class="row mrg_l_r_0">
+                <div class="col-md-7 pad_l_r_0">
+                  <div class="wed_rev">
+                    <img src="./assets/images/star.png" alt="" />
+                    <img src="./assets/images/star.png" alt="" />
+                    <img src="./assets/images/star.png" alt="" />
+                    <img src="./assets/images/star.png" alt="" />
+                    <img src="./assets/images/star.png" alt="" />
+                    <span class="rev_txt">12 Reviews</span>
+                  </div>
+                  <div class="ven_titl_txt">
+                    <h3>Catana Estate</h3>
+                    <p>
+                      <img src="./assets/images/map-marker.png" alt="" />
+                      Line B Technology Village, Bwari Lagos
+                    </p>
+                  </div>
+                </div>
+
+                <div class="col-md-5 pad_l_r_0">
+                  <div class="prcbtn">
+                    <p class="prc_st">Price start at</p>
+                    <p class="prc_nm">$50 - $200/Person</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="brd_sep"></div>
+
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="list_cap">
+                    <img src="./assets/images/cap_icn.png" alt="" />
+                    <span>300 Max Capacity</span>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="list_cap">
+                    <img src="./assets/images/catering_icn.png" alt="" />
+                    <span>Allows Outside Catering</span>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="list_cap lst_pdr">
+                    <img src="./assets/images/facility_icn.png" alt="" />
+                    <span>Outdoor Facilities</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="brd_sep"></div>
+
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="wecg_txt">
+                    <p>Wedding Pckage 50+Guests <span>$7,500</span></p>
+                    <button class="book_event">Book Event</button>
+                    <img src="./assets/images/whishlist.png" alt="" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row list_brd mrg_t_b_30">
+            <div class="col-lg-4 pad_l_r_0 list_img_bg">
+              <img src="./assets/images/list_img_1.png" alt="" class="lst_img_mob">
+            </div>
+
+
+            <div class="col-lg-8 pad_r_0 pad_l_30 pad_l_mob">
+              <div class="row mrg_l_r_0">
+                <div class="col-md-7 pad_l_r_0">
+                  <div class="wed_rev">
+                    <img src="./assets/images/star.png" alt="" />
+                    <img src="./assets/images/star.png" alt="" />
+                    <img src="./assets/images/star.png" alt="" />
+                    <img src="./assets/images/star.png" alt="" />
+                    <img src="./assets/images/star.png" alt="" />
+                    <span class="rev_txt">12 Reviews</span>
+                  </div>
+                  <div class="ven_titl_txt">
+                    <h3>
+                      Royal Venetian <br />
+                      Mansion
+                    </h3>
+                    <p>
+                      <img src="./assets/images/map-marker.png" alt="" />
+                      Line B Technology Village, Bwari Lagos
+                    </p>
+                  </div>
+                </div>
+
+                <div class="col-md-5 pad_l_r_0">
+                  <div class="prcbtn">
+                    <p class="prc_st">Price start at</p>
+                    <p class="prc_nm">$50 - $200/Person</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="brd_sep"></div>
+
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="list_cap">
+                    <img src="./assets/images/cap_icn.png" alt="" />
+                    <span>300 Max Capacity</span>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="list_cap">
+                    <img src="./assets/images/catering_icn.png" alt="" />
+                    <span>Allows Outside Catering</span>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="list_cap lst_pdr">
+                    <img src="./assets/images/facility_icn.png" alt="" />
+                    <span>Outdoor Facilities</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="brd_sep"></div>
+
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="wecg_txt">
+                    <p>Wedding Pckage 50+Guests <span>$7,500</span></p>
+                    <button class="book_event">Book Event</button>
+                    <img src="./assets/images/whishlist.png" alt="" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row list_brd mrg_t_b_30">
+            <div class="col-lg-4 pad_l_r_0 list_img_bg_2">
+              <img src="./assets/images/list_img_3.png" alt="" class="lst_img_mob">
+            </div>
+
+            <div class="col-lg-8 pad_r_0 pad_l_30 pad_l_mob">
+              <div class="row mrg_l_r_0">
+                <div class="col-md-7 pad_l_r_0">
+                  <div class="wed_rev">
+                    <img src="./assets/images/star.png" alt="" />
+                    <img src="./assets/images/star.png" alt="" />
+                    <img src="./assets/images/star.png" alt="" />
+                    <img src="./assets/images/star.png" alt="" />
+                    <img src="./assets/images/star.png" alt="" />
+                    <span class="rev_txt">12 Reviews</span>
+                  </div>
+                  <div class="ven_titl_txt">
+                    <h3>Catana Estate</h3>
+                    <p>
+                      <img src="./assets/images/map-marker.png" alt="" />
+                      Line B Technology Village, Bwari Lagos
+                    </p>
+                  </div>
+                </div>
+
+                <div class="col-md-5 pad_l_r_0">
+                  <div class="prcbtn">
+                    <p class="prc_st">Price start at</p>
+                    <p class="prc_nm">$50 - $200/Person</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="brd_sep"></div>
+
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="list_cap">
+                    <img src="./assets/images/cap_icn.png" alt="" />
+                    <span>300 Max Capacity</span>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="list_cap">
+                    <img src="./assets/images/catering_icn.png" alt="" />
+                    <span>Allows Outside Catering</span>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="list_cap lst_pdr">
+                    <img src="./assets/images/facility_icn.png" alt="" />
+                    <span>Outdoor Facilities</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="brd_sep"></div>
+
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="wecg_txt">
+                    <p>Wedding Pckage 50+Guests <span>$7,500</span></p>
+                    <button class="book_event">Book Event</button>
+                    <img src="./assets/images/whishlist.png" alt="" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> {% endcomment %}
+        </div>
+
+        <div id="grid" style="display: none;">
+          <div class="row mt-3">
+            <div class="col-lg-4">
+
+              <div class="we_ve_card">
+                <div class="featured_tag">
+                  <p>FEATURED</p>
+                </div>
+                <img src="{%static 'main_home1/wedding_static/images/list_img_2.png' %}" alt="" class="we_ve_img" />
+                <div class="eve_p">
+                  <div class="ven_titl_txt_eve">
+                    <h3>Crystal Grand Hall</h3>
+                    <div class="wed_rev_eve">
+                      <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                      <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                      <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                      <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                      <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                      <span class="rev_txt">12 Reviews</span>
+                    </div>
+                    <p class="mt-2">
+                      <img src="{%static 'main_home1/wedding_static/images/map-marker.png' %}" alt="" />
+                      Line B Technology Village, Bwari Lagos
+                    </p>
+                  </div>
+                  <div class="brd_sep"></div>
+                  <p class="prc_nm_we_ve">
+                    Price <span>$20 - $200</span>/Person
+                  </p>
+                </div>
+                <button class="book_event_wed_ev">Book Event</button>
+              </div>
+            </div>
+            <div class="col-lg-4">
+
+              <div class="we_ve_card">
+                <div class="book_event_or ">
+                  <p>BESTSELLER</p>
+                </div>
+                <img src="{%static 'main_home1/wedding_static/images/list_img_2.png' %}" alt="" class="we_ve_img" />
+                <div class="eve_p">
+                  <div class="ven_titl_txt_eve">
+                    <h3>Crystal Grand Hall</h3>
+                    <div class="wed_rev_eve">
+                      <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                      <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                      <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                      <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                      <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                      <span class="rev_txt">12 Reviews</span>
+                    </div>
+                    <p class="mt-2">
+                      <img src="{%static 'main_home1/wedding_static/images/map-marker.png' %}" alt="" />
+                      Line B Technology Village, Bwari Lagos
+                    </p>
+                  </div>
+                  <div class="brd_sep"></div>
+                  <p class="prc_nm_we_ve">
+                    Price <span>$20 - $200</span>/Person
+                  </p>
+                </div>
+                <button class="book_event_wed_ev">Book Event</button>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <!-- <div class="featured_tag">
+                    <p>FEATURED</p>
+                  </div> -->
+              <div class="we_ve_card">
+                <img src="{%static 'main_home1/wedding_static/images/list_img_2.png' %}" alt="" class="we_ve_img" />
+                <div class="eve_p">
+                  <div class="ven_titl_txt_eve">
+                    <h3>Crystal Grand Hall</h3>
+                    <div class="wed_rev_eve">
+                      <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                      <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                      <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                      <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                      <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                      <span class="rev_txt">12 Reviews</span>
+
+                    </div>
+                    <p class="mt-2">
+                      <img src="{%static 'main_home1/wedding_static/images/map-marker.png' %}" alt="" />
+                      Line B Technology Village, Bwari Lagos
+                    </p>
+                  </div>
+                  <div class="brd_sep"></div>
+                  <p class="prc_nm_we_ve">
+                    Price <span>$20 - $200</span>/Person
+                  </p>
+                </div>
+                <button class="book_event_wed_ev">Book Event</button>
+              </div>
+            </div>
+          </div>
+          {% comment %} <div class="row mt-3">
+            <div class="col-lg-4">
+
+              <div class="we_ve_card">
+                <div class="featured_tag">
+                  <p>FEATURED</p>
+                </div>
+                <img src="./assets/images/list_img_2.png" alt="" class="we_ve_img" />
+                <div class="eve_p">
+                  <div class="ven_titl_txt_eve">
+                    <h3>Crystal Grand Hall</h3>
+                    <div class="wed_rev_eve">
+                      <img src="./assets/images/star.png" alt="" />
+                      <img src="./assets/images/star.png" alt="" />
+                      <img src="./assets/images/star.png" alt="" />
+                      <img src="./assets/images/star.png" alt="" />
+                      <img src="./assets/images/star.png" alt="" />
+                      <span class="rev_txt">12 Reviews</span>
+                    </div>
+                    <p class="mt-2">
+                      <img src="./assets/images/map-marker.png" alt="" />
+                      Line B Technology Village, Bwari Lagos
+                    </p>
+                  </div>
+                  <div class="brd_sep"></div>
+                  <p class="prc_nm_we_ve">
+                    Price <span>$20 - $200</span>/Person
+                  </p>
+                </div>
+                <button class="book_event_wed_ev">Book Event</button>
+              </div>
+            </div>
+            <div class="col-lg-4">
+
+              <div class="we_ve_card">
+                <div class="book_event_or">
+                  <p>BESTSELLER</p>
+                </div>
+                <img src="./assets/images/list_img_2.png" alt="" class="we_ve_img" />
+                <div class="eve_p">
+                  <div class="ven_titl_txt_eve">
+                    <h3>Crystal Grand Hall</h3>
+                    <div class="wed_rev_eve">
+                      <img src="./assets/images/star.png" alt="" />
+                      <img src="./assets/images/star.png" alt="" />
+                      <img src="./assets/images/star.png" alt="" />
+                      <img src="./assets/images/star.png" alt="" />
+                      <img src="./assets/images/star.png" alt="" />
+                      <span class="rev_txt">12 Reviews</span>
+                    </div>
+                    <p class="mt-2">
+                      <img src="./assets/images/map-marker.png" alt="" />
+                      Line B Technology Village, Bwari Lagos
+                    </p>
+                  </div>
+                  <div class="brd_sep"></div>
+                  <p class="prc_nm_we_ve">
+                    Price <span>$20 - $200</span>/Person
+                  </p>
+                </div>
+                <button class="book_event_wed_ev">Book Event</button>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <!-- <div class="featured_tag">
+                    <p>FEATURED</p>
+                  </div> -->
+              <div class="we_ve_card">
+                <img src="./assets/images/list_img_2.png" alt="" class="we_ve_img" />
+                <div class="eve_p">
+                  <div class="ven_titl_txt_eve">
+                    <h3>Crystal Grand Hall</h3>
+                    <div class="wed_rev_eve">
+                      <img src="./assets/images/star.png" alt="" />
+                      <img src="./assets/images/star.png" alt="" />
+                      <img src="./assets/images/star.png" alt="" />
+                      <img src="./assets/images/star.png" alt="" />
+                      <img src="./assets/images/star.png" alt="" />
+                      <span class="rev_txt">12 Reviews</span>
+                    </div>
+                    <p class="mt-2">
+                      <img src="./assets/images/map-marker.png" alt="" />
+                      Line B Technology Village, Bwari Lagos
+                    </p>
+                  </div>
+                  <div class="brd_sep"></div>
+                  <p class="prc_nm_we_ve">
+                    Price <span>$20 - $200</span>/Person
+                  </p>
+                </div>
+                <button class="book_event_wed_ev">Book Event</button>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-lg-4">
+
+              <div class="we_ve_card">
+                <div class="featured_tag">
+                  <p>FEATURED</p>
+                </div>
+                <img src="./assets/images/list_img_2.png" alt="" class="we_ve_img" />
+                <div class="eve_p">
+                  <div class="ven_titl_txt_eve">
+                    <h3>Crystal Grand Hall</h3>
+                    <div class="wed_rev_eve">
+                      <img src="./assets/images/star.png" alt="" />
+                      <img src="./assets/images/star.png" alt="" />
+                      <img src="./assets/images/star.png" alt="" />
+                      <img src="./assets/images/star.png" alt="" />
+                      <img src="./assets/images/star.png" alt="" />
+                      <span class="rev_txt">12 Reviews</span>
+                    </div>
+                    <p class="mt-2">
+                      <img src="./assets/images/map-marker.png" alt="" />
+                      Line B Technology Village, Bwari Lagos
+                    </p>
+                  </div>
+                  <div class="brd_sep"></div>
+                  <p class="prc_nm_we_ve">
+                    Price <span>$20 - $200</span>/Person
+                  </p>
+                </div>
+                <button class="book_event_wed_ev">Book Event</button>
+              </div>
+            </div>
+            <div class="col-lg-4">
+
+              <div class="we_ve_card">
+                <div class="book_event_or">
+                  <p>BESTSELLER</p>
+                </div>
+                <img src="./assets/images/list_img_2.png" alt="" class="we_ve_img" />
+                <div class="eve_p">
+                  <div class="ven_titl_txt_eve">
+                    <h3>Crystal Grand Hall</h3>
+                    <div class="wed_rev_eve">
+                      <img src="./assets/images/star.png" alt="" />
+                      <img src="./assets/images/star.png" alt="" />
+                      <img src="./assets/images/star.png" alt="" />
+                      <img src="./assets/images/star.png" alt="" />
+                      <img src="./assets/images/star.png" alt="" />
+                      <span class="rev_txt">12 Reviews</span>
+                    </div>
+                    <p class="mt-2">
+                      <img src="./assets/images/map-marker.png" alt="" />
+                      Line B Technology Village, Bwari Lagos
+                    </p>
+                  </div>
+                  <div class="brd_sep"></div>
+                  <p class="prc_nm_we_ve">
+                    Price <span>$20 - $200</span>/Person
+                  </p>
+                </div>
+                <button class="book_event_wed_ev">Book Event</button>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <!-- <div class="featured_tag">
+                    <p>FEATURED</p>
+                  </div> -->
+              <div class="we_ve_card">
+                <img src="./assets/images/list_img_2.png" alt="" class="we_ve_img" />
+                <div class="eve_p">
+                  <div class="ven_titl_txt_eve">
+                    <h3>Crystal Grand Hall</h3>
+                    <div class="wed_rev_eve">
+                      <img src="./assets/images/star.png" alt="" />
+                      <img src="./assets/images/star.png" alt="" />
+                      <img src="./assets/images/star.png" alt="" />
+                      <img src="./assets/images/star.png" alt="" />
+                      <img src="./assets/images/star.png" alt="" />
+                      <span class="rev_txt">12 Reviews</span>
+                    </div>
+                    <p class="mt-2">
+                      <img src="./assets/images/map-marker.png" alt="" />
+                      Line B Technology Village, Bwari Lagos
+                    </p>
+                  </div>
+                  <div class="brd_sep"></div>
+                  <p class="prc_nm_we_ve">
+                    Price <span>$20 - $200</span>/Person
+                  </p>
+                </div>
+                <button class="book_event_wed_ev">Book Event</button>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-lg-4">
+
+              <div class="we_ve_card">
+                <div class="featured_tag">
+                  <p>FEATURED</p>
+                </div>
+                <img src="./assets/images/list_img_2.png" alt="" class="we_ve_img" />
+                <div class="eve_p">
+                  <div class="ven_titl_txt_eve">
+                    <h3>Crystal Grand Hall</h3>
+                    <div class="wed_rev_eve">
+                      <img src="./assets/images/star.png" alt="" />
+                      <img src="./assets/images/star.png" alt="" />
+                      <img src="./assets/images/star.png" alt="" />
+                      <img src="./assets/images/star.png" alt="" />
+                      <img src="./assets/images/star.png" alt="" />
+                      <span class="rev_txt">12 Reviews</span>
+                    </div>
+                    <p class="mt-2">
+                      <img src="./assets/images/map-marker.png" alt="" />
+                      Line B Technology Village, Bwari Lagos
+                    </p>
+                  </div>
+                  <div class="brd_sep"></div>
+                  <p class="prc_nm_we_ve">
+                    Price <span>$20 - $200</span>/Person
+                  </p>
+                </div>
+                <button class="book_event_wed_ev">Book Event</button>
+              </div>
+            </div>
+            <div class="col-lg-4">
+
+              <div class="we_ve_card">
+                <div class="book_event_or">
+                  <p>BESTSELLER</p>
+                </div>
+                <img src="./assets/images/list_img_2.png" alt="" class="we_ve_img" />
+                <div class="eve_p">
+                  <div class="ven_titl_txt_eve">
+                    <h3>Crystal Grand Hall</h3>
+                    <div class="wed_rev_eve">
+                      <img src="./assets/images/star.png" alt="" />
+                      <img src="./assets/images/star.png" alt="" />
+                      <img src="./assets/images/star.png" alt="" />
+                      <img src="./assets/images/star.png" alt="" />
+                      <img src="./assets/images/star.png" alt="" />
+                      <span class="rev_txt">12 Reviews</span>
+                    </div>
+                    <p class="mt-2">
+                      <img src="./assets/images/map-marker.png" alt="" />
+                      Line B Technology Village, Bwari Lagos
+                    </p>
+                  </div>
+                  <div class="brd_sep"></div>
+                  <p class="prc_nm_we_ve">
+                    Price <span>$20 - $200</span>/Person
+                  </p>
+                </div>
+                <button class="book_event_wed_ev">Book Event</button>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <!-- <div class="featured_tag">
+                    <p>FEATURED</p>
+                  </div> -->
+              <div class="we_ve_card">
+                <img src="./assets/images/list_img_2.png" alt="" class="we_ve_img" />
+                <div class="eve_p">
+                  <div class="ven_titl_txt_eve">
+                    <h3>Crystal Grand Hall</h3>
+                    <div class="wed_rev_eve">
+                      <img src="./assets/images/star.png" alt="" />
+                      <img src="./assets/images/star.png" alt="" />
+                      <img src="./assets/images/star.png" alt="" />
+                      <img src="./assets/images/star.png" alt="" />
+                      <img src="./assets/images/star.png" alt="" />
+                      <span class="rev_txt">12 Reviews</span>
+                    </div>
+                    <p class="mt-2">
+                      <img src="./assets/images/map-marker.png" alt="" />
+                      Line B Technology Village, Bwari Lagos
+                    </p>
+                  </div>
+                  <div class="brd_sep"></div>
+                  <p class="prc_nm_we_ve">
+                    Price <span>$20 - $200</span>/Person
+                  </p>
+                </div>
+                <button class="book_event_wed_ev">Book Event</button>
+              </div>
+            </div>
+          </div> {% endcomment %}
+        </div>
+
+
+
+
+      </div>
+    </div>
+  </div>
+
+
+  <div class="top_dl_bg">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 mrg_t_b_50">
+          <div class="dl_head">
+            <h3>Top Deal</h3>
+            <br>
+            <p>Find Everything you need for your Special Event</p>
+          </div>
+
+          <div class="mt_50">
+            <div class="owl-carousel owl-theme">
+              <div class="item">
+                <div class="card1 h-100">
+                  <div class="card-body vend_cat_itm">
+                    <div class="bg_overlay">
+                      <div class="cls_dis">
+                        <p>10% <span>OFF</span></p>
+                      </div>
+                      <h6 class="itm_txt">Classy Affairs</h6>
+                      <div class="ttl_vnue_bg">
+                        <p>Price stat at $1800 - $7500</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="item">
+                <div class="card1 h-100">
+                  <div class="card-body vend_cat_itm_1">
+                    <div class="bg_overlay">
+                      <div class="cls_dis">
+                        <p>$299 <span>SAVE</span></p>
+                      </div>
+                      <h6 class="itm_txt">Island Yacht Club</h6>
+                      <div class="ttl_vnue_bg">
+                        <p>Price stat at $1800 - $7500</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="item">
+                <div class="card1 h-100">
+                  <div class="card-body vend_cat_itm_2">
+                    <div class="bg_overlay">
+                      <div class="cls_dis">
+                        <p>25% <span>OFF</span></p>
+                      </div>
+                      <h6 class="itm_txt">Royal Ambassador Event</h6>
+                      <div class="ttl_vnue_bg">
+                        <p>Price stat at $1800 - $7500</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="item">
+                <div class="card1 h-100">
+                  <div class="card-body vend_cat_itm_3">
+                    <div class="bg_overlay">
+                      <div class="cls_dis">
+                        <p>$299 <span>SAVE</span></p>
+                      </div>
+                      <h6 class="itm_txt">Island Yacht Club</h6>
+                      <div class="ttl_vnue_bg">
+                        <p>Price stat at $1800 - $7500</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="item">
+                <div class="card1 h-100">
+                  <div class="card-body vend_cat_itm_2">
+                    <div class="bg_overlay">
+                      <div class="cls_dis">
+                        <p>25% <span>OFF</span></p>
+                      </div>
+                      <h6 class="itm_txt">Royal Ambassador Event</h6>
+                      <div class="ttl_vnue_bg">
+                        <p>Price stat at $1800 - $7500</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+ </div>
+{% include 'vendor_home/footer.html' %}
+
+ 
+
+  </div>
+  {% comment %} {% include 'vendor_home/footer.html' %} {% endcomment %}
+
+  <!-- JavaScript Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+    crossorigin="anonymous"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+
+  <script src="{%static 'main_home1/wedding_static/owlcarousel/jquery.min.js' %}"></script>
+  <script src="{%static 'main_home1/wedding_static/owlcarousel/owl.carousel.min.js' %}"></script>
+
+  <script src="{%static 'main_home1/wedding_static/js/main.js' %}"></script>
+  {% include 'vendor_home/index-js.html' %}
+
+  {% comment %} <script>
+    $('.currency').each(function(){
+      $(this).html('OK');
+    })
+  </script> {% endcomment %}
+
+</body>
+
+</html>

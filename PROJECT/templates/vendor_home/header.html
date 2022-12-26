@@ -1,0 +1,756 @@
+{% load static %}
+{% load lang_tran %}
+<style>
+    .loginSign-form input[type=number]{
+        height: 53px;
+        border-radius: 4px;
+        border: 1px solid #000000;
+        padding: 0 16px;
+        width: 100%;
+        display: block;
+    }
+    .intl-tel-input {
+        width: 100%;
+        display: block;
+      }
+</style>
+<script>
+    function statusChangeCallback(response) {
+        console.log('statusChangeCallback');
+        console.log(response);
+        // The response object is returned with a status field that lets the
+        // app know the current login status of the person.
+        // Full docs on the response object can be found in the documentation
+        // for FB.getLoginStatus().
+        if (response.status === 'connected') {
+          // Logged into your app and Facebook.
+          testAPI();
+        } else {
+          // The person is not logged into your app or we are unable to tell.
+          document.getElementById('status').innerHTML = 'Please log ' +
+            'into this app.';
+        }
+      }
+    
+      // This function is called when someone finishes with the Login
+      // Button.  See the onlogin handler attached to it in the sample
+      // code below.
+      function checkLoginState() {
+        FB.getLoginStatus(function(response) fb_action{
+          statusChangeCallback(response);
+        });
+      }
+    
+      window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '429226305282959',
+        cookie     : true,  // enable cookies to allow the server to access 
+                            // the session
+        xfbml      : true,  // parse social plugins on this page
+        version    : 'v15.0' // Specify the Graph API version to use
+      });
+    
+      // Now that we've initialized the JavaScript SDK, we call 
+      // FB.getLoginStatus().  This function gets the state of the
+      // person visiting this page and can return one of three states to
+      // the callback you provide.  They can be:
+      //
+      // 1. Logged into your app ('connected')
+      // 2. Logged into Facebook, but not your app ('not_authorized')
+      // 3. Not logged into Facebook and can't tell if they are logged into
+      //    your app or not.
+      //
+      // These three cases are handled in the callback function.
+    
+      FB.getLoginStatus(function(response) {
+        statusChangeCallback(response);
+      });
+    
+      };
+    
+      // Load the SDK asynchronously
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "https://connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    
+      // Here we run a very simple test of the Graph API after login is
+      // successful.  See statusChangeCallback() for when this call is made.
+      function testAPI() {
+        console.log('Welcome!  Fetching your information.... ');
+        FB.api('/me', function(response) {
+          console.log('Successful login for: ' + response.name);
+          document.getElementById('status').innerHTML =
+            'Thanks for logging in, ' + response.name + '!';
+        });
+      }
+    </script>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-default fixed-top bg-white p-0">
+        <div class="container">
+            <a class="navbar-brand" href="{%url 'vendor_home:vendor_home_index' %}"><img src="{%static 'main_home1/assets/images/logo-desktop.png' %}" alt="" width="190"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="mobSearch">
+                    <form action="">
+                        <div class="form-field position-relative">
+                            <input type="email" name="" id="" placeholder="Search">
+                            <button type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
+                        </div>
+                    </form>
+                </div>
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="{%url 'vendor_home:about' %}">{{"About"|transl:is_french}}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="{%url 'vendor_home:our_vendors' %}">{{"Our Vendors"|transl:is_french}}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="{%url 'vendor_home:all_packages' %}">{{"Packages"|transl:is_french}}</a>
+                    </li>
+                    <!--<li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="{%url 'vendor_home:Venue' %}" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Venues <i class="fa fa-angle-down float-end" aria-hidden="true"></i>
+                        </a>
+                        
+                      <div class="dropdown-menu mega-menu" aria-labelledby="navbarDarkDropdownMenuLink">
+                        
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <h5>Event Type</h5>
+                                    <ul>
+                                        {% for i in venue_links %}
+                                        <li>
+                                            <a href="{%url 'vendor_home:Venue' %}{{i.venue_name}}/" style="text-transform: capitalize;">{{i.venue_name}}</a>
+                                        </li>
+                                        {% endfor %}
+                                        {% comment %} <li>
+                                            <a href="">Corporate Venues</a>
+                                        </li>
+                                        <li>
+                                            <a href="">Social Venues</a>
+                                        </li> {% endcomment %}
+                                    </ul>
+                                </div>
+                                <div class="col-lg-9">
+                                    <h5>Venue Type</h5>
+                                    <div class="row">
+                                        
+                                        <div class="col-md-4">
+                                            <ul>
+                                        {% for i in venue_by_venue|slice:"0:7" %}
+
+                                                <li>
+                                                    <a href="{%url 'vendor_home:Venue' %}{{i.venue_name}}/">{{i.venue_name}}</a>
+                                                </li>
+                                        {% endfor %}
+
+                                               
+                                            </ul>
+                                            
+                                        </div>
+                                        <div class="col-md-4">
+                                            <ul>
+                                        {% for i in venue_by_venue|slice:"7:13" %}
+
+                                                <li>
+                                                    <a href="{%url 'vendor_home:Venue' %}{{i.venue_name}}/">{{i.venue_name}}</a>
+                                                </li>
+                                        {% endfor %}
+
+                                               
+                                            </ul>
+                                            
+                                        </div>
+                                        <div class="col-md-4">
+                                            <ul>
+                                        {% for i in venue_by_venue|slice:"13:" %}
+
+                                                <li>
+                                                    <a href="{%url 'vendor_home:Venue' %}{{i.venue_name}}/">{{i.venue_name}}</a>
+                                                </li>
+                                        {% endfor %}
+
+                                               
+                                            </ul>
+                                            
+                                        </div>
+                                    
+                                  
+                                     
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <a href="#" class="btn cta-btn btn-orange w-100">Show All</a>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </li> !-->
+                    {% comment %} <li class="nav-item">
+                        <a class="nav-link" href="{%url 'vendor_home:Venue' %}">Venues</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{%url 'vendor_home:events' %}">Event Planners</a>
+                    </li> {% endcomment %}
+                    {% comment %} <li class="nav-item">
+                        <a class="nav-link" href="{%url 'vendor_home:deals' %}">{{"Deals"|transl:is_french}}</a>
+                    </li> {% endcomment %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{%url 'vendor_home:vendor_blog' %}">{{"Blog"|transl:is_french}}</a>
+                    </li>
+                    {% comment %} <li class="nav-item">
+                        <a class="nav-link" href="#">How It Works</a>
+                    </li> {% endcomment %}
+                </ul>
+
+                <div class="d-flex nav-mob">
+                    {% if not user_login1 %}
+                    <a class="btn cta-btn btn-transparent me-4 border-0 ps-0 pe-0" data-bs-toggle="modal" href="#exampleModalToggle2" id="signbtn1" role="button">{{"Sign up"|transl:is_french}}</a>
+                    <a class="btn cta-btn btn-transparent me-4 border-0 ps-0 pe-0" data-bs-toggle="modal" href="#exampleModalToggle" id="loginbtn1" role="button">{{"Login"|transl:is_french}}</a>
+                    <a class="btn cta-btn btn-transparent me-4 border-0 ps-0 pe-0" href="{%url 'vendor_home:create_event' %}" role="button">{{"Create an Event"|transl:is_french}}</a>
+
+                    <a href="{%url 'vendor_home' %}" class="btn cta-btn btn-purple">{{"Are You A Vendor"|transl:is_french}}</a>
+                    
+                    
+                    
+                    {% endif %}
+                   {% if user_login1 %}
+                   <a class="btn cta-btn btn-transparent me-4 border-0 ps-0 pe-0" href="{%url 'vendor_home:create_event' %}" role="button">{{"Create an Event"|transl:is_french}}</a>
+
+                   <a class="btn cta-btn btn-transparent me-4 border-0 ps-0 pe-0" href="{%url 'vendor_home:user_profile' %}"  role="button"><i class="fa fa-user-o fa-fw"></i>{{"My Account"|transl:is_french}}</a>
+                   <a class="btn cta-btn btn-transparent me-4 border-0 ps-0 pe-0" href="{%url 'vendor_home:user_profile_logout' %}?url={{ request.get_full_path|urlencode }}"  role="button" id="logoutbtn"><i class="fa fa-power-off fa-fw"></i>{{"Logout"|transl:is_french}}</a>
+
+                   {% comment %} <a class="btn cta-btn btn-transparent me-4 border-0 ps-0 pe-0" data-bs-toggle="modal" href="https://google.com" id="loginbtn1" role="button"><img src="https://i.ibb.co/Q95Drc5/icons8-username-32.png" alt="" srcset=""></a> {% endcomment %}
+
+                   {% endif %}
+                </div>
+                
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="modal fade loginSign-form" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered signinForm">
+        <div class="modal-content" style="background-image: url({%static 'main_home1/assets/images/login-bg.png' %}); background-color:#fcfcfc; background-size: 100%; background-position: bottom center; background-repeat: no-repeat;">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-header d-block text-center">
+                <h5 class="modal-title">{{"Sign In"|transl:is_french}}</h5>
+            </div>
+            <div class="modal-body">
+                <form action="{%url 'vendor_home:user_login_url' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="row g-2 mb-4">
+                        {% for message in messages %}
+                            <div class="col-md-12">
+                                <div class="alert alert-danger" role="alert">
+                                   {{message}}
+                                  </div>
+                                  
+                            </div>
+                        {% endfor %}
+                        <div class="col-md-12">
+                            <div class="form-field">
+                                <input type="text" class="form-control" name="user_mail" id="" placeholder="{{"Email"|transl:is_french}}" required >
+                                <input type="hidden" name="site_path" value="{{request.path}}">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-field">
+                                <input type="password" class="form-control" name="user_password" id="" placeholder="{{"Password"|transl:is_french}}" required >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3 custom-check">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="checkbox" id="html2" checked>
+                                <label for="html2">{{"Remember Me"|transl:is_french}}</label>
+                            </div>
+                            <div class="col-md-6">
+                                
+                                <a href="#" class="btn btn-link" style="float: right;" data-bs-toggle="modal" data-bs-target="#forgotpwd">{{"Forgot Password? "|transl:is_french}}</a>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <div class="row g-2 mb-3">
+                        <div class="col-md-12">
+                            <div class="form-field">
+                                <input type="submit" name="login_btn" id="login_btn" value="{{"Login"|transl:is_french}}" class="w-100">
+                            </div>
+                        </div>
+                    </div>
+
+                    {% comment %} <div class="or text-center mb-3">
+                        <span>{{"OR"|transl:is_french}}</span>
+                    </div> 
+                   <div class="row g-2 mb-3" id="g_div_login"> {% endcomment %}
+                    
+                        <div class="col-md-12 d-none">
+                            <div class="form-field">
+                                {% comment %} <style>
+                                    #fb_btn{
+                                        display:none;
+                                    }
+                                </style> {% endcomment %}
+                                {% comment %} <div id="fb-root"></div> {% endcomment %}
+                               
+                                {% comment %} <a class="social-btn w-100" href="javaScript:void()" onclick="fb_action(login)" id="fb_big_btn"><i class="fa fa-facebook" aria-hidden="true"></i> Signin With Facebook</a> {% endcomment %}
+                            </div>
+                        </div>
+                       <div class="col-md-12 d-none">
+                            <div class="form-field">
+                                <div id="g_id_onload"
+                                data-client_id="780861556101-778h6d5rurk9dp9jv2rk49fkeqh6ff7i.apps.googleusercontent.com"
+                                data-callback="handleCredentialResponse">
+                                </div>
+
+
+                                <div class="g_id_signin"
+                                    data-type="standard"
+                                    data-shape="rectangular"
+                                    data-theme="outline"
+                                    data-text="signin_with"
+                                    data-size="large"
+                                    data-logo_alignment="left">
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="row g-2">
+                        <div class="col-md-12">
+                            <div class="form-field text-center">
+                                <p>{{"Don't have an account?"|transl:is_french}} <a href="" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">{{"Create New"|transl:is_french}}</a></p>
+                            </div>
+                        </div>
+                    </div>
+                
+              
+                
+                
+                
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade loginSign-form" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered signUpForm">
+        <div class="modal-content" style="background-image: url({%static 'main_home1/assets/images/login-bg.png' %}); background-color:#fcfcfc; background-size: 100%; background-position: bottom center; background-repeat: no-repeat;">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-header d-block text-center">
+                <h5 class="modal-title">{{"Sign up"|transl:is_french}}</h5>
+                <p>{{"Get access to all our planning tools and event planning deals!"|transl:is_french}}</p>
+            </div>
+            <div class="modal-body">
+                {% for message in messages %}
+                <div class="alert alert-primary" role="alert">
+                    
+                    {{message|transl:is_french}}
+                </div>
+                {% endfor %}
+                <form action="{% url 'vendor_home:user_signUp' %}" method="POST" id="signup_form">
+                    {% csrf_token %}
+                    <div class="row g-2 mb-4">
+                        <div class="col-md-6">
+                            <div class="form-field">
+                                <input type="text" class="form-control" name="fname" id="fname" placeholder="{{"First Name"|transl:is_french}}" required onkeydown="return /[a-z]/i.test(event.key)">
+                                
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-field">
+                                <input type="text" class="form-control" name="lname" id="lname" placeholder="{{"Last Name"|transl:is_french}}" required onkeydown="return /[a-z]/i.test(event.key)">
+                                
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-field">
+                                <input type="text" class="form-control" name="email" id="email" placeholder="{{"Email"|transl:is_french}}" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row g-2">
+                                <div class="col-md-5 d-none">
+                                    <div class="form-field">
+                                        
+                                        <input type="hidden" name="mno_code" id="mno_code">
+                                    </div>  
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-field">
+                                        <input type="number" class="form-control" name="mobile" id="mno" placeholder="{{"Phone Number"|transl:is_french}}" required>
+
+                                    </div>  
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-field">
+                                <input type="password" class="form-control" name="password" id="password" placeholder="{{"Password"|transl:is_french}}" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-field">
+                                <input type="password" class="form-control" name="re_password" id="re_password" placeholder="{{"Confirm Password"|transl:is_french}}" required>
+                                <div id="re_password_check" class="form-text"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-field">
+                                <select name="countries" class="form-select" id="countries">
+                                    <option value="">{{"--Select Country--"|transl:is_french}}</option>
+                                </select>
+                                <div id="re_password_check" class="form-text"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-field">
+                                <select name="state" class="form-select" id="state">
+                                    <option value="">{{"--Select State--"|transl:is_french}}</option>
+                                </select>
+                                <div id="re_password_check" class="form-text"></div>
+                                <input type="hidden" name="geturl" value="{{request.path}}">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-field">
+                                <select name="city" class="form-select" id="city">
+                                    <option value="">{{"--Select City--"|transl:is_french}}</option>
+                                </select>
+                                <div id="re_password_check" class="form-text"></div>
+                            </div>
+                        </div>
+                    </div>
+                    {% comment %} <span class="big-p">What type of event are you planning?</span>
+                    <div class="row g-2 mb-3">
+                        <div class="col-md-6">
+                            <div class="form-field">
+                                <select class="form-select">
+                                    <option selected disabled value="">Event Type</option>
+                                    <option>Option 1</option>
+                                    <option>Option 2</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-field">
+                                <input type="date" class="form-control" name="" id="" placeholder="Event Approx Date">
+                            </div>
+                        </div>
+                    </div> {% endcomment %}
+
+                    <div class="mb-3 custom-check">
+                        <input type="checkbox" id="html" required>
+                        <label for="html">{{"I accept Terms of use & Privacy Policy"|transl:is_french}}</label>
+                    </div>
+
+                    <div class="row g-2 mb-3">
+                        <div class="col-md-12">
+                            <div class="form-field">
+                                {{form.captcha}}
+                                
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-field">
+                                <button type="submit" name="signup_btn" id="signup_btn" class="w-100 button-submit">{{"Create an account"|transl:is_french}}</button>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <div class="or text-center mb-3" id="signup_or">
+                        <span>OR</span>
+                    </div>
+                    <div class="row g-2 mb-3" id="g_div_signup">
+                        <div class="col-md-12">
+                            <div class="form-field">
+                                <a href="javaScript:void();" class="social-btn" onclick="fb_action('login');"><i class="fa fa-facebook" aria-hidden="true"></i> {{"Signup With Facebook"|transl:is_french}}</a>
+                                {% comment %} <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+</fb:login-button> {% endcomment %}
+                            </div>
+                        </div>
+                        {% comment %} <div class="col-md-6" >
+                            <div class="form-field">
+                                <div id="g_id_onload" data-client_id="780861556101-778h6d5rurk9dp9jv2rk49fkeqh6ff7i.apps.googleusercontent.com" data-callback="handleCredentialResponse"></div>
+
+
+                                <div class="g_id_signin"
+                                    data-type="standard"
+                                    data-shape="rectangular"
+                                    data-theme="outline"
+                                    data-text="signin_with"
+                                    data-size="large"
+                                    data-logo_alignment="left">
+                                </div>
+                            </div>
+                        </div> {% endcomment %}
+                        <div class="row g-2 mb-3">
+                        <div id="messagebox" class="col-md-12"></div>
+                        </div>
+                    </div>
+                    <div class="row g-2">
+                        <div class="col-md-12">
+                            <div class="form-field text-center">
+                                <p>{{"Already Registered?"|transl:is_french}} <a href="" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">{{"Sign in here"|transl:is_french}}</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="forgotpwd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">{{"Forgot Password"|transl:is_french}}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="div1">
+        
+                <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label">{{"Email address"|transl:is_french}}</label>
+                  <input type="email" class="form-control" id="email_reg" aria-describedby="emailHelp" placeholder="abc@xyz.com">
+                  <div id="emailHelp" class="form-text"></div>
+                </div>
+                
+                
+                <button class="ven_logbtn btn btn-dark" id="nxt_otp_forgot">{{"Next"|transl:is_french}}</button>
+             
+        </div>
+        <div class="modal-body" id="div2">
+        
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">{{"Enter OTP"|transl:is_french}}</label>
+              <input type="text" class="form-control" id="otp" aria-describedby="emailHelp" placeholder="">
+              <div id="next_pwd_help" class="form-text"></div>
+            </div>
+            
+            
+            <button class="ven_logbtn btn btn-dark" id="nxt_pwd_forgot">{{"Next"|transl:is_french}}</button>
+         
+        </div>
+        <div class="modal-body" id="div3">
+        
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">{{"Enter New Password"|transl:is_french}}</label>
+              <input type="text" class="form-control" id="fgt_password" aria-describedby="emailHelp" placeholder="">
+              <label for="exampleInputEmail1" class="form-label">{{"Re-Enter Password"|transl:is_french}}</label>
+              <input type="text" class="form-control" id="fgt_password_confirm" aria-describedby="emailHelp" placeholder="">
+              <div class="form-text" id="fgt_help"></div>
+            </div>
+            
+            
+            <button class="ven_logbtn btn btn-dark" id="nxt_pwd_submit">{{"Reset Password"|transl:is_french}}</button>
+         
+        </div>
+        
+      </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.9/js/intlTelInput.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.9/js/intlTelInput.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.18/js/utils.js" integrity="sha512-6sKpcusiQQ/vOBWU0ouNesdklDzgwywnf+255TCMAs+n68jnDqaDC3gt01ofYWry4mRdCHR+8uox88HT3YBOdQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+<script>
+
+    $('#nxt_otp_forgot').html('Enter Email to Continue');
+    $('#nxt_otp_forgot').prop('disabled',true);
+    $('#div2').hide();
+    $('#div3').hide();
+
+    $('#email_reg').on('input', function() {
+        
+        var id=this.value;
+        $.ajax({
+            type: "GET",
+            url: "{%url 'vendor_home:userGet_Email' %}",
+            data: "email="+id,
+            success: function(data){
+                console.log(data)
+                if (data.length <=0){
+                    $('#emailHelp').html('<font color="red"><i class="fa fa-times fa-fw"></i><b>User Not Available</b></font>');
+                    $('#nxt_otp_forgot').prop('disabled',true);
+                    $('#nxt_otp_forgot').html('Enter Registered Email to Continue');
+
+                    
+
+                }
+                else if(data.length>0){
+                    $('#emailHelp').html('<font color="green"><i class="fa fa-check fa-fw"></i><b>User Available</b></font>');
+                    $('#nxt_otp_forgot').prop('disabled',false);
+                    $('#nxt_otp_forgot').html('Next');
+
+
+                   
+
+                }
+                //console.log(data)
+                //for (var i = 0; i < data.length; i++){
+                //	//console.log(data[i].fields)
+                //	var state_id=data[i].fields.state_code;
+                //	var state_name=data[i].fields.name;
+                //	var option_tag=document.getElementById('state')
+                //	var row=`<option value="${state_id}">${state_name}</option>`;
+                //	option_tag.innerHTML+=row
+                    //var row = `<tr>
+                    //				<td>${cno}</td>
+                    //				<td>${data[i].recharge_short_desc}</td>
+                    //				<td>${data[i].recharge_validity}</td>
+                    //  <td>${data[i].recharge_long_desc}</td>
+                    //  <td><button onclick="pay_now(${data[i].recharge_amount})">${data[i].recharge_amount}.00</button></td>
+                    //		  </tr>`
+                    //table.innerHTML += row
+        
+        
+                //}
+                //$('#statelabel').show();
+
+                //$('#state').show();
+            },
+        });
+    });
+    $('#nxt_otp_forgot').on('click',function(e){
+        e.preventDefault();
+        var id = $('#email_reg').val();
+        console.log("OK");
+        $.ajax({
+            type: "GET",
+            url: "{%url 'vendor_home:user_send_otp' %}",
+            data: "email="+id,
+            success: function(data){
+                console.log(data)
+                
+                $('#div1').hide();
+                $('#div2').show();
+
+                   
+
+                
+                //console.log(data)
+                //for (var i = 0; i < data.length; i++){
+                //	//console.log(data[i].fields)
+                //	var state_id=data[i].fields.state_code;
+                //	var state_name=data[i].fields.name;
+                //	var option_tag=document.getElementById('state')
+                //	var row=`<option value="${state_id}">${state_name}</option>`;
+                //	option_tag.innerHTML+=row
+                    //var row = `<tr>
+                    //				<td>${cno}</td>
+                    //				<td>${data[i].recharge_short_desc}</td>
+                    //				<td>${data[i].recharge_validity}</td>
+                    //  <td>${data[i].recharge_long_desc}</td>
+                    //  <td><button onclick="pay_now(${data[i].recharge_amount})">${data[i].recharge_amount}.00</button></td>
+                    //		  </tr>`
+                    //table.innerHTML += row
+        
+        
+                //}
+                //$('#statelabel').show();
+
+                //$('#state').show();
+            },
+        });
+
+    });
+    $('#nxt_pwd_forgot').on('click',function(e){
+        e.preventDefault();
+        var otp = $('#otp').val();
+        $.ajax({
+            type: "GET",
+            url: "{%url 'vendor_home:user_check_otp' %}",
+            data: "otp="+otp,
+            success: function(data){
+                console.log(data)
+                if (data == 'OK'){
+                    $('#div2').hide();
+                    $('#div3').show();
+                }
+                else{
+                    $('#next_pwd_help').html('<font color="red"><i class="fa fa-times fa-fw"></i><b>Incorrect OTP ! Please Check !</b></font>')
+                }
+                
+                
+            }
+        });
+        
+    });
+    $('#nxt_pwd_submit').on('click',function(e){
+        e.preventDefault();
+        var password = $('#fgt_password').val();
+        var confirm_password=$('#fgt_password_confirm').val();
+        console.log("OK enter");
+
+        if (password == confirm_password){
+            console.log("OK enter1");
+
+            $.ajax({
+                type: "GET",
+                url: "{%url 'vendor_home:user_update_pwd' %}",
+                data: "password="+password,
+                success: function(data){
+                    //console.log(data)
+                    if (data == 'Done'){
+                        $('#fgt_help').html('<font color="green"><i class="fa fa-check fa-fw"></i><b>Password Saved Succefully !</b></font>');
+                        
+                        swal("Success !", "Password Reset Successfully", "success")
+                        .then((value) => {
+                              location.reload();
+                        });
+                    }
+                    
+                    
+                }
+            });
+        }
+        else{
+            console.log("OK enter 2");
+
+            $('#fgt_help').html('<font color="red"><i class="fa fa-times fa-fw"></i><b>Password Does Not Match</b></font>');
+        }
+        
+        
+    });
+</script>
+<script>
+    
+    $('#mno').intlTelInput({
+        separateDialCode: true,
+        hiddenInput: "full"
+    });
+    
+</script>
+{% if messages %}
+    {% for message in messages %}
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+        <script>
+            $(document).ready(function(){
+                console.log("MOK");
+                document.getElementById("loginbtn1").click();
+            })
+        </script>
+        {% endif %}
+    {% endfor %}
+{% endif %}

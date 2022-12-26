@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+
+  <link href="https://fonts.googleapis.com/css2?family=Akaya+Kanadaka&family=Poppins:wght@200&display=swap" rel="stylesheet">    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Benne&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="main.css">
+    <title>Hello, world!</title>
+    <style>
+      body{
+    background-color: #dbdbdb;
+}
+svg{
+    width: 3%;
+}
+form{
+
+}
+#input1{
+    border-radius: 25px;
+}
+#input2{
+    border-radius: 25px;
+}
+
+input[type=text], select {
+    width: 100%;
+    border-radius: 25px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    }
+
+    input[type=submit] {
+    width: 100%;
+    background-color: #333333;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    }
+
+    input[type=submit]:hover {
+    background-color: #120061;
+    }
+    #room_name_top{
+        margin-top: 40px;
+        font-size: 30px;
+        padding-left: 20px;
+    }
+    #username_top{
+        margin-top: 5px;
+        font-size: 30px;
+        padding-left: 20px;
+
+    }
+    body {
+        margin: 0 auto;
+        max-width: 800px;
+        padding: 0 20px;
+      }
+
+      .container {
+        border: 2px solid #dedede;
+        background-color: #f1f1f1;
+        border-radius: 5px;
+        padding: 10px;
+        margin: 10px 0;
+      }
+
+      .darker {
+        border-color: #ccc;
+        background-color: #ddd;
+      }
+
+      .container::after {
+        content: "";
+        clear: both;
+        display: table;
+      }
+
+      .container img {
+        float: left;
+        max-width: 60px;
+        width: 100%;
+        margin-right: 20px;
+        border-radius: 50%;
+      }
+
+      .container img.right {
+        float: right;
+        margin-left: 20px;
+        margin-right:0;
+      }
+
+      .time-right {
+        float: right;
+        color: #aaa;
+      }
+
+      .time-left {
+        float: left;
+        color: #999;
+      }
+      h5{
+      text-align: center;
+      font-size: 12px;
+    }
+    h6{
+      text-align: center;
+      font-size: 10px;
+
+
+    }
+    nav{
+      font-family: 'Akaya Kanadaka', cursive;
+    }
+    #post-form{
+      font-family: 'Poppins', sans-serif;
+    }
+    #input1{
+      font-family: 'Poppins', sans-serif;
+      height: 20px;
+    }
+    #input2{
+      font-family: 'Poppins', sans-serif;
+      height: 20px;
+    }
+    h5{
+      text-align: center;
+      font-size: 12px;
+      font-family: 'Poppins', sans-serif;
+    }
+    h6{
+      text-align: center;
+      font-size: 10px;
+      font-family: 'Poppins', sans-serif;
+    }
+    .btn{
+      background: rgb(0, 174, 255);
+      color: white;
+      border-radius: 35px;
+    }
+    .btn:hover{
+      background-color:  rgb(0, 140, 255);
+      color: white;
+      border-radius: 2px;
+    }
+    </style>
+  </head>
+  <body>
+      <div class="container">
+
+        <form id="post-form" method="POST" action="{% url 'checkview' %}">
+          {% csrf_token %}
+            <label id="room_name_top">Room Name</label>
+            <textarea id="input1" class="form-control" aria-label="With textarea" type="text" name="room_name" id="room_name" style="margin-top: 10px;"></textarea>
+            <label id="username_top">Username</label>
+            <textarea id="input2" class="form-control" aria-label="With textarea" type="text" name="username" id="username" style="margin-top: 10px;"></textarea>
+            <input type="submit" value="Start Chat Now!">
+        </form>
+    </div>
+    {% comment %} <h5 >&copy;	Copyright Reserved Desphixs - 2021</h5> {% endcomment %}
+<h6>Made by Rownak Mazumder &hearts;	</h6>
+
+
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    -->
+  </body>
+</html>

@@ -1,0 +1,604 @@
+{% load static %}
+{% load count_vendor %}
+{% load currency_convert %}
+
+{% load get_vendor_name %}
+{% load lang_tran %}
+
+<!--Developed By Rownak Mazumder | Hire me on freelancer - https://freelancer.com/u/rownakmazumder/ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{"Eventinz | Your Event , Your Way"|transl:is_french}}</title>
+    {% include 'vendor_home/head.html' %}
+    <style>
+        #fb_btn {
+            height: 53px;
+            border-radius: 4px;
+            border: 0;
+            padding: 0 16px;
+            display: block;
+            line-height: 53px;
+            text-align: center;
+            background: #3e67c3;
+            color: var(--text-color-white);
+        
+        }
+        
+        #fb_btn:hover {
+            color: var(--text-color-white);
+        }
+        
+    </style>
+</head>
+
+<body>
+    {% include 'vendor_home/header.html' %}
+    <main>
+        <section class="hero-banner position-relative">
+            <div id="myCarousel" class="carousel slide h-100" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    {% for i in num_list %}
+                    <button type="button" {% if forloop.first %}  class="active" {% endif %} data-bs-target="#myCarousel" data-bs-slide-to="{{i}}" aria-current="true" aria-label="Slide {{i}}"></button>
+                    
+                    {% endfor %}
+                    {% comment %} <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button> {% endcomment %}
+
+                </div>
+                <div class="carousel-inner h-100">
+                    {% for i in index_slider %}
+                    <div class="carousel-item {% if forloop.first %} active {% endif %} h-100" style="background: url('{{BASE_URL}}/media/{{i.image}}'); background-repeat: no-repeat; background-size: cover; background-position: center;">
+                    </div>
+                    {% endfor %}
+                    
+                </div>
+            </div>
+            <div class="hero-banner__content d-flex align-items-center">
+                <div class="container">
+                    <div class="hero-banner__content--form text-center">
+                        <div class="hero-banner-heading">
+                            <h1>{{index_header|transl:is_french}}</h1>
+                            <p>{{index_sub_heading|transl:is_french}}</p>
+                        </div>
+                        <form action="{%url 'vendor_home:vendor_search' %}" method="POST" class="needs-validation" novalidate>
+                            {% csrf_token %}
+                            <div class="row g-0">
+                               
+                                
+                                {% comment %} <div class="col-lg-3 col-6">
+                                    <div class="form-field ec">
+                                        <select class="form-select" id="validationCustom04" required>
+                                            <option selected disabled value="">Event Categories</option>
+                                            {% for i in event_categories %}
+                                            <option value="{{i.id}}">{{i.category_name}}</option>
+                                            
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-6">
+                                    <div class="form-field et">
+                                        <select class="form-select" id="validationCustom05" required>
+                                            <option selected disabled value="">Event Sub Categories</option>
+                                           
+                                        </select>
+                                    </div>
+                                </div> {% endcomment %}
+                                <div class="col-lg-5">
+                                    <div class="form-field">
+                                        <select class="form-select" id="validationCustom06" name="category_vendor" required>
+                                            <option selected disabled value="">{{"Vendor Category"|transl:is_french}}</option>
+                                            {% for i in vendor_categories %}
+                                            <option value="{{i.id}}">{{i.category_name|transl:is_french}}</option>
+                                            
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-5">
+                                    <div class="form-field">
+                                        <select class="form-select" id="validationCustom07" name="subcategory_vendor" required>
+                                            <option selected disabled value="">{{"Vendor Sub Category"|transl:is_french}}</option>
+                                            
+                                            {% comment %} <option value="">{{i.category_name}}</option> {% endcomment %}
+                                            
+                                          
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2">
+                                    <div class="form-field">
+                                        <input class="btn cta-btn btn-orange w-100" type="submit" value="{{"Search"|transl:is_french}}"></input>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="homeVendor-section pt-7 pb-7">
+            <div class="container">
+                <div class="main-heading">
+                    <h2>{{vendor_Categ_text.Heading|transl:is_french}}</h2>
+                    <p>{{vendor_Categ_text.Sub_Heading|transl:is_french}}</p>
+                </div>
+                <div class="homeVendor-slider">
+                    {% for i in vendor_categories %}
+                    <div class="homeVendor-slider__item">
+                        <div class="card homeVendorContent">
+                            <div class="card-body d-flex align-items-center">
+                                <div class="w-100">
+                                    <img src="{{BASE_URL}}/media/{{i.category_icon}}" width="64" height="64"alt="">
+                                    <a href="{%url 'vendor_home:our_vendors' %}{{i.category_name|urlencode}}" class="stretched-link">{{i.category_name|transl:is_french}}</a>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <span>{{i.category_name|count_vendor_num}} {{"Vendors"|transl:is_french}}</span>
+                            </div>
+                            <div class="onhover_image" style="background: url('{{BASE_URL}}/media/{{i.category_cover_image}}'); background-size: cover;">
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                   
+
+                    {% comment %} <div class="homeVendor-slider__item">
+                        <div class="card homeVendorContent">
+                            <div class="card-body d-flex align-items-center">
+                                <div class="w-100">
+                                    <img src="assets/images/vendor-icon-3.png" alt="">
+                                    <a href="#" class="stretched-link">Caterers</a>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <span>243 Venues</span>
+                            </div>
+                            <div class="onhover_image" style="background: url('assets/images/vendor-bg.jpg'); background-size: cover;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="homeVendor-slider__item">
+                        <div class="card homeVendorContent">
+                            <div class="card-body d-flex align-items-center">
+                                <div class="w-100">
+                                    <img src="assets/images/vendor-icon-2.png" alt="">
+                                    <a href="#" class="stretched-link">Photographer</a>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <span>243 Venues</span>
+                            </div>
+                            <div class="onhover_image" style="background: url('assets/images/vendor-bg.jpg'); background-size: cover;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="homeVendor-slider__item">
+                        <div class="card homeVendorContent">
+                            <div class="card-body d-flex align-items-center">
+                                <div class="w-100">
+                                    <img src="assets/images/vendor-icon-3.png" alt="">
+                                    <a href="#" class="stretched-link">Music & Bands</a>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <span>243 Venues</span>
+                            </div>
+                            <div class="onhover_image" style="background: url('assets/images/vendor-bg.jpg'); background-size: cover;">
+                            </div>
+                        </div>
+                    </div> {% endcomment %}
+                </div>
+            </div>
+        </section>
+
+        <section class="eventinz-section pt-7 pb-7" style="background-image: url({%static 'main_home1/assets/images/event-bg.jpg' %}); background-repeat: no-repeat; background-size: cover;">
+            <div class="container">
+                <div class="main-heading text-white">
+                    <h2>{{how_ev_works.Header_Text|transl:is_french}}</h2>
+                    <p>{{how_ev_works.Sub_Text|transl:is_french}}</p>
+                </div>
+                <br>
+                <br>
+                <br>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <a href="{%url 'vendor_home:create_event' %}">
+                            <div class="eventinz-section__thumb text-center">
+                                <div class="eventinz-icon d-flex align-items-center">
+                                    <img src="{{BASE_URL}}/media/{{how_ev_works.Step_1_Icon}}" alt="">
+                                </div>
+                                <span>{{how_ev_works.Step_1_Text|transl:is_french}}</span>
+                                <div class="eventStep">
+                                    <h3>01</h3>
+                                    <small>{{"Step"|transl:is_french}}</small>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="">
+                            <div class="eventinz-section__thumb text-center">
+                                <div class="eventinz-icon d-flex align-items-center">
+                                    <img src="{{BASE_URL}}/media/{{how_ev_works.Step_2_Icon}}" alt="">
+                                </div>
+                                <span>{{how_ev_works.Step_2_Text|transl:is_french}}</span>
+                                <div class="eventStep">
+                                    <h3>02</h3>
+                                    <small>{{"Step"|transl:is_french}}</small>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="{%url 'vendor_home:our_vendors' %}">
+                            <div class="eventinz-section__thumb text-center">
+                                <div class="eventinz-icon d-flex align-items-center">
+                                    <img src="{{BASE_URL}}/media/{{how_ev_works.Step_3_Icon}}" alt="">
+                                </div>
+                                <span>{{how_ev_works.Step_3_Text|transl:is_french}}</span>
+                                <div class="eventStep">
+                                    <h3>03</h3>
+                                    <small>{{"Step"|transl:is_french}}</small>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="vendorDeal-section pt-7 pb-7">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-7">
+                        <div class="main-heading">
+                            <h2>{{vendor_deals_object.heading|transl:is_french}}</h2>
+                            <p>{{vendor_deals_object.sub_heading|transl:is_french}}</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="nav-tabs-list float-end">
+                            <ul class="nav nav-pills" id="myTab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">{{vendor_deals_object.Package_Button_Text|transl:is_french}}</button>
+                                </li>
+                                {% comment %} <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">{{vendor_deals_object.Deals_Button_Text|transl:is_french}}</button>
+                                </li> {% endcomment %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+                                <div class="row g-4">
+                                    {% for i in packages %}
+                                    <div class="col-lg-4 col-sm-6">
+                                        <div class="card myCard border-0">
+                                            <div class="card-body p-0" style="background: url('{{BASE_URL}}/media/{{i.image}}'); background-size:cover;min-height: 400px;">
+                                                {% comment %} <img src="{{BASE_URL}}/media/{{i.image}}" alt="" class="w-100" style="width: 356px; height: 356px;"> {% endcomment %}
+                                                <div class="myCard-content">
+                                                    <a href="{%url 'vendor_home:vendor_search' %}{{i.vendor_id|vendor_id}}/{{i.vendor_id|vendor_name}}" class="stretched-link">{{i.vendor_id|vendor_name|transl:is_french}}</a>
+                                                    {% with "vendor/"|add:i.location_country_code|add:"/user_country/"|add:get_user_location as template %}
+                                                    {% comment %} vendor/XOF/user/INR {% endcomment %}
+                                                    <input type="hidden" name="" value="{{template}}">
+                                                    {% if i.package_price != 0 %}
+                                                    {% comment %} {{i.package_price|currency_filter:template|floatformat:2}} {% endcomment %}
+                                                    <small>{{"Price starts at"|transl:is_french}}  {{i.location_country_code|currency_code:template}} 
+                                                        {{i.package_price|currency_filter:template}}
+                                                    </small>
+                                                    {% else %}
+                                                    <small>
+                                                        {{"Price Ranges From"|transl:is_french}} {{i.package_price_range_min|currency_filter:template}} - {{i.package_price_range_max|currency_filter:template}} {{i.location_country_code|currency_code:template}}
+                                                    </small>
+                                                    {% endif %}
+                                                    {% endwith %}
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% empty %}
+                                    <div class="col-lg-12 col-sm-12">
+                                        <div class="card border-0 bg-danger text-white p-3 rounded-0">
+                                            <div class="card-body p-0">
+                                                No Packages Found
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                    
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+
+
+
+
+                                <div class="row g-4">
+                                    {% for deal in deals %}
+                                        <div class="col-lg-4 col-sm-6">
+                                            <div class="card myCard border-0">
+                                                <div class="card-body p-0">
+                                                    <img src="{{BASE_URL}}/media/{{deal.package_name.image}}" alt="" class="w-100" style="width: 356px; height: 356px;">
+                                                    <div class="myCard-content">
+                                                        <a href="" class="stretched-link">{{i.deal_name}}</a>
+                                                        {% with "vendor/"|add:deal.package_name.location_country_code|add:"/user_country/"|add:get_user_location as template %}
+                                                    {% comment %} vendor/XOF/user/INR {% endcomment %}
+                                                    <input type="hidden" name="" value="{{template}}">
+                                                    
+                                                    {% comment %} {{i.package_price|currency_filter:template|floatformat:2}} {% endcomment %}
+                                                    <small>{{"Price starts at"|transl:is_french}}  {{deal.package_name.location_country_code|currency_code:template}} {{deal.package_name.package_price|currency_filter:template}}</small>
+                                                    {% endwith %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% empty %}
+                                    <div class="col-lg-12 col-sm-12">
+                                        <div class="card border-0 bg-danger text-white p-3 rounded-0">
+                                            <div class="card-body p-0">
+                                                No Deals Found
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="eventHost-section pt-7 pb-7 d-none">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="main-heading">
+                            <h2>Event Host Pre-Pack Deal </h2>
+                            <p>Find Everything you need for your Special Event</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="nav-tabs-list float-end">
+                            <ul class="nav nav-pills" id="myTab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="home-tab1" data-bs-toggle="tab" data-bs-target="#home-tab-pane1" type="button" role="tab" aria-controls="home-tab-pane1" aria-selected="true">Spotlight </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="profile-tab1" data-bs-toggle="tab" data-bs-target="#profile-tab-pane1" type="button" role="tab" aria-controls="profile-tab-pane1" aria-selected="false">New Listings </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="update-tab" data-bs-toggle="tab" data-bs-target="#update-tab-pane" type="button" role="tab" aria-controls="update-tab-pane" aria-selected="false">Recently Updated </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home-tab-pane1" role="tabpanel" aria-labelledby="home-tab1" tabindex="0">
+                                <div class="row g-4">
+                                    <div class="col-lg-7">
+                                        <div class="card myCard border-0">
+                                            <div class="card-body p-0">
+                                                <img src="{%static 'main_home1/assets/images/event-host-1.jpg' %}" alt="" class="w-100">
+                                                <div class="host-pic">
+                                                    <img src="{%static 'main_home1/assets/images/event-host-1-logo.jpg' %}" alt="">
+                                                </div>
+
+                                                <div class="myCard-content">
+                                                    <a href="" class="stretched-link">JP Fine Foods</a>
+                                                    <small>Price stat at  $1800 - $7500</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-5">
+                                        <div class="row g-4">
+                                            <div class="col-lg-12 col-md-6">
+                                                <div class="card myCard border-0">
+                                                    <div class="card-body p-0">
+                                                        <img src="{%static 'main_home1/assets/images/event-host-2.jpg' %}" alt="" class="w-100">
+                                                        <div class="host-pic">
+                                                            <img src="{%static 'main_home1/assets/images/event-host-2-logo.jpg' %}" alt="">
+                                                        </div>
+                                                        <div class="myCard-content">
+                                                            <a href="" class="stretched-link">Classy Affairs</a>
+                                                            <small>Price stat at  $1800 - $7500</small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12 col-md-6">
+                                                <div class="card myCard border-0">
+                                                    <div class="card-body p-0">
+                                                        <img src="{%static 'main_home1/assets/images/event-host-3.jpg' %}" alt="" class="w-100">
+                                                        <div class="host-pic">
+                                                            <img src="{%static 'main_home1/assets/images/event-host-3-logo.jpg' %}" alt="">
+                                                        </div>
+                                                        <div class="myCard-content">
+                                                            <a href="" class="stretched-link">Lauren Roy Entertainment</a>
+                                                            <small>Price stat at  $1800 - $7500</small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="profile-tab-pane1" role="tabpanel" aria-labelledby="profile-tab1" tabindex="0">
+                                
+                                <div class="row g-4">
+                                    <div class="col-lg-7">
+                                        <div class="card myCard border-0">
+                                            <div class="card-body p-0">
+                                                <img src="{%static 'main_home1/assets/images/event-host-1.jpg' %}" alt="" class="w-100">
+                                                <div class="host-pic">
+                                                    <img src="{%static 'main_home1/assets/images/event-host-1-logo.jpg' %}" alt="">
+                                                </div>
+
+                                                <div class="myCard-content">
+                                                    <a href="" class="stretched-link">JP Fine Foods</a>
+                                                    <small>Price stat at  $1800 - $7500</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-5">
+                                        <div class="row g-4">
+                                            <div class="col-lg-12 col-md-6">
+                                                <div class="card myCard border-0">
+                                                    <div class="card-body p-0">
+                                                        <img src="{%static 'main_home1/assets/images/event-host-2.jpg' %}" alt="" class="w-100">
+                                                        <div class="host-pic">
+                                                            <img src="{%static 'main_home1/assets/images/event-host-2-logo.jpg' %}" alt="">
+                                                        </div>
+                                                        <div class="myCard-content">
+                                                            <a href="" class="stretched-link">Classy Affairs</a>
+                                                            <small>Price stat at  $1800 - $7500</small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12 col-md-6">
+                                                <div class="card myCard border-0">
+                                                    <div class="card-body p-0">
+                                                        <img src="{%static 'main_home1/assets/images/event-host-3.jpg' %}" alt="" class="w-100">
+                                                        <div class="host-pic">
+                                                            <img src="{%static 'main_home1/assets/images/event-host-3-logo.jpg' %}" alt="">
+                                                        </div>
+                                                        <div class="myCard-content">
+                                                            <a href="" class="stretched-link">Lauren Roy Entertainment</a>
+                                                            <small>Price stat at  $1800 - $7500</small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="tab-pane fade" id="update-tab-pane" role="tabpanel" aria-labelledby="update-tab" tabindex="0">
+                                
+                                <div class="row g-4">
+                                    <div class="col-lg-7">
+                                        <div class="card myCard border-0">
+                                            <div class="card-body p-0">
+                                                <img src="{%static 'main_home1/assets/images/event-host-1.jpg' %}" alt="" class="w-100">
+                                                <div class="host-pic">
+                                                    <img src="{%static 'main_home1/assets/images/event-host-1-logo.jpg' %}" alt="">
+                                                </div>
+
+                                                <div class="myCard-content">
+                                                    <a href="" class="stretched-link">JP Fine Foods</a>
+                                                    <small>Price stat at  $1800 - $7500</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-5">
+                                        <div class="row g-4">
+                                            <div class="col-lg-12 col-md-6">
+                                                <div class="card myCard border-0">
+                                                    <div class="card-body p-0">
+                                                        <img src="{%static 'main_home1/assets/images/event-host-2.jpg' %}" alt="" class="w-100">
+                                                        <div class="host-pic">
+                                                            <img src="{%static 'main_home1/assets/images/event-host-2-logo.jpg' %}" alt="">
+                                                        </div>
+                                                        <div class="myCard-content">
+                                                            <a href="" class="stretched-link">Classy Affairs</a>
+                                                            <small>Price stat at  $1800 - $7500</small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12 col-md-6">
+                                                <div class="card myCard border-0">
+                                                    <div class="card-body p-0">
+                                                        <img src="{%static 'main_home1/assets/images/event-host-3.jpg' %}" alt="" class="w-100">
+                                                        <div class="host-pic">
+                                                            <img src="{%static 'main_home1/assets/images/event-host-3-logo.jpg' %}" alt="">
+                                                        </div>
+                                                        <div class="myCard-content">
+                                                            <a href="" class="stretched-link">Lauren Roy Entertainment</a>
+                                                            <small>Price stat at  $1800 - $7500</small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="advertise-section pt-7 pb-7">
+            <div class="container">
+                <div class="advertise_inner" style="background: url({{BASE_URL}}/media/{{adv.adv_bg_image}}); background-repeat: no-repeat; background-size: cover;">
+                    <div class="row">
+                        <div class="col-lg-7 d-flex">
+                            <div class="advertise_content d-flex align-items-center">
+                                <div class="main-heading text-white m-0 ms-5">
+                                    <h2>{{adv.adv_heading|transl:is_french}}</h2>
+                                    <p>{{adv.adv_subtext|transl:is_french}}</p>
+                                    <a href="{%url 'vendor_home' %}" class="btn cta-btn">{{"Advertise With Us"|transl:is_french}}</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-5">
+                            <img src="{{BASE_URL}}/media/{{adv.adv_image}}" alt="" class="w-100">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+   {% include 'vendor_home/footer.html' %}
+
+
+
+
+ 
+
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- <script src="assets/js/bootstrap.min.js"></script> -->
+    <script src="{%static 'main_home1/assets/js/slick.min.js' %}"></script>
+    <script src="{%static 'main_home1/assets/js/main.js' %}"></script>
+   {% include 'vendor_home/index-js.html' %}
+</body>
+
+
+</html>

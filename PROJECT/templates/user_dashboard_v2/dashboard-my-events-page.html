@@ -1,0 +1,240 @@
+{% load static %}
+{% load cool_num %}
+{% load get_event_type %}
+{% load country_data %}
+{% load event_currency_convert %}
+{% load get_head %}
+{% load lang_tran %}
+{% load get_vendor_proposal %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <title>Dashboard my events page</title>
+     {% include 'user_dashboard_v2/head.html' %}
+    <link rel="stylesheet" href="{%static 'user_dashboard_v2/assets/css/dashboard-my-events-page.css' %}">
+
+</head>
+
+<body>
+
+
+    {% include 'user_dashboard_v2/top-nav.html' %}
+
+    <div class="main-dash">
+        {% include 'user_dashboard_v2/aside.html' %}
+        <div class="dashboard w-100">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">{{"Home"|transl:is_french}}</a></li>
+                    <li class="breadcrumb-item"><a href="#">{{"Dashboard"|transl:is_french}}</a></li>
+                    {% comment %} <li class="breadcrumb-item"><a href="#">User Statistics</a></li> {% endcomment %}
+                    <li class="breadcrumb-item active"><a href="#">{{"My Events"|transl:is_french}}</a></li>
+                </ol>
+            </nav>
+            <div class="dash-content">
+                <div class="main-content">
+                    {% for i in events %}
+                    {% if not i.is_archieve %}
+                    <div class="dash-panel mt-0 pb-0">
+                        <div class="events">
+                            <div class="event-title">
+                                <span class="text-muted">#{{i.id}}</span>{{i.Event_Categories|event_type|transl:is_french}} 
+                                
+                                <span class="eve-status 
+                                {% if i.status == "draft" %}
+                                eve-act
+                                {% elif i.status == "Hired" %}
+                                eve-done
+                                {% elif i.status == "Complete" %}
+                                eve-done
+                                {% else %}
+                                eve-act
+                                {% endif %}
+                                
+                                ">
+                                    {% if i.status == "draft" %}
+                                    LIVE
+                                    {% elif i.status == "Complete" %}
+                                    Done
+                                    {% else %}
+                                    {{i.status}}
+                                    {% endif %}
+                                </span>
+                                <span class="eve-status eve-act">{{i.Heads|head_find}}</span>
+                                {% if not i.is_archieve %}
+                                    <span class="p-2"><button class="crtevn_btn p-2" onclick="window.location.href='{%url 'vendor_home:archieve_events' %}?id={{i.id}}';">{{"Archieve Event"|transl:is_french}}</button></span>
+                                {% endif %}
+                                {% if i.status == "draft" %}
+                                    <span class="p- 2"><button class="crtevn_btn p-2" onclick="window.location.href='{%url 'vendor_home:cancel_event' %}?id={{i.id}}';">{{"Cancel Event"|transl:is_french}}</button></span>
+                                {% endif %}
+                            </div>
+                            <p class="event-desc">
+                                {{i.Event_Desc|safe|truncatewords:90}}
+                                <br><br>
+                                {% for b in i.unique_id|get_vendor_type_multi %}
+                                <a href="" class="tags">{{b|get_vendor_type_single|transl:is_french}}</a>
+                                {% endfor %}
+                            </p>
+                            <div class="eve-detail">
+                                <span class="eve-date det-col">
+                                    <img src="{%static 'user_dashboard_v2/assets/images/dash/calander.png' %}" alt="icon"> {{i.DOE|date:"d F Y"|transl:is_french}}
+                                </span>
+                                <span class="eve-loc det-col">
+                                    <img src="{%static 'user_dashboard_v2/assets/images/dash/location.png' %}" alt="icon"> {{i.State|state_filter:i.Country|transl:is_french}},{{i.Country|country_filter|transl:is_french}}
+                                </span>
+                                <span class="eve-price det-col">
+                                    {% with "vendor/"|add:i.Budget.country.name|add:"/user_country/"|add:get_user_location as template %}
+                                    <img src="{%static 'user_dashboard_v2/assets/images/dash/price.png' %}" alt="icon"> {{i.Budget.Minimum_Value|currency_filter:template}} - 
+                                    {{i.Budget.Maximum_Value|currency_filter:template}} 
+                                    {{i.Budget.country.name|currency_code:template}}
+                                    {% endwith %}
+                                </span>
+                                <span class="eve-me det-col">
+                                    <img src="{%static 'user_dashboard_v2/assets/images/dash/message.png' %}" alt="icon"> {{i.unique_id|count_proposal_v2}} {{"Proposal"|transl:is_french}}{{ i.unique_id|count_proposal_v2|pluralize }}
+                                </span>
+                                {%if i.status == "Complete" %}
+                                {% comment %} <span class="eve-me det-col">
+                                    <button class="crtevn_btn" onclick="window.location.href='{%url 'vendor_home:user_profile' %}events/{{i.id}}/review/'">Rate Vendor</button>
+
+                                </span> {% endcomment %}
+
+                                
+                                
+                                {% endif %}
+                            </div>
+                            <div class="eve-detail m-0">
+                                {% if i.unique_id|count_proposal_v2 > 0 %}
+                                {% for a in i.unique_id|get_button_links %}
+                                <span class="eve-me det-col">
+                                    {% if a.event_id.status == 'Complete' %}
+                                    <button class="crtevn_btn" style="background: #9f007e;" onclick="window.location.href='{%url 'vendor_home:user_profile' %}events/{{a.event_id.id}}/review/'">Rate Vendor ({{a.event_id.vendor_type|get_vendor_type_single}})</button>
+
+                                    {% else %}
+                                    <button class="crtevn_btn" onclick="window.location.href='{%url 'vendor_home:user_profile' %}events/{{a.event_id.id}}/'">{{"View Proposals"|transl:is_french}} ({{a.event_id.vendor_type|get_vendor_type_single|transl:is_french}})</button>
+
+                                    {% endif %}
+                                    
+                                </span>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <br>
+                    {% endif %}
+                    {% empty %}
+                    <div class="dash-panel mt-0 pb-0">
+                        <div class="events">
+                            {% comment %} <div class="event-title">
+                                No Events Found
+                                
+                                
+                               
+                            </div>
+                            <p class="event-desc">
+                                
+                            </p>
+                            <div class="eve-detail">
+                                
+                            </div> {% endcomment %}
+                            <div class="row">
+                                <div class="col-lg-12 text-center">
+                                    <img src="https://img.icons8.com/dotty/500/9f007e/error--v1.png" class="img-fluid m-auto p-auto">
+                                    <div class="event-title text-center" style="display: block; color: #9f007e;">
+                                        {{"No Events Found ! Start By Creating An Event Now !"|transl:is_french}}
+                                    </div>
+                                    <div class="event-title text-center m-auto p-2" style="display: block;">
+                                        <button class="btn crtevn_btn rounded-0" onclick="window.location.href='{%url 'vendor_home:create_event' %}';">
+                                            {{"Create An Event"|transl:is_french}}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                    
+
+                </div>
+                <div class="dash-right">
+                    <div class="wrap-right">
+                        <div class="certi-box">
+                            <div class="rs-title">{{"My Events"|transl:is_french}}</div>
+                            <ul class="e-status">
+                                <li class="eve-type st-act"> 
+                                    <span class="no-eve">{{event_count}}</span>
+                                    <p>{{"Total Events"|transl:is_french}}</p>
+                                </li>
+                                <li class="eve-type st-can"> 
+                                    <span class="no-eve">{{ongoing_event_count}}</span>
+                                    <p>{{"Ongoing Events"|transl:is_french}}</p>
+                                </li> 
+                                <li class="eve-type st-done"> 
+                                    <span class="no-eve">{{complete_event_count}}</span>
+                                    <p>{{"Completed Events"|transl:is_french}}</p>
+                                </li>
+                                <li class="eve-type st-can"> 
+                                    <span class="no-eve">{{cancel_event_count}}</span>
+                                    <p>{{"Cancel Events"|transl:is_french}}</p>
+                                </li> 
+                                <li class="eve-type st-act mb-0"> 
+                                    <span class="no-eve">{{archieve_event_count}}</span>
+                                    <p>{{"Archieve Events"|transl:is_french}}</p>
+                                </li>                            
+                            </ul>
+                        </div>
+                        <div class="certi-box text-center">
+                            {% comment %} <div class="rs-title">My Events</div> {% endcomment %}
+                            {% comment %} <ul class="e-status">
+                                <li class="eve-type st-act"> 
+                                    <span class="no-eve">{{event_count}}</span>
+                                    <p>Total Events</p>
+                                </li>
+                                <li class="eve-type st-can"> 
+                                    <span class="no-eve">{{ongoing_event_count}}</span>
+                                    <p>Ongoing Events</p>
+                                </li> 
+                                <li class="eve-type st-done"> 
+                                    <span class="no-eve">{{complete_event_count}}</span>
+                                    <p>Completed Events</p>
+                                </li>
+                                <li class="eve-type st-can mb-0"> 
+                                    <span class="no-eve">{{cancel_event_count}}</span>
+                                    <p>Cancel Events</p>
+                                </li> 
+                                <li class="eve-type st-act"> 
+                                    <span class="no-eve">{{archieve_event_count}}</span>
+                                    <p>Archieve Events</p>
+                                </li>                            
+                            </ul> {% endcomment %}
+                            <button class="crtevn_btn w-100" style="max-width: none;" onclick="window.location.href='{%url 'vendor_home:my_events_all_unarchieve' %}';" >{{"Show Archieve Events"|transl:is_french}} </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer_sec p-0">
+        <div class="copyrights m-0 text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <p>© {{"2022 Eventinz, Inc All Rights Reserved"|transl:is_french}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    {% include 'user_dashboard_v2/js.html' %}
+
+</body>
+
+</html>

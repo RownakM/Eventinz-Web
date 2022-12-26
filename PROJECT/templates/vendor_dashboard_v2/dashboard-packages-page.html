@@ -1,0 +1,309 @@
+{% load static %}
+{% load lang_tran %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    {% include 'vendor_dashboard_v2/head.html' %}
+
+    <title>Dashboard Packages</title>
+</head>
+
+<body class="vendor_admin">
+    {% include 'vendor_dashboard_v2/top_header.html' %}
+
+
+    <div class="main-dash">
+       {% include 'vendor_dashboard_v2/aside.html' %}
+
+        <div class="dashboard flex-grow-1">
+
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">{{"Home"|transl:is_french}}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{"Packages"|transl:is_french}}</li>
+                </ol>
+            </nav>
+
+            <div class="request_quote shadow-sm">
+
+                <div class="pack_top_row">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="packages_head">
+                                <h4>{{"My Packages"|transl:is_french}}</h4>
+                                <div>
+                                    {% comment %} <button onclick="toggleVisibility('Activate');" class="package_btns active_btn">Activate</button> {% endcomment %}
+                                    {% comment %} <button onclick="toggleVisibility('Deactivate');" class="package_btns">Deactivate</button> {% endcomment %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="crtbtn">
+                                <button class="crt_pack_btn" onclick="window.location.href='{%url 'My_Packages' %}'">{{"Create a package"|transl:is_french}}</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="package_cards">
+
+                        <div id="Activate">
+                            
+                            <div class="row">
+                                {% for i in package_list %}
+
+                                    <div class="col-lg-3 col-md-6">
+                                        <div class="pack_card">
+                                            <img src="{{BASE_URL}}/media/{{i.image}}" alt="">
+                                            <div class="packcard_contetn">
+                                                <h5>{{i.package_name}}</h5>
+                                                <div class="ratevalid">
+                                                    <div class="rate_txt">
+                                                        <i class="fa fa-star"></i> {{"No Rating"|transl:is_french}} <span>(0)</span>
+                                                    </div>
+                                                    <div class="valdate">
+                                                        {{"Created At"|transl:is_french}} <span>{{i.created_on|date:"d-m-Y"}}</span>
+                                                    </div>
+                                                </div>
+                                                <div class="cardlastpart">
+                                                    <div class="packicons">
+
+                                                        <a href="{%url 'My_Packages' %}{{i.package_name}}/view/"><i class="fa fa-eye"></i></a>
+                                                        <a href="{%url 'My_Packages' %}{{i.id}}/edit/"><i class="fa fa-pencil"></i></a>
+
+                                                        <a href="{%url 'My_Packages' %}delete/{{i.id}}/"><i class="fa fa-trash"></i></a>
+                                                    </div>
+                                                    <div class="startat">
+                                                        {% if i.package_price == 0 %}
+                                                        <p>{{"Starting At"|transl:is_french}} </p>
+
+                                                        <h6>
+                                                            {{i.package_price_range_min|floatformat:2}} - {{i.package_price_range_max|floatformat:2}} {% if currency == "XOF" %}F CFA {% else %}{{currency}}{% endif %}
+                                                        </h6>
+                                                        {% else %}
+                                                        <p>{{"Price"|transl:is_french}} </p>
+                                                        <h6>
+                                                        {{i.package_price|floatformat:2}} {% if currency == "XOF" %}F CFA {% else %}{{currency}}{% endif %}
+                                                        </h6>
+                                                        {% endif %}
+                                                       
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                {% empty %}
+                                <div class="col-lg-12 col-md-12 text-center packicons">
+                                    
+                                    <i class="fa-regular fa-face-frown fa-3x fa-fw"></i>
+                                    <div class="p-2 m-2">
+                                    <h3><span class="text-muted">{{"Get Started By Creating Your First Package Now !"|transl:is_french}}</span></h3>
+                                    <button class="crt_pack_btn" onclick="window.location.href='{%url 'My_Packages' %}'">{{"Create a package"|transl:is_french}}</button>
+                                    
+                                    </div>
+                                </div>
+                                {% endfor %}
+                                
+
+                            </div>
+
+                        </div>
+
+                        {% comment %} <div id="Deactivate" style="display: none;">
+                            
+                             <div class="row">
+
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="pack_card">
+                                        <img src="./img/packageimg4.png" alt="">
+                                        <div class="packcard_contetn">
+                                            <h5>Beautiful weddings call for  outstanding catering</h5>
+                                            <div class="ratevalid">
+                                                <div class="rate_txt">
+                                                    <i class="fa fa-star"></i> 4.7 <span>(35)</span>
+                                                </div>
+                                                <div class="valdate">
+                                                    Valid Till : <span>Oct. 20, 2022</span>
+                                                </div>
+                                            </div>
+                                            <div class="cardlastpart">
+                                                <div class="packicons">
+                                                    <i class="fa fa-eye"></i>
+                                                    <i class="fa fa-trash"></i>
+                                                </div>
+                                                <div class="startat">
+                                                    <p>Starting At</p>
+                                                    <h6>$3000.00 - 130000.00</h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="pack_card">
+                                        <img src="./img/packageimg2.png" alt="">
+                                        <div class="packcard_contetn">
+                                            <h5>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h5>
+                                            <div class="ratevalid">
+                                                <div class="rate_txt">
+                                                    <i class="fa fa-star"></i> 4.9 <span>(25)</span>
+                                                </div>
+                                                <div class="valdate">
+                                                    Valid Till : <span>Oct. 05, 2022</span>
+                                                </div>
+                                            </div>
+                                            <div class="cardlastpart">
+                                                <div class="packicons">
+                                                    <i class="fa fa-eye"></i>
+                                                    <i class="fa fa-trash"></i>
+                                                </div>
+                                                <div class="startat">
+                                                    <p>Starting At</p>
+                                                    <h6>$3000.00 - 130000.00</h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="pack_card">
+                                        <img src="./img/packageimg1.png" alt="">
+                                        <div class="packcard_contetn">
+                                            <h5>I will do birthday Party  arrangement for 500 Guest</h5>
+                                            <div class="ratevalid">
+                                                <div class="rate_txt">
+                                                    <i class="fa fa-star"></i> 5.0 <span>(20)</span>
+                                                </div>
+                                                <div class="valdate">
+                                                    Valid Till : <span>Sept. 20, 2022</span>
+                                                </div>
+                                            </div>
+                                            <div class="cardlastpart">
+                                                <div class="packicons">
+                                                    <i class="fa fa-eye"></i>
+                                                    <i class="fa fa-trash"></i>
+                                                </div>
+                                                <div class="startat">
+                                                    <p>Starting At</p>
+                                                    <h6>$5000.00 - 150000.00</h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="pack_card">
+                                        <img src="./img/packageimg3.png" alt="">
+                                        <div class="packcard_contetn">
+                                            <h5>Fusce dictum metus eu magna facilisis ornare</h5>
+                                            <div class="ratevalid">
+                                                <div class="rate_txt">
+                                                    <i class="fa fa-star"></i> 4.8 <span>(30)</span>
+                                                </div>
+                                                <div class="valdate">
+                                                    Valid Till : <span>Sept. 01, 2022</span>
+                                                </div>
+                                            </div>
+                                            <div class="cardlastpart">
+                                                <div class="packicons">
+                                                    <i class="fa fa-eye"></i>
+                                                    <i class="fa fa-trash"></i>
+                                                </div>
+                                                <div class="startat">
+                                                    <p>Starting At</p>
+                                                    <h6>$5000.00 - 150000.00</h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+
+                            </div>
+
+                        </div> {% endcomment %}
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        
+
+
+        
+    </div>
+
+
+    <div class="footer_sec p-0">
+        <div class="copyrights m-0 text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <p>© {{"2022 Eventinz, Inc All Rights Reserved"|transl:is_french}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+
+
+        <script>
+            var selector = '.package_btns';
+
+            $(selector).on('click', function(){
+                $(selector).removeClass('active_btn');
+                $(this).addClass('active_btn');
+            });
+        </script>
+
+        <script>
+            var divs = ["Activate", "Deactivate"];
+            var visibleDivId = null;
+            function toggleVisibility(divId) {
+            if(visibleDivId === divId) {
+                //visibleDivId = null;
+            } else {
+                visibleDivId = divId;
+            }
+            hideNonVisibleDivs();
+            }
+            function hideNonVisibleDivs() {
+            var i, divId, div;
+            for(i = 0; i < divs.length; i++) {
+                divId = divs[i];
+                div = document.getElementById(divId);
+                if(visibleDivId === divId) {
+                div.style.display = "block";
+                } else {
+                div.style.display = "none";
+                }
+            }
+            }
+        </script>
+
+</body>
+
+</html>

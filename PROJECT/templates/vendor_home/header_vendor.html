@@ -1,0 +1,900 @@
+{% load static %}
+{% load lang_tran %}
+<header>
+    <nav class="navbar navbar-expand-lg navbar-default fixed-top bg-white p-0">
+        <div class="container">
+            <a class="navbar-brand" href="{%url 'vendor_home:vendor_home_index' %}"><img src="{%static 'main_home1/assets/images/logo-desktop.png' %}" alt="" width="190"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="mobSearch">
+                    <form action="">
+                        <div class="form-field position-relative">
+                            <input type="email" name="" id="" placeholder="Search">
+                            <button type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
+                        </div>
+                    </form>
+                </div>
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="#">{{"Why Eventinz"|transl:is_french}}</a>
+                    </li>
+               <!--     <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="{%url 'vendor_home:Venue' %}" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Venues <i class="fa fa-angle-down float-end" aria-hidden="true"></i>
+                        </a>
+                        
+                        <div class="dropdown-menu mega-menu" aria-labelledby="navbarDarkDropdownMenuLink">
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <h5>Event Type</h5>
+                                    <ul>
+                                        {% for i in venue_links %}
+                                        <li>
+                                            <a href="{%url 'vendor_home:Venue' %}{{i.venue_name}}/" style="text-transform: capitalize;">{{i.venue_name}} Venues</a>
+                                        </li>
+                                        {% endfor %}
+                                        {% comment %} <li>
+                                            <a href="">Corporate Venues</a>
+                                        </li>
+                                        <li>
+                                            <a href="">Social Venues</a>
+                                        </li> {% endcomment %}
+                                    </ul>
+                                </div>
+                                <div class="col-lg-9">
+                                    <h5>Venue Type</h5>
+                                    <div class="row">
+                                        
+                                        <div class="col-md-4">
+                                            <ul>
+                                        {% for i in venue_by_venue|slice:"0:7" %}
+
+                                                <li>
+                                                    <a href="{%url 'vendor_home:Venue' %}{{i.venue_name}}/">{{i.venue_name}}</a>
+                                                </li>
+                                        {% endfor %}
+
+                                               
+                                            </ul>
+                                            
+                                        </div>
+                                        <div class="col-md-4">
+                                            <ul>
+                                        {% for i in venue_by_venue|slice:"7:13" %}
+
+                                                <li>
+                                                    <a href="{%url 'vendor_home:Venue' %}{{i.venue_name}}/">{{i.venue_name}}</a>
+                                                </li>
+                                        {% endfor %}
+
+                                               
+                                            </ul>
+                                            
+                                        </div>
+                                        <div class="col-md-4">
+                                            <ul>
+                                        {% for i in venue_by_venue|slice:"13:" %}
+
+                                                <li>
+                                                    <a href="{%url 'vendor_home:Venue' %}{{i.venue_name}}/">{{i.venue_name}}</a>
+                                                </li>
+                                        {% endfor %}
+
+                                               
+                                            </ul>
+                                            
+                                        </div>
+                                    
+                                  
+                                     
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <a href="#" class="btn cta-btn btn-orange w-100">Show All</a>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li> -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">{{"Industry Corner"|transl:is_french}}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">{{"Upcoming Events"|transl:is_french}}</a>
+                    </li>
+                    {% comment %} <li class="nav-item">
+                        <a class="nav-link" href="{%url 'vendor_home:vendor_blog' %}">Blog</a>
+                    </li> {% endcomment %}
+                    {% comment %} <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li> {% endcomment %}
+                </ul>
+
+                <div class="d-flex nav-mob">
+                    {% if not user_login1 %}
+                    {% comment %} <a class="btn cta-btn btn-transparent me-4 border-0 ps-0 pe-0" data-bs-toggle="modal" href="#exampleModalToggle2" id="signbtn1" role="button">Sign up</a> {% endcomment %}
+                    <a class="btn cta-btn btn-transparent me-4 border-0 ps-0 pe-0" href="{%url 'vendor_home:vendor_home_index' %}" id="loginbtn1" role="button">{{"Back to Eventinz"|transl:is_french}}</a>
+                    <a class="btn cta-btn btn-transparent me-4 border-0 ps-0 pe-0" href="{%url 'vendor_home' %}" role="button">{{"Login"|transl:is_french}}</a>
+
+                    <a href="{%url 'vendor_signup' %}" class="btn cta-btn btn-purple">{{"Signup"|transl:is_french}}</a>
+                    
+                    
+                    
+                    {% endif %}
+                   {% if user_login1 %}
+                   <li class="dropdown" style="list-style-type: none;">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      {{email}}
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <li><a class="dropdown-item" href="#">Action</a></li>
+                      <li><a class="dropdown-item" href="#">Another action</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                  </li>
+                   {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="modal fade loginSign-form" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered signinForm">
+        <div class="modal-content" style="background-image: url({%static 'main_home1/assets/images/login-bg.png' %}); background-color:#fcfcfc; background-size: 100%; background-position: bottom center; background-repeat: no-repeat;">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-header d-block text-center">
+                <h5 class="modal-title">Sign In</h5>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row g-2 mb-4">
+                        <div class="col-md-12">
+                            <div class="form-field">
+                                <input type="text" class="form-control" name="" id="" placeholder="Email">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-field">
+                                <input type="text" class="form-control" name="" id="" placeholder="Password">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3 custom-check">
+                        <input type="checkbox" id="html2" checked>
+                        <label for="html2">Remember Me</label>
+                    </div>
+
+                    <div class="row g-2 mb-3">
+                        <div class="col-md-12">
+                            <div class="form-field">
+                                <input type="submit" name="login_btn" id="login_btn" value="Login" class="w-100">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="or text-center mb-3">
+                        <span>OR</span>
+                    </div>
+                    <div class="row g-2 mb-3" id="g_div_login">
+                        <div class="col-md-12">
+                            <div class="form-field">
+                                {% comment %} <style>
+                                    #fb_btn{
+                                        display:none;
+                                    }
+                                </style> {% endcomment %}
+                                <div id="fb-root"></div>
+                                <a class="social-btn w-100" href="javaScript:void()" onclick="fb_action(login)" id="fb_big_btn"><i class="fa fa-facebook" aria-hidden="true"></i> Signin With Facebook</a>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-field">
+                                <div id="g_id_onload"
+                                data-client_id="780861556101-778h6d5rurk9dp9jv2rk49fkeqh6ff7i.apps.googleusercontent.com"
+                                data-callback="handleCredentialResponse">
+                                </div>
+
+
+                                <div class="g_id_signin"
+                                    data-type="standard"
+                                    data-shape="rectangular"
+                                    data-theme="outline"
+                                    data-text="signin_with"
+                                    data-size="large"
+                                    data-logo_alignment="left">
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="row g-2">
+                        <div class="col-md-12">
+                            <div class="form-field text-center">
+                                <p>Don't have an account? <a href="" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Create New</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade loginSign-form" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered signUpForm">
+        <div class="modal-content" style="background-image: url({%static 'main_home1/assets/images/login-bg.png' %}); background-color:#fcfcfc; background-size: 100%; background-position: bottom center; background-repeat: no-repeat;">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-header d-block text-center">
+                <h5 class="modal-title">Sign up</h5>
+                <p>Get access to all our planning tools and event planning deals!</p>
+            </div>
+            <div class="modal-body">
+                {% for message in messages %}
+                <div class="alert alert-primary" role="alert">
+                    
+                    {{message}}
+                </div>
+                {% endfor %}
+                <form action="" method="POST" id="signup_form">
+                    {% csrf_token %}
+                    <div class="row g-2 mb-4">
+                        <div class="col-md-6">
+                            <div class="form-field">
+                                <input type="text" class="form-control" name="fname" id="fname" placeholder="First Name" required>
+                                
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-field">
+                                <input type="text" class="form-control" name="lname" id="lname" placeholder="Last Name" required>
+                                
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-field">
+                                <input type="text" class="form-control" name="email" id="email" placeholder="Email" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row g-2">
+                                <div class="col-md-5">
+                                    <div class="form-field">
+                                        <select name="mno_code" class="form-select" id="mno_country">
+                                            <option value="">-Code-</option>
+                                        </select>
+                                    </div>  
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="form-field">
+                                        <input type="text" class="form-control" name="mobile" id="mno" placeholder="Mobile Number" required>
+
+                                    </div>  
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-field">
+                                <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-field">
+                                <input type="password" class="form-control" name="re_password" id="re_password" placeholder="Confirm Password" required>
+                                <div id="re_password_check" class="form-text"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-field">
+                                <select name="countries" class="form-select" id="countries">
+                                    <option value="">--Select Country--</option>
+                                </select>
+                                <div id="re_password_check" class="form-text"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-field">
+                                <select name="state" class="form-select" id="state">
+                                    <option value="">--Select State--</option>
+                                </select>
+                                <div id="re_password_check" class="form-text"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-field">
+                                <select name="city" class="form-select" id="city">
+                                    <option value="">--Select City--</option>
+                                </select>
+                                <div id="re_password_check" class="form-text"></div>
+                            </div>
+                        </div>
+                    </div>
+                    {% comment %} <span class="big-p">What type of event are you planning?</span>
+                    <div class="row g-2 mb-3">
+                        <div class="col-md-6">
+                            <div class="form-field">
+                                <select class="form-select">
+                                    <option selected disabled value="">Event Type</option>
+                                    <option>Option 1</option>
+                                    <option>Option 2</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-field">
+                                <input type="date" class="form-control" name="" id="" placeholder="Event Approx Date">
+                            </div>
+                        </div>
+                    </div> {% endcomment %}
+
+                    <div class="mb-3 custom-check">
+                        <input type="checkbox" id="html">
+                        <label for="html">I accept Terms of use & Privacy Policy</label>
+                    </div>
+
+                    <div class="row g-2 mb-3">
+                        <div class="col-md-12">
+                            <div class="form-field">
+                                {{form.captcha}}
+                                
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-field">
+                                <button type="submit" name="signup_btn" id="signup_btn" class="w-100 button-submit">Create an account</button>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <div class="or text-center mb-3" id="signup_or">
+                        <span>OR</span>
+                    </div>
+                    <div class="row g-2 mb-3" id="g_div_signup">
+                        <div class="col-md-6">
+                            <div class="form-field">
+                                <a href="javaScript:void();" class="social-btn" onclick="fb_action();"><i class="fa fa-facebook" aria-hidden="true"></i> Signup With Facebook</a>
+                            </div>
+                        </div>
+                        <div class="col-md-6" >
+                            <div class="form-field">
+                                <div id="g_id_onload" data-client_id="780861556101-778h6d5rurk9dp9jv2rk49fkeqh6ff7i.apps.googleusercontent.com" data-callback="handleCredentialResponse"></div>
+
+
+                                <div class="g_id_signin"
+                                    data-type="standard"
+                                    data-shape="rectangular"
+                                    data-theme="outline"
+                                    data-text="signin_with"
+                                    data-size="large"
+                                    data-logo_alignment="left">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row g-2 mb-3">
+                        <div id="messagebox" class="col-md-12"></div>
+                        </div>
+                    </div>
+                    <div class="row g-2">
+                        <div class="col-md-12">
+                            <div class="form-field text-center">
+                                <p>Already Registered? <a href="" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Sign in here</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="modal fade loginSign-form" id="exampleModalToggle3" aria-hidden="true" aria-labelledby="exampleModalToggleLabel3" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered signUpForm">
+        <div class="modal-content" style="background-image: url({%static 'main_home1/assets/images/login-bg.png' %}); background-color:#fcfcfc; background-size: 100%; background-position: bottom center; background-repeat: no-repeat;">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-header d-block text-center">
+                <h5 class="modal-title">Create an Event</h5>
+                <p>Get Vendor Quotes for your upcoming event easily</p>
+            </div>
+            <div class="modal-body">
+                <div class="row" id="event_step_1">
+                    <div class="col-lg-12">
+                <form action="" method="POST" id="ev_form_1">
+                    {% csrf_token %}
+                    <div class="row g-2 mb-4">
+                        <h5 class="modal-title">Choose Event Location</h5>
+                        <hr class="text-muted">
+                        <div class="col-md-4">
+                            <div class="form-field">
+                                <select name="countries1" class="form-select" id="countries1">
+                                    <option value="">--Select Country--</option>
+                                </select>
+                                <div id="re_password_check" class="form-text"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-field">
+                                <select name="state1" class="form-select" id="state1">
+                                    <option value="">--Select State--</option>
+                                </select>
+                                <div id="re_password_check" class="form-text"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-field">
+                                <select name="city1" class="form-select" id="city1">
+                                    <option value="">--Select City--</option>
+                                </select>
+                                <div id="re_password_check" class="form-text"></div>
+                            </div>
+                        </div>
+                        <h5 class="modal-title">Choose Event Type</h5>
+                        <hr class="text-muted">
+                        <div class="col-md-6">
+                            <div class="form-field">
+                                <select name="ev_cat" class="form-select" id="ev_cat">
+                                    <option value="">--Event Categories--</option>
+                                    {% for i in event_categories %}
+                                    <option value="{{i.id}}">{{i.category_name}}</option>
+                                    {% endfor %}
+                                </select>
+                                
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-field">
+                                <select name="ev_subcat" class="form-select" id="ev_subcat">
+                                    <option value="">--Event Sub Category--</option>
+                                </select>
+                                
+                            </div>
+                        </div>
+                        {% comment %} <h5 class="modal-title">Approximate Heads</h5>
+                        <hr class="text-muted"> {% endcomment %}
+                        <div class="col-md-4">
+                            <h5 class="modal-title">Approximate Heads</h5>
+                        <hr class="text-muted">
+                            <div class="form-field">
+                                <select name="ev_appxheads" class="form-select" id="ev_appxheads">
+                                    <option value="">--Approx Heads--</option>
+                                </select>
+                                
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <h5 class="modal-title">Event Date</h5>
+                        <hr class="text-muted">
+                            <div class="form-field">
+                                <input type="date" class="form-control" name="ev_date" id="ev_date" required>
+
+                                
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <h5 class="modal-title">Budget  </h5>
+                        <hr class="text-muted">
+                            <div class="form-field">
+                                <select name="ev_appxheads" class="form-select" id="ev_appxheads">
+                                    <option value="">--Approx Budget--</option>
+                                </select>
+
+                                
+                            </div>
+                        </div>
+                        <h5 class="modal-title">Contact Information</h5>
+                        <hr class="text-muted">
+                        <div class="col-md-6">
+                            <div class="form-field">
+                                <input type="text" class="form-control" name="ev_fname" id="ev_fname" placeholder="First Name" required>
+                                
+                                
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-field">
+                                <input type="text" class="form-control" name="ev_lname" id="ev_lname" placeholder="Last Name" required>
+                                
+                                
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-field">
+                                <input type="email" class="form-control" name="ev_email" id="ev_email" placeholder="Email Address" required>
+                                
+                                <div id="email_message_ev" class="form-text"></div>
+                                <input type="hidden" name="user_type_ev" id="user_type_ev" value="">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row g-2">
+                                <div class="col-md-5">
+                                    <div class="form-field">
+                                        <select name="mno_code" class="form-select" id="mno_country">
+                                            <option value="">-Code-</option>
+                                        </select>
+                                    </div>  
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="form-field">
+                                        <input type="text" class="form-control" name="mobile" id="mno" placeholder="Mobile Number" required>
+
+                                    </div>  
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-field">
+                               <textarea class="form-control" name="ev_desc" id="ev_desc" placeholder="Event Description" rows="5" cols="30"  required></textarea> 
+                                {% comment %} <textarea name="" id="" cols="30" rows="10"></textarea> {% endcomment %}
+                                
+                            </div>
+                        </div>
+                        {% comment %} <div class="col-md-4">
+                            <div class="form-field">
+                                <input type="text" class="form-control" name="email" id="email" placeholder="Email" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row g-2">
+                                <div class="col-md-5">
+                                    <div class="form-field">
+                                        <select name="mno_code" class="form-select" id="mno_country">
+                                            <option value="">-Code-</option>
+                                        </select>
+                                    </div>  
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="form-field">
+                                        <input type="text" class="form-control" name="mobile" id="mno" placeholder="Mobile Number" required>
+
+                                    </div>  
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-field">
+                                <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-field">
+                                <input type="password" class="form-control" name="re_password" id="re_password" placeholder="Confirm Password" required>
+                                <div id="re_password_check" class="form-text"></div>
+                            </div>
+                        </div> {% endcomment %}
+                       
+                    </div>
+                    <div class="mb-3 custom-check">
+                        <input type="checkbox" id="notify">
+                        <label for="notify">I agree to recieve updates & notifications from eventinz.com for this event</label>
+                        
+                    </div>
+                    {% comment %} <span class="big-p">What type of event are you planning?</span>
+                    <div class="row g-2 mb-3">
+                        <div class="col-md-6">
+                            <div class="form-field">
+                                <select class="form-select">
+                                    <option selected disabled value="">Event Type</option>
+                                    <option>Option 1</option>
+                                    <option>Option 2</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-field">
+                                <input type="date" class="form-control" name="" id="" placeholder="Event Approx Date">
+                            </div>
+                        </div>
+                    </div> {% endcomment %}
+
+                        {% comment %} <div class="mb-3 custom-check">
+                            <input type="checkbox" id="html">
+                            <label for="html">I accept Terms of use & Privacy Policy</label>
+                        </div> {% endcomment %}
+
+                    <div class="row g-2 mb-3">
+                        <div class="col-md-12">
+                            <div class="form-field">
+                                {{form.captcha}}
+                                
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-field">
+                                <button type="submit" name="signup_btn" id="signup_btn" class="w-100 button-submit">Proceed</button>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    {% comment %} <div class="or text-center mb-3">
+                        <span>OR</span>
+                    </div> {% endcomment %}
+                    {% comment %} <div class="row g-2 mb-3">
+                        <div class="col-md-6">
+                            <div class="form-field">
+                                <a href="" class="social-btn"><i class="fa fa-facebook" aria-hidden="true"></i> Signup With Facebook</a>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-field">
+                                <a href="" class="social-btn google-btn"><i class="fa fa-google" aria-hidden="true"></i> Signup With Google</a>
+                            </div>
+                        </div>
+                    </div> {% endcomment %}
+                    {% comment %} <div class="row g-2">
+                        <div class="col-md-12">
+                            <div class="form-field text-center">
+                                <p>Already Registered? <a href="" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Sign in here</a></p>
+                            </div>
+                        </div>
+                    </div> {% endcomment %}
+                </form>
+                </div>
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+                <div class="row" id="event_step_2">
+                    <div class="col-lg-12">
+                <form action="" method="POST" id="ev_form_2">
+                    {% csrf_token %}
+                    <div class="row g-2 mb-4">
+                        <h5 class="modal-title">Choose Event OTP</h5>
+                        <hr class="text-muted">
+                        <div class="col-md-4">
+                            <div class="form-field">
+                                <select name="countries1" class="form-select" id="countries1">
+                                    <option value="">--Select Country--</option>
+                                </select>
+                                <div id="re_password_check" class="form-text"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-field">
+                                <select name="state1" class="form-select" id="state1">
+                                    <option value="">--Select State--</option>
+                                </select>
+                                <div id="re_password_check" class="form-text"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-field">
+                                <select name="city1" class="form-select" id="city1">
+                                    <option value="">--Select City--</option>
+                                </select>
+                                <div id="re_password_check" class="form-text"></div>
+                            </div>
+                        </div>
+                        <h5 class="modal-title">Choose Event Type</h5>
+                        <hr class="text-muted">
+                        <div class="col-md-6">
+                            <div class="form-field">
+                                <select name="ev_cat" class="form-select" id="ev_cat">
+                                    <option value="">--Event Categories--</option>
+                                    {% for i in event_categories %}
+                                    <option value="{{i.id}}">{{i.category_name}}</option>
+                                    {% endfor %}
+                                </select>
+                                
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-field">
+                                <select name="ev_subcat" class="form-select" id="ev_subcat">
+                                    <option value="">--Event Sub Category--</option>
+                                </select>
+                                
+                            </div>
+                        </div>
+                        {% comment %} <h5 class="modal-title">Approximate Heads</h5>
+                        <hr class="text-muted"> {% endcomment %}
+                        <div class="col-md-4">
+                            <h5 class="modal-title">Approximate Heads</h5>
+                        <hr class="text-muted">
+                            <div class="form-field">
+                                <select name="ev_appxheads" class="form-select" id="ev_appxheads">
+                                    <option value="">--Approx Heads--</option>
+                                </select>
+                                
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <h5 class="modal-title">Event Date</h5>
+                        <hr class="text-muted">
+                            <div class="form-field">
+                                <input type="date" class="form-control" name="ev_date" id="ev_date" required>
+
+                                
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <h5 class="modal-title">Budget  </h5>
+                        <hr class="text-muted">
+                            <div class="form-field">
+                                <select name="ev_appxheads" class="form-select" id="ev_appxheads">
+                                    <option value="">--Approx Budget--</option>
+                                </select>
+
+                                
+                            </div>
+                        </div>
+                        <h5 class="modal-title">Contact Information</h5>
+                        <hr class="text-muted">
+                        <div class="col-md-6">
+                            <div class="form-field">
+                                <input type="text" class="form-control" name="ev_fname" id="ev_fname" placeholder="First Name" required>
+                                
+                                
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-field">
+                                <input type="text" class="form-control" name="ev_lname" id="ev_lname" placeholder="Last Name" required>
+                                
+                                
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-field">
+                                <input type="email" class="form-control" name="ev_email" id="ev_email" placeholder="Email Address" required>
+                                
+                                <div id="email_message_ev" class="form-text"></div>
+                                <input type="hidden" name="user_type_ev" id="user_type_ev" value="">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row g-2">
+                                <div class="col-md-5">
+                                    <div class="form-field">
+                                        <select name="mno_code" class="form-select" id="mno_country">
+                                            <option value="">-Code-</option>
+                                        </select>
+                                    </div>  
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="form-field">
+                                        <input type="text" class="form-control" name="mobile" id="mno" placeholder="Mobile Number" required>
+
+                                    </div>  
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-field">
+                               <textarea class="form-control" name="ev_desc" id="ev_desc" placeholder="Event Description" rows="5" cols="30"  required></textarea> 
+                                {% comment %} <textarea name="" id="" cols="30" rows="10"></textarea> {% endcomment %}
+                                
+                            </div>
+                        </div>
+                        {% comment %} <div class="col-md-4">
+                            <div class="form-field">
+                                <input type="text" class="form-control" name="email" id="email" placeholder="Email" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row g-2">
+                                <div class="col-md-5">
+                                    <div class="form-field">
+                                        <select name="mno_code" class="form-select" id="mno_country">
+                                            <option value="">-Code-</option>
+                                        </select>
+                                    </div>  
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="form-field">
+                                        <input type="text" class="form-control" name="mobile" id="mno" placeholder="Mobile Number" required>
+
+                                    </div>  
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-field">
+                                <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-field">
+                                <input type="password" class="form-control" name="re_password" id="re_password" placeholder="Confirm Password" required>
+                                <div id="re_password_check" class="form-text"></div>
+                            </div>
+                        </div> {% endcomment %}
+                       
+                    </div>
+                    <div class="mb-3 custom-check">
+                        <input type="checkbox" id="notify">
+                        <label for="notify">I agree to recieve updates & notifications from eventinz.com for this event</label>
+                        
+                    </div>
+                    {% comment %} <span class="big-p">What type of event are you planning?</span>
+                    <div class="row g-2 mb-3">
+                        <div class="col-md-6">
+                            <div class="form-field">
+                                <select class="form-select">
+                                    <option selected disabled value="">Event Type</option>
+                                    <option>Option 1</option>
+                                    <option>Option 2</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-field">
+                                <input type="date" class="form-control" name="" id="" placeholder="Event Approx Date">
+                            </div>
+                        </div>
+                    </div> {% endcomment %}
+
+                        {% comment %} <div class="mb-3 custom-check">
+                            <input type="checkbox" id="html">
+                            <label for="html">I accept Terms of use & Privacy Policy</label>
+                        </div> {% endcomment %}
+
+                    <div class="row g-2 mb-3">
+                        <div class="col-md-12">
+                            <div class="form-field">
+                                {{form.captcha}}
+                                
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-field">
+                                <button type="submit" name="signup_btn" id="signup_btn" class="w-100 button-submit">Proceed</button>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    {% comment %} <div class="or text-center mb-3">
+                        <span>OR</span>
+                    </div> {% endcomment %}
+                    {% comment %} <div class="row g-2 mb-3">
+                        <div class="col-md-6">
+                            <div class="form-field">
+                                <a href="" class="social-btn"><i class="fa fa-facebook" aria-hidden="true"></i> Signup With Facebook</a>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-field">
+                                <a href="" class="social-btn google-btn"><i class="fa fa-google" aria-hidden="true"></i> Signup With Google</a>
+                            </div>
+                        </div>
+                    </div> {% endcomment %}
+                    {% comment %} <div class="row g-2">
+                        <div class="col-md-12">
+                            <div class="form-field text-center">
+                                <p>Already Registered? <a href="" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Sign in here</a></p>
+                            </div>
+                        </div>
+                    </div> {% endcomment %}
+                </form>
+                </div>
+                </div>
+
+
+
+
+
+
+
+
+            </div> 
+
+        </div>
+    </div>
+</div>

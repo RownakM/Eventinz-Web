@@ -1,0 +1,1527 @@
+{% load static %}
+
+{% load event_currency_convert %}
+{% load convert_USD %}
+{% load get_user_login_state %}
+{% load lang_tran %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+    {% include 'vendor_home/head.html' %}
+    <link rel="stylesheet" href="{%static 'main_home1/user_dashboard/css/style.css' %}">
+    <link rel="stylesheet" href="{%static 'main_home1/user_dashboard/fonts/style.css' %}">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.9/css/intlTelInput.css" rel="stylesheet" media="screen">
+
+    <style>
+        html,body{
+            overflow-x: visible;
+        }
+    </style>
+
+    <title>Create Event</title>
+</head>
+
+<body>
+
+    
+    {% include 'vendor_home/header.html' %}
+
+
+    <section class="create_registration">
+        <div class="container">
+            <div class="create_event_title">
+                <h2>{{"Create an Event"|transl:is_french}}</h2>
+                <p>{{"Get access to all our planning tools and event planning deals!"|transl:is_french}}</p>
+            </div>
+       
+            
+            <div class="create_form_wrap mt-5">
+                <div class="">
+
+                    <div class="stepwizard">
+                        <style>
+                            a.disabled {
+                                pointer-events: none;
+                                cursor: default;
+                              }
+                        </style>
+                        <div class="stepwizard_row setup_panel">
+                            <div class="stepwizard_step">
+                                <a href="#step_1" type="button" class="btn btn_primary btn_circle" id="step1_circle">01</a>
+                                <p>{{"Event Information"|transl:is_french}}</p>
+                            </div>
+                            <div class="stepwizard_step">
+                                <a href="#step_2" type="button" class="btn btn_default btn_circle disabled"
+                                    disabled="disabled" id="step2_circle">02</a>
+                                <p>{{"Get"|transl:is_french}} <br> {{"Verified"|transl:is_french}}</p>
+                            </div>
+                            <div class="stepwizard_step">
+                                <a href="#step_3" type="button" class="btn btn_default btn_circle disabled"
+                                    disabled="disabled" id="step3_circle">03</a>
+                                <p id="step3_text">{{"Generate Password"|transl:is_french}}</p>
+                            </div>
+                            <div class="stepwizard_step">
+                                <a href="#step_4" type="button" class="btn btn_default btn_circle disabled"
+                                    disabled="disabled" id="step4_circle">04</a>
+                                <p>{{"Payment Option"|transl:is_french}}</p>
+                            </div>
+                        </div>
+                        {% comment %} <div class="stepwizard_row setup_panel">
+                            <div class="stepwizard_step">
+                                <a href="#step_1" type="button" class="btn btn_primary btn_circle block-click">01</a>
+                                <p>Event Information</p>
+                            </div>
+                            <div class="stepwizard_step">
+                                <a href="" type="button" class="btn btn_default btn_circle"
+                                    disabled="true" id="step2_circle">02</a>
+                                <p>Get <br> Verified</p>
+                            </div>
+                            <div class="stepwizard_step">
+                                <a href="" type="button" class="btn btn_default btn_circle"
+                                    disabled="disabled">03</a>
+                                <p>Generate Password</p>
+                            </div>
+                            <div class="stepwizard_step">
+                                <a href="" type="button" class="btn btn_default btn_circle"
+                                    disabled="disabled">04</a>
+                                <p>Payment Option</p>
+                            </div>
+                        </div> {% endcomment %}
+                    </div>
+
+                    <form role="form" action="" method="post" class="mt-4">
+                        <div class="row setup_content" id="step_1">
+                            <div class="">
+
+                                <div class="col-md-12 form_spce">
+                                    <h3 class="location_title">{{"Choose Event Location"|transl:is_french}}</h3>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <select class="form-control reg-sel" id="event_country">
+                                                <option> {{"Country"|transl:is_french}} </option>
+                                                
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <select class="form-control reg-sel cont_sel" id="event_state">
+                                                <option> {{"State"|transl:is_french}} </option>
+                                                
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <select class="form-control reg-sel cont_sel" id="event_city">
+                                                <option> {{"City"|transl:is_french}} </option>
+                                                
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12 mt-4 form_spce">
+                                    <h3 class="location_title">{{"Event Type"|transl:is_french}}</h3>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <select class="form-control reg-sel cont_sel" id="event_category">
+                                                <option selected disabled> {{"Categories"|transl:is_french}} </option>
+                                                {% for i in event_categories %}
+                                                <option value="{{i.id}}">{{i.category_name|transl:is_french}}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                        <style>
+                                            .bootstrap-select {
+                                                min-width: 100%;
+                                              }
+                                              .bootstrap-select .btn {
+                                                height: 56px;
+                                                border-radius: 3px;
+                                                background-color: #ffffff;
+                                                border: 1px solid #313131;
+                                                font-size: 16px;
+                                                line-height: 24px;
+                                                color: #313131;
+                                                font-family: "Akkurat";
+                                                margin-top: 10px;
+                                              }
+                                              .bootstrap-select .filter-option-inner-inner{
+                                                padding: 10px;
+                                                color: #313131;
+                                              }
+                                              .bootstrap-select .dropdown-menu {
+                                                margin: 15px 0 0;
+                                              }
+                                        </style>
+                                        <div class="col-md-6">
+                                            <select class="selectpicker" id="event_sub_category" data-noneSelectedText="Noo" data-selectAllText='Select All' data-selected-text-format="count > 3" multiple >
+                                               
+                                              </select>
+                                              
+                                            {% comment %} <select class="form-control reg-sel cont_sel">
+                                                <option> Sub Categoires </option>
+                                                <option> Sub Categoires1 </option>
+                                                <option> Sub Categoires2 </option>
+                                            </select> {% endcomment %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12 mt-4 form_spce">
+                                    <h3 class="location_title">{{"Event Information ( Guests, Date & Budget)"|transl:is_french}}</h3>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <select class="form-control reg-sel cont_sel" id="event_heads">
+                                                <option selected disabled> {{"No. Of Guests"|transl:is_french}} </option>
+                                                {% for i in event_heads %}
+                                                {% if i.Maximum_Value == 2441139 %}
+                                                <option value="{{i.id}}">Above {{i.Minimum_Value}} </option>
+                                                {% else %}
+
+                                                <option value="{{i.id}}">{{i.Minimum_Value}} - {{i.Maximum_Value}}</option>
+                                                {% endif %}
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="date" class="form-control" id="event_date" min="{% now "Y-m-d" %}">
+                                        </div>
+                                        <div class="col-md-12">
+                                            <select class="form-control reg-sel cont_sel" id="event_budget">
+                                                <option selected disabled> {{"Approx Budget"|transl:is_french}} </option>
+                                                {% for i in budget_settings %}
+                                                {% with "vendor/"|add:i.country.name|add:"/user_country/"|add:get_user_location as template %}
+                                                {% if i.Maximum_Value == 2441139 %}
+                                                    <option value="{{i.id}}">Above {{i.Minimum_Value|currency_filter:template}} {{i.country.name|currency_code:template}} </option> 
+                                                {% else %}
+                                                <option value="{{i.id}}">{{i.Minimum_Value|currency_filter:template}} {{i.country.name|currency_code:template}} - {{i.Maximum_Value|currency_filter:template}} {{i.country.name|currency_code:template}} </option>
+
+                                                {% endif %}
+                                                {% endwith %}
+                                                
+                                                {% endfor %}
+                                                
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12 mt-4 form_spce">
+                                    <h3 class="location_title">{{"Contact Information"|transl:is_french}}</h3>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <input type="text" class="form-control" name="firstname" placeholder="{{"First Name"|transl:is_french}}" id="first_name" onkeydown="return /[a-z]/i.test(event.key)" value="{{user.fname}}" {% if user.Email|userlogin %} readonly {% endif %}>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="text" class="form-control" name="lastname" placeholder="{{"Last Name"|transl:is_french}}" id="last_name" onkeydown="return /[a-z]/i.test(event.key)" value="{{user.lname}}" {% if user.Email|userlogin %} readonly {% endif %}>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="email" class="form-control" name="email" placeholder="{{"Email Address"|transl:is_french}}" id="email_id" value="{{user.Email}}" {% if user.Email|userlogin %} readonly {% endif %}>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <!-- <input type="text" class="form-control" name="phonenumber" placeholder="Phone No."> -->
+                                            <input id="phone" type="tel" class="form-control" name="phonenumber" placeholder="{{"Phone No."|transl:is_french}}" >
+                                            <span id="valid-msg" class="hide d-none">Valid</span>
+                                            <span id="error-msg" class="hide d-none">Invalid number</span>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <textarea type="text" class="form-control descr" name="description" placeholder="{{'Event Description'|transl:is_french}}" rows="4" id="ev_desc1"></textarea>
+                                        </div>
+                                    
+                                        
+                                    </div>
+                                </div>
+                                
+
+                                <div class="col-md-12 mt-4 form_spce">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="agreement_txt">
+                                                <input type="checkbox" name="agree" id="" class="input_checkbox" checked readonly> <span class="agree_txt">{{"By Proceeding , I agree to recieve updates & notifications from eventinz.com for this event"|transl:is_french}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12 mt-5 form_spce">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <button class="btn proceed_btn" type="button" id="step1">{{"Proceed"|transl:is_french}}</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+
+                        <div class="row setup_content" id="step_2">
+                            <div>
+                                <div class="col-md-12 mt-4 form_spce">
+                                    <h3 class="location_title">{{"OTP Send"|transl:is_french}} </h3>
+                                    <p class="otp_sent_txt">{{"A 6 digit OTP has been send on"|transl:is_french}} <a href="#" id="otp_email"></a></p>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <input type="text" name="otp" id="otp1234" class="form-control" placeholder="******">
+                                        </div>
+                                    </div>
+                                </div> 
+                                <div class="col-md-12 form_spce mt-3">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <button class="btn proceed_btn" type="button" id="step2">{{"Proceed"|transl:is_french}}</button>
+                                            <button class="btn btn-link" style="color: #9f007e;" type="button" id="resendotp_event">{{"Resend OTP"|transl:is_french}}</button>
+
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="row my-2 d-none" id="conf_msg">
+                                        <div class="col-md-12">
+                                            <div class="alert alert-success rounded-0" role="alert">
+                                                OTP Resend Successfully !
+                                              </div>
+                                              
+    
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row setup_content" id="step_3">
+                            <div>
+                                <div class="col-md-12 mt-4 form_spce">
+                                    <h3 class="location_title" id="password_heading">{{"Create New Password"|transl:is_french}}</h3>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <input type="password" name="password" class="form-control" placeholder="{{'Password'|transl:is_french}}" id="ev_password">
+                                            <input type="hidden" name="user_type" id="user_type">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="password" name="new_password" class="form-control" placeholder="{{'Confirm Password'|transl:is_french}}" id="cpassword">
+                                        </div>
+                                    </div>
+                                </div> 
+                                <div class="col-md-12 form_spce mt-3">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <button class="btn proceed_btn" type="button" id="step3">{{"Proceed"|transl:is_french}}</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row setup_content" id="step_4">
+                            <div>
+                                <div class="col-md-12 mt-4 form_spce">
+
+                                    <div class="login_box">
+                                        <div class="row login_wrap">
+                                            <div class="login_box_cont col">
+                                                <h4 class="login_txt">{{"Login"|transl:is_french}}</h4>
+                                                <h3 class="login_email_txt"><a href="#" id="review_email"></a></h3>
+                                            </div>
+                                            {% comment %} <div class="change_eml col">
+                                                <div><h6 class="change_txt">Change</h6></div>
+                                            </div> {% endcomment %}
+                                        </div>
+                                    </div>
+
+                                    <div class="accordion" id="accordionFilter">
+                              
+                                        <!-- Item -->
+                                        <div class="accordion-item">
+                                          <h2 class="accordion-header" id="headingOne">
+                                            <button class="accordion-button po_teext collapsed" type="button" data-bs-toggle="collapse" id="package_options" data-bs-target="#collapseOne"
+                                              aria-expanded="false" aria-controls="collapseOne">
+                                              {{"Package Options"|transl:is_french}}
+                                              
+                                            </button>
+                                          </h2>
+                                          <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFilter">
+                                            <div class="accordion-body premium_body_bg">
+                                              <div class="premium_body">
+                                                <div class="premium_bg">
+                                                    <div class="row">
+                                                        <div class="col-md-6 prem_brd pe-0 ps-0">
+                                                            <div class="premium_btn">
+                                                                <div class="premium_free_btn premium_free_active" onclick="packageVisibility('Freemium');">{{"Freemium"|transl:is_french}}</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6 pe-0 ps-0">
+                                                            <div class="premium_btn">
+                                                                <div class="premium_free_btn" onclick="packageVisibility('Premium');">{{"Premium"|transl:is_french}}</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="plan_brg_spc">
+                                                        <div id="Freemium">
+                                                            <div class="freemium_plan">
+                                                                <h3 class="plan_txt">{{"Freemium Plan"|transl:is_french}} <span>{% if user_currency == "XOF" %}
+                                                                   
+                                                                    {% else %}
+                                                                    {{user_currency}}
+                                                                    {% endif %} {{freemium_pack|floatformat:2}} {% if user_currency == "XOF" %} F CFA {% endif %}</span></h3>
+                                                                <ul class="plan_list">
+                                                                    {{event_packages.freemium_features|safe|transl:is_french|safe}}
+                                                                </ul>
+                                                            </div>
+                                                            <div class="col-md-12 form_spce mt-4">
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        <button class="btn nextBtn free_plan_btn" type="button" id="free_event_btn">{{"Continue Free"|transl:is_french}}</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+    
+    
+                                                        <div id="Premium" style="display: none;">
+                                                            <div class="freemium_plan">
+                                                                <h3 class="plan_txt">{{"Premium Plan"|transl:is_french}} <span>
+                                                                    {% if user_currency == "XOF" %}
+                                                                   
+                                                                    {% else %}
+                                                                    {{user_currency}}
+                                                                    {% endif %}
+                                                                    {{premium_pack|floatformat:2}} {% if user_currency == "XOF" %} F CFA {% endif %}</span> - {{event_packages.premium_validity}} {{"Days"|transl:is_french}}</h3>
+                                                                <ul class="plan_list">
+                                                                    {{event_packages.premium_features|safe|transl:is_french}}
+                                                                </ul>
+                                                            </div>
+                                                            <div class="col-md-12 form_spce mt-4">
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        <button class="btn nextBtn free_plan_btn" type="button" id="premium_event_btn">{{"Continue"|transl:is_french}} {% if user_currency == "XOF" %}
+                                                                   
+                                                                            {% else %}
+                                                                            {{user_currency}}
+                                                                            {% endif %} {{premium_pack|floatformat:2}} {% if user_currency == "XOF" %} F CFA {% endif %}</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="headingFour">
+                                              <button class="accordion-button po_teext collapsed" id="vendor_type" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour"
+                                                aria-expanded="false" aria-controls="collapseOne">
+                                                {{"Vendor Type"|transl:is_french}}
+                                              </button>
+                                            </h2>
+                                            <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionFilter">
+                                              <div class="accordion-body premium_body_bg">
+                                                <div class="premium_body">
+                                                  <div class="premium_bg">
+                                                     
+  
+                                                      <div class="plan_brg_spc">
+                                                          <div id="vendortype">
+                                                              {% comment %} <div class="freemium_plan">
+                                                                  <h3 class="plan_txt">Freemium Plan <span>{{user_currency}} {{freemium_pack}}</span></h3>
+                                                                  <ul class="plan_list">
+                                                                      {{event_packages.freemium_features|safe}}
+                                                                  </ul>
+                                                              </div>
+                                                              <div class="col-md-12 form_spce mt-4">
+                                                                  <div class="row">
+                                                                      <div class="col-md-12">
+                                                                          <button class="btn nextBtn free_plan_btn" type="button">Continue Free</button>
+                                                                      </div>
+                                                                  </div>
+                                                              </div> {% endcomment %}
+                                                              <h3 class="location_title">{{"Vendor Type"|transl:is_french}}</h3>
+                                                              
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        <select class="" id="vendor_category">
+                                                                            {% comment %} <option value="" readonly>Select Vendor Category</option> {% endcomment %}
+                                                                            {% for i in vendor_categories %}
+                                                                            <option value="{{i.id}}">{{i.category_name|transl:is_french}}</option>
+                                                                            {% endfor %}
+                                                                        </select>
+                                                                    </div>
+                                                                    
+                                                                    
+                                                                    <button class="btn nextBtn free_plan_btn mt-4" type="button" id="vendor_type_btn">{{"Continue"|transl:is_french}}</button>
+                                                                </div>
+                                                          </div>
+      
+      
+                                                          
+                                                      </div>
+  
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                         
+                                        <!-- Item -->
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="headingTwo">
+                                              <button class="accordion-button po_teext collapsed" id="review_event_summary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+                                                aria-expanded="false" aria-controls="collapseTwo">
+                                                {{"Review Event Summary"|transl:is_french}}
+                                              </button>
+                                            </h2>
+                                            <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFilter">
+                                              <div class="accordion-body premium_body_bg">
+                                                <div class="review_body">
+                                                    <div>
+                                                        <div class="rev_loc_title"><h3>{{"Event Location"|transl:is_french}}
+                                                            <span class="change_txt" style="float: right;" ><button type="button" class="btn btn-link change_txt" id="change_details">{{"Edit"|transl:is_french}}</button></span>
+                                                            <input type="hidden" name="change_active" id="change_active">
+                                                            </h3></div>
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <div class="REview_loc_txt">
+                                                                    <p>{{"Country"|transl:is_french}}</p>
+                                                                    <h6 id="review_country"></h6>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="REview_loc_txt">
+                                                                    <p>{{"State"|transl:is_french}}</p>
+                                                                    <h6 id="review_state"></h6>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="REview_loc_txt">
+                                                                    <p>{{"City"|transl:is_french}}</p>
+                                                                    <h6 id="review_city"></h6>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mt-4">
+                                                        <div class="rev_loc_title"><h3>{{"Event Type"|transl:is_french}}</h3></div>
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <div class="REview_loc_txt">
+                                                                    <p>{{"Category"|transl:is_french}}</p>
+                                                                    <h6 id="review_category"></h6>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <div class="REview_loc_txt">
+                                                                    <p>{{"Sub Category"|transl:is_french}}</p>
+                                                                    <h6 id="review_subcategory"></h6>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mt-4">
+                                                        <div class="rev_loc_title"><h3>{{"Event Information"|transl:is_french}}</h3></div>
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <div class="REview_loc_txt">
+                                                                    <p>{{"Approx Heads"|transl:is_french}}</p>
+                                                                    <h6 id="review_heads"></h6>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="REview_loc_txt">
+                                                                    <p>{{"Approx Date"|transl:is_french}}</p>
+                                                                    <h6 id="review_date"></h6>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="REview_loc_txt">
+                                                                    <p>{{"Approx Budget"|transl:is_french}}</p>
+                                                                    <h6 id="review_budget"></h6>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mt-4">
+                                                        <div class="rev_loc_title"><h3>{{"Contact Information"|transl:is_french}}</h3></div>
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <div class="REview_loc_txt">
+                                                                    <p>{{"First Name"|transl:is_french}}</p>
+                                                                    <h6 id="review_fname"></h6>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="REview_loc_txt">
+                                                                    <p>{{"Last Name"|transl:is_french}}</p>
+                                                                    <h6 id="review_lname"></h6>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4"></div>
+                                                        </div>
+                                                        <div class="row mt-3">
+                                                            <div class="col-md-4">
+                                                                <div class="REview_loc_txt">
+                                                                    <p>{{"Phone No."|transl:is_french}}</p>
+                                                                    <h6><span id="review_country_code"></span> <span id="review_phone"></span></h6>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="REview_loc_txt">
+                                                                    <p>{{"Email Address"|transl:is_french}}</p>
+                                                                    <h6 id="review_email1"></h6>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4"></div>
+                                                        </div>
+                                                        
+                                                        <div class="row mt-4">
+                                                            <div class="col-md-12">
+                                                                <div class="REview_loc_txt">
+                                                                    <p>{{"Event Description"|transl:is_french}}</p>
+                                                                    <h6 class="descr_txt" id="review_ev_desc"></h6>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-12 form_spce mt-4">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <button class="btn nextBtn continue_btn" type="button" id="event_summary_btn">{{"Continue"|transl:is_french}}</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          
+                                          <!-- Item -->
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="headingThree">
+                                              <button class="accordion-button po_teext collapsed" id="review_payment_options" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree"
+                                                aria-expanded="false" aria-controls="collapseThree">
+                                                {{"Payment Options"|transl:is_french}}
+                                              </button>
+                                            </h2>
+                                            <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFilter">
+                                              <div class="accordion-body premium_body_bg">
+                                                <div class="payment_bg">
+                                                    <form action="">
+
+                                                       <div class="payment_list" id="payment_list">
+                                                        <span id="payment_text_free" class="d-none">{{"It is A Freemium Event ! No Payment is Required . Click on Continue to proceed"|transl:is_french}}</span>
+                                                        <ul class="payment_list_ul">
+                                                            <li>
+                                                              <input type="radio" id="f-option" name="selector" class="paypal_tag">
+                                                              <div class="check"></div>
+                                                              <label for="f-option" class="paypal_btn"><img src="{%static 'main_home1/user_dashboard/images/paypal.png' %}" alt=""> Paypal </label>
+                                                              <div id="paypal-button-container" class="d-none"></div>
+                                                            </li>
+                                                            {% if cntry %}
+                                                            <li>
+                                                              <input type="radio" id="s-option" name="selector" class="paypal_tag">
+                                                              <div class="check"><div class="inside"></div></div>
+                                                              <label for="s-option" class="paypal_btn"><img src="{%static 'main_home1/user_dashboard/images/momo.png' %}" alt=""> Momo </label>
+                                                            </li>
+                                                            <li class="d-none" id="momono">
+                                                                <input type="text" placeholder="{{'Enter MoMo Number Without 229'|transl:is_french}}" id="momofield" class="form-control" />
+                                                            </li>
+
+                                                            <li>
+                                                                <input type="radio" id="mo-option" name="selector" class="paypal_tag">
+                                                                <div class="check"><div class="inside"></div></div>
+                                                                <label for="mo-option" class="paypal_btn"><img src="https://www.moov-africa.ci/wp-content/uploads/2022/05/icon-assistance-moovci_Plan-de-travail-1-1.png" style="width: 40px; height: 40px;" alt=""> Moove Money</label>
+                                                              </li>
+                                                              <li class="d-none" id="mooveno">
+                                                                  <input type="text" placeholder="{{'Enter Moove Number Without 229'|transl:is_french}}" id="moovefield" class="form-control" />
+                                                              </li>
+                                                            
+                                                            {% endif %}
+                                                            
+                                                          </ul>
+                                                       </div>
+
+                                                        <div class="col-md-12 form_spce mt-3">
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <button class="btn nextBtn continue_btn" type="button" id="final_btn">{{"Continue"|transl:is_french}}</button>
+                                                                </div>
+                                                                <div class="col-md-12 d-none" id="paymentrqst">
+                                                                    <div class="alert alert-success rounded-0" role="alert">
+                                                                        {{"Payment Request Sent"|transl:is_french}}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+
+                                      </div>
+                                </div> 
+                            </div>
+                        </div>
+
+                
+                </form>
+
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <section class="launch_prf_sec">
+
+        <div class="container">
+            <div class="get_sec">
+                <h4 class="get_sec_title">{{"Get your business back on track"|transl:is_french}}</h4>
+                <p class="get_sec_txt">{{"Launch your profile today and get yourself up and running!"|transl:is_french}}
+                </p>
+                <button class="get_sec_btn">{{"Lets Get Started"|transl:is_french}}</button>
+            </div>
+        </div>
+
+    </section>
+
+
+    
+    {% include 'vendor_home/footer.html' %}
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta3/js/bootstrap-select.min.js" integrity="sha512-yrOmjPdp8qH8hgLfWpSFhC/+R9Cj9USL8uJxYIveJZGAiedxyIxwNw4RsLDlcjNlIRR4kkHaDHSmNHAkxFTmgg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+        {% comment %} <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> {% endcomment %}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.9/js/intlTelInput.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.9/js/intlTelInput.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.18/js/utils.js" integrity="sha512-6sKpcusiQQ/vOBWU0ouNesdklDzgwywnf+255TCMAs+n68jnDqaDC3gt01ofYWry4mRdCHR+8uox88HT3YBOdQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+        <script src="{%static 'main_home1/user_dashboard/js/main.js' %}"></script>
+
+        <script src="https://www.paypal.com/sdk/js?client-id=AZIm1q4nNWX-CpoJxUU1l1b-Z906A1q5ruuPQMRgBM18GHJndFZ22Z1hcFJGfaNo6FJY8tSHP-7JbOkd&currency=USD"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+        <script>
+            $( document ).ready(function() {
+                $('.selectpicker').selectpicker({
+                    liveSearchPlaceholder: "Search Here...",
+                    showSubtext: true,
+                    liveSearch: true,
+                    actionsBox: true,
+                    selectAllText:"Select All",
+                    
+                });
+                
+                $('.bs-actionsbox').addClass('d-flex');
+                $('.btn-group-sm').addClass('flex-fill');
+                var sub_french = "{{'Event Sub Categories'|transl:is_french}}";
+                $('.filter-option-inner-inner').html(sub_french);
+                var vendor_type_text = "{{'Vendor Types'|transl:is_french}}";
+                $(".filter-option-inner-inner").eq(1).html(vendor_type_text);
+            });
+        </script>
+        <script>
+            $(document).ready(function(){
+                $(".block-click").off('click');
+
+                var settings = {
+                    "url": "https://api.countrystatecity.in/v1/countries",
+                    "method": "GET",
+                    "headers": {
+                      "X-CSCAPI-KEY": "UktWSUFIa0VSazU1V1ZpZnRKN0IzNFVlWjRtWlR4bDl0Tm43RFcyNA=="
+                    },
+                  };
+                  
+                  $.ajax(settings).done(function (response) {
+                    for (var i = 0; i < response.length; i++) {
+                        // POPULATE SELECT ELEMENT WITH JSON.
+                        ele=document.getElementById('event_country');
+                        ele.innerHTML = ele.innerHTML +
+                            '<option value="' + response[i]['iso2'] + '">' + response[i]['name'] + '</option>';
+                    }
+                    
+                  });
+                  $('#event_country').on('change',function(){
+                    var iso2=$(this).val();
+                    var settings = {
+                        "url": "https://api.countrystatecity.in/v1/countries/"+iso2+"/states",
+                        "method": "GET",
+                        "headers": {
+                          "X-CSCAPI-KEY": "UktWSUFIa0VSazU1V1ZpZnRKN0IzNFVlWjRtWlR4bDl0Tm43RFcyNA=="
+                        },
+                      };
+                      
+                      $.ajax(settings).done(function (response) {
+                        var ele=document.getElementById('event_state');
+                        //ele.innerHTML='<option> State </option>';
+                        for (var i = 0; i < response.length; i++) {
+                            // POPULATE SELECT ELEMENT WITH JSON.
+                            ele=document.getElementById('event_state');
+                            
+                            ele.innerHTML = ele.innerHTML +
+                                '<option value="' + response[i]['iso2'] + '">' + response[i]['name'] + '</option>';
+                        }
+                        
+                      });
+                  });
+                  $('#event_state').on('change',function(){
+                    var iso2_state=$(this).val();
+                    var iso2_country=$('#event_country').val();
+                    var settings = {
+                        "url": "https://api.countrystatecity.in/v1/countries/"+iso2_country+"/states/"+iso2_state+"/cities",
+                        "method": "GET",
+                        "headers": {
+                          "X-CSCAPI-KEY": "UktWSUFIa0VSazU1V1ZpZnRKN0IzNFVlWjRtWlR4bDl0Tm43RFcyNA=="
+                        },
+                      };
+                      
+                      $.ajax(settings).done(function (response) {
+                        var ele=document.getElementById('event_city');
+                        //ele.innerHTML='<option> City </option>';
+                        for (var i = 0; i < response.length; i++) {
+                            // POPULATE SELECT ELEMENT WITH JSON.
+                            ele=document.getElementById('event_city');
+                            
+                            ele.innerHTML = ele.innerHTML +
+                                '<option value="' + response[i]['id'] + '">' + response[i]['name'] + '</option>';
+                        }
+                        
+                      });
+                  });
+                  $('#event_category').on('change',function(){
+                    var id=$(this).val();
+                    var settings = {
+                        "url": "{%url 'vendor_home:get_event_sub_cat' %}?event_category_id="+id,
+                        "method": "GET",
+                        
+                      };
+                    $.ajax(settings).done(function(response){
+                        console.log(response);
+                        console.log(response.length);
+                        ele=document.getElementById('event_sub_category');
+                        ele.innerHTML='';
+                        $('.selectpicker').selectpicker('destroy');
+                        
+                        
+                        
+                        
+                        for (var i=0;i<response.length;i++){
+                            ele=document.getElementById('event_sub_category');
+                            
+                            ele.innerHTML = ele.innerHTML +'<option value="' + response[i].pk + '">' + response[i]['fields'].sub_category_name + '</option>';
+                        }
+                        $('#event_sub_category').addClass('selectpicker');
+                        $('.selectpicker').selectpicker({
+                            liveSearchPlaceholder: "Search Here...",
+                            showSubtext: true,
+                            liveSearch: true,
+                            actionsBox: true,
+                            selectAllText:"Select All",
+                            
+
+                        });
+                        $('.bs-actionsbox').addClass('d-flex');
+                        $('.btn-group-sm').addClass('flex-fill');
+                        $('.filter-option-inner-inner').html('Event Sub Categories');
+                        $(".filter-option-inner-inner").eq(1).html('Vendor Types');
+                    });
+                  });
+                  
+                  $('#step1').on('click',function(){
+                    
+                    $(this).html(`<div class="spinner-border spinner-border-sm" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                      </div>&nbsp;{{"Please Wait"|transl:is_french}}...`);
+                      $(this).prop('disabled',true);
+                    var country=$('#event_country').val();
+                    var state=$('#event_state').val();
+                    var city = $('#event_city').val();
+
+                    var event_category=$('#event_category').val();
+                    var event_sub_category=$('#event_sub_category').val();
+                    var event_sub_category_string=JSON.stringify(event_sub_category);
+
+                    var heads=$('#event_heads').val();
+                    var ev_date=$('#event_date').val();
+                    var budget=$('#event_budget').val();
+
+                    var first_name=$('#first_name').val();
+                    var last_name=$('#last_name').val();
+                    var email_id=$('#email_id').val();
+                    var phone = $('#phone').val();
+                    var country_code=$('.selected-dial-code').eq(1).html();
+                    var ev_desc=$('#ev_desc1').val();
+                    var change_active=$('#change_active').val();
+
+                    if(country == '' || state == '' || city == '' || event_category == '' || event_sub_category == '' || heads == '' || ev_date == '' || budget == '' || first_name == '' || last_name == '' || email_id == '' || phone == '' || country == '' || ev_desc == '' || country_code == ''){
+                        swal("{{'Blank Field'|transl:is_french}}", "{{'Please Fill all Fields to continue'|transl:is_french}}", "error");
+                        $(this).html(`Proceed`);
+                          $(this).prop('disabled',false);
+                    }
+                    else{
+
+                    
+                        var settings = {
+                            "url": "{%url 'vendor_home:ev_send_mail' %}?country="+country+"&state="+state+"&city="+city+"&event_category="+event_category+"&event_sub_category="+event_sub_category_string+"&heads="+heads+"&ev_date="+ev_date+"&budget="+budget+"&first_name="+first_name+"&last_name="+last_name+"&email_id="+email_id+"&phone="+phone+"&country_code="+country_code+"&ev_desc="+ev_desc+"&updated="+change_active,
+                            "method": "GET",
+                            
+                        };
+                        $.ajax(settings).done(function(response){
+                            console.log(response);
+                            if (response == 'OK'){
+                                
+                                $('#step2_circle').removeClass('disabled');
+                                $('#step1_circle').addClass('disabled');
+                                $('#otp_email').html(email_id);
+                                var change_active = $('#change_active').val();
+                                if (change_active == 'YES'){
+                                    $('#step4_circle').removeClass('disabled');
+                                    $('#step2_circle').addClass('disabled');
+                                    var settings = {
+                                        "url":"{%url 'vendor_home:ev_data' %}?pwd="+password,
+                                        "method":"GET",
+                                    };
+                                    $.ajax(settings).done(function(response){
+                                        console.log(response);
+                                        
+                                        if(response.status== 'OK'){
+                                            
+                                            $('#review_email').html(response.email_id);
+                                            $('#review_country').html(response.country);
+                                            $('#review_state').html(response.state);
+                                            $('#review_city').html(response.city);
+                                            $('#review_category').html(response.event_category);
+                                            $('#review_budget').html(response.budget);
+                                            $('#review_heads').html(response.heads);
+                                            $('#review_date').html(response.ev_date);
+                                            $('#review_fname').html(response.first_name);
+                                            $('#review_lname').html(response.last_name);
+                                            $('#review_country_code').html('+'+response.country_code);
+                                            $('#review_phone').html(response.phone);
+                                            $('#review_email1').html(response.email_id);
+                                            $('#review_ev_desc').html(response.ev_desc);
+                                            console.log(response.sub_category.length);
+            
+                                            
+                                            $('#review_subcategory').html('');
+            
+                                            for (var i = 0; i < 100; i++) {
+                                                var html = $('#review_subcategory').html();
+                                                console.log("Loop");
+                                                if (typeof response.sub_category[i] !== 'undefined'){
+                                                    html+=response.sub_category[i]
+                                                $('#review_subcategory').html(html+' ');
+                                                }
+                                                else{
+                                                    break;
+                                                }
+                                            };
+                
+                                        $('#step4_circle').click();
+                                            
+                                        };
+                                    });
+
+                                }
+                                else{
+
+                                    $('#step2_circle').click();
+                                };
+                            }
+                        });
+                    }
+
+                    //alert(JSON.stringify(event_sub_category));
+                    //$('#step2_circle').click();
+                  });
+                  $('#step2').on('click',function(){
+                    $(this).html(`<div class="spinner-border spinner-border-sm" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                      </div>&nbsp;Please Wait...`);
+                      $(this).prop('disabled',true);
+                    var otp = $('#otp1234').val();
+                    console.log(otp);
+                    console.log('OK');
+                    var settings = {
+                        "url":"{%url 'vendor_home:ev_check_otp' %}?otp="+otp,
+                        "method":"GET",
+                    };
+                    $.ajax(settings).done(function(response){
+                        console.log(response);
+
+                        if (response == 'checkpwd'){
+                            var text ="{{'Verify Password'|transl:is_french}}";
+                            var text1 = "{{'Verify Your Password !'|transl:is_french}}";
+                            $('#step3_text').html(text);
+                            $('#password_heading').html(text1);
+                            $('#user_type').val('user_exist');
+                            $('#cpassword').addClass('d-none');
+                            $('#step2_circle').addClass('disabled');
+                            $('#step1_circle').addClass('disabled');
+                            $('#step3_circle').removeClass('disabled');
+                            $('#step3_circle').click();
+
+
+                        }
+                        else if (response == 'Newuser'){
+                            $('#user_type').val('user_new');
+                            $('#step2_circle').addClass('disabled');
+                            $('#step1_circle').addClass('disabled');
+                            $('#step3_circle').removeClass('disabled');
+                            $('#step3_circle').click();
+
+                        }
+                        else{
+                            swal({
+                                title: "{{'Oops!!'|transl:is_french}}",
+                                text: "{{'Invalid OTP Entered'|transl:is_french}}",
+                                icon: "warning",
+                                button: "{{'Try Again...'|transl:is_french}}",
+                              }).then((value) => {
+                                $('#step2').html('Proceed');
+                                $('#step2').prop('disabled',false);
+                                $('#otp1234').val('');
+                              }); 
+                        }
+                    });
+                  });
+                  $('#step3').on('click',function(){
+                    $(this).html(`<div class="spinner-border spinner-border-sm" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                      </div>&nbsp;Please Wait...`);
+                      $(this).prop('disabled',true);
+                    var password = $('#ev_password').val();
+                    var user_type=$('#user_type').val();
+                    var settings = {};
+                    if (user_type == 'user_exist'){
+                        var settings = {
+                            "url":"{%url 'vendor_home:ev_check_pwd' %}?pwd="+password,
+                            "method":"GET",
+                        };
+                        $.ajax(settings).done(function(response){
+                            console.log(response);
+                            if(response.status== 'OK' || response.status == 'Subscription Exists'){
+                                $('#step2_circle').addClass('disabled');
+                                $('#step1_circle').addClass('disabled');
+                                $('#step3_circle').addClass('disabled');
+                                $('#step4_circle').removeClass('disabled');
+                                $('#review_email').html(response.email_id);
+                                $('#review_country').html(response.country);
+                                $('#review_state').html(response.state);
+                                $('#review_city').html(response.city);
+                                $('#review_category').html(response.event_category);
+                                $('#review_budget').html(response.budget);
+                                $('#review_heads').html(response.heads);
+                                $('#review_date').html(response.ev_date);
+                                $('#review_fname').html(response.first_name);
+                                $('#review_lname').html(response.last_name);
+                                $('#review_country_code').html('+'+response.country_code);
+                                $('#review_phone').html(response.phone);
+                                $('#review_email1').html(response.email_id);
+                                $('#review_ev_desc').html(response.ev_desc);
+                                console.log(response.sub_category.length);
+
+                                $('#vendor_type').attr('disabled',true);
+                                $('#review_event_summary').attr('disabled',true);
+                                $('#review_payment_options').attr('disabled',true);
+
+
+                                for (var i = 0; i < 100; i++) {
+                                    var html = $('#review_subcategory').html();
+                                    console.log("Loop");
+                                    if (typeof response.sub_category[i] !== 'undefined'){
+                                        html+=response.sub_category[i]
+                                    $('#review_subcategory').html(html+' ');
+                                    }
+                                    else{
+                                        break;
+                                    }
+                                };
+    
+                                $('#step4_circle').click();
+
+
+                                $('#package_options').click();
+                            }
+                            if (response.status == "Subscription Exists"){
+                                package_type = 'free'  ;
+                            }
+                            else if(response.status == 'Invalid'){
+                                swal({
+                                    title: "{{'Oops!!'|transl:is_french}}",
+                                    text: "{{'Invalid Password Entered'|transl:is_french}}",
+                                    icon: "warning",
+                                    button: "{{'Try Again...'|transl:is_french}}",
+                                  }).then((value) => {
+                                    $('#step3').html('Proceed');
+                                    $('#step3').prop('disabled',false);
+                                    $('#ev_password').val('');
+                                  }); 
+
+
+                            }
+                        });
+                    }
+                    else{
+                        var confirm_password=$('#cpassword').val();
+                        if (password == confirm_password){
+                            var settings = {
+                                "url":"{%url 'vendor_home:ev_new_pwd' %}?pwd="+password,
+                                "method":"GET",
+                            };
+                            $.ajax(settings).done(function(response){
+                                console.log(response);
+                                if(response.status== 'OK'){
+                                    $('#step2_circle').addClass('disabled');
+                                    $('#step1_circle').addClass('disabled');
+                                    $('#step3_circle').addClass('disabled');
+                                    $('#step4_circle').removeClass('disabled');
+                                    $('#review_email').html(response.email_id);
+                                    $('#review_country').html(response.country);
+                                    $('#review_state').html(response.state);
+                                    $('#review_city').html(response.city);
+                                    $('#review_category').html(response.event_category);
+                                    $('#review_budget').html(response.budget);
+                                    $('#review_heads').html(response.heads);
+                                    $('#review_date').html(response.ev_date);
+                                    $('#review_fname').html(response.first_name);
+                                    $('#review_lname').html(response.last_name);
+                                    $('#review_country_code').html('+'+response.country_code);
+                                    $('#review_phone').html(response.phone);
+                                    $('#review_email1').html(response.email_id);
+                                    $('#review_ev_desc').html(response.ev_desc);
+
+
+                                    $('#vendor_type').attr('disabled',true);
+                                    $('#review_event_summary').attr('disabled',true);
+                                    $('#review_payment_options').attr('disabled',true);
+                                    console.log(response.sub_category.length);
+                                    for (var i = 0; i < 100; i++) {
+                                        var html = $('#review_subcategory').html();
+                                        console.log("Loop");
+                                        if (typeof response.sub_category[i] !== 'undefined'){
+                                            html+=response.sub_category[i]
+                                        $('#review_subcategory').html(html+' ');
+                                        }
+                                        else{
+                                            break;
+                                        }
+                                    };
+        
+                                    $('#step4_circle').click();
+
+                                    $('#package_options').click();
+
+                                }
+                            });
+                        }
+                        else{
+                            swal({
+                                title: "{{'Password Mismatch!'|transl:is_french}}",
+                                text: "{{'Check the Password Correctly and Try Again...'|transl:is_french}}",
+                                icon: "warning",
+                                button: "{{'Try Again...'|transl:is_french}}",
+                              }).then((value) => {
+                                $('#step3').html('Proceed');
+                                $('#step3').prop('disabled',false);
+                                
+                              }); 
+                            //alert('Password Mismatch');
+                            //$(this).html(`Proceed`);
+                            //$(this).prop('disabled',false);
+                        }
+                          
+                    }
+                    
+                    
+                  });
+                  var package_type='';
+                  $('#free_event_btn').on('click',function(){
+                    swal({
+                        title: "{{'Are you sure?'|transl:is_french}}",
+                        text: "{{'Once selected, you will not be able to change this package type!'|transl:is_french}}",
+                        icon: "warning",
+                        buttons: true,
+                        dangerMode: true,
+                      })
+                      .then((willDelete) => {
+                        if (willDelete) {
+                            $('#vendor_category').addClass('form-control');
+                            $('#vendor_category').addClass('reg-sel');
+                            $('#package_options').click();
+                            $('#package_options').attr('disabled',true);
+                            $('#vendor_type').attr('disabled',false);
+                            package_type='free';
+                            $('#vendor_type').click();
+                        } else {
+                          swal("{{'Changes Not Saved'|transl:is_french}}");
+                        }
+                      });
+                    //alert("OK");
+                    
+                  });
+                  $('#premium_event_btn').on('click',function(){
+                    swal({
+                        title: "{{'Are you sure?'|transl:is_french}}",
+                        text: "{{'Once selected, you will not be able to change this package type! Package Duration - 1 Month'|transl:is_french}}",
+                        icon: "warning",
+                        buttons: true,
+                        dangerMode: true,
+                      })
+                      .then((willDelete) => {
+                        if (willDelete) {
+                            $('#vendor_category').addClass('selectpicker');
+                            document.getElementById("vendor_category").setAttribute("multiple", "multiple");
+                            $('.selectpicker').selectpicker();
+                            $('#package_options').click();
+                            $('#package_options').attr('disabled',true);
+                            $('#vendor_type').attr('disabled',false);
+                            if (package_type != 'free'){
+                                package_type='premium';
+
+                            }
+                            $('#vendor_type').click();
+                        } else {
+                          swal("{{'Changes Not Saved'|transl:is_french}}");
+                        }
+                      });
+                    
+
+                  });
+                  $('#vendor_type_btn').on('click',function(){
+
+                    swal({
+                        title: "{{'Are you sure?'|transl:is_french}}",
+                        text: "{{'Once Confirmed , You will not be able to change vendor type'|transl:is_french}}",
+                        icon: "warning",
+                        buttons: true,
+                        dangerMode: true,
+                      })
+                      .then((willDelete) => {
+                        if (willDelete) {
+                            $('#vendor_type').click();
+                            $('#vendor_type').attr('disabled',true);
+                            $('#review_event_summary').attr('disabled',false);
+                            $('#review_event_summary').click();
+                        } else {
+                          swal("{{'Changes Not Saved'|transl:is_french}}");
+                        }
+                      });
+
+                    
+                  });
+                  $('#event_summary_btn').on('click',function(){
+                    $('#review_event_summary').click();
+                    $('#review_event_summary').attr('disabled',true);
+                    $('#review_payment_options').attr('disabled',false);
+                    if(package_type=='free'){
+                        var check = $('#payment_text_free').html();
+                        if (check != ''){
+                        $('#payment_list').html(check);
+
+                        }else{
+
+                            $('#payment_list').html('{{"It is A Freemium Event ! No Payment is Required . Click on Continue to proceed"|transl:is_french}}');
+                        }
+                    }
+                    $('#review_payment_options').click();
+                  });
+                  $('#change_details').on('click',function(){
+                    $('#change_active').val('YES');
+                    $('#step1_circle').removeClass('disabled');
+                    $('#step1').attr('disabled',false);
+                    $('#step1').html('Proceed');
+                    $('#email_id').attr('readonly',true);
+                    $('#step2').attr('disabled',false);
+                    $('#step2').html('Proceed');
+                    $('#step4_circle').addClass('disabled');
+                    $('#step1_circle').click();
+                  });
+                  $('#s-option').on('change',function(){
+                    
+                    $('#momono').removeClass('d-none');
+                    $('#mooveno').addClass('d-none');
+                  })
+                  $('#mo-option').on('change',function(){
+                    
+                    $('#mooveno').removeClass('d-none');
+
+                    $('#momono').addClass('d-none');
+
+                  })
+
+                  $('#f-option').on('change',function(){
+                    $('#momono').addClass('d-none');
+                    $('#mooveno').addClass('d-none');
+                  })
+
+                  $('#final_btn').on('click',function(){
+                    $(this).html(`<div class="spinner-border spinner-border-sm" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                      </div>&nbsp;Please Wait...`);
+                    if (package_type == 'free'){
+                        var vendor_type=$('#vendor_category').val();
+                        var settings = {
+                            "url":"{%url 'vendor_home:save_ev_data' %}?vendor_type="+vendor_type+"&package_type="+package_type,
+                            "method":"GET",
+                        };
+                        $.ajax(settings).done(function(response){
+                            
+                            console.log("PAID");
+                            swal({
+                                title: "{{'Great !'|transl:is_french}}",
+                                text: "{{'Your Event has been Posted'|transl:is_french}}",
+                                icon: "success",
+                                button: "{{'Oh ! Wow ...'|transl:is_french}}",
+                              }).then((value) => {
+                                location.replace("{%url 'vendor_home:user_profile' %}");
+                              });
+
+                        });
+                    }
+                    else if(package_type == 'premium'){
+                        //alert("OK premium");
+                        if($('#f-option').is(':checked')){
+                            $('#paypal-button-container').removeClass('d-none');
+
+                            paypal.Buttons({
+                                style:{
+                                    layout:'horizontal',
+                                },
+                    
+                                // Set up the transaction
+                                createOrder: function(data, actions) {
+                                    return actions.order.create({
+                                        purchase_units: [{
+                                            amount: {
+                                                value: '{{premium_pack|usd_convert:user_currency}}',
+                                            }
+                                        }]
+                                    });
+                                },
+                    
+                                // Finalize the transaction
+                                onApprove: function(data, actions) {
+                                    return actions.order.capture().then(function(orderData) {
+                                        // Successful capture! For demo purposes:
+                                        console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+                                        var transaction = orderData.purchase_units[0].payments.captures[0];
+                                        //alert('Transaction '+ transaction.status + ': ' + transaction.id + '\n\nSee console for all available details');
+                                        var vendor_type=$('#vendor_category').val();
+                                            var settings = {
+                                                "url":"{%url 'vendor_home:save_ev_data' %}?vendor_type="+vendor_type+"&package_type="+package_type,
+                                                "method":"GET",
+                                            };
+                                            $.ajax(settings).done(function(response){
+                                                console.log("PAID");
+                                                swal({
+                                                    title: "{{'Great !'|transl:is_french}}",
+                                                    text: "{{'Your Event has been Posted'|transl:is_french}}",
+                                                    icon: "success",
+                                                    button: "{{'Oh ! Wow ...'|transl:is_french}}",
+                                                  }).then((value) => {
+                                                    location.replace("{%url 'vendor_home:user_profile' %}");
+                                                  });
+                    
+                                            });
+                                        // Replace the above to show a success message within this page, e.g.
+                                        // const element = document.getElementById('paypal-button-container');
+                                        // element.innerHTML = '';
+                                        // element.innerHTML = '<h3>Thank you for your payment!</h3>';
+                                        // Or go to another URL:  actions.redirect('thank_you.html');
+                                    });
+                                }
+                    
+                    
+                            }).render('#paypal-button-container');
+                        }
+                        if($('#s-option').is(':checked')){
+                            
+                            var mobile = $('#momofield').val();
+                            var amount = "{{momo_pack}}";
+                            var currency = 'XOF';
+                            if(mobile == '' || mobile == null){
+                                swal({
+                                    title: "{{'Oops !'|transl:is_french}}",
+                                    text: "{{'Please Enter Your MoMo Number'|transl:is_french}}",
+                                    icon: "error",
+                                    button: "{{'Okay !'|transl:is_french}}",
+                                });
+                                $('#final_btn').html("Proceed");
+                            }
+                            else{
+                                $('#paymentrqst').removeClass('d-none');
+
+                                axios.get("{%url 'vendor_home:momo_event' %}?amount="+amount+"&mobile="+mobile+"&currency="+currency)
+                              .then(function (response) {
+                                //console.log(response);
+                                //console.log(response.data);
+
+                                if (response.data == "OK"){
+
+
+                                    var package_type='premium';
+                                    var vendor_type=$('#vendor_category').val();
+                                    var settings = {
+                                        "url":"{%url 'vendor_home:save_ev_data' %}?vendor_type="+vendor_type+"&package_type="+package_type,
+                                        "method":"GET",
+                                    };
+                                    $.ajax(settings).done(function(response){
+                                        console.log("PAID");
+                                        swal({
+                                            title: "{{'Great !'|transl:is_french}}",
+                                            text: "{{'Your Event has been Posted'|transl:is_french}}",
+                                            icon: "success",
+                                            button: "{{'Oh ! Wow ...'|transl:is_french}}",
+                                        }).then((value) => {
+                                            location.replace("{%url 'vendor_home:user_profile' %}");
+                                        });
+            
+                                    });
+                                }else{
+                                    swal({
+                                        title: "{{'Oops !'|transl:is_french}}",
+                                        text: "{{'Transaction Failed...Please Try Again...'|transl:is_french}}",
+                                        icon: "error",
+                                        button: "{{'Okay !'|transl:is_french}}",
+                                    }).then((value) => {
+                                        $('#final_btn').html(`Proceed`);
+                                        $('#final_btn').prop('disabled',false);
+                                    });
+                                }
+                                
+                                    
+                                
+                                
+                            })
+                                .catch(function (error) {
+                                    console.log(error);
+                                });
+                            }
+                            }
+                                
+                        }
+                        if($('#mo-option').is(':checked')){
+                            
+                            var mobile = $('#moovefield').val();
+                            var amount = "{{momo_pack}}";
+                            var currency = 'XOF';
+                            if(mobile == '' || mobile == null){
+                                swal({
+                                    title: "{{'Oops !'|transl:is_french}}",
+                                    text: "{{'Please Enter Your Moove Number'|transl:is_french}}",
+                                    icon: "error",
+                                    button: "{{'Okay !'|transl:is_french}}",
+                                });
+                                $('#final_btn').html("Proceed");
+                            }
+                            else{
+                                $('#paymentrqst').removeClass('d-none');
+
+                                axios.get("{%url 'vendor_home:moove_event' %}?amount="+amount+"&mobile="+mobile+"&currency="+currency)
+                              .then(function (response) {
+                                //console.log(response);
+                                //console.log(response.data);
+
+                                if (response.data == "OK"){
+
+
+                                    var package_type='premium';
+                                    var vendor_type=$('#vendor_category').val();
+                                    var settings = {
+                                        "url":"{%url 'vendor_home:save_ev_data' %}?vendor_type="+vendor_type+"&package_type="+package_type,
+                                        "method":"GET",
+                                    };
+                                    $.ajax(settings).done(function(response){
+                                        console.log("PAID");
+                                        swal({
+                                            title: "{{'Great !'|transl:is_french}}",
+                                            text: "{{'Your Event has been Posted'|transl:is_french}}",
+                                            icon: "success",
+                                            button: "{{'Oh ! Wow ...'|transl:is_french}}",
+                                        }).then((value) => {
+                                            location.replace("{%url 'vendor_home:user_profile' %}");
+                                        });
+            
+                                    });
+                                }else{
+                                    swal({
+                                        title: "{{'Oops !'|transl:is_french}}",
+                                        text: "{{'Transaction Failed...Please Try Again...'|transl:is_french}}",
+                                        icon: "error",
+                                        button: "{{'Okay !'|transl:is_french}}",
+                                    }).then((value) => {
+                                        $('#final_btn').html(`Proceed`);
+                                        $('#final_btn').prop('disabled',false);
+                                    });
+                                }
+                                
+                                    
+                                
+                                
+                            })
+                                .catch(function (error) {
+                                    console.log(error);
+                                });
+                            }
+                            }
+                                
+                        
+                    })
+                  });
+                  
+
+          
+        
+            
+        </script>
+        <script>
+            $(document).ready(function(){
+                $('#resendotp_event').on('click',function(e){
+                    e.preventDefault();
+                    $(this).html(`Resending OTP ...`);
+                    axios.get("{%url 'vendor_home:create_event_resend' %}")
+                              .then(function (response) {
+                                $('#conf_msg').removeClass('d-none');
+                                $("#resendotp_event").html(`Resend OTP`);
+
+                              })
+                })
+            })
+        </script>
+
+    <!-- Include the PayPal JavaScript SDK -->
+
+    <script>
+        
+        // Render the PayPal button into #paypal-button-container
+        
+
+    </script>
+</body>
+
+</html>

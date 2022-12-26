@@ -1,0 +1,498 @@
+{% load lang_tran %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    {% include 'vendor_dashboard_v2/head.html' %}
+
+    <title>Dashboard Chat</title>
+</head>
+
+<body class="vendor_admin">
+    {% include 'vendor_dashboard_v2/top_header.html' %}
+
+
+    <div class="main-dash">
+        {% include 'vendor_dashboard_v2/aside.html' %}
+
+        <div class="dashboard flex-grow-1">
+
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Create a quote</li>
+                </ol>
+            </nav>
+
+            <div class="create-quote shadow-sm">
+                <div class="quote-header d-flex align-items-center justify-content-between mb-4">
+                    <h4>Create A Quote</h4>
+                    <form action="">
+                        <div class="pos_rel">
+                            <input type="text" name="search" id="search" class="head_Search" placeholder="Search"> <img
+                                src="../assets/images/searchicn.png" alt="" class="sercimg">
+                        </div>
+                    </form>
+                </div>
+                <div class="quote-body">
+                    <div class="row mb-5">
+                        <div class="col-xxl-4 col-xl-12 col-md-6 mb-3">
+                            <div class="box-1 h-100">
+                                <div class="id-price d-flex align-items-center justify-content-between">
+                                    <div class="id-info">
+                                        <span>{{"Quotation ID"|transl:is_french}}</span>
+                                        <input type="hidden" name="link_id" id="link_id" value="">
+
+                                        <h4 id="Quotatio_ID">{{quote_id}}</h4>
+                                    </div>
+                                    
+                                </div>
+                                <div class="select-date d-flex align-items-center">
+                                    <div class="mb-3 w-50">
+                                        <label class="form-label">{{"Quotation For"|transl:is_french}}</label>
+                                        <input type="hidden" name="user_id" value="" id="user_id">
+
+                                        <select class="form-select" id="get_quote_user">
+                                            <option value="" selected disabled>{{"Select Host"|transl:is_french}}</option>
+
+                                            {% for i in quotation_for %}
+                                            <option value="{{i.id}}" class="text-dark">{{i.fname}}</option>
+                                            {% empty %}
+                                            <option value="" disabled readonly selected>No Quotes Left</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <div class="mb-3 w-50">
+                                        <label class="form-label">{{"Valid Till"|transl:is_french}}</label>
+                                        <input type="date" class="form-control form-control-sm" value="{{expire_at|date:"Y-m-d"}}" name="e_date" id="e_date">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg col-md-6 mb-3">
+                            <div class="post-guests box-2 h-100">
+                                <h5>{{"Posted On"|transl:is_french}}</h5>
+                                <p>{{"Requested Date"|transl:is_french}}</p>
+                                <h3 id="req_date">{{"Select Host to Continue"|transl:is_french}}</h3>
+                            </div>
+                        </div>
+                        <div class="col-lg col-md-6 mb-3">
+                            <div class="post-guests box-3 h-100">
+                                <h5>{{"Apprx. Guests"|transl:is_french}}</h5>
+                                <p>{{"Expected Heads"|transl:is_french}}</p>
+                                <h3 id="nguests">{{"Select Host to Continue"|transl:is_french}}</h3>
+                            </div>
+                        </div>
+                        <!-- <div class="col-lg col-md-6 mb-3">
+                            <div class="box-4 h-100">
+                                <h5>Host Requirements</h5>
+                                <p>Hi there- we found you on Eventinz and would love more informat</p>
+                            </div>
+                        </div> -->
+                    </div>
+                    <div class="update-box mb-5">
+                        <div class="box-border">
+                            <h5 class="detail-title mb-0">{{"Host Requirements"|transl:is_french}}</h5>
+                            <p class="m-0" id="hmsg">{{"Select Host to Continue"|transl:is_french}}</p>
+                        </div>
+                    </div>
+                    <div class="update-box mb-5">
+                        <div class="box-border">
+                            <h5 class="detail-title mb-0">{{"Payment Terms & Conditions"|transl:is_french}}</h5>
+                            <p class="m-0 p-2"><textarea name="payment_terms" id="ptc" cols="10" rows="4" class="form-control border-0" placeholder="{{'Mention Your Payment Terms & Conditions for this Event'|transl:is_french}}"></textarea></p>
+                        </div>
+                    </div>
+                    <div class="update-box mb-5">
+                        <div class="box-border">
+                            <h5 class="detail-title mb-0">{{"Service & Description"|transl:is_french}}</h5>
+                            <form>
+                                <div class="row">
+                                    <div class="form-group col-md-4 mb-3">
+                                        <label>{{"Description"|transl:is_french}}</label>
+                                        <input type="text" class="form-control"
+                                            placeholder="" id="desc">
+                                    </div>
+                                    <div class="form-group col-md-2 mb-3">
+                                        <label>{{"Quantity"|transl:is_french}}</label>
+                                        <input type="text" class="form-control"
+                                            placeholder="" id="qty">
+                                    </div>
+                                    <div class="form-group col-md-2 mb-3">
+                                        <label>{{"Unit"|transl:is_french}}</label>
+                                        <select class="form-control" id="unit">
+                                            <option value="" disabled selected>--</option>
+                    
+                                            <option value="Per Event">{{"Event"|transl:is_french}}</option>
+                                            <option value="Per Person">{{"Person"|transl:is_french}}</option>
+                                            <option value="Per Hour">Hour</option>
+                                            <option value="Per units">units</option>
+                                            <option value=" Per Day">Day</option>
+                                        </select>
+                                        
+                                    </div>
+                                    <div class="form-group col-md-2 mb-3">
+                                        <label>Rate</label>
+                                        <input type="text" class="form-control"
+                                            placeholder="" id="rate">
+                                    </div>
+                                    <div class="form-group col-md-2 mb-3">
+                                        <label>Total</label>
+                                        <input type="text" class="form-control"
+                                            placeholder="" readonly id="total">
+                                          <input type="hidden" name="grnd_ttl" id="final_amt" value="0">
+
+                                    </div>
+                                    
+                                    {% comment %} <div class="form-group col-md-2 mb-3">
+                                        <h4 class="mb-0">$500</h4>
+                                    </div> {% endcomment %}
+                                    {% comment %} <div class="form-group col-md-2 mb-3">
+                                        <h6 class="mb-0">+ Add New Entry</h6>
+                                    </div> {% endcomment %}
+                                </div>
+                                <button type="button" class="btn btn-solid" id="addbtn" onclick="add();">Select Host To Continue</button>
+                                {% comment %} <button type="button" class="btn btn-line">Select Host To Continue</button> {% endcomment %}
+                            </form>
+                                
+                        </div>
+                    </div>
+                    <div class="update-box mb-5">
+                        <div class="box-border">
+                            <h5 class="detail-title mb-0">Items & Details</h5>
+                            <div class="row">
+                                <div class="col-lg-12" id="tabletag">
+                                <table class="table table-sm table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col" class="text-center">Description</th>
+                                        <th scope="col" class="text-center">Quantity</th>
+                                        <th scope="col" class="text-center">Unit</th>
+                                        <th scope="col" class="text-center">Rate</th>
+                                        <th scope="col" class="text-center">Total</th>
+                    
+                                    </tr>
+                                    </thead>
+                                    <tbody id="getul">
+                                    
+                                    
+                                    
+                                    </tbody>
+                                    {% comment %} <tfoot>
+                                    <tr>
+                                        <td colspan="4"><span style="float: right;">Grand Total</span></td>
+                                        <td id="grnd_ttl">0.00</td>
+                                    </tr>
+                                    </tfoot> {% endcomment %}
+                                </table>
+                                </div>
+                            </div>
+                            
+                                
+                        </div>
+                    </div>
+                    <div class="update-box mb-5">
+                        <div class="box-border">
+                            <h5 class="detail-title mb-0">Milestone Details</h5>
+                            <div class="row">
+                             
+                                    <div class="form-group col-md-4 mb-3">
+                                        <div class="input-group">
+                                            
+                                            <input type="text" aria-label="First name" class="form-control" placeholder="Initial Milestone" id="initmile">
+                                            <select class="form-select" id="inputGroupSelect01">
+                                                <option value="percent" selected>By Percentage</option>
+                                                <option value="amt">By Amount</option>
+                                            </select>
+                                          </div>
+                                    </div>
+                               
+                            </div>
+                            
+                                
+                        </div>
+                    </div>
+                    <div class="update-box mb-5">
+                      <div class="box-border">
+                          <h5 class="detail-title mb-0">Tax Details</h5>
+                          <div class="row">
+                           
+                                  <div class="form-group col-md-4 mb-3">
+                                      <div class="input-group">
+                                          
+                                          <input type="text" aria-label="First name" class="form-control" placeholder="Tax (in % )" id="tax">
+                                          {% comment %} <select class="form-select" id="inputGroupSelect01tax">
+                                              <option value="percent" selected>By Percentage</option>
+                                              <option value="amt">By Amount</option>
+                                          </select> {% endcomment %}
+                                        </div>
+                                  </div>
+                             
+                          </div>
+                          
+                              
+                      </div>
+                  </div>
+                    <div class="update-box mb-5">
+                        <div class="box-border">
+                            {% comment %} <h5 class="detail-title mb-0">Milestone Details</h5> {% endcomment %}
+                            <div class="row">
+                             
+                                <button type="button" class="btn btn-solid" id="finalbtn">
+                                    <i class="fas fa-plus"></i>&nbsp;&nbsp;Finalise Quote
+                                </button>
+
+                               
+                            </div>
+                            
+                                
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <div class="footer_sec p-0">
+        <div class="copyrights m-0 text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <p>© 2022 Eventinz, Inc All Rights Reserved</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+        <script>
+          function add(){
+            $('#addbtn').html(`<div class="spinner-border spinner-border-sm" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div> Please Wait...`);
+            var get_ul=$('#getul').html();
+            var desc=$('#desc').val();
+            var qty=$('#qty').val();
+            var unit=$('#unit').val();
+            var rate=$('#rate').val();
+            var total=$('#total').val();
+            if(desc == ''||qty == ''||unit == ''||rate == '' || total == ''){
+              swal("Oops!", "Please Fill In Valid Details to Continue", "error");
+            }
+            else{
+
+            
+              var content=`<tr>
+                <td class="text-center">${desc}</td>
+                <td class="text-center">${qty}</td>
+                <td class="text-center">${unit}</td>
+                <td class="text-center">${rate}</td>
+                <td class="text-center total">${total}</td>
+        
+              </tr>`;
+        
+              
+        
+              get_ul+=content;
+              $('#getul').html(get_ul);
+              calc_total();
+              $('#desc').val('');
+              $('#qty').val('');
+              $('#unit').val('');
+              $('#rate').val('');
+              $('#total').val('');
+              $('#addbtn').html(`<i class="fas fa-plus"></i>&nbsp;&nbsp;Add New Entry`);
+              $('#finalbtn').attr('disabled',false);
+            }
+          }
+      
+          function delete1(){
+           console.log("OK");
+            //alert(li);
+          }
+          function calc_total(){
+            var sum = 0;
+            $(".total").each(function(){
+              sum += parseFloat($(this).text());
+      
+            });
+           $('#grnd_ttl').html(sum);
+           $('#final_amt').val(sum);
+          }
+        </script>
+        
+        <script>
+          $('#qty,#rate').on('input',function(){
+            var qty=$('#qty').val();
+            var rate=$('#rate').val();
+            var total=(qty*rate).toFixed(2);
+            $('#total').val(total);
+          })
+        </script>
+        <script src="https://momentjs.com/downloads/moment.js"></script>
+        <script>
+        
+          $('#addbtn').html('Select Host to Continue');
+          $('#addbtn').attr('disabled',true);
+          $('#finalbtn').attr('disabled',true);
+      
+          $('#get_quote_user').on('change',function(){
+          $('#addbtn').html(`<div class="spinner-border spinner-border-sm text-light" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>Loading...`);
+          $('#nguests').html(`<div class="spinner-border spinner-border-sm text-dark" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>&nbsp; Loading...`);
+          $('#hmsg').html(`<div class="spinner-border spinner-border-sm text-dark" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>&nbsp; Loading...`);
+          $('#req_date').html(`<div class="spinner-border spinner-border-sm text-dark" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>&nbsp; Loading...`);
+      
+            var id=$(this).val();
+            $.ajax({
+              url: "{%url 'get_quote_details'%}?id="+id,
+            }).done(function(response) {
+              $('#req_date').html(moment(response.posted_on).format("DD MMM YYYY"));
+              $('#nguests').html('Appx .'+response.no_of_guests+' Guests');
+              $('#hmsg').html(response.msg);
+              $('#addbtn').html(`<i class="fas fa-plus"></i>&nbsp;&nbsp;Add Entry`);
+              $('#link_id').val(response.id);
+              $('#user_id').val(response.email);
+              
+      
+            $('#addbtn').attr('disabled',false);
+      
+              //console.log(response)
+      
+            });
+            //alert($(this).val());
+            //console.log("OK");
+          })
+        </script>
+        <script>
+          
+          $('#finalbtn').on('click',function(){
+            //console.log("OK");
+            $(this).html(`<div class="spinner-border spinner-border-sm text-light" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>Please Wait...`)
+            var id='{{quote_id}}';
+            var link_id=$('#link_id').val();
+            var ptc=$('#ptc').val();
+            var quote_user=$('#get_quote_user').val();
+            var user_id=$('#user_id').val();
+            var data=encodeURIComponent($('#tabletag').html());
+            var e_date=$('#e_date').val();
+            var milestone=$('#initmile').val();
+            var milestone_type=$('#inputGroupSelect01').val();
+            var final_amt=$('#final_amt').val();
+            var tax_percent = $('#tax').val()
+            if (milestone_type == 'percent'){
+              var grand_total=$('#final_amt').val();
+             // alert(grand_total);
+                //alert(grand_total);
+              var grand_total_int=parseFloat(grand_total).toFixed(2);
+              var mile_total=parseFloat((milestone*grand_total_int)/100).toFixed(2);
+             // alert(mile_total);
+              $('#initmile').val(mile_total);
+              var milestone=$('#initmile').val();
+      
+            }
+            //console.log(data);
+            if(ptc == '' ){
+              swal("Oops!", "Please Provide Payment Terms N Conditions to Continue", "error");
+            }
+            if(tax_percent == '' || tax_percent == null){
+              swal("Oops!", "Please Provide Tax Percentage", "error");
+
+            }
+            else{
+
+            
+              $.ajax({
+                url: "{%url 'items_bill'%}?data="+data+"&id="+id+"&link_id="+link_id+"&ptc="+ptc+"&quote_user="+quote_user+"&e_date="+e_date+"&user_id="+user_id+"&milestone="+milestone+"&milestone_type="+milestone_type+"&final_amt="+final_amt+"&tax="+tax_percent,
+              }).done(function(response) {
+                console.log("OK");
+                console.log(response);
+                window.location.href = "{%url 'my_quote_request'%}";
+              });
+            }
+
+          })
+        </script>
+        <script>
+          $('#initmile,#inputGroupSelect01,#grnd_ttl').on('change',function(){
+            var milestone_amt=$('#initmile').val();
+            var mile_amt=parseFloat(milestone_amt).toFixed(2);
+            //alert(milestone_amt);
+            var get_selected=$('#inputGroupSelect01').val();
+            //alert(get_selected);
+            if(get_selected=='amt'){
+            if(milestone_amt==''){
+              $('#milestone_amt').html('0.00');
+      
+            }
+            else{
+              var total_amt=$('#final_amt').val();
+              if(mile_amt>total_amt){
+                swal({
+                  title: "Oops!",
+                  text: "Please Enter Valid Amount",
+                  icon: "error",
+                  button: "Okay !",
+                });
+                $('#initmile').val("");
+              }
+              else{
+              $('#milestone_amt').html(mile_amt);
+              }
+            }
+          }
+            if(get_selected=='percent'){
+              //var net_amount=$('')
+              if(mile_amt > 100){
+                swal({
+                  title: "Oops !",
+                  text: "Enter Correct Value for Milestone",
+                  icon: "warning",
+                  button: "Okay !",
+                });
+                $('#initmile').val('');
+      
+                //$('#milestone_amt').html('0.00');
+              }
+              else{
+                var grand_total=$('#grnd_ttl').html();
+                //alert(grand_total);
+                var grand_total_int=parseFloat(grand_total).toFixed(2);
+                var mile_total=parseFloat((mile_amt*grand_total_int)/100).toFixed(2);
+      
+                //$('#milestone_amt').html(mile_total);
+               // alert(mile_total);
+              }
+            }
+          })
+        </script>
+
+
+</body>
+
+</html>

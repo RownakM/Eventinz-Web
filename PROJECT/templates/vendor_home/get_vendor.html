@@ -1,0 +1,1087 @@
+{% load static %}
+{% load currency_convert %}
+{% load get_vendor_filter %}
+{% load cool_num %}
+{% load get_event_type %}
+{% load country_data %}
+{% load event_currency_convert %}
+{% load get_head %}
+{% load get_currency_symbol %}
+{% load get_vendor_quote %}
+{% load get_vendor_bank %}
+{% load gett_list %}
+{% load lang_tran %}
+
+{% load get_vendor_rating %}
+{% load gett_list %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{company_details.Company_Name|title}} on Eventinz.com | Eventinz | Your Event Your Way</title>
+  <!-- CSS only -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+  integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous" />
+  <link rel="stylesheet" href="{%static 'main_home1/wedding_static/owlcarousel/assets/owl.carousel.min.css' %}" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="{%static 'main_home1/wedding_static/owlcarousel/assets/owl.theme.default.min.css' %}" />
+  <link rel="stylesheet" href="{%static 'main_home1/wedding_static/fonts/style.css' %}" />
+  {% include 'vendor_home/head.html' %}
+  <link rel="stylesheet" href="{%static 'main_home1/wedding_static/css/style.css' %}" />
+</head>
+
+<body>
+
+  {% include 'vendor_home/header.html' %}
+
+  <!--<div class="modal fade loginSign-form" id="exampleModalToggle4" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered signinForm">
+        <div class="modal-content" style="background-image: url({%static 'main_home1/assets/images/login-bg.png' %}); background-color:#fcfcfc; background-size: 100%; background-position: bottom center; background-repeat: no-repeat;">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-header d-block text-center">
+                <h5 class="modal-title">Request A Quote</h5>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row g-2 mb-4">
+                        <div class="col-md-12">
+                            <div class="form-field">
+                                <input type="text" class="form-control" name="" id="" placeholder="Email">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-field">
+                                <input type="text" class="form-control" name="" id="" placeholder="Password">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3 custom-check">
+                        <input type="checkbox" id="html2" checked>
+                        <label for="html2">Remember Me</label>
+                    </div>
+
+                    <div class="row g-2 mb-3">
+                        <div class="col-md-12">
+                            <div class="form-field">
+                                <input type="submit" name="login_btn" id="login_btn" value="Login" class="w-100">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="or text-center mb-3">
+                        <span>OR</span>
+                    </div>
+                    <div class="row g-2 mb-3" id="g_div_login">
+                        <div class="col-md-12">
+                            <div class="form-field">
+                                {% comment %} <style>
+                                    #fb_btn{
+                                        display:none;
+                                    }
+                                </style> {% endcomment %}
+                                <div id="fb-root"></div>
+                                <a class="social-btn w-100" href="javaScript:void()" onclick="fb_action(login)" id="fb_big_btn"><i class="fa fa-facebook" aria-hidden="true"></i> Signin With Facebook</a>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-field">
+                                <div id="g_id_onload"
+                                data-client_id="780861556101-778h6d5rurk9dp9jv2rk49fkeqh6ff7i.apps.googleusercontent.com"
+                                data-callback="handleCredentialResponse">
+                                </div>
+
+
+                                <div class="g_id_signin"
+                                    data-type="standard"
+                                    data-shape="rectangular"
+                                    data-theme="outline"
+                                    data-text="signin_with"
+                                    data-size="large"
+                                    data-logo_alignment="left">
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="row g-2">
+                        <div class="col-md-12">
+                            <div class="form-field text-center">
+                                <p>Don't have an account? <a href="" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Create New</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+  </div> !-->
+  {% if user_login %}
+  <div class="modal fade email-popup" id="exampleModalToggle4" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-body p-0">
+                    <div class="email-vendor-popup">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+                        <div class="popup-header">
+                            <div class="sign-col" style="height: auto;">
+                                <img src="{{BASE_URL}}/media/{{company_details.Profile_Img}}" class="img-fluid w-50"alt="sign">
+                            </div>
+                            <div class="rating-col">
+                                <div class="rating-title">{{company_details.Company_Name}}</div>
+                                <div class="rating-reviews">
+                                    <div class="rating-stars">
+                                      {% for a in company_details.id|getstar|get_list|make_list %}
+                                        {% if a != 0 %}
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        {% endif %}
+                                      {% endfor %}
+                                        
+                                    </div>
+                                    <div class="tot-reviews">{{company_details.id|getrating}} - {{company_details.id|get_rating_count}} {{"Reviews"|transl:is_french}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <form class="vendor-form">
+                            <div class="row row-cols-1 row-cols-lg-2 g-2 g-lg-3">
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="First Name " id="req_fname" value="{{user_acc.fname}}" readonly>
+                                </div>
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="Last Name *" id="req_lname" value="{{user_acc.lname}}" readonly>
+                                </div>
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="Email Address *" value="{{user_acc.Email}}" readonly id="req_email">
+                                </div>
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="Phone *" id="phone" value="{{user_acc.mobile}}" readonly>
+                                    <input type="hidden" name="vendor_id" id="vendor_id" value="{{company_details.id}}">
+                                </div>
+                            </div>
+                            <div class="row-btn p-2" style="margin: 0px;">
+                                <button type="button" class="btn form-btn" id="requote">{{"Request a Quote"|transl:is_french}}</button>
+                                {% comment %} <button type="button" class="btn form-btn aq-btn" id="question">Ask a Question</button> {% endcomment %}
+                            </div>
+                            <textarea class="form-control comment question my-2" placeholder="{{'Type your message'|transl:is_french}}"></textarea>
+                            <div class="row row-cols-1 row-cols-lg-2 g-2 g-lg-3 quote">
+                              <div class="col">
+                                 <select name="request_type" id="request_type" class="form-control">
+                                  <option value="" selected disabled>{{"Select"|transl:is_french}} {{company_details.Company_Name}} {{"Services"|transl:is_french}}</option>
+                                  {% for i in vendor_category %}
+                                    <option value="{{i}}">{{i|transl:is_french}}</option>
+                                  {% endfor %}
+                                  {% comment %} <option value="">Wedding</option> {% endcomment %}
+                                 </select>
+                              </div>
+                              <div class="col">
+                                  <input type="date" class="form-control" placeholder="Date" id="req_date" min="{% now "Y-m-d" %}">
+                              </div>
+                              <div class="col-lg-12">
+                                  <input type="number" class="form-control" placeholder="{{'Number of Guests'|transl:is_french}}" id="req_guest" min="0" oninput="validity.valid||(value='');">
+                                  <input type="hidden" name="v_link" id="v_link" value="{{venue_type}}">
+                              </div>
+                              {% comment %} <div class="col">
+                                  <input type="text" class="form-control" placeholder="Phone *">
+                              </div> {% endcomment %}
+                              <div class="col-lg-12">
+
+                                <textarea class="form-control comment my-2" placeholder="Type your message" id="req_message">{{"Hi there - we found you on Eventinz and would love more information about your venue!"|transl:is_french}}</textarea>
+                              </div>
+
+                          </div>
+                          <div class="my-2"></div>
+                            <div class="attach-file question d-none">
+                                <div class="btn-wrap ">
+                                    <button class="uplbtn"><img class="icon" src="{%static 'main_home1/wedding_static/images/attach-file.png' %}"
+                                            alt="Attach Icon"> Attach a photo</button>
+                                    <input type="file" name="myfile" />
+                                </div>
+                                <div class="upload-size">File must be less than 2 MB</div>
+                            </div>
+                            <div class="form-footer">
+                                <button type="button" class="btn send-btn btn-purple" id="sendmsg">{{"Send Message"|transl:is_french}}</button>
+                                <button type="button" class="btn send-btn btn-purple" id="askquote">{{"Ask For Quote"|transl:is_french}}</button>
+
+                                
+                            </div>
+                            
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+  </div>
+  {% endif %}
+
+<div class="main_cont">
+
+    <div class="main pos_rel">
+        <div class="vrn_bg_img">
+          <div class="vrn_bg_over"></div>
+        </div>
+
+        <div class="prf_part">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="prf_img_bg">
+                            <img src="{{BASE_URL}}/media/{{company_details.Profile_Img}}" class="img-fluid w-75" alt="">
+                        </div>
+                    </div>
+                    <div class="col-md-7 al_center">
+                        <div class="wed_rev_1">
+                          {% for a in company_details.id|getstar|get_list|make_list %}
+                          {% if a != 0 %}
+                          <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+
+                          {% endif %}
+                          {% endfor %}
+                            
+                            <span class="rev_txt_1">{{company_details.id|getrating|transl:is_french}} - {{company_details.id|get_rating_count}}</span>
+                            <h4>{{company_details.Company_Name|title}}</h4>
+                          </div>
+                    </div>
+                    <div class="col-md-3 al_center">
+                        <div class="wecg_txt_1">
+                            {% comment %} <img src="{%static 'main_home1/wedding_static/images/heart.png' %}" alt="" />
+                          <button class="book_event_1">Write a review</button> {% endcomment %}
+                          
+                        </div>
+                      </div>
+                </div>
+                <div class="row d-none d-sm-block">
+                    <div class="">
+                        <div class="loc_bg">
+                            <div class="ven_titl_txt_1 w-25">
+                                <p>
+                                  <img src="{%static 'main_home1/wedding_static/images/map-marker.png' %}" alt="" />
+                                  {{company_details.Company_Address|truncatechars:38}}
+                                </p>
+                              </div>
+                              <div class="ven_titl_txt_1">
+                                <p>
+                                  <img src="{%static 'main_home1/wedding_static/images/img_icn.png' %}" alt="" />
+                                  {{get_gallery_count}} Images
+                                </p>
+                              </div>
+                              <div class="ven_titl_txt_1">
+                                {% comment %} <p>
+                                  <img src="{%static 'main_home1/wedding_static/images/vid_icn.png' %}" alt="" />
+                                  2 Video
+                                </p> {% endcomment %}
+                              </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+      </div>
+
+     <div class="rep_spca">
+
+      <div class="container">
+
+        <div class="row mt-5 rever_rw">
+
+            <div class="txt_wid">
+                <div class="txt_csds mb-5 me-4" style="word-wrap: break-word;">
+                    <span id="less">{{company_details.Company_description|truncatewords:50}}</span>
+                    <span id="more" class="d-none">{{company_details.Company_description}}</span>
+                    <button class="btn btn-link px-0 mx-0" id="button_more">Read More</button>
+                    <button class="btn btn-link px-0 mx-0 d-none" id="button_less">Read Less</button>
+
+                </div>
+
+                <div class="brd_b_sep"></div>
+
+                <div class="row event-deal">
+                    <div class="col-md-6">
+                        <h4 class="gal_txt">{{"Gallery"|transl:is_french}}</h4>
+                    </div>
+                    <div class="col-md-6 buttons filtersbutton text-end">
+                        <a class="otl-btn spot_btn px-4 grd_ev gal_btn grid_active" onclick="divVisibility('photos');">{{"Photos"|transl:is_french}}</a>
+                        {% comment %} <a class="otl-btn spot_btn px-4 grd_ev gal_btn" onclick="divVisibility('tours');">360 Tours</a> {% endcomment %}
+                    </div>
+                </div>
+
+               <div>
+
+                  <div class="mt-4 mb-5" id="photos">
+
+                    <div class="gal_img main_img">
+                      {% for i in get_gallery %}
+                      {% if forloop.first %}
+                        <img src="{{BASE_URL}}/media/{{i.photo_src}}" width="200" height="700" alt="">
+                        {% endif %}
+                        {% empty %}
+                       <p class="text-center"> {{"No Image Found"|transl:is_french}}</p>
+                        {% endfor %}
+                    </div>
+                      <div class="tab_sm_img">
+                        {% for i in get_gallery %}
+                        <img src="{{BASE_URL}}/media/{{i.photo_src}}" alt="" width="83" height="83" class="im_thumb">
+                        
+                        {% endfor %}
+                      </div>
+
+                  </div>
+                      
+                  <div id="tours" style="display: none;">...</div>
+
+               </div>
+
+               <div class="rev_sep"></div>
+
+               <div>
+                <div class="row event-deal mb-4">
+                    <div class="col-md-6">
+                        <h4 class="gal_txt">{{"Reviews"|transl:is_french}}</h4>
+                    </div>
+                </div>
+
+                <div class="top_dl_bg1">
+                  <div class="">
+              
+                        <div class="mb-4">
+                          <div class="owl-carousel review_carousel owl-theme">
+                            {% for a in vendor_reviews %}
+                              <div class="item">
+                                <div class="rev_bg">
+                                  <div class="wed_rev">
+                                    {% for k in a.review_star|get_list|make_list %}
+                                    <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                                    {% endfor %}
+
+                                    <span>{{a.review_star}}.0</span>
+                                    
+                                  </div>
+                                  <div class="mt-3 mb-2">
+                                    <p class="rewsl_txt">{{a.review_text}}<img src="{%static 'main_home1/wedding_static/assets/images/quote.png' %}" alt=""> </p>
+                                  </div>
+                                  <div class="revcs_name">
+                                    <p><span>{{a.review_from.fname|make_list|first}}</span> {{a.review_from.fname}} {{a.review_from.lname|make_list|first}} </p>
+                                  </div>
+                                </div>
+                              </div>
+                            {% endfor %}
+                           
+            
+            
+                          </div>
+                        </div>
+                    
+                  </div>
+                </div>
+
+               </div>
+
+            <div class="rev_sep"></div>
+
+               <div>
+
+                <div class="row event-deal">
+                  <div class="col-md-4">
+                      <h4 class="gal_txt">{{"Overview"|transl:is_french}}</h4>
+                  </div>
+                  <div class="col-md-8 buttons filtersbutton text-end">
+                      <a class="otl-btn spot_btn px-4 grd_ev_1 gal_btn grid_active" onclick="overviewvisibility('details');">Detail</a>
+                      {% comment %} <a class="otl-btn spot_btn px-4 grd_ev_1 gal_btn" onclick="overviewvisibility('faqs');">FAQ’s</a> {% endcomment %}
+                      <a class="otl-btn spot_btn px-4 grd_ev_1 gal_btn d-none" onclick="overviewvisibility('pricing');">Pricing</a>
+                  </div>
+              </div>
+
+              <div>
+
+                <div class="mt-4 mb-5" id="details">
+
+                  <div class="mt-5">
+
+                    <div class="con_info_brd mt-4 mb-4">
+                      {% if req_status %}
+                      <div class="row mrg_l_r_0">
+
+                        <div class="col-md-4 cont_in_bg">
+                          <h5 class="con_intxt">Contact <br> Information</h5>
+                        </div>
+                        <div class="col-md-4 txt_pad pe-0">
+                          <div>
+                            <p class="labelname">Name</p>
+                            <p class="lbname_txt">{{company_details.First_Name}} {{company_details.Last_Name}}</p>
+                          </div>
+                          <div>
+                            <p class="labelname">Designation</p>
+                            <p class="lbname_txt">Director of Sales</p>
+                          </div>
+                        </div>
+                        <div class="col-md-4 txt_pad ps-0">
+                          <div>
+                            <p class="labelname">Contact</p>
+                            <p class="lbname_txt"><a href="tel:{{company_details.Mobile}}">({{company_details.phone_code}}) {{company_details.Mobile}}</a></p>
+                          </div>
+                          <div>
+                            <p class="labelname">Email </p>
+                            <p class="lbname_txt email_txt"><a href="mailto:{{company_details.Email}}">{{company_details.Email}}</a></p>
+                          </div>
+                        </div>
+
+                      </div>
+                      {% endif %}
+                    </div>
+
+                    <div class="con_info_brd mt-4 mb-4 d-none">
+                      <div class="row mrg_l_r_0">
+
+                        <div class="col-md-4 cont_in_bg">
+                          <h5 class="con_intxt">{{"Venue"|transl:is_french}} <br> {{"Features"|transl:is_french}}</h5>
+                        </div>
+                        <div class="col-md-8 txt_pad_1 pb-4">
+                          <div class="row">
+                          {% for key,value in get_features_list.items %}
+                          {% comment %} {% if forloop.counter <= 4 %} {% endcomment %}
+                          <div class="col-md-6">
+                            
+                            <p class="lbname_txt"> <img src="https://img.icons8.com/material-sharp/24/9f007e/checked--v1.png"/>
+
+
+
+                                {{key}} </p>
+                            
+                            {% comment %} <p class="lbname_txt"> <img src="{%static 'main_home1/wedding_static/images/venf_2.png' %}" alt=""> Parking </p> {% endcomment %}
+                          </div>
+                          {% comment %} {% else %} {% endcomment %}
+                          {% comment %} 8 more {% endcomment %}
+                         {% comment %} {% endif %} {% endcomment %}
+                          {% empty %}
+                          <div class="col-md-12 text-center">
+                           
+                            {{"No Features Found"|transl:is_french}}
+                          </div>
+                          {% endfor %}
+                        </div>
+                        </div>
+                        {% comment %} <div class="col-md-4 txt_pad_1 ps-2">
+                          <div>
+                            <p class="lbname_txt"> <img src="{%static 'main_home1/wedding_static/images/venf_5.png' %}" alt=""> Wheelchair Access </p>
+                            <p class="lbname_txt"> <img src="{%static 'main_home1/wedding_static/images/venf_6.png' %}" alt=""> Audio/Visual </p>
+                          </div>
+                          <div>
+                            <p class="lbname_txt"> <img src="{%static 'main_home1/wedding_static/images/venf_7.png' %}" alt=""> Outdoor Facilities </p>
+                          </div>
+                        </div> {% endcomment %}
+
+                      </div>
+
+                    </div>
+
+                    <div class="con_info_brd mt-4 mb-4">
+                      <div class="row mrg_l_r_0">
+
+                        <div class="col-md-4 cont_in_bg">
+                          <h5 class="con_intxt">{{"Catering"|transl:is_french}} <br> {{"Information"|transl:is_french}} </h5>
+                        </div>
+                        <div class="col-md-8 txt_pad_1 pb-4">
+                          <div class="row">
+                            {% for key,value in get_cater_list.items %}
+                            {% comment %} {% if forloop.counter <= 4 %} {% endcomment %}
+                            <div class="col-md-6">
+                              
+                              <p class="lbname_txt"> <img src="{{BASE_URL}}/media/{{value}}" alt=""> {{key}} </p>
+                              
+                              {% comment %} <p class="lbname_txt"> <img src="{%static 'main_home1/wedding_static/images/venf_2.png' %}" alt=""> Parking </p> {% endcomment %}
+                            </div>
+                            {% comment %} {% else %} {% endcomment %}
+                            {% comment %} 8 more {% endcomment %}
+                           {% comment %} {% endif %} {% endcomment %}
+                            {% empty %}
+                            <div class="col-md-12 text-center">
+                             
+                             {{"No Features Found"|transl:is_french}}
+                            </div>
+                            {% endfor %}
+                          </div>
+                        </div>
+                       
+
+                      </div>
+
+                    </div>
+
+                    <div class="con_info_brd mt-4 mb-4 d-none">
+                      <div class="row mrg_l_r_0">
+
+                        <div class="col-md-4 cont_in_bg">
+                          <h5 class="con_intxt">Capacity <br> Information </h5>
+                        </div>
+                        
+                        <div class="col-md-8 txt_pad_1 mb-4">
+
+                          <div class="row">
+
+                            <div class="col-md-6">
+                              <div class="grt_txt">
+                                <p class="grt_pr">Great Lakes Ballroom </p>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <p class="lbname_txt_1">Max Standing  <span class="nmb_txt">350</span></p>
+                              <p class="lbname_txt_1">Max Seated <span class="nmb_txt">260</span></p>
+                            </div>
+                            <!-- <div class="col-md-2">
+                              <p class="nmb_txt">350</p>
+                              <p class="nmb_txt">260</p>
+                            </div> -->
+
+                          </div>
+
+                          <div class="row mt-3 mb-3">
+
+                            <div class="col-md-6">
+                              <div class="grt_txt">
+                                <p class="grt_pr">Superior Meeting Room </p>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <p class="lbname_txt_1">Max Standing  <span class="nmb_txt">60</span></p>
+                              <p class="lbname_txt_1">Max Seated <span class="nmb_txt">40</span></p>
+                            </div>
+                            <!-- <div class="col-md-2">
+                              <p class="nmb_txt">60</p>
+                              <p class="nmb_txt">40</p>
+                            </div> -->
+
+                          </div>
+
+                          <div class="row mt-3 mb-3">
+
+                            <div class="col-md-6">
+                              <div class="grt_txt">
+                                <p class="grt_pr">Huron Boardroom </p>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <p class="lbname_txt_1">Max Standing <span class="nmb_txt">10</span></p>
+                              <p class="lbname_txt_1">Max Seated <span class="nmb_txt">10</span></p>
+                            </div>
+                            <!-- <div class="col-md-2">
+                              <p class="nmb_txt">10</p>
+                              <p class="nmb_txt">10</p>
+                            </div> -->
+
+                          </div>
+
+                        </div>
+
+                      </div>
+
+                    </div>
+
+                    {% comment %} <div class="con_info_brd mt-4 mb-4">
+                      <div class="row mrg_l_r_0">
+
+                        <div class="col-md-4 cont_in_bg">
+                          <h5 class="con_intxt">Our <br> Awards </h5>
+                        </div>
+                        
+                        <div class="col-md-8 txt_pad_1 mb-4">
+
+                          <div>
+                            <img src="{%static 'main_home1/wedding_static/images/badge.png' %}" alt="">
+                          </div>
+
+                        </div>
+
+                      </div>
+
+                    </div> {% endcomment %}
+
+                  </div>
+
+                </div>
+
+                <div id="faqs" style="display: none;">...</div>
+
+                <div id="pricing" style="display: none;">---</div>
+
+
+
+              </div>
+
+
+
+               </div>
+
+               <div>
+
+                <div class="row event-deal mb-4" id="packageandquotes">
+                  <div class="col-md-6">
+                      <h4 class="gal_txt">{{"Deals & Packages"|transl:is_french}}</h4>
+                  </div>
+                </div>
+
+                <div>
+                  {% for i in vendor_package %}
+                  <div class="row dedl_brg mrg_l_r_0 my-2">
+                    <div class="col-md-4 ps-0  del_p_bg" style="background-image: url('{{BASE_URL}}/media/{{i.image}}'); height: 200px;">
+                      <!-- <div class="del_p_bg"><img src="./assets/images/dealpackage.png" alt=""></div> -->
+                    </div>
+
+                    <div class="col-md-8 ps-4">
+                      <div class="row mt-2">
+                        <div class="col-md-6">
+                          <div><p class="ex_date">{{"Expiration"|transl:is_french}}: {{i.valid_till|date:"d / F /Y"}}</p></div>
+                        </div>
+                        <div class="col-md-6">
+                          <div>
+                            <p class="disc_per"><span style="font-size: 14px;">
+                              
+                              
+                              {% with "vendor/"|add:company_details.country_name|add:"/user_country/"|add:get_user_location as template %}
+                      
+                      <input type="hidden" name="" value="{{template}}">
+                      {% if i.package_price == 0 %}
+                      {{i.package_price_range_min|currency_filter:template}} - {{i.package_price_range_max|currency_filter:template}} {{i.country_code|currency_code:template}}
+                      {% else %}
+                      {{i.package_price|currency_filter:template}} {{i.country_code|currency_code:template}}
+                      {% endif %}
+                        {% endwith %}
+                              {% comment %} {{i.package_price}} {% endcomment %}
+                            
+                            
+                            
+                            </span></p></div>
+                        </div>
+                      </div>
+                      <div class="del_pa_txt">
+                        <h4>{{i.package_name}}</h4>
+                        <p style="word-wrap: break-word;">{{i.what_included|striptags|truncatewords:30}}
+                          <span id="viewmorepkg" class="viewmorepkg"><button class="btn btn-link m-0 p-0 viewmorepkgbtn" id="viewmorepkgbtn">{{"View More"|transl:is_french}}</button></span>
+                          
+                        </p>
+                        <span id="pkgallcontent" class="pkgallcontent">{{i.what_included|striptags}}</span>
+                        <p>{{"Attendee Range"|transl:is_french}} : {{i.attendee_range}}</p>
+                        <p>{{"Pricing Model"|transl:is_french}} : {{i.pricing_model}}</p>
+                        {% comment %} {% if req_stats %} {% endcomment %}
+                        {% comment %} <button class="cont_vend">{{"Already Requested"|transl:is_french}}</button> {% endcomment %}
+                        {% if req_status %}
+                        <button class="cont_vend">{{"Contact Vendor"|transl:is_french}}</button>
+                        
+                        {% elif user_login %}
+                        <button class="cont_vend" data-bs-toggle="modal" href="#exampleModalToggle4" id="req_quote_main">{{"Contact Vendor"|transl:is_french}}</button>
+                        
+
+                        {% elif not user_login %}
+                        <button class="cont_vend" data-bs-toggle="modal" href="#exampleModalToggle">{{"Login To Continue"|transl:is_french}}</button>
+                        {% elif not req_status %}
+                        <button class="cont_vend">{{"Contact Vendor"|transl:is_french}}</button>
+                        {% endif %}
+                          {% comment %} <button class="cont_vend">Contact Vendor</button> {% endcomment %}
+                      </div>
+                    </div>
+
+                  </div>
+                  {% empty %}
+                  <div class="row dedl_brg mrg_l_r_0 my-2">
+                   
+
+                    <div class="col-md-12 ps-4">
+                      {{"No Packages / Deals Found"|transl:is_french}}
+                    </div>
+
+                  </div>
+                  {% endfor %}
+                  
+                </div>
+
+               </div>
+
+               <div>
+
+                <div class="row event-deal mt-5 mb-4">
+                  <div class="col-md-6">
+                      <h4 class="gal_txt">{{"On the Blog"|transl:is_french}}</h4>
+                  </div>
+                </div>
+
+                <div class="row blog_pad">
+                  {% for i in get_related_blogs %}
+                  {% if forloop.counter == 1 %}
+                  <div class="col-md-6 pe-3">
+                    <div class="blog_bg">
+                      <div class="blog_img">
+                        <img src="{{BASE_URL}}/media/{{i.cover_image}}" alt="">
+                      </div>
+                        <div class="row blg_brd mrg_l_r_0">
+                          <div class="col-md-3 pos_rel">
+                            <div class="dt_bg_1 ">
+                              <p class="dt_txt">{{i.created_on|date:"d"}}</p>
+                              <p class="mnyr_txt">{{i.created_on|date:"m,y"}}</p>
+                            </div>
+                          </div>
+                          <div class="col-md-9">
+                            <div class="blgtxt">
+                              <p>{{i.title|title|truncatewords:9}}</p>
+                              <a href="{%url 'vendor_home:vendor_blog' %}{{i.blog_id}}/{{i.title}}/">{{"Read More"|transl:is_french}}</a>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                  </div>
+                  {% endif %}
+                  {% if forloop.counter == 2 %}
+                  <div class="col-md-6 pe-3">
+                    <div class="blog_bg">
+                      <div class="blog_img">
+                        <img src="{{BASE_URL}}/media/{{i.cover_image}}" alt="">
+                      </div>
+                        <div class="row blg_brd mrg_l_r_0">
+                          <div class="col-md-3 pos_rel">
+                            <div class="dt_bg_1 ">
+                              <p class="dt_txt">{{i.created_on|date:"d"}}</p>
+                              <p class="mnyr_txt">{{i.created_on|date:"m,y"}}</p>
+                            </div>
+                          </div>
+                          <div class="col-md-9">
+                            <div class="blgtxt">
+                              <p>{{i.title|title|truncatewords:9}}</p>
+                              <a href="{%url 'vendor_home:vendor_blog' %}{{i.blog_id}}/{{i.title}}/">{{"Read More"|transl:is_french}}</a>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                  </div>
+                  {% endif %}
+
+                  {% endfor %}
+                 
+                </div>
+
+               </div>
+
+
+
+
+
+
+
+            </div>
+
+            
+            <div class="spce_wid"></div>
+
+            <div class="side_b_wid">
+
+                <div class="pln_evnt">
+                    <div class="pln_evnt_bg">
+                        <p class="fea_txt">{{"FEATURED"|transl:is_french}}</p>
+                        <h5 class="prc_txt">
+                          {% with "vendor/"|add:company_details.country_name|add:"/user_country/"|add:get_user_location as template %}
+                      
+                      <input type="hidden" name="" value="{{template}}">
+                           {{company_details.min_budget|currency_filter:template}} - {{company_details.max_budget|currency_filter:template}} {{i.country_code|currency_code:template}}
+                        {% endwith %}
+                        </h5>
+                        <h3 class="tlt_hed">{{company_details.Company_Name}}</h3>
+                        {% comment %} {% if req_stats %}
+                        <button class="pln_en_btn mt-3">Already Requested</button>
+                        {% elif req_status %}
+                        <button class="pln_en_btn mt-3">Vendor Engaged</button> {% endcomment %}
+                        
+                        {% if user_login %}
+                        <button class="pln_en_btn mt-3" data-bs-toggle="modal" href="#exampleModalToggle4" id="req_quote_main">{{"Request A Quote"|transl:is_french}}</button>
+                        
+
+                        {% elif not user_login %}
+                        <button class="pln_en_btn mt-3" data-bs-toggle="modal" href="#exampleModalToggle">{{"Login To Continue"|transl:is_french}}</button>
+                        {% comment %} {% elif not req_status %}
+                        <button class="pln_en_btn mt-3">Vendor Rejected</button>
+                        {% endcomment %}
+                        {% endif %} 
+                    </div>
+                    <div class="mt-5">
+                        <div>
+                          {% comment %} <p class="phn_txt mb-4">Place A Quote Request To Continue</p> {% endcomment %}
+                            {% if req_status %}
+                            <p class="phn_txt mb-4"><a href="tel:{{company_details.phone_code}}">({{company_details.phone_code}}) {{company_details.Mobile}}</a></p>
+                            {% endif %}
+                          </div>
+                        <div>
+                            <p class="soc_share">{{"We are on"|transl:is_french}}</p>
+                            <div class="soc_gap mb-4">
+                                <span class="soc_brd btn" onclick="window.location.href='{{company_details.facebook_url}}';"><img src="{%static 'main_home1/wedding_static/images/fb.png' %}" alt=""></span>
+                                <span class="soc_brd btn" onclick="window.location.href='{{company_details.instagram_url}}'"><img src="{%static 'main_home1/wedding_static/images/insta.png' %}" alt=""></span>
+                                <span class="soc_brd btn" onclick="window.location.href='{{company_details.twitter_url}}';"><img src="{%static 'main_home1/wedding_static/images/twitter.png' %}" alt=""></span>
+                                {% comment %} <span class="soc_brd btn"><img src="{%static 'main_home1/wedding_static/images/pintrest.png' %}" alt=""></span> {% endcomment %}
+                            </div>
+                        </div>
+                        <div class="brd_t_bok d-none">
+                            <button class="btn btn-link"><p class="bookmark_txt"><img src="{%static 'main_home1/wedding_static/images/left_ar.png' %}" alt=""> Bookmark this vendor</p></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-4 mb-4">
+
+                 
+
+                  <div class="map_brd">
+
+                    <div class="map_txt">
+                      <h5>{{"Address"|transl:is_french}}</h5>
+                      <p>{{company_details.Company_Address}}<br>{{company_details.country_name}}</p>
+                    </div>
+
+                  </div>
+
+                </div>
+
+                <div class="mt-4 mb-4 d-none">
+
+                  <div class="map_brd_1">
+
+                    <div class="map_txt">
+                      <h5>Search by Tags</h5>
+                      <div class="mt-3">
+                        <button class="tag_btns"><span>Hotel</span></button>
+                        <button class="tag_btns"><span>Special Event Venu</span></button>
+                        <button class="tag_btns"><span>Seat</span></button>
+                        <button class="tag_btns"><span>Mississauga Hotel</span></button>
+                        <button class="tag_btns"><span>Events</span></button>
+                      </div>
+                    </div>
+
+                  </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+     </div>
+
+    </div>
+
+     <div class="top_dl_bg d-none">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 mrg_t_b_50">
+            <div class="dl_head_1">
+              <h3>You Might Be Interested</h3>
+            </div>
+  
+            <div class="mt_50">
+              <div class="owl-carousel vendor_carousel owl-theme">
+
+                {% for i in other_related_vendors %}
+                <div class="item">
+                  <div class="we_ve_card">
+                    <img src="{{BSAE_URL}}/media/{{i.Profile_Img}}" alt="" class="we_ve_img" />
+                    <div class="eve_p">
+                      <div class="ven_titl_txt_eve">
+                        <h3>{{i.Company_Name}}</h3>
+                        <div class="wed_rev_eve">
+                          <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                          <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                          <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                          <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                          <img src="{%static 'main_home1/wedding_static/images/star.png' %}" alt="" />
+                          <span class="rev_txt">12 Reviews</span>
+                        </div>
+                        <p class="mt-2">
+                          <img src="./assets/images/map-marker.png" alt="" />
+                          {{i.Company_Address}}
+                        </p>
+                      </div>
+                      <div class="brd_sep"></div>
+                      <p class="prc_nm_we_ve">
+                        {% with "vendor/"|add:i.country_name|add:"/user_country/"|add:get_user_location as template %}
+                      
+                      <input type="hidden" name="" value="{{template}}">
+                     
+                      {% comment %} {{i.package_price_range_min|currency_filter:template|floatformat:2}} - {{i.package_price_range_max|currency_filter:template|floatformat:2}} {{i.country_code|currency_code:template}} {% endcomment %}
+                      
+                        Price <span>{{i.min_budget|currency_filter:template|floatformat:2}} - {{i.max_budget|currency_filter:template|floatformat:2}} {{i.country_code|currency_code:template}}</span>
+                        {% endwith %}
+                      </p>
+                    </div>
+                    <button class="book_event_wed_ev">View {{i.Company_Name|title}}</button>
+                  </div>
+                </div>
+                {% endfor %}
+                
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+     
+
+</div>
+
+
+
+
+
+
+
+
+
+
+  </div>
+{% include 'vendor_home/footer.html' %}
+
+
+  <!-- JavaScript Bundle with Popper -->
+ <!-- JavaScript Bundle with Popper -->
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+    crossorigin="anonymous"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+  <script src="{%static 'main_home1/wedding_static/owlcarousel/jquery.min.js' %}"></script>
+  <script src="{%static 'main_home1/wedding_static/owlcarousel/owl.carousel.min.js' %}"></script>
+
+  <script src="{%static 'main_home1/wedding_static/js/main.js' %}"></script>
+  {% include 'vendor_home/index-js.html' %}
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+<script>
+  $('.im_thumb').click(function(){
+    var old_images = $('.main_img img').attr('src');
+    //alert(old_images);      
+    var newSrc = $(this).attr('src');
+    $('.main_img img[src="' + old_images + '"]').attr('src', newSrc);
+  });
+</script>
+
+<script>
+  $( document ).ready(function() {
+   $('.quote').hide();
+   $('#askquote').hide();
+
+   function requote(){
+    $('#requote').addClass('aq-btn');
+    $('#requote').addClass('d-none');
+    $('#question').removeClass('aq-btn');
+    $('.quote').show();
+    $('.question').hide();
+    $('#askquote').show();
+    $('#sendmsg').hide();
+
+   };
+   function question(){
+    $('#question').addClass('aq-btn');
+    $('#requote').removeClass('aq-btn');
+    $('.quote').hide();
+    $('.question').show();
+    $('#sendmsg').show();
+    $('#askquote').hide();
+
+   }
+   $('#requote').on('click',function(){
+    requote();
+   });
+   $('#question').on('click',function(){
+    question();
+   });
+   $('#askquote').on('click',function(){
+    $(this).attr('disabled',true);
+   })
+});
+</script>
+
+<!--REQUEST A QUOTE-->
+<script>
+  $(document).ready(function(){
+    $("#askquote").click(function(e){
+      e.preventDefault();
+      $(this).html("Please Wait...");
+      var fname=$('#req_fname').val();
+      var lname=$('#req_lname').val();
+      var email=$('#req_email').val();
+      var event_type=$('#request_type').val();
+      var event_date=$('#req_date').val();
+      var guests=$('#req_guest').val();
+      var msg=$('#req_message').val();
+      var vendor_id=$('#vendor_id').val();
+      var v_link=$('#v_link').val();
+      if(fname == '' || lname == '' || email == '' || event_type == null || event_date == '' || guests == '' || msg == '' || vendor_id == '' ){
+        swal("Blank Field", "Please Fill all Fields to continue", "error");
+        $(this).html(`Ask For Quote`);
+        $(this).prop('disabled',false);
+      }
+      else{
+
+     
+        $.ajax({url: "{%url 'vendor_home:request_quote' %}"+"?email="+email+"&fname="+fname+"&lname="+lname+"&event_type="+event_type+"&event_date="+event_date+"&guests="+guests+"&msg="+msg+"&vendor_id="+vendor_id+"&v_link="+v_link, success: function(result){
+          //$("#div1").html(result);
+          window.location.href="{%url 'vendor_home:user_profile' %}";
+          //$('#askquote').html("Done");
+          //$('#askquote').focusout();
+          console.log(result);
+        }});
+      }
+    });
+
+    $('#req_quote_main').click(function(){
+      $('#requote').click();
+      console.log("click");
+    })
+  });
+  </script>
+  <script>
+    $(document).ready(function(){
+      var str = $('#more').html();
+      var res = str.split(" ");
+      var count = res.length;
+      if(count > 50){
+        $('#button_more').removeClass('d-none');
+      }
+      else{
+        $('#button_more').addClass('d-none');
+      }
+      $('#button_more').on('click',function(){
+        $('#less').addClass('d-none');
+        $('#more').removeClass('d-none');
+        $('#button_less').removeClass('d-none');
+        $(this).addClass('d-none');
+      });
+      $('#button_less').on('click',function(){
+        $('#less').removeClass('d-none');
+        $('#more').addClass('d-none');
+        $('#button_more').removeClass('d-none');
+        $(this).addClass('d-none');
+      });
+    });
+  </script>
+  <script>
+    function htmlEntities(str) {
+      return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+    $('.pkgallcontent').hide();
+    $('.viewmorepkgbtn').on('click',function(){
+      var index=$(this).index('.viewmorepkgbtn');
+
+      //alert(index);
+      var html = $('.pkgallcontent').eq(index).html();
+      swal(html);
+
+
+    })
+  </script>
+</body>
+
+</html>

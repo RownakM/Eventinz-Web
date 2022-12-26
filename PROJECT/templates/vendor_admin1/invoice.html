@@ -1,0 +1,243 @@
+{% load country_data %}
+{% load qr_code %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>EV/{{quotes_data.quote_id}} | Quotation from {{quotes_data.vendor_id.Company_Name}}</title>
+    {% comment %} <link rel="shortcut icon" href="https://eventinz.com/static/main_home1/assets/images/logo-footer.png" type="image/x-icon"> {% endcomment %}
+    {% comment %} <link href="assets/fontawesome/css/all.css" rel="stylesheet" />
+     {% endcomment %}
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+     
+    <style>
+        
+      * {
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      body {
+        background: transparent;
+      }
+      .container {
+        max-width: 550px;
+        min-height: 500px;
+        background: transparent;
+        margin: auto;
+        padding: 10px;
+        margin-top: 30px;
+        border: none;
+        border-radius: 15px;
+      }
+
+      .invoice {
+        max-width: 100%;
+        margin: 5px;
+      }
+
+      .invoice .header,
+      .invoicebody,
+      .infosection {
+        min-height: 60px;
+        max-width: 100%;
+      }
+      .invoicebody {
+        background: transparent;
+        padding: 10px;
+        border: 1px solid #eee;
+        border-radius: 5px;
+      }
+      .header .logo,
+      .rechargeinfo,
+      .links {
+        width: 50%;
+        float: left;
+      }
+      .header .logo img {
+        width: auto;
+        height: 50px;
+      }
+      .header{
+        width: 100%;
+      }
+      .header .date,
+      .amount,
+      .socialicons {
+        width: 50%;
+        float: left;
+      }
+      .header .date p,
+      .amount p {
+        text-align: right;
+        font-size: 12px;
+      }
+      .amount p {
+        font-size: 20px;
+        font-weight: bold;
+      }
+      .rechargeinfo p {
+        margin-bottom: 0;
+        font-size: 12px;
+      }
+      .rechargeinfo h3 {
+        font-size: 20px;
+        margin-top: 5px;
+      }
+      .invoicebody table {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: transparent;
+      }
+      .invoicebody table tr th,
+      .invoicebody table tr td {
+        border: 1px solid #ccc;
+        border: 1pxsolid #ccc;
+        padding: 8px;
+        font-size: 14px;
+      }
+      .invoicebody table tr th {
+        text-align: left;
+      }
+
+      .infosection {
+        margin-top: 20px;
+      }
+      .infosection p {
+        font-size: 12px;
+        margin-top: 10px;
+      }
+
+      .footer {
+        border-top: 1px solid #ccc;
+        min-height: 100px;
+        max-width: 100%;
+        margin-top: 30px;
+        padding-top: 10px;
+      }
+
+      .footertop .links a,
+      .footertop .socialicons a {
+        margin: 0 5px;
+        color: purple;
+      }
+      .footertop .socialicons {
+        text-align: right;
+      }
+      .footertop .socialicons a i {
+        height: 25px;
+        width: 25px;
+        color: #fff;
+        font-size: 12px;
+        text-align: center;
+        line-height: 25px;
+        border-radius: 50%;
+      }
+      .footertop .socialicons a i.fa-facebook {
+        background: blue;
+      }
+      .footertop .socialicons a i.fa-twitter {
+        background: #09c;
+      }
+
+      .footerbottom p {
+        margin-top: 40px;
+        padding-top: 100px;
+        font-size: 14px;
+        line-height: 22px;
+        bottom: 0px;
+        float: right;
+        text-align: right;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container" style="min-width: 70%;">
+      <div class="invoice">
+        <div class="header">
+          <div class="logo">
+            <img src="https://eventinz.com/static/main_home1/assets/images/logo-desktop.png" /> 
+            {% comment %} <img src="https://eventinz.com/static/main_home1/assets/images/logo-desktop.png"  style="float: right;"/> {% endcomment %}
+
+          </div>
+
+          {% comment %} <div class="date">
+            <p>28 Oct 2021</p>
+          </div> {% endcomment %}
+        </div>
+
+        <div class="invoicebody">
+          
+
+          {% comment %} <div class="amount">
+            <p><i class="fas fa-rupee-sign"></i> 300</p>
+          </div> {% endcomment %}
+
+          <table class="table table-borderless">
+            <tbody>
+                <tr class="add">
+                    <td>To</td>
+                    <td>From</td>
+                </tr>
+                <tr class="content">
+                  <td class="font-weight-bold">{{inv_data.Vendor_company_name}} <br> {{inv_data.Vendor_name}} <br> {{inv_data.Vendor_company_name}}<br><br></td>
+
+
+                    <td class="font-weight-bold">{{get_contact_details.Company_Name}}<br> {{get_contact_details.Address_Line_1}} <br> {{get_contact_details.Address_Line_2}}<br>{{get_contact_details.City}} <br>{{get_contact_details.State}}<br>{{get_contact_details.Country}}<br>{{get_contact_details.Phone_Number}}<br>{{get_contact_details.Email}}</td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+        <div class="invoicebody">
+            
+  
+           
+  
+            <table class="table table-borderless table-hover">
+                <thead>
+                    <tr class="add bg-dark text-white round">
+                     <td>PACKAGE NAME & DESCRIPTION</td>
+                     <td>RATE</td>
+                     <td>VALID FROM</td>
+                     <td>TOTAL</td>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    
+                  <tr class="content">
+                     <td>
+                        <span class="text-inverse">{{inv_data.package_name}}</span><br>
+                        <small>{{inv_data.package_description}}</small>
+                     </td>
+                     <td class="text-center">{{inv_data.country_cuurency}} {{inv_data.package_fee}}.00</td>
+                     <td class="text-center">{{inv_data.valid_from}}</td>
+                     <td class="text-right">{{inv_data.country_cuurency}} {{inv_data.package_fee}}.00</td>
+                  </tr>
+                  
+                    
+                </tbody>
+            </table>
+          </div>
+
+        
+
+        <div class="footer" style="text-align: center;">
+
+         <a href="{%url 'vendor_index' %}">Go To Dashboard</a>
+          {% comment %} <div class="footertop">
+            <div class="links">
+              <a href="#">About Us</a>
+              <a href="#">Policy</a>
+              <a href="#">Terms</a>
+            </div>
+
+            <div class="socialicons">
+              <a href="#"><i class="fab fa-facebook"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+          </div> {% endcomment %}
+
+          
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

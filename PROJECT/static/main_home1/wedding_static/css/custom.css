@@ -1,0 +1,847 @@
+@font-face {
+    font-family: Akkurat;
+    src: url(./fonts/Akkurat.ttf);
+}
+
+@font-face {
+    font-family: DomaineDisplayBold;
+    src: url(./fonts/DomaineDisplayBold.ttf);
+}
+
+.nav-link:hover {
+    color: rgba(0, 0, 0, 0.7);
+}
+
+/* Join us for bussiness css start */
+
+.joinus_mnsec {
+    background-image: url(../images/vendrpro/vendmain_bg.png);
+    background-color: #000000;
+    padding: 100px 0;
+    background-position: 0 15%;
+    background-size: cover;
+}
+.mn_center {
+    align-items: center;
+}
+.joinbs_title_txt {
+    font-size: 60px;
+    line-height: 60px;
+    color: #ffffff;
+    font-weight: bold;
+    font-family: "DomaineDisplayBold";
+    margin-bottom: 0;
+}
+.joinbs_sbttl {
+    font-size: 30px;
+    line-height: 60px;
+    color: #ffffff;
+    font-weight: bold;
+    font-family: "DomaineDisplayBold";
+    margin-bottom: 0;
+ }
+ .joinbs_p_txt {
+    font-size: 20px;
+    line-height: 24px;
+    color: #ffffff;
+    font-family: "Akkurat";
+    margin-bottom: 0;
+ }
+.em_bg {
+    border-radius: 8px;
+    background-color: rgb(0 0 0 / 64%);
+    padding: 50px 35px;
+    max-width: 428px;
+    margin-left: auto;
+}
+.getst_txt {
+    font-size: 24px;
+    line-height: 48px;
+    color: #ffffff;
+    font-weight: bold;
+    font-family: "DomaineDisplayBold";
+    text-align: center;
+    margin-bottom: 15px;
+}
+.email_add {
+    border-radius: 3px;
+    background-color: #ffffff;
+    width: 100%;
+    padding: 16px;
+    border: 0;
+    font-size: 16px;
+    line-height: 24px;
+    color: #313131;
+    font-family: "Akkurat";
+    margin-bottom: 8px;
+}
+input.remembr {
+    width: 30px;
+    height: 26px;
+    border-radius: 3px;
+    background-color: #ffffff;
+}
+.rem_txt {
+    display: inline-flex;
+    align-items: center;
+}
+p.frg_txt {
+    text-align: right;
+}
+.rem_txt span {
+    font-size: 16px;
+    line-height: 24px;
+    color: #ffffff;
+    font-family: "Akkurat";
+    margin-left: 5px;
+}
+.frg_txt a {
+    font-size: 16px;
+    line-height: 24px;
+    color: #ffffff;
+    font-family: "Akkurat";
+    text-decoration: none;
+}
+.ven_logbtn {
+    font-size: 16px;
+    line-height: 24px;
+    color: #ffffff;
+    font-family: "Akkurat";
+    text-align: center;
+    border-radius: 3px;
+    background-color: #9f007e;
+    border: 0;
+    padding: 16px;
+    width: 100%;
+    margin-top: 5px;
+}
+.ven_logbtn:hover {
+    background-color: #fff;
+    color: #000;
+}
+
+
+
+
+/* Join us for bussiness css end */
+
+
+
+/* Special-events css start */
+.special-events {
+    background-color: #000;
+    padding: 94px 0 143px 0;
+}
+
+.section-title {
+    font-size: 36px;
+    font-family: DomaineDisplayBold;
+    color: #fff;
+    max-width: 660px;
+}
+
+.sec-subtitle {
+    color: #fff;
+    font-size: 18px;
+    font-family: Akkurat;
+    margin-top: 15px;
+}
+
+.timeline {
+    max-width: 800px;
+    margin: 70px auto 0;
+    width: 100%;
+}
+
+.timeline-head {
+    margin-bottom: 55px;
+}
+
+.timeline-head .tab {
+    display: inline-block;
+    color: #fff;
+    text-decoration: none;
+    font-size: 30px;
+    padding-right: 20px;
+    font-family: DomaineDisplayBold;
+    border-bottom: 4px solid transparent;
+    transition: 0.5s;
+    margin-right: 20px;
+}
+
+.timeline-head .tab:hover,
+.timeline-head .tab.active {
+    border-bottom: 4px solid #9f007e;
+    color: #9f007e;
+}
+
+.event {
+    max-width: 697px;
+    margin: 0 auto;
+    border: 2px solid #474747;
+    border-radius: 50px;
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    position: relative;
+    transition: 0.5s;
+    margin-bottom: 30px;
+}
+
+/* .event:hover, */
+.eve-active {
+    border-color: #fff;
+    transition: 0.5s;
+}
+
+/* .event:hover .eve-no, */
+.eve-active .eve-no {
+    border-color: #fff;
+    color: #fff;
+}
+
+/* .event:hover::before, */
+.event.eve-active::before {
+    background-color: #ffffff;
+}
+
+/* .event:hover .event-title, */
+.eve-active .event-title,
+/* .event:hover .event-text, */
+.eve-active .event-text {
+    color: #fff;
+}
+
+/* .event:hover .event-icon, */
+.eve-active .event-icon {
+    background-color: #9f007e;
+}
+
+/* .event:hover .event-icon img, */
+.eve-active .event-icon img {
+    filter: grayscale(100%) brightness(2000%);
+}
+
+/* .event:hover .eve-btn, */
+.eve-active .eve-btn {
+    background-color: #9f007e;
+    color: #fff;
+    border-color: #9f007e;
+}
+/* .event:hover  */
+.eve-active .eve-btn:hover {
+    background-color: #fff;
+    color: #000;
+}
+.event::before {
+    content: "";
+    transition: 0.5s;
+    position: absolute;
+    height: 100%;
+    width: 2px;
+    background-color: #474747;
+    left: -79px;
+    top: 55%;
+}
+
+.event:last-child::before {
+    display: none;
+}
+
+.eve-no {
+    position: absolute;
+    width: 42px;
+    height: 42px;
+    left: -100px;
+    top: 50%;
+    background: #000;
+    transform: translateY(-50%);
+    font-size: 14px;
+    color: #474747;
+    border: 2px solid #474747;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Akkurat;
+}
+
+.event-icon {
+    min-width: 180px;
+    height: 198px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 25px;
+    background-color: #090909;
+}
+
+.event-desc {
+    width: calc(100% - 110px);
+    margin-left: 30px;
+}
+
+.event-title {
+    font-size: 30px;
+    font-family: DomaineDisplayBold;
+    color: #474747;
+}
+
+.event-text {
+    font-size: 18px;
+    color: #474747;
+    font-family: Akkurat;
+}
+
+.eve-btn {
+    border-color: #474747;
+    color: #474747;
+    padding-left: 30px;
+    padding-right: 30px;
+    font-size: 16px;
+    font-family: Akkurat;
+}
+
+/* Online-platform css start */
+
+.online-platform {
+    padding: 90px 100px 115px;
+    background-color: #9d017b;
+    background-image: url(../images/vendrpro/online_plat_bg.png);
+    background-position: 70% 100%;
+}
+
+.op-row {
+    display: flex;
+    align-items: center;
+    margin-top: 60px;
+    justify-content: space-between;
+}
+
+.op-row .op-col {
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+    transition: 0.5s;
+    margin-right: 15px;
+    margin-left: 15px;
+}
+
+.op-col:hover .col-cap {
+    transition: 0, 5s;
+    background: transparent;
+}
+
+.op-col:hover .cap-foot,
+.op-col:hover .cap-icon img {
+    visibility: hidden;
+    transition: 0, 5s;
+}
+
+.op-col:hover .icon-title {
+    transition: 0, 5s;
+    color: #fff;
+}
+
+.op-col .col-cap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #fff;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+    transition: 0, 5s;
+}
+
+.col-cap .cap-foot {
+    width: 100%;
+    background: #f3f3f3;
+    padding: 15.5px 20px;
+    font-family: Akkurat;
+    font-size: 14px;
+}
+
+.col-cap .cap-icon {
+    text-align: center;
+    padding: 30px 0 0;
+}
+
+.online-platform .slick-slide img {
+    margin: auto;
+}
+
+.cap-icon .icon-title {
+    font-size: 24px;
+    margin-top: 10px;
+    font-family: Akkurat;
+}
+
+.online-platform .slick-prev:before {
+    content: "";
+    width: 43px;
+    height: 43px;
+    border: 2px solid #fff;
+    display: block;
+    border-radius: 100%;
+    background-image: url(../images/vendrpro/arrow-icon.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    line-height: 43px;
+}
+
+.online-platform .slick-next:before {
+    content: "";
+    width: 43px;
+    height: 43px;
+    border: 2px solid #fff;
+    display: block;
+    border-radius: 100%;
+    background-image: url(../images/vendrpro/arrow-icon.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    transform: rotate(180deg);
+    line-height: 43px;
+}
+
+.online-platform .slick-next,
+.online-platform .slick-prev {
+    width: 43px;
+    height: 43px;
+    padding: 0;
+}
+
+.online-platform .slick-prev {
+    left: -60px;
+}
+
+.online-platform .slick-next {
+    right: -60px;
+}
+
+/* Testimonial css start */
+
+.testimonial {
+    padding: 85px 0 65px;
+    background-image: url(../images/vendrpro/customer-bg.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.testi-row {
+    margin-top: 35px;
+}
+
+.testi-col {
+    background-color: rgb(0 0 0 / 35%);
+    border: 2px solid #777571;
+    border-radius: 50px;
+    padding: 50px;
+    color: #fff;
+    transition: 0.5s;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.slick-dots li button:before {
+    font-size: 20px;
+}
+
+.slick-dots {
+    bottom: -45px;
+}
+
+.slick-dots li.slick-active button:before {
+    opacity: 1;
+    color: #ffffff;
+}
+
+.slick-dots li button:before {
+    color: #8b8984;
+    opacity: 1;
+}
+
+.testi-col:hover {
+    background-color: rgb(0 0 0 / 73%);
+    border-color: #fff;
+    transition: 0.5s;
+}
+
+.testi-col:hover .fa {
+    color: #ff593f;
+}
+
+.testi-col p {
+    color: #fff;
+    font-family: Akkurat;
+    font-size: 24px;
+}
+
+.testi-col .fa {
+    color: #cd5c4a;
+    font-size: 24px;
+}
+
+.testi-col .author {
+    font-size: 15px;
+    font-family: DomaineDisplayBold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.author .first-letter {
+    width: 67px;
+    height: 67px;
+    border-radius: 100%;
+    display: inline-block;
+    background: #9f007e;
+    font-size: 46px;
+    margin-right: 15px;
+}
+
+
+/* Our Client css start */
+
+.client_sec {
+    padding: 100px 0;
+}
+.cls_brd {
+    border-radius: 5px;
+    background-color: #ffffff;
+    border: 1px solid #515151;
+    padding: 30px;
+}
+.cltl_bg {
+    margin-bottom: -25px;
+    display: grid;
+    width: 31%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #fff;
+    position: relative;
+}
+.cls_title {
+    font-size: 36px;
+    line-height: 36px;
+    color: #000000;
+    font-weight: bold;
+    font-family: "DomaineDisplayBold";
+    text-align: center;
+    margin-bottom: 10px;
+}
+.clal_center {
+    display: grid;
+    align-items: center;
+}
+.clal_center img {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Our Client css end */
+
+
+/* Our Mission css start */
+
+.our_mission {
+    background-color: #9f007e;
+}
+.msn_bg {
+    background-image: url(../images/vendrpro/our_msn.png);
+    background-size: cover;
+    background-position: center;
+}
+.ormns_txt {
+    padding: 100px 50px;
+}
+.msn_title {
+    font-size: 36px;
+    line-height: 36px;
+    color: #ffffff;
+    font-weight: bold;
+    font-family: "DomaineDisplayBold";
+    margin-bottom: 15px;
+}
+.msn_text {
+    font-size: 18px;
+    line-height: 24px;
+    color: #ffffff;
+    font-family: "Akkurat";
+    width: 74%;
+    margin-bottom: 35px;
+}
+.mission_conbtn {
+    font-size: 16px;
+    line-height: 24px;
+    color: #000000;
+    font-family: "Akkurat";
+    text-align: center;
+    border-radius: 3px;
+    background-color: #ffffff;
+    border: 0;
+    padding: 9px 41px;
+}
+.mission_conbtn:hover {
+    background-color: #000;
+    color: #fff;
+}
+
+/* Our Mission css end */
+
+/* Ready to Get Started css end */
+
+.launch_prf_sec {
+    background-color: #ff593f;
+    padding: 100px 0;
+    text-align: center;
+}
+.get_sec_title {
+    font-size: 36px;
+    line-height: 36px;
+    color: #ffffff;
+    font-weight: bold;
+    font-family: "Domaine Display";
+    text-align: center;
+}
+.get_sec_txt {
+    font-size: 24px;
+    line-height: 36px;
+    color: #ffffff;
+    font-family: "Akkurat";
+    text-align: center;
+}
+.get_sec_btn {
+    border-radius: 3px;
+    filter: drop-shadow(0px 3px 3.5px rgba(0,0,0,0.06));
+    background-color: #ffffff;
+    font-size: 16px;
+    line-height: 24px;
+    color: #000000;
+    font-family: "Akkurat";
+    text-align: center;
+    border: 0;
+    padding: 13px 30px;
+}
+.get_sec_btn:hover {
+    background-color: #000;
+    color: #fff;
+}
+
+
+
+/* Ready to Get Started css end */
+
+
+/* responsive */
+
+@media only screen and (max-width: 1030px) {
+
+    .clal_center img {
+        width: 100%;
+    }
+    .cltl_bg {
+        width: 40%;
+    }
+    
+}
+
+
+@media only screen and (max-width: 830px) {
+
+    .em_bg {
+        margin-top: 50px;
+        margin-left: 0;
+    }
+    .event::before {
+        left: -45px;
+    }
+    .eve-no {
+        left: -65px;
+    }
+    .event {
+        max-width: 600px;
+    }
+    .cltl_bg {
+        width: 55%;
+    }
+    .ormns_txt {
+        padding: 50px 25px;
+    }
+    .msn_text {
+        width: 95%;
+    }
+    .launch_prf_sec {
+        padding: 50px 0;
+    }
+    .joinus_mnsec {
+        padding: 50px 0;
+    }
+
+}
+
+@media only screen and (max-width: 770px) {
+
+    .em_bg {
+        margin-top: 50px;
+        margin-left: 0;
+    }
+    .event::before {
+        left: -45px;
+    }
+    .eve-no {
+        left: -65px;
+    }
+    .event {
+        max-width: 600px;
+    }
+    .cltl_bg {
+        width: 55%;
+    }
+    .ormns_txt {
+        padding: 50px 25px;
+    }
+    .msn_text {
+        width: 95%;
+    }
+    .launch_prf_sec {
+        padding: 50px 0;
+    }
+    .joinus_mnsec {
+        padding: 50px 0;
+    }
+
+}
+
+@media (max-width:480px) {
+
+    .special-events, .online-platform, .testimonial {
+        padding: 35px 0;
+    }
+
+    .timeline {
+        margin: 25px auto 0;
+        padding-left: 10px;
+    }
+
+    .section-title {
+        font-size: 25px;
+    }
+
+    .timeline-head {
+        margin-bottom: 25px;
+    }
+
+    .timeline-head .tab {
+        font-size: 16px;
+        padding-right: 10px;
+        margin-right: 10px;
+    }
+
+    .timeline {
+        max-width: 300px;
+    }
+
+    .event {
+        border-radius: 25px;
+        padding: 20px;
+        flex-direction: column;
+    }
+
+    .event-icon {
+        min-width: 100%;
+        margin-bottom: 15px;
+    }
+
+    .event-desc {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .event-title {
+        font-size: 25px;
+    }
+
+    .eve-no {
+        width: 32px;
+        height: 32px;
+        left: -45px;
+    }
+
+    .event::before {
+        left: -29px;
+        top: 53%;
+    }
+
+    .testi-col {
+        margin-left: 10px;
+        margin-right: 10px;
+        border-radius: 25px;
+        padding: 20px;
+    }
+
+    .testi-col p {
+        font-size: 18px;
+    }
+
+    .em_bg {
+        width: 95%;
+    }
+    .cls_title {
+        font-size: 30px;
+        line-height: 30px;
+    }
+    .cltl_bg {
+        width: 80%;
+    }
+    .clal_center img {
+        width: 100%;
+        margin: 20px 0;
+    }
+    .msn_bg {
+        height: 250px;
+    }
+    .joinbs_title_txt {
+        font-size: 40px;
+        line-height: 40px;
+    }
+    .joinbs_sbttl {
+        font-size: 20px;
+        line-height: 50px;
+    }
+    .joinbs_p_txt {
+        font-size: 16px;
+        line-height: 20px;
+    }
+    .em_bg .col-md-6 {
+        width: 50%;
+    }
+    .clal_center img {
+        height: 100px;
+        object-fit: contain;
+    }
+
+}
+
+@media only screen and (max-width: 375px) {
+    
+    .cltl_bg {
+        width: 90%;
+    }
+    p.frg_txt {
+        text-align: left;
+    }
+    .em_bg .col-md-6 {
+        width: 100%;
+    }
+    .joinbs_title_txt {
+        font-size: 35px;
+        line-height: 35px;
+    }
+
+}

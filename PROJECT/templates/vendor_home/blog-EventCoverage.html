@@ -1,0 +1,351 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>{{details.category}} | Eventinz.com - Your Event Your Way</title>
+  {% include 'vendor_home/head.html' %}
+
+</head>
+
+<body>
+  {% include 'vendor_home/header.html' %}
+<div class="container-fluid baner-blog-section">
+  <div class="baner-blog"><img src="{{BASE_URL}}/media/{{details.cover_image}}" class="img-fluid" alt=""></div>
+  <div class="blog-baner-title">
+    <div class="container">
+      <div class="row">
+        <h3>{{details.category}}</h3>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid blog-update-section event">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="row">
+          <div class="main-heading event-info">
+            <h2>{{details.Heading}}</h2>
+            <p>{{details.description|safe}}</p>
+          </div>
+          {% for i in blog_content %}
+          {% if forloop.first %}
+          <div class="row blog-update-box event-row">
+            <div class="col-md-6">
+              <div class="blog-update-img"><img src="{{BASE_URL}}/media/{{i.cover_image}}"  class="img-fluid" alt=""></div>
+            </div>
+            <div class="col-md-6">
+              <div class="blog-update-title"> <a href="#">{{i.created_on|date:"F d,Y"}}</a>
+                <h3>{{i.title}}</h3>
+                <h6><a href="#">Read More</a></h6>
+              </div>
+            </div>
+          </div>
+          {% else %}
+          <div class="col-md-6">
+            <div class="blog-update-box event">
+              <div class="blog-update-img"><img src="{{BASE_URL}}/media/{{i.cover_image}}" class="img-fluid"  alt=""></div>
+              <div class="blog-update-title">
+                <h3>{{i.title}}</h3>
+              </div>
+              <div class="row blog-update-more-row">
+                <div class="col-md-6">
+                  <div class="blog-update-more a1">
+                    <h5><a href="#">Read More</a></h5>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="blog-update-more">
+                    <h5>{{i.created_on|date:"F d,Y"}}</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+          
+          {% endfor %}
+        </div>
+      </div>
+      <div class="col-md-4 blog-rightbar d-none">
+        <div class="blog-search-bar topnav2 ">
+          <h3>Search</h3>
+          <div class="search-container">
+            <input type="text" placeholder="Search for vendor">
+            <button type="button"><i class="fa fa-search"></i></button>
+          </div>
+        </div>
+        <div class="blog-search-bar topnav2">
+          <h3>Category</h3>
+          <select id="country" name="country">
+            <option value="australia">Select Category</option>
+            <option value="canada">Canada</option>
+            <option value="usa">USA</option>
+          </select>
+        </div>
+        <div class="blog-search-bar topnav2 d-none">
+          <h3>Recently Featured</h3>
+          <div class="blog-recently-box">
+            <div class="blog-recently-img"><img src="assets/images/recently-img-1.jpg" class="img-fluid" alt=""></div>
+            <div class="blog-recently-text">
+              <h4>Hyatt Place </h4>
+            </div>
+          </div>
+          <div class="blog-recently-box">
+            <div class="blog-recently-img"><img src="assets/images/recently-img-2.jpg" class="img-fluid" alt=""></div>
+            <div class="blog-recently-text">
+              <h4>A Celebrity Limousine </h4>
+            </div>
+          </div>
+          <div class="blog-recently-box">
+            <div class="blog-recently-img"><img src="assets/images/recently-img-2.jpg" class="img-fluid" alt=""></div>
+            <div class="blog-recently-text">
+              <h4>Photo Mosaic Media </h4>
+            </div>
+          </div>
+          <div class="blog-recently-box">
+            <div class="blog-recently-img"><img src="assets/images/recently-img-3.jpg" class="img-fluid" alt=""></div>
+            <div class="blog-recently-text">
+              <h4> Detailz Couture Event 
+                Rentals </h4>
+            </div>
+          </div>
+          <div class="blog-recently-box">
+            <div class="blog-recently-img"><img src="assets/images/recently-img-1.jpg" class="img-fluid" alt=""></div>
+            <div class="blog-recently-text">
+              <h4>Hyatt Place </h4>
+            </div>
+          </div>
+          <div class="blog-recently-box">
+            <div class="blog-recently-img"><img src="assets/images/recently-img-2.jpg" class="img-fluid" alt=""></div>
+            <div class="blog-recently-text">
+              <h4>A Celebrity Limousine </h4>
+            </div>
+          </div>
+          <div class="blog-recently-box">
+            <div class="blog-recently-img"><img src="assets/images/recently-img-3.jpg" class="img-fluid" alt=""></div>
+            <div class="blog-recently-text">
+              <h4>A Celebrity Limousine </h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="emailAlearts">
+          <h3>E-mail Alerts</h3>
+          <p>Subscribe our newsletter to get update.</p>
+          <form action="">
+            <div class="form-field position-relative">
+              <input type="email" name="" id="" placeholder="Enter email address">
+              <span><img src="assets/images/email-icon.png" alt=""></span> </div>
+          </form>
+          <div class="footer-social">
+            <ul class="list-unstyled">
+              <li> <a href=""><i class="fa fa-instagram" aria-hidden="true"></i> </a> </li>
+              <li> <a href=""><i class="fa fa-facebook" aria-hidden="true"></i> </a> </li>
+              <li> <a href=""><i class="fa fa-linkedin" aria-hidden="true"></i> </a> </li>
+              <li> <a href=""><i class="fa fa-twitter" aria-hidden="true"></i> </a> </li>
+              <li> <a href=""><i class="fa fa-youtube-play" aria-hidden="true"></i> </a> </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="footer-links">
+              <h3>Company <i class="fa fa-angle-down float-end" aria-hidden="true"></i></h3>
+              <ul>
+                <li> <a href="">About Us</a> </li>
+                <li> <a href="">Venues </a> </li>
+                <li> <a href="">Events</a> </li>
+                <li> <a href="">Deal</a> </li>
+                <li> <a href="">Blog & News</a> </li>
+                <li> <a href="">Contact</a> </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="footer-links">
+              <h3>Vendors <i class="fa fa-angle-down float-end" aria-hidden="true"></i></h3>
+              <ul>
+                <li> <a href="">Caterers</a> </li>
+                <li> <a href="">Event Planners</a> </li>
+                <li> <a href="">Photographers</a> </li>
+                <li> <a href="">Videographers</a> </li>
+                <li> <a href="">Music</a> </li>
+                <li> <a href="">Decor & Rentals</a> </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="footer-logo float-end"> <a href=""><img src="assets/images/logo-footer.png" alt=""></a> </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copyrights">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <p>© 2022 Eventinz, Inc All Rights Reserved</p>
+        </div>
+        <div class="col-md-6 text-end">
+          <ul>
+            <li><a href="">Terms of use</a></li>
+            <li><a href="">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+<div class="modal fade loginSign-form" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered signinForm">
+    <div class="modal-content" style="background-image: url('assets/images/login-bg.png'); background-color:#fcfcfc; background-size: 100%; background-position: bottom center; background-repeat: no-repeat;">
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <div class="modal-header d-block text-center">
+        <h5 class="modal-title">Sign In</h5>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="row g-2 mb-4">
+            <div class="col-md-12">
+              <div class="form-field">
+                <input type="text" class="form-control" name="" id="" placeholder="Email">
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-field">
+                <input type="text" class="form-control" name="" id="" placeholder="Password">
+              </div>
+            </div>
+          </div>
+          <div class="mb-3 custom-check">
+            <input type="checkbox" id="html2" checked>
+            <label for="html2">Remember Me</label>
+          </div>
+          <div class="row g-2 mb-3">
+            <div class="col-md-12">
+              <div class="form-field">
+                <input type="submit" name="" id="" value="Login" class="w-100">
+              </div>
+            </div>
+          </div>
+          <div class="or text-center mb-3"> <span>OR</span> </div>
+          <div class="row g-2 mb-3">
+            <div class="col-md-12">
+              <div class="form-field"> <a href="" class="social-btn"><i class="fa fa-facebook" aria-hidden="true"></i> Signup With Facebook</a> </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-field"> <a href="" class="social-btn google-btn"><i class="fa fa-google" aria-hidden="true"></i> Signup With Google</a> </div>
+            </div>
+          </div>
+          <div class="row g-2">
+            <div class="col-md-12">
+              <div class="form-field text-center">
+                <p>Don't have an account? <a href="" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Create New</a></p>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade loginSign-form" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered signUpForm">
+    <div class="modal-content" style="background-image: url('assets/images/login-bg.png'); background-color:#fcfcfc; background-size: 100%; background-position: bottom center; background-repeat: no-repeat;">
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <div class="modal-header d-block text-center">
+        <h5 class="modal-title">Sign up</h5>
+        <p>Get access to all our planning tools and event planning deals!</p>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="row g-2 mb-4">
+            <div class="col-md-6">
+              <div class="form-field">
+                <input type="text" class="form-control" name="" id="" placeholder="Name">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-field">
+                <input type="text" class="form-control" name="" id="" placeholder="Email">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-field">
+                <input type="text" class="form-control" name="" id="" placeholder="Password">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-field">
+                <input type="text" class="form-control" name="" id="" placeholder="Confirm Password">
+              </div>
+            </div>
+          </div>
+          <span class="big-p">What type of event are you planning?</span>
+          <div class="row g-2 mb-3">
+            <div class="col-md-6">
+              <div class="form-field">
+                <select class="form-select">
+                  <option selected disabled value="">Event Type</option>
+                  <option>Option 1</option>
+                  <option>Option 2</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-field">
+                <input type="date" class="form-control" name="" id="" placeholder="Event Approx Date">
+              </div>
+            </div>
+          </div>
+          <div class="mb-3 custom-check">
+            <input type="checkbox" id="html">
+            <label for="html">I accept Terms of use & Privacy Policy</label>
+          </div>
+          <div class="row g-2 mb-3">
+            <div class="col-md-12">
+              <div class="form-field">
+                <input type="submit" name="" id="" value="Create an account" class="w-100">
+              </div>
+            </div>
+          </div>
+          <div class="or text-center mb-3"> <span>OR</span> </div>
+          <div class="row g-2 mb-3">
+            <div class="col-md-6">
+              <div class="form-field"> <a href="" class="social-btn"><i class="fa fa-facebook" aria-hidden="true"></i> Signup With Facebook</a> </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-field"> <a href="" class="social-btn google-btn"><i class="fa fa-google" aria-hidden="true"></i> Signup With Google</a> </div>
+            </div>
+          </div>
+          <div class="row g-2">
+            <div class="col-md-12">
+              <div class="form-field text-center">
+                <p>Already Registered? <a href="" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Sign in here</a></p>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script> 
+
+<!-- <script src="assets/js/bootstrap.min.js"></script> --> 
+<script src="assets/js/slick.min.js"></script> 
+<script src="assets/js/main.js"></script>
+</body>
+</html>

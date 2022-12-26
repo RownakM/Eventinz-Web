@@ -1,0 +1,505 @@
+{% load static %}
+{% load lang_tran %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    {% include 'vendor_dashboard_v2/head.html' %}
+
+    <title>{{"Renew Leads"|transl:is_french}}</title>
+</head>
+
+<body class="vendor_admin">
+    {% include 'vendor_dashboard_v2/top_header.html' %}
+
+
+    <div class="main-dash">
+       {% include 'vendor_dashboard_v2/aside.html' %}
+
+        <div class="dashboard flex-grow-1">
+
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">{{"Home"|transl:is_french}}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{"Buy Leads"|transl:is_french}}</li>
+                </ol>
+            </nav>
+
+            <div class="request_quote shadow-sm">
+
+                <div class="pack_top_row">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="packages_head">
+                                <h4>{{"Buy Leads"|transl:is_french}}</h4>
+                                <div>
+                                    {% comment %} <button onclick="toggleVisibility('Activate');" class="package_btns active_btn">Activate</button> {% endcomment %}
+                                    {% comment %} <button onclick="toggleVisibility('Deactivate');" class="package_btns">Deactivate</button> {% endcomment %}
+                                </div>
+                            </div>
+                        </div>
+                        {% comment %} <div class="col-lg-6">
+                            <div class="crtbtn">
+                                <button class="crt_pack_btn" onclick="window.location.href='{%url 'My_Packages' %}'">Create a package</button>
+                            </div>
+                        </div> {% endcomment %}
+                    </div>
+
+                    <div class="package_cards">
+
+                        <div id="Activate">
+                            
+                            <div class="row">
+                                {% for i in leads_package %}
+
+                                    <div class="col-lg-3 col-md-6">
+                                        <div class="pack_card">
+                                            <img src="{{BASE_URL}}/media/{{i.package_image}}" alt="">
+                                            <div class="packcard_contetn">
+                                                <h5>{{i.package_name}}</h5>
+                                                <div class="ratevalid">
+                                                    <div class="rate_txt">
+                                                        <span>{{"Valid Type"|transl:is_french}}</span>   {{i.valid_type}} 
+                                                    </div>
+                                                    <div class="valdate">
+                                                        {{"Created At"|transl:is_french}} <span>{{i.created_at|date:"d-m-Y"}}</span>
+                                                    </div>
+                                                </div>
+                                                <div class="cardlastpart">
+                                                    <div class="packicons">
+
+                                                        <p class="text-muted mb-0 text-sm">{{"Leads"|transl:is_french}}</p>
+                                                        <h6 class="mt-0">{{i.lead_count}}</h6>
+                                                    </div>
+                                                    <div class="startat">
+                                                        
+                                                        <p>{{"Price"|transl:is_french}} </p>
+
+                                                        <h6>
+                                                            {{i.package_fee}}
+                                                        </h6>
+                                                        
+                                                       
+                                                    </div>
+
+                                                </div>
+                                                <button class="crt_pack_btn w-100" style="max-width: none; border-radius: 0px;" onclick="setamount('{{i.package_fee}}','{{i.package_name}}');" data-bs-toggle="modal" data-bs-target="#exampleModal">{{"Buy"|transl:is_french}} {{i.package_name|transl:is_french}}</button>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                {% comment %} {% empty %}
+                                <div class="col-lg-12 col-md-12 text-center packicons">
+                                    
+                                    <i class="fa-regular fa-face-frown fa-3x fa-fw"></i>
+                                    <div class="p-2 m-2">
+                                    <h3><span class="text-muted">Get Started By Creating Your First Package Now !</span></h3>
+                                    <button class="crt_pack_btn" onclick="window.location.href='{%url 'My_Packages' %}'">Create a package</button>
+                                    
+                                    </div>
+                                </div> {% endcomment %}
+                                {% endfor %}
+                                
+
+                            </div>
+
+                        </div>
+
+                        {% comment %} <div id="Deactivate" style="display: none;">
+                            
+                             <div class="row">
+
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="pack_card">
+                                        <img src="./img/packageimg4.png" alt="">
+                                        <div class="packcard_contetn">
+                                            <h5>Beautiful weddings call for  outstanding catering</h5>
+                                            <div class="ratevalid">
+                                                <div class="rate_txt">
+                                                    <i class="fa fa-star"></i> 4.7 <span>(35)</span>
+                                                </div>
+                                                <div class="valdate">
+                                                    Valid Till : <span>Oct. 20, 2022</span>
+                                                </div>
+                                            </div>
+                                            <div class="cardlastpart">
+                                                <div class="packicons">
+                                                    <i class="fa fa-eye"></i>
+                                                    <i class="fa fa-trash"></i>
+                                                </div>
+                                                <div class="startat">
+                                                    <p>Starting At</p>
+                                                    <h6>$3000.00 - 130000.00</h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="pack_card">
+                                        <img src="./img/packageimg2.png" alt="">
+                                        <div class="packcard_contetn">
+                                            <h5>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h5>
+                                            <div class="ratevalid">
+                                                <div class="rate_txt">
+                                                    <i class="fa fa-star"></i> 4.9 <span>(25)</span>
+                                                </div>
+                                                <div class="valdate">
+                                                    Valid Till : <span>Oct. 05, 2022</span>
+                                                </div>
+                                            </div>
+                                            <div class="cardlastpart">
+                                                <div class="packicons">
+                                                    <i class="fa fa-eye"></i>
+                                                    <i class="fa fa-trash"></i>
+                                                </div>
+                                                <div class="startat">
+                                                    <p>Starting At</p>
+                                                    <h6>$3000.00 - 130000.00</h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="pack_card">
+                                        <img src="./img/packageimg1.png" alt="">
+                                        <div class="packcard_contetn">
+                                            <h5>I will do birthday Party  arrangement for 500 Guest</h5>
+                                            <div class="ratevalid">
+                                                <div class="rate_txt">
+                                                    <i class="fa fa-star"></i> 5.0 <span>(20)</span>
+                                                </div>
+                                                <div class="valdate">
+                                                    Valid Till : <span>Sept. 20, 2022</span>
+                                                </div>
+                                            </div>
+                                            <div class="cardlastpart">
+                                                <div class="packicons">
+                                                    <i class="fa fa-eye"></i>
+                                                    <i class="fa fa-trash"></i>
+                                                </div>
+                                                <div class="startat">
+                                                    <p>Starting At</p>
+                                                    <h6>$5000.00 - 150000.00</h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="pack_card">
+                                        <img src="./img/packageimg3.png" alt="">
+                                        <div class="packcard_contetn">
+                                            <h5>Fusce dictum metus eu magna facilisis ornare</h5>
+                                            <div class="ratevalid">
+                                                <div class="rate_txt">
+                                                    <i class="fa fa-star"></i> 4.8 <span>(30)</span>
+                                                </div>
+                                                <div class="valdate">
+                                                    Valid Till : <span>Sept. 01, 2022</span>
+                                                </div>
+                                            </div>
+                                            <div class="cardlastpart">
+                                                <div class="packicons">
+                                                    <i class="fa fa-eye"></i>
+                                                    <i class="fa fa-trash"></i>
+                                                </div>
+                                                <div class="startat">
+                                                    <p>Starting At</p>
+                                                    <h6>$5000.00 - 150000.00</h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+
+                            </div>
+
+                        </div> {% endcomment %}
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        
+
+
+        
+    </div>
+
+
+    <div class="footer_sec p-0">
+        <div class="copyrights m-0 text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <p>© 2022 Eventinz, Inc All Rights Reserved</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{"Pay With"|transl:is_french}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <button class="crt_pack_btn w-100 my-2" style="max-width: none; border-radius: 0px;" onclick="setmethod('paypal');">{{"Pay With PayPal"|transl:is_french}}</button>
+
+                    <div id="paypal-button-container"></div>
+                </div>
+                {% if cntry %}
+                {% if vendor_momo %}
+                <div class="col-lg-12">
+                    <input type="number" id="mnumber" placeholder="MoMo Number" class="form-control w-100 my-2">
+                    <button class="crt_pack_btn w-100" style="max-width: none; border-radius: 0px;" onclick="setmethod('momo');" id="pmomo">{{"Pay With MoMo"|transl:is_french}}</button>
+
+                </div>
+                {% endif %}
+                {% endif %}
+                <div class="col-lg-12 d-none my-2" id="momo_msg_box" >
+                    <div class="alert alert-success rounded-0" role="alert">
+                        {{"Request To Pay Sent."|transl:is_french}}
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+<input type ="hidden" id="pay_type">
+<input type ="hidden" id="pay_amt">
+<input type ="hidden" id="lead_type">
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+
+
+        <script>
+            var selector = '.package_btns';
+
+            $(selector).on('click', function(){
+                $(selector).removeClass('active_btn');
+                $(this).addClass('active_btn');
+            });
+        </script>
+
+        <script>
+            var divs = ["Activate", "Deactivate"];
+            var visibleDivId = null;
+            function toggleVisibility(divId) {
+            if(visibleDivId === divId) {
+                //visibleDivId = null;
+            } else {
+                visibleDivId = divId;
+            }
+            hideNonVisibleDivs();
+            }
+            function hideNonVisibleDivs() {
+            var i, divId, div;
+            for(i = 0; i < divs.length; i++) {
+                divId = divs[i];
+                div = document.getElementById(divId);
+                if(visibleDivId === divId) {
+                div.style.display = "block";
+                } else {
+                div.style.display = "none";
+                }
+            }
+            }
+        </script>
+
+
+    
+        <div id="smart-button-container">
+            <div style="text-align: center;">
+              
+            </div>
+          </div>
+          <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+          <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script src="https://www.paypal.com/sdk/js?client-id=AZIm1q4nNWX-CpoJxUU1l1b-Z906A1q5ruuPQMRgBM18GHJndFZ22Z1hcFJGfaNo6FJY8tSHP-7JbOkd&enable-funding=venmo&currency=USD" data-sdk-integration-source="button-factory"></script>
+        <script>
+          function initPayPalButton() {
+            var amount = $('#pay_amt').val();
+            var lead_type = $('#lead_type').val();
+            var amt_usd = amount * 0.0015;
+            paypal.Buttons({
+              style: {
+                shape: 'rect',
+                color: 'blue',
+                layout: 'horizontal',
+                label: 'buynow',
+                
+              },
+      
+              createOrder: function(data, actions) {
+                return actions.order.create({
+                  purchase_units: [{"amount":{"currency_code":"USD","value":amt_usd}}]
+                });
+              },
+      
+              onApprove: function(data, actions) {
+                return actions.order.capture().then(function(orderData) {
+                  
+                  // Full available details
+                  console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+      
+                  // Show a success message within this page, e.g.
+                  //const element = document.getElementById('paypal-button-container');
+                  //element.innerHTML = '';
+                  //element.innerHTML = '<h3>Thank you for your payment!</h3>';
+                  axios.get("{%url 'renew_leads_paypal' %}?amount="+amount+"&type="+lead_type)
+                    .then(function (response) {
+                        // handle success
+                        console.log(response);
+                        //alert("OK");
+                        if (response.data == "OK"){
+                            swal({
+                                title: "Success",
+                                text: "Payment Successfull",
+                                icon: "success",
+                                button: "Okay!",
+                            })
+                            .then((value) => {
+                                window.location.href = "{%url 'vendor_index' %}"
+                            });
+                        }
+                        else{
+                            swal({
+                                title: "Payment Failed",
+                                text: "Failed ! Please Try Again In Some Time",
+                                icon: "error",
+                                button: "Okay!",
+                            })
+                            .then((value) => {
+                                location.reload();
+                            })
+                        }
+                    })
+                    .catch(function (error) {
+                        // handle error
+                        console.log(error);
+                    })
+                    .then(function () {
+                        // always executed
+                    });
+                  //swal("Good job!", "Payment Made With PayPal", "success");
+                  // Or go to another URL:  actions.redirect('thank_you.html');
+                  
+                });
+              },
+      
+              onError: function(err) {
+                console.log(err);
+              }
+            }).render('#paypal-button-container');
+          }
+
+          function setamount(amount,type){
+
+                var amount = amount;
+                //var type = type ;
+                $('#pay_amt').val(amount);
+                $('#lead_type').val(type);
+                
+              //initPayPalButton();
+          }
+          function setmethod(type){
+            $('#pay_type').val(type);
+            var lead_type = $('#lead_type').val();
+            var amount = $('#pay_amt').val();
+            if (type == 'paypal'){
+                initPayPalButton();
+            }
+            else{
+
+                var mnumber = $('#mnumber').val();
+                
+                if (mnumber != ''){
+                    $('#pmomo').html(`
+                <div class="spinner-border spinner-border-sm text-light" role="status">
+                    <span class="visually-hidden">Loading...</span> 
+                  </div>
+                  Please Wait...
+                  
+                `);
+                $('#pmomo').attr('disabled',true);
+
+                  $("#momo_msg_box").removeClass('d-none');
+
+                axios.get("{%url 'renew_leads_momo' %}?amount="+amount+"&type="+lead_type+"&number="+mnumber)
+                    .then(function (response) {
+                        // handle success
+                        console.log(response);
+                        //alert("OK");
+                        if (response.data == "OK"){
+                            swal({
+                                title: "Success",
+                                text: "Payment Successfull",
+                                icon: "success",
+                                button: "Okay!",
+                            })
+                            .then((value) => {
+                                window.location.href = "{%url 'vendor_index' %}"
+                            });
+                        }
+                        else{
+                            swal({
+                                title: "Payment Failed",
+                                text: "Failed ! Please Try Again In Some Time",
+                                icon: "error",
+                                button: "Okay!",
+                            })
+                            .then((value) => {
+                                location.reload();
+                            })
+                        }
+                    })
+                    .catch(function (error) {
+                        // handle error
+                        console.log(error);
+                    })
+                    .then(function () {
+                        // always executed
+                    });
+                }else{
+                    alert("Please Enter MoMo Number to Continue...");
+                }
+                //alert("moMo Okk");
+            }
+          }
+        </script>
+</body>
+
+</html>

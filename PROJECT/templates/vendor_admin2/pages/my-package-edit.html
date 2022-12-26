@@ -1,0 +1,348 @@
+<!--
+=========================================================
+* Soft UI Dashboard - v1.0.5
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard
+* Copyright 2022 Creative Tim (https://www.creative-tim.com)
+* Licensed under MIT (https://www.creative-tim.com/license)
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+-->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>
+    Soft UI Dashboard by Creative Tim
+  </title>
+ {% include 'vendor_admin2/pages/head.html' %}
+ <script src="https://cdn.tiny.cloud/1/f6p74jbuw17jsc2t75unuo7f5b6l4w37ltrnlm56jduf8u24/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+  
+</head>
+
+<body class="g-sidenav-show bg-gray-100">
+ {% include 'vendor_admin2/pages/aside.html' %}
+  <div class="main-content position-relative bg-gray-100 max-height-vh-100 h-100">
+    <!-- Navbar -->
+    {% include 'vendor_admin2/pages/top-nav.html' %}
+    <!-- End Navbar -->
+    <div class="container-fluid">
+      <div class="page-header min-height-300 border-radius-xl mt-2" style="background-image: url('../assets/img/curved-images/curved0.jpg'); background-position-y: 50%;">
+        <span class="mask bg-gradient-primary opacity-6"></span>
+      </div>
+      <div class="card card-body blur shadow-blur mx-4 mt-n6 overflow-hidden">
+        <div class="row gx-4">
+          <div class="col-auto">
+            <div class="avatar avatar-xl position-relative">
+              {% comment %} <img src="{%static 'vendor_admin2/assets/img/bruce-mars.jpg'%}" alt="profile_image" class="w-100 border-radius-lg shadow-sm"> {% endcomment %}
+              {% if pstat %}
+            <img src="{{BASE_URL}}/media/{{user.Profile_Img}}" alt="Christina Mason" class="w-100 border-radius-lg shadow-sm"/>
+            
+            {% else %}
+
+            <img src="https://cambodiaict.net/wp-content/uploads/2019/12/computer-icons-user-profile-google-account-photos-icon-account.jpg " alt="Christina Mason" class="w-100 border-radius-lg shadow-sm"/>
+            {% endif %}
+
+            </div>
+          </div>
+          <div class="col-auto my-auto">
+            <div class="h-100">
+              <h5 class="mb-1">
+                {{user.First_Name}} {{user.Last_Name}}
+              </h5>
+              <p class="mb-0 font-weight-bold text-sm">
+                #{{user.User_ID}}
+              </p>
+              <p class="mb-0 font-weight-bold text-sm">
+                {% for i in li %}
+            <button class="badge rounded-pill px-3 bg-primary btn btn-link me-1 my-1">{{i}}</button>
+            
+            {% endfor %}
+              </p>
+            </div>
+          </div>
+          {% include 'vendor_admin2/pages/intro_head.html' %}
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid py-4">
+      <div class="row">
+        <div class="col-12 col-xl-12">
+          <div class="card h-100">
+            <div class="card-header pb-0 p-3">
+              <h6 class="mb-0">Create A Package <a href="{%url 'my_packages_view' %}" class="btn btn-link btn-sm" style="float: right;">View All </a></h6>
+            </div>
+            <div class="card-body p-3">
+            
+              {% comment %} <h6 class="text-uppercase text-body text-xs font-weight-bolder">Personal Details</h6> {% endcomment %}
+              <form action="{%url 'my_packages_edit_on_post' %}" method="POST" enctype="multipart/form-data" id="pupdate">
+                {% csrf_token %}
+                <div class="row">
+                    {% comment %} <h6 class="text-uppercase text-body text-xs font-weight-bolder">Personal Details</h6> {% endcomment %}
+                    
+            
+
+
+                  <div class="col-lg-12">
+
+            
+                
+               
+                    <div class="col-lg-12">
+                    <div class="mb-3">
+                      <label for="exampleInputPassword1" class="form-label">Package Name</label>
+                      <input type="text" name="package_name" id="pack_name" class="form-control" placeholder="Package Name" value="{{get_package.package_name}}">
+                      <input type="hidden" name="id" id="id" value="{{get_package.id}}">
+                    </div>
+                    </div>
+                    <div class="col-lg-12">
+                      <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Attendees Range</label>
+                        <input type="text" name="Attendees_range" id="Attendees_range" class="form-control" value="{{get_package.attendee_range}}" placeholder="Minimum Attendees - Maximum Attendees">
+                      </div>
+                      </div>
+                    <div class="col-lg-12">
+                      <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Short Package Description</label>
+                        <textarea name="what_included" id="pack_include" cols="30" class="form-control" rows="10" placeholder="Describe What's Included in your Package">{{get_package.what_included|safe}}</textarea>
+                      </div>
+                      </div>
+                      <div class="col-lg-12">
+                        <div class="mb-3">
+                          <label for="exampleInputPassword1" class="form-label">Package Price</label>
+                          <input type="text" name="package_price" id="pack_price" class="form-control" placeholder="Package Price" value="{{get_package.package_price}}">
+                        </div>
+                        </div>
+                        <div class="col-lg-12">
+                          <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Pricing Model</label>
+                            <select name="pricing_model" id="pricing_model" class="form-control">
+                              <option value="" selected disabled>-Pricing Model-</option>
+                              <option value="event" 
+                              {% if get_package.pricing_model == 'event' %}selected{% endif %}>
+                              Per Event</option>
+                              <option value="person" {% if get_package.pricing_model == 'person' %}selected{% endif %}>Per Person</option>
+                              <option value="hour" {% if get_package.pricing_model == 'hour' %}selected{% endif %}>Per Hour</option>
+                              <option value="units" {% if get_package.pricing_model == 'units' %}selected{% endif %}>Per Unit</option>
+                              <option value="day" {% if get_package.pricing_model == 'day' %}selected{% endif %}>Per Day</option>
+                            </select>
+                          </div>
+                          </div>
+                        <div class="col-lg-12">
+                          <div class="mb-3" id="filediv">
+                            <label for="exampleInputPassword1" class="form-label">Event Category</label>
+                            <select name="package_category" id="package_type" class="form-control">
+                              <option value="" disabled>--Select Event Category--</option>
+      
+                              {% for i in ev_cat %}
+                              <option value="{{i.id}}" {% if get_package.package_category == i.id %}selected{% endif %}>{{i.category_name}}</option>
+                              {% endfor %}
+      
+                            </select>
+                          </div>
+                          </div>
+                          <div class="col-lg-12">
+                          <div class="mb-3" id="filediv">
+                            <label for="exampleInputPassword1" class="form-label">Event Sub Category</label>
+                            <select name="package_for" id="package_for" class="form-control">
+                              <option value="{{get_package.package_for}}" readonly selected>{{get_package.package_for}}</option>
+      
+                            </select>
+                          </div>
+                          </div>
+                          <div class="col-lg-12">
+                            <div class="mb-3" id="filediv">
+                              <label for="exampleInputPassword1" class="form-label">Valid Till</label>
+                              <input type="date" class="form-control" name="valid_till" value="{{get_package.valid_till|date:"Y-m-d"}}">
+                            </div>
+                            </div>
+                            <div class="col-lg-12 d-none">
+                              <div class="mb-3">
+                                <label for="exampleInputPassword1" class="form-label">Service Country</label>
+                               <select name="scountry" id="scountry" class="form-control">
+                                <option value="">--Select Country--</option>
+                                {% for i in countries %}
+                                <option value="{{i.id}}">{{i.name}}</option>
+                                {% endfor %}
+                               </select>
+                              </div>
+                              </div>
+                              <div class="col-lg-12 d-none">
+                                <div class="mb-3">
+                                  <label for="exampleInputPassword1" class="form-label">Service State</label>
+                               <select name="sstate" id="sstate" class="form-control">
+                                <option value="">--Select Country First -- </option>
+                               </select>
+                                </div>
+                                </div>
+                         
+                                <div class="col-lg-12">
+                                  <div class="mb-3">
+                                    <label for="exampleInputPassword1" class="form-label">Package Thumbnail</label>
+                                 <input type="file" name="pthumbnail" id="pthumbnail" class="form-control">
+                                  </div>
+                                  </div>
+                    <div class="col-lg-12">
+                      <div class="mb-3">
+
+                        <button type="submit" class="btn btn-primary w-25" id="sbtn">Update</button>
+                      </div>
+                    </div>
+               
+                  </div>
+                </div>
+              </form>
+              
+            </div>
+          </div>
+        </div>
+       
+
+        
+
+
+
+
+        
+      </div>
+      {% include 'vendor_admin2/pages/footer.html' %}
+    </div>
+  </div>
+  
+
+
+ 
+
+
+  <!--   Core JS Files   -->
+  <script src="{%static 'vendor_admin2/assets/js/core/popper.min.js'%}"></script>
+  <script src="{%static 'vendor_admin2/assets/js/core/bootstrap.min.js'%}"></script>
+  <script src="{%static 'vendor_admin2/assets/js/plugins/perfect-scrollbar.min.js'%}"></script>
+  <script src="{%static 'vendor_admin2/assets/js/plugins/smooth-scrollbar.min.js'%}"></script>
+  
+  <script>
+    var win = navigator.platform.indexOf('Win') > -1;
+    if (win && document.querySelector('#sidenav-scrollbar')) {
+      var options = {
+        damping: '0.5'
+      }
+      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+    }
+  </script>
+  <!-- Github buttons -->
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+  <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+  <script src="{%static 'vendor_admin2/assets/js/soft-ui-dashboard.min.js'%}?v=1.0.5"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  {% comment %} <script>
+    $('#filediv').hide();
+    $('#exampleCheck1').change(function() {
+        var status = $(this).is(':checked');
+        if (status == true){
+            $('#filediv').show();
+            $('#fileval').val('YES');
+        }
+        else{
+            $('#filediv').hide();
+            $('#fileval').val('NO');
+
+        }
+    });
+</script> {% endcomment %}
+<script>
+    $('#sbtn').on('click',function(){
+        $(this).prop('disabled',true);
+        $(this).html(`
+        <div class="spinner-border spinner-border-sm text-light" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div> Please Wait...
+        `);
+        $('#pupdate').submit()
+    })
+</script>
+
+
+  <script>
+    $('#package_type').on('change',function(){
+
+      var event_categories=$(this).val();
+      $('#package_for').html('<option selected disabled value="">--Select Package For--</option>');
+    var settings = {
+        "url": "../get-sub-cat/?id="+event_categories,
+        "method": "GET",
+        
+      };
+      
+      $.ajax(settings).done(function (response) {
+          //console.log(response);
+          const obj = JSON.parse(response);
+          console.log(obj);
+        
+        //console.log(response);
+        var table = document.getElementById('package_for');
+   for (var i = 0; i < obj.length; i++){
+       var row = `<option value="${obj[i]['fields'].sub_category_name}">${obj[i]['fields'].sub_category_name}</option>`
+       table.innerHTML += row
+
+   }
+    })
+      });
+
+    
+      {% comment %} $('#pack_include').keyup(function(){
+        console.log('change');
+        //var pack_name=$(this).val();
+        var pack_name=tinymce.get('pack_include').getContent();
+        alert(pack_name);
+        $('#package_include_live').html(pack_name);
+      }) {% endcomment %}
+
+  </script>
+  <script>
+    $('#scountry').on('change', function() {
+      $('#sstate').html('<option value="">--Select State--</option>');
+      var id=this.value;
+      $.ajax({
+          type: "GET",
+          url: "{%url 'Get_State'%}",
+          data: "id="+id,
+          success: function(data){
+              
+              console.log(data)
+              for (var i = 0; i < data.length; i++){
+                console.log("LOOP");
+                  //console.log(data[i].fields)
+                  var state_id=data[i].fields.state_code;
+                  var state_name=data[i].fields.name;
+                  var option_tag=document.getElementById('sstate')
+                  console.log("GOT");
+                  var row=`<option value="${state_id}">${state_name}</option>`;
+                  option_tag.innerHTML+=row
+                  //var row = `<tr>
+                  //				<td>${cno}</td>
+                  //				<td>${data[i].recharge_short_desc}</td>
+                  //				<td>${data[i].recharge_validity}</td>
+                  //  <td>${data[i].recharge_long_desc}</td>
+                  //  <td><button onclick="pay_now(${data[i].recharge_amount})">${data[i].recharge_amount}.00</button></td>
+                  //		  </tr>`
+                  //table.innerHTML += row
+      
+      
+              }
+              $('#statelabel').show();
+
+              $('#state_reg').show();
+          },
+          
+        });
+    });
+
+  </script> 
+</body>
+
+</html>

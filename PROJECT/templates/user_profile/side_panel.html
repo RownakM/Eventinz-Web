@@ -1,0 +1,115 @@
+{% load static %}
+<div class="col-lg-4">
+    <div class="sidepanel_wd">
+        <div class="side_panel">
+            <div class="personal_info">
+                <div class="edit_icon btn_right"><button class="btn" data-bs-toggle="modal" data-bs-target="#updateprofile"><img src="{%static 'main_home1/user_dashboard/images/edit_icn.png' %}" alt="" ></button></div>
+                <div class="prf_iamge">
+                    {% if user.profile_image == "0" %}
+                    <img src="https://eventinz.com/static/main_home1/assets/images/logo-footer.png" alt="" class="img-fluid">
+                    {% else %}
+                    <img src="/media/{{user.profile_image}}" alt="" class="img-fluid" height="128px" width="128px">
+                    {% endif %}
+
+                    <h5 class="maanas_txt">{{user.fname}} {{user.lname|make_list|first}}</h5>
+                    <div class="rev_txt">
+                        <img src="{%static 'main_home1/user_dashboard/images/rev_star.png' %}" alt=""> <span class="numb_txt">5</span> <span class="rev_num_txt">( 3 Reviews )</span>
+                    </div>
+                </div>
+            </div>
+            <div class="pers_address">
+                <div class="address_txt">
+                    <p class="add_img_txt"><img src="{%static 'main_home1/user_dashboard/images/address_icn.png' %}" alt=""> <span>From</span></p>
+                    <p class="add_end_txt">{{country}}</p>
+                </div>
+                <div class="address_txt">
+                    <p class="add_img_txt"><img src="{%static 'main_home1/user_dashboard/images/member_icn.png' %}" alt=""> <span>Member since</span></p>
+                    <p class="add_end_txt">{{user.created_on|date:'d M Y'}}</p>
+                </div>
+                <div class="address_txt">
+                    <p class="add_img_txt"><img src="https://img.icons8.com/ios-glyphs/16/7f7f7f/coin-wallet.png"/> <span>Wallet Balance</span></p>
+                    <p class="add_end_txt">{{user.user_wallet}}</p>
+                </div>
+                {% comment %} <div class="address_txt">
+                    <p class="add_img_txt"><img src="{%static 'main_home1/user_dashboard/images/delivery_icn.png' %}" alt=""> <span>Last Delivery</span></p>
+                    <p class="add_end_txt">2 week ago</p>
+                </div> {% endcomment %}
+                {% comment %} <div class="address_txt">
+                    <p class="add_img_txt"><img src="{%static 'main_home1/user_dashboard/images/clock_icn.png' %}" alt=""> <span>Availability</span></p>
+                    <p class="add_end_txt"><input type="range" name="range" id="" min="0" max="1" value="0" class="input_rang"></p>
+                </div> {% endcomment %}
+            </div>
+        </div>
+        <style>
+            .loginSign-form input[type=text], .loginSign-form button[type=submit], .loginSign-form input[type=password], .loginSign-form input[type=email], .loginSign-form input[type=search], .loginSign-form input[type=date], .loginSign-form input[type=submit], .loginSign-form select {
+                height: 53px;
+                border-radius: 4px;
+                border: 1px solid #000000;
+                padding: 0 16px;
+            }
+        </style>
+        <div class="side_acord">
+            <div class="accordion" id="accordionFilter">
+                <!-- Item -->
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                      aria-expanded="false" aria-controls="collapseOne">
+                      Settings
+                    </button>
+                  </h2>
+                  <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+                    data-bs-parent="#accordionFilter">
+                    <div class="accordion-body">
+                        <div class="map_txt">
+                            <div class="mb-4">
+                              <button class="tag_btns" ><span>Update Profile</span></button>
+                              
+                              {% comment %} <button class="tag_btns"><span>Special Event Venu</span></button>
+                              <button class="tag_btns"><span>Seat</span></button>
+                              <button class="tag_btns"><span>Mississauga Hotel</span></button>
+                              <button class="tag_btns"><span>Events</span></button> {% endcomment %}
+                            </div>
+                            {% comment %} <div class="add_new_btn mb-3">Add New</div> {% endcomment %}
+                          </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+                        aria-expanded="false" aria-controls="collapseOne">
+                        My Events
+                      </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingOne"
+                      data-bs-parent="#accordionFilter">
+                      <div class="accordion-body">
+                          <div class="map_txt">
+                              <div class="mb-4">
+                                <button class="tag_btns" onclick="window.location.href='{%url 'vendor_home:my_events_all' %}';"><span>All Events</span></button>
+
+                                <button class="tag_btns" onclick="window.location.href='{%url 'vendor_home:my_events_open' %}';"><span>Open Events</span></button>
+                                <button class="tag_btns" onclick="window.location.href='{%url 'vendor_home:my_events_progress' %}';"><span>Work in Progress Events </span></button>
+                                <button class="tag_btns" onclick="window.location.href='{%url 'vendor_home:my_events_closed' %}';"><span>Past Events </span></button>
+
+                                
+                                {% comment %} <button class="tag_btns"><span>Special Event Venu</span></button>
+                                <button class="tag_btns"><span>Seat</span></button>
+                                <button class="tag_btns"><span>Mississauga Hotel</span></button>
+                                <button class="tag_btns"><span>Events</span></button> {% endcomment %}
+                              </div>
+                              {% comment %} <div class="add_new_btn mb-3">Add New</div> {% endcomment %}
+                            </div>
+                      </div>
+                    </div>
+                  </div>
+      
+                <!-- Item -->
+                
+      
+              </div>
+        </div>
+    </div>
+    
+</div>

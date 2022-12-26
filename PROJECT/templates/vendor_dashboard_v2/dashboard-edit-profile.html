@@ -1,0 +1,435 @@
+{% load static %}
+{% load get_vendor_cat %}
+{% load get_vendor_answered_keys %}
+{% load lang_tran %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    {% include 'vendor_dashboard_v2/head.html' %}
+
+    <title>Dashboard Chat</title>
+</head>
+
+<body class="vendor_admin">
+   {% include 'vendor_dashboard_v2/top_header.html' %}
+
+
+    <div class="main-dash">
+        {% include 'vendor_dashboard_v2/aside.html' %}
+
+        <div class="dashboard flex-grow-1">
+
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">{{"Home"|transl:is_french}}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{"Profile"|transl:is_french}}</li>
+                </ol>
+            </nav>
+            
+            <div class="profile_page">
+                {% for message in messages %}
+                    <div class="row mb-5">
+                        <div class="col-lg-12">
+                            <div class="alert alert-danger rounded-0" role="alert">
+                                {{message|transl:is_french}}
+                              </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                <div class="row mb-5">
+                    <div class="col-lg-4 my-3">
+                        <div class="profile_col h-100 shadow-sm">
+                            <img src="{%static 'vendor_dashboard_v2/img/profile_bg.png' %}" alt="" class="orange-img img-fluid">
+                            <div class="text-center user_profile_img">
+                                {% if pstat %}
+                                <img src="{{BASE_URL}}/media/{{user.Profile_Img}}" alt="Christina Mason" class="img-fluid" style="width: 206px; height: 206px;"/>
+                                
+                                {% else %}
+                    
+                                <img src="https://cambodiaict.net/wp-content/uploads/2019/12/computer-icons-user-profile-google-account-photos-icon-account.jpg " alt="Christina Mason" class="img-fluid w-50"/>
+                                {% endif %}
+                            </div>
+                            <h2 class="name">
+                                {{user.First_Name}} {{user.Last_Name}}
+                            </h2>
+                            <h6 class="text-muted text-sm text-center">#{{user.User_ID}}</h6>
+
+                            <div class="tag d-flex justify-content-start align-content-center px-4  flex-wrap">
+                                {% for i in li %}
+                                <div class="tag_name">
+                                    <h3>{{i|transl:is_french}}</h3>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            <div class="text-center mt-4">
+                                <button class="btn btn-primary">{{"Edit Profile"|transl:is_french}} </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-8 my-3">
+                        <div class="user_info_col shadow-sm pb-5">
+                            <h2 class="heading">
+                                {{"Update Profile"|transl:is_french}}
+                            </h2>
+                            <form autocomplete="off" action="{%url 'update_on_post' %}" method="POST" enctype="multipart/form-data" id="pupdate">
+                                {% csrf_token %}
+                                <div class="update-box">
+                                    <div class="box-border">
+                                        <h5 class="detail-title mb-0">{{"Personal Details"|transl:is_french}}</h5>
+                                            <div class="row">
+                                                <div class="col-xl-6 col-lg-12 col-md-6 form-group mb-3">
+                                                    <label>{{"First Name"|transl:is_french}}</label>
+                                                    <input type="text"
+                                                        class="form-control border-start-0 border-top-0 border-end-0 rounded-0"
+                                                        value="{{user.First_Name}}" name="fname" required>
+                                                </div>
+                                                <div class="col-xl-6 col-lg-12 col-md-6 form-group mb-3">
+                                                    <label>{{"Last Name"|transl:is_french}}</label>
+                                                    <input type="text"
+                                                        class="form-control border-start-0 border-top-0 border-end-0 rounded-0"
+                                                        value="{{user.Last_Name}}" name="lname" required>
+                                                </div>
+                                                <div class="col-xl-12 col-lg-12 col-md-12 form-group mb-3">
+                                                    <label>{{"Email Address"|transl:is_french}}</label>
+                                                    <input type="text"
+                                                        class="form-control border-start-0 border-top-0 border-end-0 rounded-0"
+                                                        value="{{user.Email}}" readonly required>
+                                                        <button id="pwdchangebtn" class="btn btn-link btn-sm" style="float: right;">{{"Change Your Password"|transl:is_french}}</button>
+                                                </div>
+                                                
+                                                <div class="col-xl-12 col-lg-12 col-md-12 form-group mb-3 d-none" id="curr_pwdfield">
+                                                    <label>{{"Password"|transl:is_french}}</label>
+                                                    
+                                                    <input type="password" id="c_pass" placeholder="Enter Current Password"
+                                                        class="form-control border-start-0 border-top-0 border-end-0 rounded-0"  autocomplete="off">
+                                                    <button id="pwdchangebtn_validate" class="btn btn-solid btn-link btn-sm" style="float: right;">{{"Validate"|transl:is_french}}</button>
+                                                    
+                                                </div>
+
+                                                <div class="col-xl-12 col-lg-12 col-md-12 form-group mb-3 d-none" id="pwdfield">
+                                                    <label>{{"New Password"|transl:is_french}}</label>
+                                                    
+                                                    <input type="password" id="inputpwd" name="password" placeholder="{{'Enter New Password'|transl:is_french}}"
+                                                        class="form-control border-start-0 border-top-0 border-end-0 rounded-0"  autocomplete="off">
+
+                                                    <label> {{"Confirm Password"|transl:is_french}} </label>
+                                                        <input type="password" name="password" class="form-control border-start-0 border-top-0 border-end-0 rounded-0" id="inputpwd_confirm" value="" id="Confirm Password">
+
+                                                    
+                                                    
+                                                </div>
+
+                                                <div id="errortext" class="form-text"></div>
+                                                <div class="col-xl-6 col-lg-12 col-md-6 form-group mb-3">
+                                                    <label>{{"Phone"|transl:is_french}}</label>
+                                                    <input type="text"
+                                                        class="form-control border-start-0 border-top-0 border-end-0 rounded-0"
+                                                        value="{{user.Mobile}}"  autocomplete="off" name="mobile" required>
+
+                                                </div>
+                                                <div class="col-xl-6 col-lg-12 col-md-6 form-group mb-3">
+                                                    <label>{{"Alternative Mobile"|transl:is_french}}</label>
+                                                    <input type="text"
+                                                        class="form-control border-start-0 border-top-0 border-end-0 rounded-0"
+                                                        value="{{user.Alternative_Mobile}}" name="al_mobile"  autocomplete="off" required>
+
+                                                </div>
+
+                                            </div>
+                                    
+                                    </div>
+                                </div>
+                                <div class="update-box">
+                                    <div class="box-border">
+                                        <h5 class="detail-title mb-0">{{"Company Description"|transl:is_french}}</h5>
+                                       
+                                            <div class="row">
+                                                <div class="col-xl-12 col-lg-12 col-md-12 form-group mb-3">
+                                                    <label>{{"Company Name"|transl:is_french}}</label>
+                                                    <input type="text"
+                                                        class="form-control border-start-0 border-top-0 border-end-0 rounded-0"
+                                                        value="{{user.Company_Name}}" name="company" required>
+                                                </div>
+                                                <div class="col-xl-12 col-lg-12 col-md-12 form-group mb-3">
+                                                    <label>{{"Company Address"|transl:is_french}}</label>
+                                                    <textarea
+                                                        class="form-control border-start-0 border-top-0 border-end-0 rounded-0"
+                                                        placeholder="Company Address" rows="2" name="company_address" required>{{user.Company_Address}}</textarea>
+                                                </div>
+                                                <div class="col-xl-12 col-lg-12 col-md-12 form-group mb-3">
+                                                    <label>{{"Company URL"|transl:is_french}}</label>
+                                                    <input type="text"
+                                                        class="form-control border-start-0 border-top-0 border-end-0 rounded-0"
+                                                        value="{{user.Company_url}}" name="Company_url">
+                                                </div>
+                                                <div class="col-xl-12 col-lg-12 col-md-6 form-group mb-3">
+                                                    <label>{{"Company Description"|transl:is_french}}</label>
+                                                    <textarea
+                                                        class="form-control border-start-0 border-top-0 border-end-0 rounded-0"
+                                                        placeholder="Company Description" rows="2" name="company_about" required>{{user.Company_description}}</textarea>
+                                                </div>
+                                                <div class="col-xl-6 col-lg-12 col-md-6 form-group mb-3">
+                                                    <label>{{"Country"|transl:is_french}}</label>
+                                                    <input type="text"
+                                                        class="form-control border-start-0 border-top-0 border-end-0 rounded-0"
+                                                        value="{{user.country_name|transl:is_french}}" disabled>
+                                                <input type="hidden" name="id" value="{{user.id}}">
+
+                                                </div>
+                                                <div class="col-xl-6 col-lg-12 col-md-6 form-group mb-3">
+                                                    <label>{{"State"|transl:is_french}}</label>
+                                                    <input type="text"
+                                                        class="form-control border-start-0 border-top-0 border-end-0 rounded-0"
+                                                        value="{{user.state_name|transl:is_french}}" disabled>
+
+                                                </div>
+                                                <div class="col-xl-6 col-lg-12 col-md-6 form-group mb-3">
+                                                    <label>{{"Minimum Budget"|transl:is_french}}</label>
+                                                    <input type="number"
+                                                        class="form-control border-start-0 border-top-0 border-end-0 rounded-0"
+                                                        value="{% if user.min_budget != 0 %}{{user.min_budget}}{% endif %}" min='1' name="min_budget" id="min_budget" required>
+                                                </div>
+                                                <div class="col-xl-6 col-lg-12 col-md-6 form-group mb-3">
+                                                    <label>{{"Maximum Budget"|transl:is_french}}</label>
+                                                    <input type="number"
+                                                        class="form-control border-start-0 border-top-0 border-end-0 rounded-0"
+                                                        value="{% if user.max_budget != 0 %}{{user.max_budget}}{% endif %}" name="max_budget" id="max_budget" min="1" required>
+                                                </div>
+                                                <div class="col-lg-12 rounded-0 bg-white text-white" id="budgethelp">
+
+                                                </div>
+                                            </div>
+                                      
+                                    </div>
+                                </div>
+                                <div class="update-box">
+                                    <div class="box-border">
+                                        <h5 class="detail-title mb-0">{{"Social Media Profiles"|transl:is_french}}</h5>
+                                       
+                                            <div class="row">
+                                                <div class="col-xl-6 col-lg-12 col-md-6 form-group mb-3">
+                                                    <label>{{"Facebook"|transl:is_french}}</label>
+                                                    <input type="text"
+                                                        class="form-control border-start-0 border-top-0 border-end-0 rounded-0"
+                                                        value="{%if user.facebook_url != None %}{{user.facebook_url}}{% else %}{% endif %}" name="facebook_url">
+                                                </div>
+                                                <div class="col-xl-6 col-lg-12 col-md-6 form-group mb-3" >
+                                                    <label>{{"Twitter"|transl:is_french}}</label>
+                                                    <input type="text"
+                                                        class="form-control border-start-0 border-top-0 border-end-0 rounded-0"
+                                                        value="{%if user.twitter_url != None %}{{user.twitter_url}}{% else %}{% endif %}" name="twitter_url">
+                                                </div>
+                                                <div class="col-xl-6 col-lg-12 col-md-6 form-group mb-3" >
+                                                    <label>{{"Linkedin"|transl:is_french}}</label>
+                                                    <input type="text"
+                                                        class="form-control border-start-0 border-top-0 border-end-0 rounded-0"
+                                                        value="{%if user.linkedin_url != None %}{{user.linkedin_url}}{% else %}{% endif %}" name="linkedin_url" >
+                                                </div>
+                                                <div class="col-xl-6 col-lg-12 col-md-6 form-group mb-3">
+                                                    <label>{{"Instagram"|transl:is_french}}</label>
+                                                    <input type="text"
+                                                        class="form-control border-start-0 border-top-0 border-end-0 rounded-0"
+                                                        value="{%if user.instagram_url != None %}{{user.instagram_url}}{% else %}{% endif %}"  name="instagram_url">
+                                                </div>
+                                            </div>
+                                      
+                                    </div>
+                                </div>
+                                <div class="update-box">
+                                    <div class="box-border">
+                                        <h5 class="detail-title mb-0">{{"Vendor Sub Categories"|transl:is_french}}</h5>
+                                        {% for i in sub_cat_data %}
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox{{i.id}}"
+                                            value="{{i.id}}" name="ven_subs" {% if i.id in check_data %}checked{% endif %} {% if check_all %}checked{% endif %}>
+                                            <label class="form-check-label" for="inlineCheckbox{{i.id}}">{{i.sub_category_name|transl:is_french}}</label>
+                                        </div>
+                                        {% endfor %}
+                                        
+                                    </div>
+                                </div>
+                                <div class="update-box">
+                                    <div class="box-border">
+                                        <h5 class="detail-title mb-0">{{"Features"|transl:is_french}}</h5>
+                                        <div class="row">
+                                        {% for i in optgroup %}
+                                        <div class="col-lg-12">
+                                        <div class="container-fluid p-0 m-0 my-2"><h6 style="color: #9f007e; border-bottom: 2px solid #9f007e;">{{i|get_v_vat|transl:is_french}}</h6></div>
+                                        {% for question in vendor_questions %}
+                                            {% if question.Question_Category.id == i %}
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" name="question_new" id="question_new_id{{question.id}}" value="{{question.id}}" 
+                                            {% if question.id|get_check:user.Email == "Check" %} checked 
+                                            
+                                            {% endif %}
+                                            >
+                                            <input type="hidden" name="question_new_id" value="{{question.id}}">
+                                            <label class="form-check-label" for="question_new_id{{question.id}}">{{question.Question_Text|transl:is_french}}</label>
+                                        </div>
+                                        {% endif %}
+                                        {% endfor %}
+                                            </div>
+                                        {% endfor %}
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                                <div class="update-box">
+                                    <div class="box-border">
+                                        <h5 class="detail-title mb-0">{{"Profile Picture"|transl:is_french}}</h5>
+                                        <div class="row">
+                                            <div class="col-xl-12 col-lg-12 col-md-12 form-group mb-3">
+                                                <input type="checkbox" name="filecheck" class="form-check-input" id="exampleCheck1">
+                                                <label>{{"Update Profile Picture ?"|transl:is_french}}</label>
+                                                <input type="hidden" name="fileval" id="fileval" value="" >
+                                            </div>
+                                            <div class="col-lg-12" id="filediv">
+                                                
+                                                <label for="exampleInputPassword1" class="form-label">{{"Change Profile Picture"|transl:is_french}}</label>
+                                                <input type="file" class="form-control border-start-0 border-top-0 border-end-0 rounded-0" name="file" id="exampleInputFile1" accept="image/png, image/jpg, image/jpeg">
+                                            
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                                <div class="update-box">
+                                    <button type="submit" class="btn update-profile-btn w-100" id="sbtn">{{"Update Profile"|transl:is_french}}</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <div class="footer_sec p-0">
+        <div class="copyrights m-0 text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <p>© {{"2022 Eventinz, Inc All Rights Reserved"|transl:is_french}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script>
+          $('#filediv').hide();
+          $('#exampleCheck1').change(function() {
+              var status = $(this).is(':checked');
+              if (status == true){
+                  $('#filediv').show();
+                  $('#fileval').val('YES');
+              }
+              else{
+                  $('#filediv').hide();
+                  $('#fileval').val('NO');
+      
+              }
+          });
+      </script>
+      {% comment %} <script>
+          $('#sbtn').on('click',function(){
+              $(this).prop('disabled',true);
+              $(this).html(`
+              <div class="spinner-border spinner-border-sm text-light" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div> Please Wait...
+              `);
+              $('#pupdate').submit()
+          })
+      </script> {% endcomment %}
+      <script>
+        $(document).ready(function(){
+          $('#inputpwd,#inputpwd_confirm').on('input',function(){
+            var inputpwd=$('#inputpwd').val();
+            var inputpwd_confirm=$('#inputpwd_confirm').val();
+            if (inputpwd == inputpwd_confirm){
+              $('#sbtn').prop('disabled',false);
+              $('#errortext').html(`<font color="green">Password Matched !</font>`);
+            }
+            else{
+              $('#sbtn').prop('disabled',true);
+              $('#errortext').html(`<font color="red">Passwords Do Not Match ! Please Check ...</font>`);
+      
+            }
+          })
+        })
+      </script>
+      <script>
+        
+        $('#pwdchangebtn').on('click',function(e){
+          e.preventDefault();
+      
+          $(this).addClass('d-none');
+          $('#curr_pwdfield').removeClass('d-none')
+          //$('#pwdfield').removeClass('d-none');
+        });
+        $('#pwdchangebtn_validate').on('click',function(e){
+          e.preventDefault();
+          var current = '{{user.Password}}';
+          var given = $('#c_pass').val();
+      
+          if (given == current){
+            $('#pwdfield').removeClass('d-none');
+            $('#c_pass').attr('readonly',true);
+          }
+          //$('#pwdfield').removeClass('d-none');
+        });
+      
+        $('#min_budget').on('input',function(){
+          var min_val=parseInt($(this).val());
+          var max_val=parseInt($('#max_budget').val());
+          if(min_val>=max_val){
+            //alert("NO");
+            $('#budgethelp').html(`<font color="red">{{"Minimum Budget should be Lower than Maximum Budget"|transl:is_french}}</font>`);
+            $('#sbtn').attr('disabled',true);
+            
+          }
+          else{
+            $('#budgethelp').html(``);
+      
+            $('#sbtn').attr('disabled',false);
+          }
+        });
+        $('#max_budget').on('input',function(){
+          var min_val=parseInt($('#min_budget').val());
+          var max_val=parseInt($(this).val());
+          if(min_val>=max_val){
+            //alert("NO");
+            $('#budgethelp').html(`<font color="red">{{"Minimum Budget should be Lower than Maximum Budget"|transl:is_french}}</font>`);
+            $('#sbtn').attr('disabled',true);
+            
+          }
+          else{
+            $('#budgethelp').html(``);
+      
+            $('#sbtn').attr('disabled',false);
+          }
+        })
+      </script>
+
+
+</body>
+
+</html>

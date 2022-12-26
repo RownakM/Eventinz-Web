@@ -1,0 +1,170 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Eventinz.com | Your Event Your Way</title>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous" />
+    <link rel="stylesheet" href="{%static 'main_home1/wedding_static/owlcarousel/assets/owl.carousel.min.css' %}" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="{%static 'main_home1/wedding_static/owlcarousel/assets/owl.theme.default.min.css' %}" />
+    <link rel="stylesheet" href="{%static 'main_home1/wedding_static/fonts/style.css' %}" />
+    <link rel="stylesheet" href="{%static 'main_home1/wedding_static/css/style.css' %}" />
+  {% include 'vendor_home/head.html' %}
+
+</head>
+
+<body>
+
+    {% include 'vendor_home/header.html' %}
+
+
+    <div class="main_cont">
+
+
+        <div>
+            <div class="deal_main_bg" style="background-image: url('{{BASE_URL}}/media/{{data.page_image}}');">
+                <h3>{{data.page_header}}</h3>
+            </div>
+        </div>
+
+        <div class="container resp_cont">
+
+            <div class="row mt-5 mb-5 align-center ">
+                <div class="col-md-12">
+                    <div class="deal_title">
+                        {{data.content|safe}}
+                    </div>
+                </div>
+                
+                  
+            </div>
+
+            <div class="row mb-5 resp_mrg">
+               
+                <div class="col-md-12 text-center">
+                    
+                </div>
+                
+            </div>
+
+           
+
+        </div>
+
+
+    </div>
+
+
+
+
+    {% include 'vendor_home/footer.html' %}
+
+
+    <!-- Modal -->
+   
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+
+    <script src="{%static 'main_home1/wedding_static/owlcarousel/jquery.min.js' %}"></script>
+    <script src="{%static 'main_home1/wedding_static/owlcarousel/owl.carousel.min.js' %}"></script>
+
+    <script src="{%static 'main_home1/wedding_static/js/main.js' %}"></script>
+    
+{% comment %} <script>
+    const redirecterror = position => {
+        //alert(position.code);
+        if (position.code == '1'){
+          
+        }
+        else{
+          var url="{%url 'vendor_home:vendor_home_index' %}";
+          window.location.replace(url);
+        }
+      }
+      const successfulLookup = position => {
+        var url="{%url 'vendor_home:vendor_home_index' %}";
+        window.location.replace(url);
+          const { latitude, longitude } = position.coords;
+         // console.log(latitude);
+        //  console.log(longitude);
+  
+          var api_key = 'c8c4d13225914c19b28021ece8bc07da';
+     // var latitude = '51.0';
+     // var longitude = '7.0';
+    
+      var api_url = 'https://api.opencagedata.com/geocode/v1/json'
+    
+      var request_url = api_url
+        + '?'
+        + 'key=' + api_key
+        + '&q=' + encodeURIComponent(latitude + ',' + longitude)
+        + '&pretty=1'
+        + '&no_annotations=1';
+    
+      // see full list of required and optional parameters:
+      // https://opencagedata.com/api#forward
+    
+      var request = new XMLHttpRequest();
+      request.open('GET', request_url, true);
+    
+      request.onload = function() {
+        // see full list of possible response codes:
+        // https://opencagedata.com/api#codes
+    
+        if (request.status === 200){
+          // Success!
+          var data = JSON.parse(request.responseText);
+         // alert(data.results[0]["geometry"].lat);
+  
+  
+          var latitude=data.results[0]["geometry"].lat;
+          var longitude=data.results[0]["geometry"].lng;
+          //console.log(data); // print the location
+          //alert(data.results[0]);
+          console.log(data);
+          var url="{%url 'vendor_home:track_me_new'%}"+longitude+"/"+latitude+"/";
+          //alert(url);
+          $.ajax({
+            url: url,
+           // context: document.body
+          }).done(function(response) {
+           //alert(response)
+           $('#state_name').html(response);
+          });
+        } else if (request.status <= 500){
+          // We reached our target server, but it returned an error
+          alert("oops");
+          console.log("unable to geocode! Response code: " + request.status);
+          var data = JSON.parse(request.responseText);
+          console.log('error msg: ' + data.status.message);
+        } else {
+          console.log("server error");
+        }
+      };
+    
+      request.onerror = function() {
+        // There was a connection error of some sort
+        console.log("unable to connect to server");
+      };
+    
+      request.send();
+      }
+      window.navigator.geolocation
+      .getCurrentPosition(successfulLookup, redirecterror);
+</script> {% endcomment %}
+
+</body>
+
+</html>

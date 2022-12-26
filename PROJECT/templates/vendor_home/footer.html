@@ -1,0 +1,202 @@
+{% load static %}
+{% load lang_tran %}
+<style>
+    .open-button {
+        background-color: #9f007c;
+        color: white;
+        
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        
+        position: fixed;
+        bottom: 23px;
+        right: 28px;
+        width: 50px;
+        height: 50px;
+      }
+    
+      .open-button:hover{
+        background-color: black;
+        
+      }
+      .icon-bar {
+        position: fixed;
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+      }
+      
+      .icon-bar button {
+        display: block;
+        text-align: center;
+        padding: 16px;
+        transition: all 0.3s ease;
+        color: white;
+        font-size: 20px;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+      }
+      
+      .icon-bar button:hover {
+        background-color: #000;
+        color: #fff;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+      }
+      .icon-bar button:focus{
+        background-color: #9f007e;
+        color: #fff;
+      }
+      .facebook {
+        background: #3B5998;
+        color: white;
+      }
+      
+</style>
+<div class="icon-bar">
+    <button onclick="setlang({% if is_french == 'No' %} 'Yes' {% else %} 'No' {% endif %});" id="lang" class="cta-btn btn btn-purple rounded-0" style="font-size: 15px;">
+        Switch To {% if is_french == 'No' %} French {% else %} English {% endif %}
+        
+    </button> 
+    {% comment %} <a href="#" class="twitter"><i class="fa fa-twitter"></i></a> 
+    <a href="#" class="google"><i class="fa fa-google"></i></a> 
+    <a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a>
+    <a href="#" class="youtube"><i class="fa fa-youtube"></i></a>  {% endcomment %}
+  </div>
+{% comment %} <button class="open-button" onclick="setlang({% if is_french == 'No' %} 'Yes' {% else %} 'No' {% endif %});" id="lang"><i class="fa fa-language fa-fw fa-2x"></i></button> {% endcomment %}
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="emailAlearts">
+                    <h3>{{"E-mail Alerts"|transl:is_french}}</h3>
+                    <p>{{"Subscribe our newsletter to get update."|transl:is_french}}</p>
+                    <form action="{%url 'vendor_home:subscribe_newsletter' %}" method="POST">
+                        <div class="form-field position-relative">
+                           
+                                {% csrf_token %}
+                                <input type="email" name="emailid" id="emailid" placeholder="{{'Enter email address'|transl:is_french}}">
+                                <input type="hidden" name="url" value="{{request.path}}">
+                                <span style="right: 7px; top: 51%;">
+                                    {% comment %} <img src="{%static 'main_home1/assets/images/email-icon.png' %}" alt=""> {% endcomment %}
+                                
+                                <button type="submit" class="btn btn-link m-2 p-0" style="color: #ff2c09; background: none;">{{"Subscribe"|transl:is_french}}</button></span>
+                         
+                        </div>
+                    </form>
+                    <div class="footer-social">
+                        <ul class="list-unstyled">
+                            <li>
+                                <a href=""><i class="fa fa-instagram" aria-hidden="true"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href=""><i class="fa fa-facebook" aria-hidden="true"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href=""><i class="fa fa-linkedin" aria-hidden="true"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href=""><i class="fa fa-twitter" aria-hidden="true"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href=""><i class="fa fa-youtube-play" aria-hidden="true"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="footer-links">
+                            <h3>Company <i class="fa fa-angle-down float-end" aria-hidden="true"></i></h3>
+                            <ul>
+                                <li>
+                                    <a href="{%url 'vendor_home:about' %}">{{"About Us"|transl:is_french}}</a>
+                                </li>
+                                <li>
+                                    <a href="{%url 'vendor_home:our_vendors' %}">{{"Our Vendors"|transl:is_french}} </a>
+                                </li>
+                               
+                                {% comment %} <li>
+                                    <a href="{%url 'vendor_home:deals' %}">{{"Deals"|transl:is_french}}</a>
+                                </li> {% endcomment %}
+                                <li>
+                                    <a href="{%url 'vendor_home:vendor_blog' %}">{{"Blog & News"|transl:is_french}}</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'vendor_home:vendor_contact' %}">{{"Contact"|transl:is_french}}</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-4 ">
+                        <div class="footer-links">
+                            <h3>{{"We Are At"|transl:is_french}} <i class="fa fa-angle-down float-end" aria-hidden="true"></i></h3>
+                            <a href= "#"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/2560px-Google_Play_Store_badge_EN.svg.png" class="img-fluid" alt=""></a>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="footer-logo float-end">
+                            <a href=""><img src="{%static 'main_home1/assets/images/logo-footer.png' %}" alt=""></a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="copyrights">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>© {{"2022 Eventinz, Inc All Rights Reserved"|transl:is_french}}</p>
+                </div>
+                <div class="col-md-6 text-end">
+                    <ul>
+                        <li><a href="{%url 'vendor_home:termsncond' %}">{{"Terms of use"|transl:is_french}}</a></li>
+                        <li><a href="{%url 'vendor_home:privacynpolicy' %}">{{"Privacy Policy"|transl:is_french}}</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+function setlang(settype){
+    var data = settype;
+    $('#lang').html(`<div class="spinner-border spinner-border-sm text-light" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>&nbsp;Loading...
+      `);
+    axios.get("{%url 'vendor_home:set_lang' %}?active="+data)
+      .then(function (response) {
+        console.log(response);
+        location.reload();
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    
+}
+</script>
+<script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+    s1.async=true;
+    s1.src='https://embed.tawk.to/6347de6a37898912e96e6868/1gf8bpk5a';
+    s1.charset='UTF-8';
+    s1.setAttribute('crossorigin','*');
+    s0.parentNode.insertBefore(s1,s0);
+    })();
+</script>

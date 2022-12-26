@@ -1,0 +1,150 @@
+{% load static %}
+{% load cool_num %}
+{% load get_event_type %}
+{% load country_data %}
+{% load event_currency_convert %}
+{% load get_head %}
+{% load get_vendor_proposal %}
+{% load lang_tran %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <title>Dashboard my events page</title>
+     {% include 'user_dashboard_v2/head.html' %}
+    <link rel="stylesheet" href="{%static 'user_dashboard_v2/assets/css/dashboard-my-events-page.css' %}">
+
+</head>
+
+<body>
+
+
+    {% include 'user_dashboard_v2/top-nav.html' %}
+
+    <div class="main-dash">
+        {% include 'user_dashboard_v2/aside.html' %}
+        <div class="dashboard w-100">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">{{"Home"|transl:is_french}}</a></li>
+                    <li class="breadcrumb-item"><a href="#">{{"Dashboard"|transl:is_french}}</a></li>
+                    {% comment %} <li class="breadcrumb-item"><a href="#">User Statistics</a></li> {% endcomment %}
+                    <li class="breadcrumb-item active"><a href="#">{{"My Chats"|transl:is_french}}</a></li>
+                </ol>
+            </nav>
+            <div class="dash-content">
+                <div class="main-content">
+                    <div class="row">
+                        <div class="col-lg-12 p-4 bg-white shandow-sm ">
+                            <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">{{"Event ID"|transl:is_french}}</th>
+                                    <th scope="col">{{"Company Name"|transl:is_french}}</th>
+                                    <th scope="col">{{"Event Category"|transl:is_french}}</th>
+
+                                    <th scope="col">{{"Created On"|transl:is_french}}</th>
+                                    <th scope="col">{{"Action"|transl:is_french}}</th>
+                                  </tr>
+                                </thead>
+        
+                                 <tbody>
+                                    {% for i in vendor_hired %}
+                                  <tr>
+                                    <th scope="row">{{i.event_id.id}}</th>
+                                    <td>{{i.vendor_id.Company_Name}}</td>
+                                    <td>{{i.event_id.Event_Categories|event_type|transl:is_french}}</td>
+
+                                    <td>{{i.created_on}}</td>
+                                    <td><button class="btn crtevn_btn" onclick="window.location.href='{%url 'vendor_home:chat_dup' %}{{i.id}}/events/'">{{"Chat"|transl:is_french}}</button></td>
+                                  </tr>
+                                  {% endfor %}
+                                 
+                                </tbody>
+                              </table>
+
+                        </div>
+                    </div>
+
+                    
+
+                </div>
+                <div class="dash-right">
+                    <div class="wrap-right">
+                        <div class="certi-box">
+                            <div class="rs-title">{{"My Events"|transl:is_french}}</div>
+                            <ul class="e-status">
+                                <li class="eve-type st-act"> 
+                                    <span class="no-eve">{{event_count}}</span>
+                                    <p>{{"Total Events"|transl:is_french}}</p>
+                                </li>
+                                <li class="eve-type st-can"> 
+                                    <span class="no-eve">{{ongoing_event_count}}</span>
+                                    <p>{{"Ongoing Events"|transl:is_french}}</p>
+                                </li> 
+                                <li class="eve-type st-done"> 
+                                    <span class="no-eve">{{complete_event_count}}</span>
+                                    <p>{{"Completed Events"|transl:is_french}}</p>
+                                </li>
+                                <li class="eve-type st-can "> 
+                                    <span class="no-eve">{{cancel_event_count}}</span>
+                                    <p>{{"Cancel Events"|transl:is_french}}</p>
+                                </li> 
+                                <li class="eve-type st-act mb-0"> 
+                                    <span class="no-eve">{{archieve_event_count}}</span>
+                                    <p>{{"Archieve Events"|transl:is_french}}</p>
+                                </li>                            
+                            </ul>
+                        </div>
+                        <div class="certi-box text-center">
+                            {% comment %} <div class="rs-title">My Events</div> {% endcomment %}
+                            {% comment %} <ul class="e-status">
+                                <li class="eve-type st-act"> 
+                                    <span class="no-eve">{{event_count}}</span>
+                                    <p>Total Events</p>
+                                </li>
+                                <li class="eve-type st-can"> 
+                                    <span class="no-eve">{{ongoing_event_count}}</span>
+                                    <p>Ongoing Events</p>
+                                </li> 
+                                <li class="eve-type st-done"> 
+                                    <span class="no-eve">{{complete_event_count}}</span>
+                                    <p>Completed Events</p>
+                                </li>
+                                <li class="eve-type st-can mb-0"> 
+                                    <span class="no-eve">{{cancel_event_count}}</span>
+                                    <p>Cancel Events</p>
+                                </li> 
+                                <li class="eve-type st-act"> 
+                                    <span class="no-eve">{{archieve_event_count}}</span>
+                                    <p>Archieve Events</p>
+                                </li>                            
+                            </ul> {% endcomment %}
+                            <button class="crtevn_btn w-100" style="max-width: none;" onclick="window.location.href='{%url 'vendor_home:my_events_all' %}';" >{{"Show Other Events"|transl:is_french}} </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer_sec p-0">
+        <div class="copyrights m-0 text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <p>© 2022 Eventinz, Inc All Rights Reserved</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    {% include 'user_dashboard_v2/js.html' %}
+
+</body>
+
+</html>

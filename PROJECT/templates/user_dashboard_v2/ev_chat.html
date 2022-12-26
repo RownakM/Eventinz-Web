@@ -1,0 +1,153 @@
+{% load static %}
+{% load cool_num %}
+{% load get_event_type %}
+{% load country_data %}
+{% load event_currency_convert %}
+{% load get_head %}
+{% load get_vendor_proposal %}
+{% load lang_tran %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <title>Dashboard my events page</title>
+     {% include 'user_dashboard_v2/head.html' %}
+    <link rel="stylesheet" href="{%static 'user_dashboard_v2/assets/css/dashboard-my-events-page.css' %}">
+
+</head>
+
+<body>
+
+
+    {% include 'user_dashboard_v2/top-nav.html' %}
+
+    <div class="main-dash">
+        {% include 'user_dashboard_v2/aside.html' %}
+        <div class="dashboard w-100">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">{{"Home"|transl:is_french}}</a></li>
+                    <li class="breadcrumb-item"><a href="#">{{"Dashboard"|transl:is_french}}</a></li>
+                    {% comment %} <li class="breadcrumb-item"><a href="#">User Statistics</a></li> {% endcomment %}
+                    <li class="breadcrumb-item active"><a href="#">{{"Frequently Asked Questions"|transl:is_french}}</a></li>
+                </ol>
+            </nav>
+            <div class="dash-content">
+                <div class="main-content w-100">
+                    
+                    <div class="dash-panel mt-0 pb-0">
+                        <div class="events">
+                            <div class="event-title" style="display: block;">
+                                {{"Frequently Asked Questions"|transl:is_french}}
+                                <div class="row" style="display: block;">
+                                    <div class="col-lg-12 p-2">
+
+                                        <div class="accordion" id="accordionExample">
+                                            {% for i in faq %}
+                                            <div class="accordion-item shadow-sm">
+                                              <h2 class="accordion-header" id="heading{{i.id}}">
+                                                <button class="accordion-button collapsed p-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{i.id}}" aria-expanded="true" aria-controls="collapse{{i.id}}">
+                                                  {{i.Question|transl:is_french}}
+                                                </button>
+                                              </h2>
+                                              <div id="collapse{{i.id}}" class="accordion-collapse collapse" aria-labelledby="heading{{i.id}}" data-bs-parent="#accordionExample">
+                                                <div class="accordion-body p-2">
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            {{i.Answer|safe|transl:is_french|safe}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                            {% endfor %}
+                                            {% comment %} <div class="accordion-item">
+                                              <h2 class="accordion-header" id="headingTwo">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                  Accordion Item #2
+                                                </button>
+                                              </h2>
+                                              <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                                <div class="accordion-body">
+                                                  <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="accordion-item">
+                                              <h2 class="accordion-header" id="headingThree">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                                  Accordion Item #3
+                                                </button>
+                                              </h2>
+                                              <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                                                <div class="accordion-body">
+                                                  <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                                                </div>
+                                              </div>
+                                            </div> {% endcomment %}
+                                          </div>
+
+
+                                    </div>
+
+                                </div>
+                               
+                            </div>
+                        </div>
+                    </div>
+                    
+
+                    
+
+                </div>
+                {% comment %} <div class="dash-right d-none">
+                    <div class="wrap-right">
+                        <div class="certi-box">
+                            <div class="rs-title">My Events</div>
+                            <ul class="e-status">
+                                <li class="eve-type st-act"> 
+                                    <span class="no-eve">{{event_count}}</span>
+                                    <p>Total Events</p>
+                                </li>
+                                <li class="eve-type st-can"> 
+                                    <span class="no-eve">{{ongoing_event_count}}</span>
+                                    <p>Ongoing Events</p>
+                                </li> 
+                                <li class="eve-type st-done"> 
+                                    <span class="no-eve">02</span>
+                                    <p>Completed Events</p>
+                                </li>
+                                <li class="eve-type st-can mb-0"> 
+                                    <span class="no-eve">01</span>
+                                    <p>Cancel Events</p>
+                                </li>                             
+                            </ul>
+                        </div>
+                    </div>
+                </div> {% endcomment %}
+            </div>
+        </div>
+    </div>
+
+    <div class="footer_sec p-0">
+        <div class="copyrights m-0 text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <p>© {{"2022 Eventinz, Inc All Rights Reserved"|transl:is_french}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    {% include 'user_dashboard_v2/js.html' %}
+ <!--Start of Tawk.to Script-->
+ 
+<!--End of Tawk.to Script--> 
+</body>
+
+</html>

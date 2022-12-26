@@ -1,0 +1,109 @@
+{% load static %}
+{% load lang_tran %}
+<aside class="left-sidebar vendor_left_sidebar">
+    <ul class="main-menu">
+        <li>
+            <a href="{%url 'vendor_index' %}">
+                <img src="{%static 'vendor_dashboard_v2/assets/images/dash/dashboard.png' %}" alt="icon">
+                <span class="item-txt">{{"Dashboard"|transl:is_french}}</span></span>
+            </a>
+        </li>
+        <li>
+            <a href="{%url 'active_events' %}">
+                <img src="{%static 'vendor_dashboard_v2/img/packagesmn.png' %}" alt="icon">
+                <span class="item-txt">{{"Active Events"|transl:is_french}}</span></span>
+            </a>
+        </li>
+        <li>
+            <a href="{%url 'my_quote_request' %}">
+                <img src="{%static 'vendor_dashboard_v2/img/quotereq.png' %}" alt="icon">
+                <span class="item-txt">{{"Quote Requests"|transl:is_french}}</span>
+            </a>
+        </li>
+        <li>
+            <a href="{%url 'my_packages_view' %}">
+                <img src="{%static 'vendor_dashboard_v2/img/packagesmn.png' %}" alt="icon">
+                <span class="item-txt">{{"Packages"|transl:is_french}}</span>
+            </a>
+        </li>
+        
+        <li>
+            <a href="{%url 'my_gallery'%}">
+                <img src="{%static 'vendor_dashboard_v2/img/gallery.png' %}" alt="icon">
+                <span class="item-txt">{{"Gallery"|transl:is_french}}</span>
+            </a>
+        </li>
+        <li>
+            <a href="{%url 'vendor_profile'%}">
+                <img src="{%static 'vendor_dashboard_v2/img/profile.png' %}" alt="icon">
+                <span class="item-txt">{{"Profile"|transl:is_french}}</span>
+            </a>
+        </li>
+        {% comment %} <li>
+            <a href="{%url 'vendor_my_deals' %}">
+                <img src="{%static 'vendor_dashboard_v2/img/deals.png' %}" alt="icon">
+                <span class="item-txt">Deals</span>
+            </a>
+        </li> {% endcomment %}
+        <li>
+            <a href="{%url 'chat_dup_ven' %}">
+                <img src="{%static 'vendor_dashboard_v2/img/chats.png' %}" alt="icon">
+                <span class="item-txt">{{"Chats"|transl:is_french}}</span>
+            </a>
+        </li>
+        <li>
+            <a href="{%url 'my_proposals' %}">
+                <img src="{%static 'vendor_dashboard_v2/assets/images/dash/dashboard.png' %}" alt="icon">
+                <span class="item-txt">{{"My Proposals"|transl:is_french}}</span></span>
+            </a>
+        </li>
+        <li>
+            <a href="{%url 'event_transactions' %}">
+                <img src="{%static 'vendor_dashboard_v2/assets/images/dash/dashboard.png' %}" alt="icon">
+                <span class="item-txt">{{"Event Transactions"|transl:is_french}}</span></span>
+            </a>
+        </li>
+        <li class="d-none">
+            <button id="liveToastBtn">
+                <img src="{%static 'vendor_dashboard_v2/assets/images/dash/dashboard.png' %}" alt="icon">
+                <span class="item-txt">Test Button</span></span>
+            </button>
+        </li>
+        
+    </ul>
+</aside>
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="background: #a00380;color: white;">
+      
+        <div class="d-flex">
+            <div class="toast-body">
+              {{"Whoaa ! You Just Recieved a New Message !"|transl:is_french}}
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+<script>
+    const toastTrigger = document.getElementById('liveToastBtn')
+    const toastLiveExample = document.getElementById('liveToast')
+    if (toastTrigger) {
+    toastTrigger.addEventListener('click', () => {
+        const toast = new bootstrap.Toast(toastLiveExample)
+
+        toast.show()
+    })
+    }
+
+    $(document).ready(function(){
+        setInterval(function () {
+          $.ajax({url: "https://www.eventinz.com/chat/checkmessages/check/{{ven_id}}/", success: function(result){
+            console.log(result);
+            if (result == 'Yes'){
+                $('#liveToastBtn').trigger('click');
+
+            }
+          }});
+        },5000);
+      });
+</script>

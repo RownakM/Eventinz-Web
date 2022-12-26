@@ -1,0 +1,312 @@
+@media only screen and (max-width: 1199px) {
+    .navbar-brand {
+        width: 170px;
+        margin-right: 20px;
+    }
+    .navbar-brand img {
+        width: 100%;
+    }
+    .eventinz-icon {
+        width: 125px;
+        height: 125px;
+    }
+    .nav-tabs-list .nav-link {
+        padding: 0 20px;
+    }
+    .myCard-content a {
+        font-size: 20px;
+    }
+    .navbar-nav .nav-item {
+        margin-right: 7px;
+    }
+    .mega-menu {
+        width: 675px;
+    }
+}
+
+@media only screen and (max-width: 991px) {
+    .mobSearch {
+        display: block;
+    }
+    .dropdown i {
+        display: block;
+        position: relative;
+        top: 3px;
+    }
+    .navbar-nav .nav-link {
+        padding: 10px 0;
+        background: var(--bgcolor-dark) !important;
+    }
+    .navbar-collapse .btn-transparent:hover {
+        color: var(--text-color-white) !important;
+    }
+    .nav-mob {
+        display: block !important;
+        border-top: 1px solid #ddd;
+        margin: 30px 0;
+        padding-top: 20px;
+    }
+    .nav-mob a {
+        display: block;
+        margin: 7px 0 !important;
+        color: var(--text-color-white);
+        text-align: left;
+    }
+    .nav-mob a:last-child {
+        display: inline-block;
+    }
+    .hero-banner__content--form h1 {
+        font-size: 40px;
+    }
+    .hero-banner__content--form p {
+        font-size: 17px;
+    }
+    .hero-banner__content--form .form-field {
+        margin-bottom: 5px;
+    }
+    .hero-banner__content--form input[type=submit] {
+        border: 0;
+    }
+    .hero-banner__content--form input[type=text],
+    .hero-banner__content--form input[type=email],
+    .hero-banner__content--form input[type=search],
+    .hero-banner__content--form input[type=submit],
+    .hero-banner__content--form select {
+        border-radius: 4px;
+    }
+    .et select {
+        border-radius: 4px 0 0 4px;
+    }
+    .ec input {
+        border-radius: 0 4px 4px 0 !important;
+    }
+    .slick-prev {
+        left: 47%;
+        transform: translateX(-50%);
+        right: auto;
+    }
+    .slick-next {
+        left: 53%;
+        transform: translateX(-50%);
+        right: auto;
+    }
+    .slick-arrow {
+        top: auto;
+        bottom: -50px;
+    }
+    .eventinz-section__thumb span {
+        font-size: 18px;
+    }
+    .eventinz-icon {
+        width: 105px;
+        height: 105px;
+        top: -50px;
+    }
+    .eventinz-icon img {
+        width: 50px;
+    }
+    .main-heading p {
+        font-size: 16px;
+    }
+    .homeVendorContent a {
+        font-size: 20px;
+    }
+    .nav-tabs-list {
+        float: none !important;
+        margin-bottom: 20px;
+        margin-top: 0;
+    }
+    .nav-tabs-list .nav-link {
+        margin-left: 0;
+        margin-right: 10px;
+    }
+    .pb-7 {
+        padding-bottom: 50px;
+    }
+    .pt-7 {
+        padding-top: 50px;
+    }
+    .advertise_content {
+        display: block !important;
+        margin: auto;
+        text-align: center;
+        padding: 40px 15px;
+    }
+    .advertise_content .main-heading {
+        margin: 0 !important;
+    }
+    .advertise_inner img {
+        display: none;
+    }
+    .emailAlearts {
+        margin-bottom: 30px;
+    }
+    footer {
+        padding-top: 70px;
+    }
+    .copyrights {
+        margin-top: 60px;
+    }
+    header .navbar {
+        background: var(--bgcolor-dark) !important;
+    }
+    .navbar-collapse {
+        overflow: hidden;
+        overflow-y: auto;
+        max-height: calc(100vh - 50px);
+    }
+    .navbar-toggler {
+        height: 40px;
+        width: 40px;
+        border: 1px solid #fff;
+        border-radius: 50%;
+        padding: 0;
+    }
+    .navbar-toggler img {
+        width: 30px;
+    }
+    .navbar-nav .nav-link {
+        color: var(--text-color-white);
+    }
+    .mega-menu {
+        width: 100%;
+        padding: 20px;
+    }
+    .mega-menu h5 {
+        margin-top: 10px;
+    }
+    .navbar-nav .nav-link::after {
+        height: 3px;
+    }
+    .cta-btn img {
+        display: none;
+    }
+    .host-pic {
+        bottom: auto;
+        top: 30px;
+    }
+    .mob-login {
+        display: block;
+        border-top: 1px solid #414141;
+        margin-top: 30px;
+        margin-bottom: 30px;
+        padding-top: 20px;
+    }
+    .desktop-login {
+        display: none !important;
+    }
+    .homeVendor-section {
+        margin-bottom: 40px;
+    }
+    .btn-close {
+        top: 0;
+        right: 0;
+        border: 1px solid #fff;
+        background-color: var(--bgcolor-dark);
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .main-heading {
+        text-align: center;
+    }
+    .slick-next {
+        left: 55%;
+    }
+    .slick-prev {
+        left: 45%;
+    }
+    .eventinz-section__thumb {
+        margin-bottom: 40px;
+    }
+    .footer-links h3 {
+        margin: 0;
+    }
+    .footer-links ul {
+        display: none;
+    }
+    .footer-links.active ul {
+        display: block;
+        margin-top: 15px;
+    }
+    .footer-links.active h3 i {
+        transform: rotate(-180deg);
+    }
+    .footer-links h3 i {
+        display: inline-block;
+    }
+    .footer-logo.float-end {
+        float: none !important;
+        border-top: 1px solid #3b3b3b;
+        padding-top: 30px;
+    }
+    .copyrights {
+        text-align: center;
+    }
+    .copyrights .text-end {
+        text-align: center !important;
+    }
+    .footer-links {
+        border-top: 1px solid #3b3b3b;
+        padding: 10px 0 13px;
+    }
+    .emailAlearts form input {
+        width: 100%;
+    }
+    .hero-banner-heading {
+        max-width: 300px;
+        margin: auto;
+    }
+    .hero-banner__content--form h1 {
+        line-height: 40px;
+        margin-bottom: 10px;
+    }
+    .eventHost-section .myCard-content {
+        padding: 20px;
+    }
+    .host-pic {
+        right: 20px;
+        top: 20px;
+    }
+    .advertise-section .container {
+        padding: 0;
+    }
+    .advertise-section .container .row {
+        margin: 0;
+    }
+    .advertise-section {
+        padding-bottom: 0 !important;
+    }
+    footer {
+        padding-top: 40px;
+    }
+    .homeVendor-slider .slick-list {
+        margin: 0;
+    }
+    .signinForm .modal-content,
+    .signUpForm .modal-content {
+        padding: 40px;
+    }
+}
+
+@media only screen and (max-width: 575px) {
+    .slick-next {
+        left: 57%;
+    }
+    .slick-prev {
+        left: 43%;
+    }
+    .main-heading h2 {
+        font-size: 28px;
+    }
+    .hero-banner-heading {
+        max-width: 260px;
+    }
+    .signinForm .modal-content,
+    .signUpForm .modal-content {
+        padding: 15px;
+    }
+    .loginSign-form .modal-header h5 {
+        font-size: 30px;
+    }
+}

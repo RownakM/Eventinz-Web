@@ -1,0 +1,1330 @@
+{% load static %}
+{% load cool_num %}
+{% load get_event_type %}
+{% load country_data %}
+{% load event_currency_convert %}
+{% load get_head %}
+{% load get_currency_symbol %}
+{% load get_vendor_quote %}
+{% load get_vendor_bank %}
+{% load gett_list %}
+{% load currency_convert %}
+
+
+{% load get_vendor_rating %}
+{% load lang_tran %}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    {% include 'user_dashboard_v2/head.html' %}
+
+
+    <title>My Events</title>
+</head>
+
+<body>
+
+
+    {% include 'user_dashboard_v2/top-nav.html' %}
+
+
+    <div class="modl_ovr"></div>
+
+    <div class="main-dash">
+        {% include 'user_dashboard_v2/aside.html' %}
+
+
+        <div class="dashboard main_daswid">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item" aria-current="page"><a href="dashboard.html">Dashboard</a></li>
+                    <li class="breadcrumb-item" aria-current="page"><a href="dashboard_user_page.html">User
+                            Statistics</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">My Events</li>
+                </ol>
+            </nav>
+
+            <div class="dash-content1">
+                <div class="event_main">
+                    <div class="profile evntpro">
+                        <div class="bday_clbg">
+                            <div class="event_con">
+                                <div class="p-name">
+                                    {{event.Event_Categories|event_type|transl:is_french}}
+                                </div>
+                                <div class="btn_opn">
+                                    <button class="open_btn">
+                                        {% for proposal in event_proposals %}
+                                        {% if forloop.first %}
+                                            {% if proposal.event_id.status == 'Hired' %}
+                                            {{"HIRED"|transl:is_french}}
+                                            {% else %}
+                                            {{"OPEN"|transl:is_french}}
+                                            {% endif %}
+                                        {% endif %}
+                                        {% endfor %}
+
+                                    </button>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="details_tabs">
+                                    <span class="detail_tab_btn"
+                                        onclick="toggleVisibility('Details');">{{"Details"|transl:is_french}}</span>
+                                    <span class="detail_tab_btn dtab_active"
+                                        onclick="toggleVisibility('Proposals');">{{"Proposals"|transl:is_french}}</span>
+                                    
+                                    <span class="detail_tab_btn" onclick="toggleVisibility('Payments');" id="paymentbtn">{{"Payments"|transl:is_french}}</span>
+
+                                    {% comment %} <span class="detail_tab_btn" onclick="toggleVisibility('Files');">Files</span> {% endcomment %}
+                                    {% comment %} <span class="detail_tab_btn" onclick="toggleVisibility('Reviews');">Reviews</span> {% endcomment %}
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="evdet_Sec">
+
+                        <div id="Details" style="display: none;">
+
+                            <div class="evndcon">
+                                <div class="evntmndet_wid">
+                                    <div class="evntmndet">
+                                        <div class="Proj_h_de">
+                                            <div class="prodehead">
+                                                <h5>{{"Event Details"|transl:is_french}}</h5>
+                                            </div>
+                                            <div class="prodehtxt">
+                                                {% with "vendor/"|add:event.Budget.country.name|add:"/user_country/"|add:location as template %}
+                                    
+                                                <h6>{{event.Budget.country.name|currency_code:template|currency_icon}} {{event.Budget.Minimum_Value|currency_filter:template}} - {{event.Budget.Maximum_Value|currency_filter:template}}</h6>
+                                                {% endwith %}
+                                            </div>
+                                        </div>
+
+                                        <div class="Proj_cont_d">
+                                            <div class="evcontext">
+                                                <p>{{event.Event_Desc}}</p>
+                                            </div>
+
+                                            <div>
+                                                <div class="prodehtxt">
+                                                    <h6>{{"Vendor Categories"|transl:is_french}}</h6>
+                                                </div>
+                                                <div class="skl-tags">
+                                                    {% for b in event.unique_id|get_vendor_type_multi %}
+                                                   
+                                                    <a href="" class="tags">{{b|get_vendor_type_single|transl:is_french}}</a>
+                                                    
+                                                    {% endfor %}
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="dash-right dash_rt">
+                                    <div class="wrap-right">
+                                        <div class="certi-box">
+                                            <div class="rs-title">{{"About the Event"|transl:is_french}}</div>
+                                            <div class="abtcl">
+                                                <div class="clname"><span>{{event.First_Name|make_list|first|title}}</span>{{event.First_Name}} {{event.Last_Name|make_list|first}}</div>
+                                                <div class="revevtxt"><img src="./assets/images/evntrev.png"
+                                                        alt="">
+                                                        {% comment %} <span>( 6 Reviews )</span> {% endcomment %}
+                                                    </div>
+                                                <div class="cldes">
+                                                    <div class="cldestx">
+                                                        <h6>{{"Created On"|transl:is_french}}</h6>
+                                                        <p>{{event.created_on}}</p>
+                                                    </div>
+                                                    <div class="cldestx">
+                                                        <h6>{{"Date of Event"|transl:is_french}}</h6>
+                                                        <p>{{event.DOE}}</p>
+                                                    </div>
+                                                    <div class="cldestx">
+                                                        <h6>{{"Approximate Heads"|transl:is_french}}</h6>
+                                                        <p>{{event.Heads|head_find}}</p>
+                                                    </div>
+                                                    {% comment %} <div class="cldestx">
+                                                        <p class="membsin">Member since Aug 5, 2022</p>
+                                                    </div> {% endcomment %}
+                                                    {% comment %} <div class="payveri">
+                                                        <img src="./assets/images/payver.png" alt=""> <span>Payment
+                                                            method verified</span>
+                                                    </div> {% endcomment %}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div id="Proposals">
+                            
+                            <div class="evndcon">
+                                <div class="evntmndet_wid">
+                                    <div class="evntmndet">
+                                        
+                                        {% for proposal in event_proposals %}
+                                        <div class="dash-panel jp-wrap">
+                                            <div class="job-post">
+                                                <div class="jp-image">
+                                                    <img src="{{BASE_URL}}/media/{{proposal.vendor_id.Profile_Img}}" alt="Image" style="width: 124px; height: 97px;">
+                                                </div>
+                                                <div class="jp-deatail w-100">
+                                                    <div class="jp-title">{{proposal.vendor_id.Company_Name|title}}</div>
+                                                    <div class="jp-about">
+                                                        <div class="jp-rating">
+                                                            {% for i in proposal.vendor_id.id|getstar|get_list|make_list %}
+                                                            {% if i != 0 %}
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            {% endif %}
+                                                            {% endfor %}
+                                                            
+                                                            <span class="no-star">
+                                                                
+                                                                {{proposal.vendor_id.id|getrating|transl:is_french}}
+                                                            </span>
+                                                        </div>
+                                                        {% comment %} <div class="jp-suc">
+                                                            <img src="{%static 'user_dashboard_v2/assets/images/dash/99per.png' %}" alt="Image">
+                                                            <span class="jp-per"> 99% Success rate </span>
+                                                        </div> {% endcomment %}
+                                                        <div class="jp-cun">
+                                                            <i class="fa fa-globe fa-fw"></i>
+                                                    {% comment %} {{vendor_event_proposal_data.vendor_id.state_code|state_filter:vendor_event_proposal_data.vendor_id.country_code}} {{vendor_event_proposal_data.vendor_id.country_code|country_filter}} {% endcomment %}
+
+                                                            {% comment %} {{proposal.vendor_id.state_code|state_filter:proposal.vendor_id.country_code}} {% endcomment %}
+                                                            {{proposal.vendor_id.country_code|country_filter}}
+                                                        </div>
+                                                    </div>
+                                                    <p class="jp-desc">{{proposal.cover_letter}} </p>
+                                                    <p class="jp-desc">
+                                                        <div class="accordion accordion-flush" id="accordionFlushExample{{proposal.id}}">
+                                                            <div class="accordion-item">
+                                                              <h2 class="accordion-header" id="flush-headingOne">
+                                                                <button class="accordion-button collapsed m-0 p-2" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne{{proposal.id}}" aria-expanded="false" aria-controls="flush-collapseOne">
+                                                                  <span style="font-size: 13px;"> {{"View Quotation"|transl:is_french}} </span>
+                                                                </button>
+                                                              </h2>
+                                                              
+                                                            </div>
+                                                           
+                                                        </div>
+                                                        {% if proposal.status == 'Hired' and proposal.event_id.status == "Hired" %}
+
+                                                        <div class="accordion accordion-flush" id="accordionFlushExample{{proposal.id}}bank">
+                                                            <div class="accordion-item">
+                                                              <h2 class="accordion-header" id="flush-headingOne{{proposal.id}}bank">
+                                                                <button class="accordion-button collapsed m-0 p-2" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne{{proposal.id}}bank" aria-expanded="false" aria-controls="flush-collapseOne">
+                                                                  <span style="font-size: 13px;"> {{"View Bank Details"|transl:is_french}} </span>
+                                                                </button>
+                                                              </h2>
+                                                              
+                                                            </div>
+                                                           
+                                                        </div>
+                                                        {% endif %}
+                                                        </p>
+                                                        
+                                                    <div class="jp-btns">
+                                                        {% comment %} <button class="jp-btn">More Detail</button> {% endcomment %}
+                                                        {% if proposal.event_id.status == "Complete" %}
+                                                        
+                                                        {% elif proposal.event_id.status != 'Hired' %}
+                                                        <button class="jp-btn" onclick="window.location.href='{%url 'vendor_home:hire_event_vendor' %}?eid={{proposal.event_id.id}}&pid={{proposal.id}}';">{{"Hire"|transl:is_french}}</button>
+                                                        
+
+                                                        <button class="jp-btn" onclick="window.location.href='{%url 'vendor_home:chat_dup' %}{{proposal.id}}/events/';">{{"Chat"|transl:is_french}}</button>
+
+                                                        {% elif proposal.status == 'Hired' %}
+                                                            <button class="jp-btn" onclick="window.location.href='{%url 'vendor_home:chat_dup' %}{{proposal.id}}/events/';">{{"Chat"|transl:is_french}}</button>
+
+
+                                                            <button class="jp-btn" id="sadd">{{"Add Payments"|transl:is_french}}</button>
+                                                           <button class="jp-btn w-auto {% if not proposal.event_id.id|is_finalise_enabled %} d-none {% endif %}" onclick="window.location.href='{%url 'vendor_home:user_profile' %}events_close/{{proposal.event_id.id}}/'">{{"Finalise Project"|transl:is_french}}</button>
+
+                                                        {% endif %}
+
+                                                    </div>
+                                                </div>
+                                                <div class="jp-price">
+                                                    <div class="jp-rate">
+                                                        {% with "vendor/"|add:proposal.vendor_id.country_code|add:"/user_country/"|add:location as template %}
+                                                        
+                                                        {{proposal.grand_total|currency_code:template}}{{proposal.grand_total|currency_filter:template}}
+                                                        {% endwith %}
+                                                    </div>
+                                                    {% if proposal.status == 'Hired' %}
+                                                    <div class="awa-job">
+                                                        <span class="awa-star"><i class="fa fa-star" aria-hidden="true"></i></span>
+                                                        <span class="awa-txt">{{"Hired"|transl:is_french}}</span>
+                                                    </div>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                            <div class="job-post">
+                                                <div id="flush-collapseOne{{proposal.id}}" class="accordion-collapse collapse w-100" aria-labelledby="flush-headingOne{{proposal.id}}" data-bs-parent="#accordionFlushExample{{proposal.id}}">
+                                                    <div class="accordion-body table-responsive">
+                                                        <table class="table table-sm table-striped table-borderless table caption-top">
+                                                            <caption><a href="{%url 'vendor_home:event_invoice' %}?proposal_id={{proposal.id}}" target="_blank" class="btn btn-link m-0 p-0">Download Quote</a></caption>
+                                                            <thead>
+                                                              <tr class="table-dark">
+                                                                <th scope="col">#</th>
+                                                                <th scope="col">{{"Description"|transl:is_french}}</th>
+                                                                <th scope="col">{{"Rate"|transl:is_french}}</th>
+                                                                <th scope="col">{{"Quantity"|transl:is_french}}</th>
+                                                                <th scope="col">{{"Unit"|transl:is_french}}</th>
+
+                                                                <th scope="col">{{"Total"|transl:is_french}}</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody class="table-group-divider">
+                                                                {% for i in proposal.id|get_event_quotation %}
+                                                              <tr>
+                                                                <th scope="row">{{forloop.counter}}</th>
+                                                                <td>{{i.item}}</td>
+                                                                <td>{{i.rate}}</td>
+                                                                <td>{{i.qty}}</td>
+                                                                <td>{{i.unit}}</td>
+                                                                <td>{{i.total}}</td>
+                                                              </tr>
+                                                              {% endfor %}
+                                                            </tbody>
+                                                          </table>
+                                                    </div>
+                                                </div>
+                                                {% if proposal.event_id.status == 'Hired' %}
+
+                                                <div id="flush-collapseOne{{proposal.id}}bank" class="accordion-collapse collapse w-100" aria-labelledby="flush-headingOne{{proposal.id}}bank" data-bs-parent="#accordionFlushExample{{proposal.id}}bank">
+                                                    <div class="accordion-body table-responsive">
+                                                        {% for a in proposal.vendor_id|get_bank %}
+                                                            {% if a.is_bank %}
+                                                            <table class="table table-sm table-striped table-borderless table caption-top">
+                                                            
+                                                            <thead>
+                                                              <tr class="table-dark">
+                                                                <th scope="col">#</th>
+                                                                <th scope="col">{{"Bank Name"|transl:is_french}}</th>
+                                                                <th scope="col">{{"Account Name"|transl:is_french}}</th>
+                                                                <th scope="col">{{"Bank Account Number"|transl:is_french}}</th>
+                                                                <th scope="col">{{"Country"|transl:is_french}}</th>
+
+                                                                <th scope="col">{{"Code_Guichet"|transl:is_french}}</th>
+                                                                <th scope="col">{{"Cle_RIB"|transl:is_french}}</th>
+                                                                <th scope="col">{{"IBAN"|transl:is_french}}</th>
+                                                                <th scope="col">{{"Code_Swift"|transl:is_french}}</th>
+                                                                <th scope="col">{{"Domiciliation"|transl:is_french}}</th>
+                                                               
+
+                                                                
+
+
+
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody class="table-group-divider">
+                                                                {% for i in proposal.vendor_id.id|get_bank %}
+                                                              <tr>
+                                                                <th scope="row">{{forloop.counter}}</th>
+                                                                <td>{{i.Bank_Name}}</td>
+                                                                <td>{{i.Account_Name}}</td>
+                                                                <td>{{i.Bank_Account_Number}}</td>
+                                                                <td>{{i.Country}}</td>
+                                                                <td>{{i.Code_Banque}}</td>
+                                                                <td>{{i.Code_Guichet}}</td>
+                                                                <td>{{i.Cle_RIB}}</td>
+                                                                <td>{{i.Code_Swift}}</td>
+                                                                <td>{{i.Domiciliation}}</td>
+
+                                                               
+
+
+                                                              </tr>
+                                                              {% endfor %}
+                                                            </tbody>
+                                                            </table>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                        {% for a in proposal.vendor_id|get_bank %}
+                                                            {% if a.is_momo %}
+                                                            <table class="table table-sm table-striped table-borderless table caption-top">
+                                                                
+                                                                <thead>
+                                                                <tr class="table-dark">
+                                                                    <th scope="col">#</th>
+                                                                    
+                                                                    {% comment %} <th scope="col">PayPal ID</th> {% endcomment %}
+                                                                    <th scope="col">{{"MoMo Number"|transl:is_french}}</th>
+
+                                                                    
+
+
+
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody class="table-group-divider">
+                                                                    {% for i in proposal.vendor_id.id|get_bank %}
+                                                                <tr>
+                                                                    <th scope="row">{{forloop.counter}}</th>
+                                                                    
+                                                                    
+                                                                    {% comment %} <td>{{i.Paypal_ID}}</td> {% endcomment %}
+                                                                    <td>{{i.MoMo_Number}}</td>
+
+
+                                                                </tr>
+                                                                {% endfor %}
+                                                                </tbody>
+                                                            </table>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                        {% for a in proposal.vendor_id|get_bank %}
+                                                            {% if a.is_paypal %}
+                                                            <table class="table table-sm table-striped table-borderless table caption-top">
+                                                                
+                                                                <thead>
+                                                                <tr class="table-dark">
+                                                                    <th scope="col">#</th>
+                                                                    
+                                                                    <th scope="col">{{"PayPal ID"|transl:is_french}}</th>
+                                                                    {% comment %} <th scope="col">MoMo Number</th> {% endcomment %}
+
+                                                                    
+
+
+
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody class="table-group-divider">
+                                                                    {% for i in proposal.vendor_id.id|get_bank %}
+                                                                <tr>
+                                                                    <th scope="row">{{forloop.counter}}</th>
+                                                                    
+                                                                    
+                                                                    <td>{{i.Paypal_ID}}</td>
+                                                                    {% comment %} <td>{{i.MoMo_Number}}</td> {% endcomment %}
+
+
+                                                                </tr>
+                                                                {% endfor %}
+                                                                </tbody>
+                                                            </table>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                        
+
+                                        
+                                    </div>
+                                </div>
+
+                                <div class="dash-right dash_rt">
+                                    <div class="wrap-right">
+                                        <div class="certi-box">
+                                            <div class="bids">
+                                                <div class="bids-title">{{"Total Proposals"|transl:is_french}}</div>
+                                                <div class="bids-no">{{event_proposals_count}}</div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div id="Payments" style="display: none;">
+                            <div class="evndcon">
+                                <div class="evntmndet_wid">
+                                    <div class="evntmndet">
+                                        {% for proposal in event_proposals_hired %}
+                                        <div class="dash-panel">
+
+                                            <div class="payhsec">
+                                                <div class="paymimnttx">
+                                                    <div class="icnspan">{{proposal.vendor_id.Company_Name|title|make_list|first}}</div>
+                                                    <div class="icntextc">
+                                                        <h5>{{proposal.vendor_id.Company_Name|title}}</h5>
+                                                        <p>{{proposal.vendor_id.country_code|country_filter}}</p>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                            <div class="modl_ovr"></div>
+                                            <div class="payment_summery">
+                                                <div class="container-fluid">
+                                                    {% with proposal.vendor_id.id|get_bank as bank_details %}
+                                                        {% for i in bank_details  %}
+                                                    <div class="row">
+                                                        <div class="col-lg-4">
+                                                            <button type="button" class="req_btn btn-primary w-100 {% if not i.is_bank %}d-none{% endif %}" id="paybank">{{"Pay By Bank"|transl:is_french}}</button>
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <button type="button" class="req_btn btn-primary w-100 {% if not i.is_paypal %}d-none{% endif %}" id="paypaypal">{{"Pay By PayPal"|transl:is_french}}</button>
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <button type="button" class="req_btn btn-primary w-100 {% if not i.is_momo %}d-none{% endif %}" id="paymomo">{{"Pay By MoMo"|transl:is_french}}</button>
+                                                        </div>
+                                                    </div>
+                                                        {% endfor %}
+                                                    {% endwith %}
+                                                </div>
+                                            </div>
+                                            {% with proposal.vendor_id.id|get_bank as bank_details %}
+                                            {% for i in bank_details  %}
+                                            <div class="payment_summery" id="payment_details">
+                                                <div class="paydf">
+                                                    <div class="paysum" id="payto">
+                                                        {{"Pay To"|transl:is_french}}
+                                                    </div>
+                                                    <div class="upload-btn-wrapper">
+                                                        <button type="button" class="req_btn btn-primary"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#exampleModal">{{"Add Payment"|transl:is_french}}</button>
+                                                    </div>
+                                                </div>
+                                                <div class="paysumde" id="bank_1">
+                                                    <div class="payscon">
+                                                        <h6>{{"Bank Name"|transl:is_french}}</h6>
+                                                        <p>{{i.Bank_Name}}</p>
+                                                    </div>
+                                                    <div class="payscon">
+                                                        <h6>{{"Account Name"|transl:is_french}}</h6>
+                                                        <p>{{i.Account_Name}}</p>
+                                                    </div>
+                                                    <div class="payscon">
+                                                        <h6>{{"Bank Account Number"|transl:is_french}}</h6>
+                                                        <p>{{i.Bank_Account_Number}}</p>
+                                                    </div>
+                                                    
+                                                    <div class="payscon desvw"></div>
+                                                </div>
+                                                <div class="paysumde" id="bank_2">
+                                                    <div class="payscon">
+                                                        <h6>{{"Country"|transl:is_french}}</h6>
+                                                        <p>{{i.Country}}</p>
+                                                    </div>
+                                                    <div class="payscon">
+                                                        <h6>{{"Code_Guichet"|transl:is_french}}</h6>
+                                                        <p>{{i.Code_Guichet}}</p>
+                                                    </div>
+                                                    <div class="payscon">
+                                                        <h6>{{"Cle_RIB"|transl:is_french}}</h6>
+                                                        <p>{{i.Cle_RIB}}</p>
+                                                    </div>
+                                                    
+                                                    <div class="payscon desvw"></div>
+                                                </div>
+                                                <div class="paysumde" id="bank_3">
+                                                    <div class="payscon">
+                                                        <h6>{{"IBAN"|transl:is_french}}</h6>
+                                                        <p>{{i.Cle_RIB}}</p>
+                                                    </div>
+                                                    <div class="payscon">
+                                                        <h6>{{"Code_Swift"|transl:is_french}}</h6>
+                                                        <p>{{i.Code_Swift}}</p>
+                                                    </div>
+                                                    <div class="payscon">
+                                                        <h6>{{"Domiciliation"|transl:is_french}}</h6>
+                                                        <p>{{i.Domiciliation}}</p>
+                                                    </div>
+                                                    
+                                                    <div class="payscon desvw"></div>
+                                                </div>
+                                                <div class="paysumde" id="momopaypal">
+                                                    <div class="payscon" id="paypaldiv">
+                                                        <h6>{{"PayPal"|transl:is_french}}</h6>
+                                                        <p>{{i.Paypal_ID}}</p>
+                                                    </div>
+                                                    <div class="payscon" id="momodiv">
+                                                        <h6>{{"MoMo Pay"|transl:is_french}}</h6>
+                                                        <p>{{i.MoMo_Number}}</p>
+                                                    </div>
+                                                    
+                                                    
+                                                    <div class="payscon desvw"></div>
+                                                </div>
+                                            </div>
+
+                                            {% empty %}
+
+                                            <div class="payment_summery">
+                                                {{"No Bank Details Found"|transl:is_french}}
+                                            </div>
+                                            
+                                            {% endfor %}
+                                            {% endwith %}
+                                            
+
+                                            <div class="modal fade" id="exampleModal" tabindex="-1"
+                                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content mdlcb">
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title modaltitlw" id="exampleModalLabel">
+                                                                {{"Transaction Details"|transl:is_french}} </h4>
+                                                            <button type="button" class="btn-close"
+                                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div>
+                                                                <h5 class="reqmlt">{{"Transaction Type & Details"|transl:is_french}}</h5>
+                                                            </div>
+                                                            <form action="{%url 'vendor_home:save_transaction_event' %}" method="POST" enctype="multipart/form-data">
+                                                                {% csrf_token %}
+                                                                <div>
+                                                                    <div class="amountfl">
+                                                                        <label for="amount">{{"Amount"|transl:is_french}}</label>
+                                                                        <div class="amtflps">
+                                                                            {% comment %} <i class="fa fa-inr"></i> {% endcomment %}
+                                                                            <input type="text"
+                                                                                class="amtfl"
+                                                                                placeholder="{{'Enter Amount'|transl:is_french}}" name="amount">
+                                                                            {% comment %} <div class="wrapper">
+                                                                                <dl id="country-select"
+                                                                                    class="dropdown">
+                                                                                    <dt><a href="javascript:void(0);"><span><span
+                                                                                                    style="background-position:0px -1375px"></span><span>CAD</span></span></a>
+                                                                                    </dt>
+                                                                                    <dd>
+                                                                                        <ul style="display: none;">
+                                                                                            <li><a cunt_code="+91"
+                                                                                                    href="javascript:void(0);"><span
+                                                                                                        style="background-position:0px -1694px"></span><span>IND</span></a>
+                                                                                            </li>
+                                                                                            <li><a cunt_code="+1"
+                                                                                                    href="javascript:void(0);"><span
+                                                                                                        style="background-position:0px -44px"></span><span>US</span></a>
+                                                                                            </li>
+                                                                                            <li><a cunt_code="+61"
+                                                                                                    href="javascript:void(0);"><span
+                                                                                                        style="background-position:0px -1716px"></span><span>AUS</span></a>
+                                                                                            </li>
+                                                                                            <li><a cunt_code="+1"
+                                                                                                    href="javascript:void(0);"><span
+                                                                                                        style="background-position:0px -1375px"></span><span>CAD</span></a>
+                                                                                            </li>
+                                                                                            <li><a cunt_code="+45"
+                                                                                                    href="javascript:void(0);"><span
+                                                                                                        style="background-position:0px -1386px"></span><span>DAN</span></a>
+                                                                                            </li>
+                                                                                            <li><a cunt_code="+81"
+                                                                                                    href="javascript:void(0);"><span
+                                                                                                        style="background-position:0px -429px"></span><span>JAP</span></a>
+                                                                                            </li>
+                                                                                            <li><a cunt_code="+44"
+                                                                                                    href="javascript:void(0);"><span
+                                                                                                        style="background-position:0px -55px"></span><span>UK</span></a>
+                                                                                            </li>
+                                                                                            
+                                                                                        </ul>
+                                                                                    </dd>
+                                                                                </dl>
+                                                                            </div> {% endcomment %}
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="amountfl">
+                                                                        <label for="description" id="Bank_Name_label">{{"Bank Name"|transl:is_french}}</label>
+                                                                        <input type="hidden" value="{{proposal.vendor_id.id}}" name="vendor_id">
+                                                                        <input type="hidden" value="{{proposal.event_id.id}}" name="event_id">
+
+                                                                        <div class="amtflps">
+                                                                            <input type="text" class="amtfl"
+                                                                                placeholder="" name="bank_name" id="bank_name">
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="amountfl">
+                                                                        <label for="description">{{"Account Name"|transl:is_french}}</label>
+                                                                        <div class="amtflps">
+                                                                            <input type="text" class="amtfl"
+                                                                                placeholder="" name="account_name" id="account_name">
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="amountfl">
+                                                                        <label for="description" id="acc_num_label">{{"Account Number"|transl:is_french}}</label>
+                                                                        <div class="amtflps">
+                                                                            <input type="text" class="amtfl"
+                                                                                placeholder="" name="acc_num" id="acc_num">
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="amountfl">
+                                                                        <div class="upload-btn-wrapper">
+                                                                            <button class="up-btn">{{"Upload file"|transl:is_french}}</button>
+                                                                            <span id="checkfilechange"></span>
+                                                                            <input type="file" name="transreciept" id="transreciept" Required>
+                                                                            
+                            
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <button type="button" class="btn btn_cancel"
+                                                                data-bs-dismiss="modal">{{"Cancel"|transl:is_french}}</button>
+                                                            <button type="submit" class="btn btn_req d-none" id="sadd_btn_main">{{"Add"|transl:is_french}}</button>
+
+                                                            <button type="button" class="btn btn_req" id="sadd_btn">{{"Add"|transl:is_french}}</button>
+                                                            </form>
+
+                                                        </div>
+                                                       
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="sapcebt"></div>
+
+                                            <div class="mlhis">
+                                                <div class="paydf">
+                                                    <div class="paysum">
+                                                        {{"Transaction History"|transl:is_french}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="table-wrap padb">
+                                                <h6 class="creml">{{"Submitted Transactions"|transl:is_french}}</h6>
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th scope="col">{{"Date"|transl:is_french}}</th>
+                                                                <th scope="col">{{"Description"|transl:is_french}}</th>
+                                                                <th scope="col">{{"Status"|transl:is_french}}</th>
+                                                                <th scope="col">{{"Amount"|transl:is_french}}</th>
+                                                                
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            
+                                                            {% for i in trans_history %}
+                                                                <tr>
+                                                                    <td valign="middle">{{i.created_at|date:"d-F-Y"}}</td>
+                                                                    <td valign="middle">{{i.Account_Name}}</td>
+                                                                    <td valign="middle">{{i.status|title}}</td>
+                                                                    <td valign="middle" style="float: left;">{{i.Amount}}</td>
+                                                                    
+                                                                </tr>
+                                                            {% empty %}
+                                                            <tr>
+                                                                <td valign="middle" colspan="5" style="text-align: center;">
+                                                                    {{"No Payments made"|transl:is_french}}
+                                                                </td>
+                                                            </tr>
+                                                            {% endfor %}
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                        {% empty %}
+                                        <div class="dash-panel">
+
+                                            <div class="payhsec">
+                                                <div class="paymimnttx">
+                                                    {% comment %} <div class="icnspan">{{proposal.vendor_id.Company_Name|title|make_list|first}}</div> {% endcomment %}
+                                                    <div class="icntextc">
+                                                        <h5>{{"No Vendors Hired"|transl:is_french}}</h5>
+                                                        {% comment %} <p>{{proposal.vendor_id.country_code|country_filter}}</p> {% endcomment %}
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+
+                                    </div>
+                                </div>
+
+                                <div class="dash-right dash_rt">
+                                    <div class="wrap-right">
+                                        <div class="certi-box">
+                                            <div class="rs-title">{{"Payments"|transl:is_french}}</div>
+                                            <ul class="filter-list">
+                                                <li>
+                                                    <div class="paymn_df">
+                                                        <img class="file-icon" src="{%static 'user_dashboard_v2/assets/images/payicn.png'%}"
+                                                            alt="Icon">
+                                                        <div class="paymcon">
+                                                            <h6>{{"Safe and Secure."|transl:is_french}}</h6>
+                                                            <p>{{"We securely hold your client's deposited money."|transl:is_french}}</p>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="paymn_df">
+                                                        <img class="file-icon" src="{%static 'user_dashboard_v2/assets/images/payicn.png' %}"
+                                                            alt="Icon">
+                                                        <div class="paymcon">
+                                                            <h6>{{"Controlled by you."|transl:is_french}}</h6>
+                                                            <p>{{"Only you can cancel a created Milestone."|transl:is_french}}</p>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="paymn_df">
+                                                        <img class="file-icon" src="{%static 'user_dashboard_v2/assets/images/payicn.png' %}"
+                                                            alt="Icon">
+                                                        <div class="paymcon">
+                                                            <h6>{{"Released on completion."|transl:is_french}}</h6>
+                                                            <p>{{"Once you finish a task, you can request the release of the Milestone."|transl:is_french}}</p>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div id="Files" style="display: none;">
+                            <div class="evndcon">
+                                <div class="evntmndet_wid">
+                                    <div class="evntmndet">
+
+                                        <div class="dash-panel">
+                                            <div class="reviews-head">
+                                                <div class="rev-tit">
+                                                    Files
+                                                </div>
+                                                <div class="upload-btn-wrapper">
+                                                    <button class="up-btn">Upload file</button>
+                                                    <input type="file" name="file" />
+                                                </div>
+                                            </div>
+                                            <div class="table-wrap">
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th scope="col">Name</th>
+                                                                <th scope="col">Size</th>
+                                                                <th scope="col">Owner</th>
+                                                                <th scope="col">Modified</th>
+                                                                <th scope="col"></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td valign="middle">
+                                                                    <span class="d-flex align-itens-center">
+                                                                        <img class="file-icon"
+                                                                            src="./assets/images/dash/file.png"
+                                                                            alt="Icon">
+                                                                        homepage.jpg
+                                                                    </span>
+                                                                </td>
+                                                                <td valign="middle">2 MB</td>
+                                                                <td valign="middle">You</td>
+                                                                <td valign="middle">06 months ago</td>
+                                                                <td valign="middle">
+                                                                    <button class="dwl-btn">
+                                                                        Download
+                                                                    </button>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td valign="middle">
+                                                                    <span class="d-flex align-itens-center">
+                                                                        <img class="file-icon"
+                                                                            src="./assets/images/dash/file.png"
+                                                                            alt="Icon">
+                                                                        homepage.jpg
+                                                                    </span>
+                                                                </td>
+                                                                <td valign="middle">2 MB</td>
+                                                                <td valign="middle">You</td>
+                                                                <td valign="middle">06 months ago</td>
+                                                                <td valign="middle">
+                                                                    <button class="dwl-btn">
+                                                                        Download
+                                                                    </button>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td valign="middle">
+                                                                    <span class="d-flex align-itens-center">
+                                                                        <img class="file-icon"
+                                                                            src="./assets/images/dash/file.png"
+                                                                            alt="Icon">
+                                                                        homepage.jpg
+                                                                    </span>
+                                                                </td>
+                                                                <td valign="middle">2 MB</td>
+                                                                <td valign="middle">You</td>
+                                                                <td valign="middle">06 months ago</td>
+                                                                <td valign="middle">
+                                                                    <button class="dwl-btn">
+                                                                        Download
+                                                                    </button>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td valign="middle">
+                                                                    <span class="d-flex align-itens-center">
+                                                                        <img class="file-icon"
+                                                                            src="./assets/images/dash/file.png"
+                                                                            alt="Icon">
+                                                                        homepage.jpg
+                                                                    </span>
+                                                                </td>
+                                                                <td valign="middle">2 MB</td>
+                                                                <td valign="middle">You</td>
+                                                                <td valign="middle">06 months ago</td>
+                                                                <td valign="middle">
+                                                                    <button class="dwl-btn">
+                                                                        Download
+                                                                    </button>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="dash-right dash_rt">
+                                    <div class="wrap-right">
+                                        <div class="certi-box">
+                                            <div class="rs-title">Filter</div>
+                                            <ul class="filter-list">
+                                                <li>
+                                                    <img class="file-icon" src="./assets/images/dash/file.png"
+                                                        alt="Icon">
+                                                    <span>All Files (4)</span>
+                                                </li>
+                                                <li>
+                                                    <img class="file-icon" src="./assets/images/dash/doc.png"
+                                                        alt="Icon">
+                                                    <span>Documents (8)</span>
+                                                </li>
+                                                <li>
+                                                    <img class="file-icon" src="./assets/images/dash/images.png"
+                                                        alt="Icon">
+                                                    <span>Images (3)</span>
+                                                </li>
+                                                <li>
+                                                    <img class="file-icon" src="./assets/images/dash/video.png"
+                                                        alt="Icon">
+                                                    <span>Video (3)</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                        <div id="Reviews" style="display: none;">
+                            <div class="evndcon">
+                                <div class="evntmndet_wid">
+                                    <div class="evntmndet">
+                                        <div class="dash-panel">
+                                            <div class="reviews-head">
+                                                <div class="rev-tit">
+                                                    Reviews
+                                                </div>
+                                            </div>
+                                            <div class="rev_sec">
+                                                <h6 class="rewmn">Review from Ismail J</h6>
+                                                <div class="revsecis">
+                                                    <div class="staricns rating-stars ratefl">
+                                                        <ul id='stars'>
+                                                            <li class='star' title='Poor' data-value='1'>
+                                                                <i class='fa fa-star'></i>
+                                                            </li>
+                                                            <li class='star' title='Fair' data-value='2'>
+                                                                <i class='fa fa-star'></i>
+                                                            </li>
+                                                            <li class='star' title='Good' data-value='3'>
+                                                                <i class='fa fa-star'></i>
+                                                            </li>
+                                                            <li class='star' title='Excellent' data-value='4'>
+                                                                <i class='fa fa-star'></i>
+                                                            </li>
+                                                            <li class='star' title='WOW!!!' data-value='5'>
+                                                                <i class='fa fa-star'></i>
+                                                            </li> <span>5.0</span>
+                                                        </ul>
+                                                        <div>
+                                                            <h5 class="cad">$1500.00 CAD </h5>
+                                                        </div>
+                                                    </div>
+                                                    <div class="bircel">
+                                                        <h4>Birthday Celebration </h4>
+                                                        <p>Our family hired the Whimlets to help with the planning of my
+                                                            brothers wedding. Best decision we made! Alisha was so
+                                                            seamless to deal with from the start. Both Karen and Alisha
+                                                            from the whim team took care of all of the details</p>
+                                                        <div class="spec-tags ps-0">
+                                                            <a href="" class="tags">Hotel</a> <a href=""
+                                                                class="tags">Corporate Event Planners</a>
+                                                            <a href="" class="tags">Wedding Planners</a> <a href=""
+                                                                class="tags">Social Event Planners</a>
+                                                        </div>
+                                                        <div class="rev-auth d-flex align-content-center">
+                                                            <span class="r-auth-name">
+                                                                <img class="flag-icon"
+                                                                    src="./assets/images/flag-icon.png" alt="Icon">
+                                                                <p>Ismail J</p>
+                                                            </span>
+                                                            <span class="rev-time">1 months ago</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="rev_sec">
+                                                <h6 class="rewmn">Review from Maanas s</h6>
+                                                <div class="revsecis">
+                                                    <div class="staricns rating-stars ratefl">
+                                                        <ul id='stars'>
+                                                            <li class='star' title='Poor' data-value='1'>
+                                                                <i class='fa fa-star'></i>
+                                                            </li>
+                                                            <li class='star' title='Fair' data-value='2'>
+                                                                <i class='fa fa-star'></i>
+                                                            </li>
+                                                            <li class='star' title='Good' data-value='3'>
+                                                                <i class='fa fa-star'></i>
+                                                            </li>
+                                                            <li class='star' title='Excellent' data-value='4'>
+                                                                <i class='fa fa-star'></i>
+                                                            </li>
+                                                            <li class='star' title='WOW!!!' data-value='5'>
+                                                                <i class='fa fa-star'></i>
+                                                            </li> <span>5.0</span>
+                                                        </ul>
+                                                        <div>
+                                                            <h5 class="cad">$1500.00 CAD </h5>
+                                                        </div>
+                                                    </div>
+                                                    <div class="bircel">
+                                                        <h4>Birthday Celebration </h4>
+                                                        <p>Our family hired the Whimlets to help with the planning of my
+                                                            brothers wedding. </p>
+                                                        <div class="spec-tags ps-0">
+                                                            <a href="" class="tags">Hotel</a> <a href=""
+                                                                class="tags">Corporate Event Planners</a>
+                                                            <a href="" class="tags">Wedding Planners</a> <a href=""
+                                                                class="tags">Social Event Planners</a>
+                                                        </div>
+                                                        <div class="rev-auth d-flex">
+                                                            <span class="r-auth-name">
+                                                                <img class="flag-icon"
+                                                                    src="./assets/images/flag-icon-i.png" alt="Icon">
+                                                                <p>Ismail J</p>
+                                                            </span>
+                                                            <span class="rev-time">1 months ago</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="dash-right dash_rt">
+                                    <div class="wrap-right">
+                                        <div class="certi-box">
+                                            <div class="rs-title">New Job Invitation</div>
+                                            <div class="new_invite">
+                                                <img src="./assets/images/offer.png" alt="">
+                                                <div class="invit_txt">
+                                                    <h5>Send a quote to your client for more work</h5>
+                                                    <p>There's always more work to be
+                                                        done. Now is the perfect time to
+                                                        let your client know what you can
+                                                        do for their project by sending a
+                                                        quote.</p>
+                                                    <div>
+                                                        <button class="crtevn_btn">Create a Quote</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+        </div>
+
+
+    </div>
+
+    <div class="footer_sec p-0">
+        <div class="copyrights m-0 text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <p>© {{"2022 Eventinz, Inc All Rights Reserved"|transl:is_french}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+
+    <script>
+        var divs = ["Details", "Proposals", "Payments", "Files", "Reviews"];
+        var visibleDivId = null;
+        function toggleVisibility(divId) {
+            if (visibleDivId === divId) {
+                //visibleDivId = null;
+            } else {
+                visibleDivId = divId;
+            }
+            hideNonVisibleDivs();
+        }
+        function hideNonVisibleDivs() {
+            var i, divId, div;
+            for (i = 0; i < divs.length; i++) {
+                divId = divs[i];
+                div = document.getElementById(divId);
+                if (visibleDivId === divId) {
+                    div.style.display = "block";
+                } else {
+                    div.style.display = "none";
+                }
+            }
+        }
+    </script>
+
+    <script>
+        var selector = '.detail_tab_btn';
+
+        $(selector).on('click', function () {
+            $(selector).removeClass('dtab_active');
+            $(this).addClass('dtab_active');
+        });
+    </script>
+
+    <script>
+        function setCountry(code) {
+            if (code || code == '') {
+                var text = jQuery('a[cunt_code="' + code + '"]').html();
+                $(".dropdown dt a span").html(text);
+            }
+        }
+        $(document).ready(function () {
+            $(".dropdown img.flag").addClass("flagvisibility");
+
+            $(".dropdown dt a").click(function () {
+                $(".dropdown dd ul").toggle();
+            });
+
+            $(".dropdown dd ul li a").click(function () {
+                //console.log($(this).html())
+                var text = $(this).html();
+                $(".dropdown dt a span").html(text);
+                $(".dropdown dd ul").hide();
+                $("#result").html("Selected value is: " + getSelectedValue("country-select"));
+            });
+
+            function getSelectedValue(id) {
+                //console.log(id,$("#" + id).find("dt a span.value").html())
+                return $("#" + id).find("dt a span.value").html();
+            }
+
+            $(document).bind('click', function (e) {
+                var $clicked = $(e.target);
+                if (!$clicked.parents().hasClass("dropdown"))
+                    $(".dropdown dd ul").hide();
+            });
+
+
+            $("#flagSwitcher").click(function () {
+                $(".dropdown img.flag").toggleClass("flagvisibility");
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+
+            /* 1. Visualizing things on Hover - See next part for action on click */
+            $('#stars li').on('mouseover', function () {
+                var onStar = parseInt($(this).data('value'), 10); // The star currently mouse on
+
+                // Now highlight all the stars that's not after the current hovered star
+                $(this).parent().children('li.star').each(function (e) {
+                    if (e < onStar) {
+                        $(this).addClass('hover');
+                    }
+                    else {
+                        $(this).removeClass('hover');
+                    }
+                });
+
+            }).on('mouseout', function () {
+                $(this).parent().children('li.star').each(function (e) {
+                    $(this).removeClass('hover');
+                });
+            });
+
+
+            /* 2. Action to perform on click */
+            $('#stars li').on('click', function () {
+                var onStar = parseInt($(this).data('value'), 10); // The star currently selected
+                var stars = $(this).parent().children('li.star');
+
+                for (i = 0; i < stars.length; i++) {
+                    $(stars[i]).removeClass('selected');
+                }
+
+                for (i = 0; i < onStar; i++) {
+                    $(stars[i]).addClass('selected');
+                }
+
+            });
+
+
+        });
+
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@grabzit/js@3.5.2/grabzit.min.js"></script>
+<script>
+
+</script>
+    <script>
+       
+
+        $('#sadd').on('click',function(){
+            $('#paymentbtn').click();
+        });
+
+        $(document).ready(function(){
+            $('#payment_details').addClass('d-none');
+            $('#bank_1,#bank_2,#bank_3,#momopaypal').addClass('d-none');
+            
+            $('#paybank').on('click',function(){
+                $('#payment_details').removeClass('d-none');
+                $('#bank_1,#bank_2,#bank_3').removeClass('d-none');
+                $('#payto').html('{{"Pay By Bank"|transl:is_french}}');
+
+
+                $('#paypaypal').attr('disabled',true);
+                $('#paymomo').attr('disabled',true);
+                $(this).attr('disabled',true);
+                con('bank');
+
+
+            });
+            $('#paypaypal').on('click',function(){
+                $('#payment_details').removeClass('d-none');
+                $('#momopaypal').removeClass('d-none');
+                $('#momodiv').addClass('d-none');
+                $('#payto').html('{{"Pay By PayPal"|transl:is_french}}');
+
+                $('#paybank').attr('disabled',true);
+                $('#paymomo').attr('disabled',true);
+                $(this).attr('disabled',true);
+
+                $('#bank_name').val('PayPal');
+                $('#bank_name').attr('readonly',true);
+
+                //$('#account_name').val('PayPal');
+                //$('#account_name').attr('readonly',true);
+                $('#acc_num_label').html('PayPal Transaction Number');
+                con('paypal');
+
+
+            });
+            $('#paymomo').on('click',function(){
+                $('#payment_details').removeClass('d-none');
+
+                $('#momopaypal').removeClass('d-none');
+                $('#paypaldiv').addClass('d-none');
+                $('#payto').html('{{"Pay By MoMo"|transl:is_french}}');
+
+
+                $('#paypaypal').attr('disabled',true);
+                $('#paybank').attr('disabled',true);
+                $(this).attr('disabled',true);
+
+                $('#bank_name').val('MoMo');
+                $('#bank_name').attr('readonly',true);
+
+                //$('#account_name').val('MoMo');
+                //$('#account_name').attr('readonly',true);
+                $('#Bank_Name_label').html('{{"Payment By"|transl:is_french}}');
+                $('#acc_num_label').html('{{"MoMo Transaction Number"|transl:is_french}}');
+                con('momo');
+
+
+            });
+            function con(type){
+                if (type == 'paypal'){
+                    var html = $('#paypaldiv').html();
+                    
+
+                }
+                if ( type == 'momo'){
+                    var html = $('#momodiv').html();
+                    
+                }
+                if ( type == 'bank'){
+                    var html = $('#payment_details').html();
+                    
+                }
+            }
+
+        })
+    </script>
+    <script>
+        $('#transreciept').on('change',function(){
+            $('#checkfilechange').html('{{"File Uploaded Successfully"|transl:is_french}}');
+        })
+        $('#sadd_btn').on('click',function(e){
+            e.preventDefault();
+            $(this).attr('disabled',true);
+            $('#sadd_btn_main').click();
+        })
+    </script>
+
+</body>
+
+</html>

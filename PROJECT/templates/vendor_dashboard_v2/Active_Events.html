@@ -1,0 +1,237 @@
+{% load static %}
+{% load get_request_a_quote_transaction %}
+{% load get_event_type %}
+{% load cool_num %}
+{% load lang_tran %}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    {% include 'vendor_dashboard_v2/head.html' %}
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/jszip-2.5.0/dt-1.12.1/b-2.2.3/b-colvis-2.2.3/b-html5-2.2.3/b-print-2.2.3/r-2.3.0/datatables.min.css"/>
+
+
+    <title>Dashboard Chat</title>
+</head>
+
+<body class="vendor_admin">
+    {% include 'vendor_dashboard_v2/top_header.html' %}
+
+
+    <div class="main-dash">
+        {% include 'vendor_dashboard_v2/aside.html' %}
+
+        <div class="dashboard flex-grow-1">
+
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">{{"Home"|transl:is_french}}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{"Active Events"|transl:is_french}}</li>
+                </ol>
+            </nav>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="request_quote shadow-sm ">
+                        {% comment %} <h2 class="heading">
+                            Quote Requests
+                        </h2> {% endcomment %}
+                     
+
+                        <div class="table_row my-4">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="table_box shadow-sm">
+                                        <h5 class="table_heading">
+                                            {{"Active Events"|transl:is_french}}  <span style"float: right;"><button class="readmorebtn w-auto" id="loadmorebtn" onclick="event_load_new();">{{"Reload Events"|transl:is_french}}</span> 
+                                            {% comment %} <span style="float: right;"><img src="https://i.ibb.co/h8s2hmv/icons8-online.gif" class="img-fluid w-4" alt=""> Updating Live</span> {% endcomment %}
+                                        </h5>
+                                        <div class="table-responsive">
+            
+            
+                                            <table class="table table-borderless" id="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">{{"Post ID"|transl:is_french}}</th>
+            
+                                                        <th scope="col">{{"Posted On"|transl:is_french}}</th>
+                                                        <th scope="col">{{"Event Type"|transl:is_french}} </th>
+                                                        <th scope="col">{{"Host Name"|transl:is_french}} </th>
+                                                        <th scope="col">{{"Description"|transl:is_french}} </th>
+                                                        <th scope="col">{{"More"|transl:is_french}} </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="live_data_events">
+                                                    {% for i in ev %}
+                                                    <tr class="
+                                                   
+                                                     
+                                                   " style=" {%if i.id|is_bid:get_id %} background: #e8dce6;  {% endif %}">
+                                                        <td>{{i.id}}</td>
+                                                        <td>{{i.created_on|date:"d-M-Y"}}</td>
+                                                        <td>{{i.ev_name|transl:is_french}}</td>
+                                                        <td>{{i.First_Name}} {{i.Last_Name}}</td>
+                                                        <td><div class="overflow-auto" style="max-height: 100px;">{{i.Event_Desc}}</div></td>
+                                                        <td class="text-center ps-0">
+                                                            {%if not i.id|is_bid:get_id %} 
+                                                   
+                                                            <button class="px-2
+                                                            
+                                                            " onclick="window.location.href='{%url 'event_live' %}{{i.id}}'">{{"view"|transl:is_french}}</button>
+                                                            {% else %}
+                                                            <button class="
+                                                            px-2" onclick="window.location.href='{%url 'event_live' %}{{i.id}}'">{{"Quote Sent"|transl:is_french}}</button>
+                                                            {% endif %}
+                                                        </td>
+                                                    </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+            
+                                </div>
+                            </div>
+                        </div>
+
+                        
+
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="footer_sec p-0">
+        <div class="copyrights m-0 text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <p>© 2022 Eventinz, Inc All Rights Reserved</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+    crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jszip-2.5.0/dt-1.12.1/b-2.2.3/b-colvis-2.2.3/b-html5-2.2.3/b-print-2.2.3/r-2.3.0/datatables.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+    <script>
+        function event_load(){
+            $('#loadmorebtn').html(`
+            <div class="spinner-border spinner-border-sm" role="status">
+                <span class="visually-hidden">Loading...</span>
+                </div>&nbsp; &nbsp;Refreshing...
+            `);
+            var settings = {
+                "url":"{%url 'get_live_events' %}",
+                "method":"GET",
+            };
+            $.ajax(settings).done(function(response){
+                var data = response;
+                console.log(response);
+                $('#live_data_events').html('');
+                $('#total_count').html(response.length);
+                //console.log(response.length);
+                for (var i = 0; i < response.length; i++) {
+                    // POPULATE SELECT ELEMENT WITH JSON.
+                    ele=document.getElementById('live_data_events');
+                    var desc = data[i].fields.Event_Desc;
+                    var trimmedString = desc.substr(0, 50);
+                    trimmedString = trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(" ")));
+                    var vendor_type=data[i].fields.vendor_type;
+                    //console.log(vendor_type);
+                    var vendor_type_list=vendor_type.split(",");
+                    //console.log(vendor_type_list);
+                    let z = 0;
+                    const vendor_type_list_filtered=[];
+                    //console.log("OKK");
+                    //while(z < vendor_type_list.length){
+                    //    axios.get("{%url 'get_vendor_categories' %}?id="+vendor_type_list[z])
+                    //      .then(function (a) {
+                    //        console.log(a);
+                    //        vendor_type_list_filtered.push(a);
+        
+                    //      })
+                    //      .catch(function (error) {
+                    //        console.log(error);
+                    //      });
+                    //}
+                    //console.log(vendor_type_list_filtered);
+                    var date = data[i].fields.created_on
+                    var date_new = date.slice(0,10)
+                    ele.innerHTML = ele.innerHTML +
+                        `<tr>
+                            <td>${data[i].pk}</td>
+                            <td>${date_new}</td>
+                            <td>${data[i].fields.ev_name}</td>
+                            <td>${data[i].fields.First_Name} ${data[i].fields.Last_Name}</td>
+                            <td><div class="overflow-auto" style="max-height: 100px;">${desc}</div></td>
+                            <td class="text-center ps-0"><button class="px-2" onclick="window.location.href='{%url 'event_live' %}${data[i].pk}'">view</button></td>
+                        </tr>`;
+                    
+                }
+                var table=$('#table').DataTable().destroy();
+                var table = $('#table').DataTable({
+                    responsive: true,
+                    paging: true,
+                    pageLength : 5,
+                    pagingType: 'simple_numbers',
+                    ordering: true,
+                    order: [[1, 'desc']],
+                });
+                $('#loadmorebtn').html(`
+            Reload Events
+            `);
+            });
+        }
+        $(document).ready(function(){
+        var event_category_name='';
+        data = '';
+        //$('#live_data_events').html();
+        var table = $('#table').DataTable({
+            responsive: true,
+            paging: true,
+            //pageLength : 5,
+            pagingType: 'simple_numbers',
+            ordering: true,
+            order: [[1, 'desc']],
+        });
+        //event_load();
+        });
+        function event_load_new(){
+            $('#loadmorebtn').html(`
+            <div class="spinner-border spinner-border-sm" role="status">
+                <span class="visually-hidden">Loading...</span>
+                </div>&nbsp; &nbsp;Refreshing...
+            `);
+            location.reload();
+        }
+        
+    </script>
+
+</body>
+
+</html>

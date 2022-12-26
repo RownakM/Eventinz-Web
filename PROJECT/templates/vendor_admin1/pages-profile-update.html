@@ -1,0 +1,317 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Profile | AdminKit Demo</title>
+	{% include 'vendor_admin1/head.html' %}
+	<script src="https://cdn.tiny.cloud/1/f6p74jbuw17jsc2t75unuo7f5b6l4w37ltrnlm56jduf8u24/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+</head>
+
+<body>
+	<div class="wrapper">
+	{% include 'vendor_admin1/side_nav.html' %}
+		<div class="main">
+			{% include 'vendor_admin1/top_nav.html' %}
+
+
+			<main class="content">
+				<div class="container-fluid p-0">
+
+					<div class="mb-3">
+						<h1 class="h3 d-inline align-middle">Update Profile</h1>
+						
+					</div>
+					<div class="row">
+						{% include 'vendor_admin1/profile-sidebar.html' %}
+
+						<div class="col-md-7 col-xl-9 col-lg-7">
+							<div class="card">
+								<div class="card-header">
+
+									<h5 class="card-title mb-0">{{user.First_Name}}'s Profile</h5>
+								</div>
+								<div class="card-body h-100">
+
+									<div class="align-items-start">
+										{% comment %} <img src="{%static 'vendor_admin1/img/avatars/avatar-5.jpg' %}" width="200" height="200" class="rounded-circle me-2" alt="Vanessa Tucker">
+										<div class="flex-grow-1">
+											<small class="float-end text-navy">5m ago</small>
+											<strong>Vanessa Tucker</strong> started following <strong>Christina Mason</strong><br />
+											<small class="text-muted">Today 7:51 pm</small><br />
+
+										</div> {% endcomment %}
+                                        <form action="{%url 'update_on_post' %}" method="POST" enctype="multipart/form-data">
+											{% csrf_token %}
+											<div class="row">
+												<h3 class="text-muted">Personal Details</h3>
+                                                <div class="col-lg-12">
+                                                    <div class="mb-3">
+                                                        <label for="exampleInputEmail1" class="form-label">Email address</label>
+                                                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{user.Email}}" readonly>
+                                                        {% comment %} <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> {% endcomment %}
+                                                      </div>
+                                                </div>
+                                           
+                                            <div class="col-lg-12">
+                                            <div class="mb-3">
+                                              <label for="exampleInputPassword1" class="form-label">Password</label>
+                                              <input type="password" name="password" class="form-control" id="exampleInputPassword1" value="{{user.Password}}">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                              <label for="exampleInputPassword1" class="form-label">First Name</label>
+                                              <input type="text" class="form-control" name="fname" id="exampleInputPassword1" value="{{user.First_Name}}">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                              <label for="exampleInputPassword1" class="form-label">Last Name</label>
+                                              <input type="text" class="form-control" name="lname" id="exampleInputPassword1" value="{{user.Last_Name}}">
+                                            </div>
+                                        </div>
+										<div class="col-lg-6">
+                                            <div class="mb-3">
+                                              <label for="exampleInputPassword1" class="form-label">Mobile</label>
+                                              <input type="text" class="form-control" name="mobile" id="exampleInputPassword1" value="{{user.Mobile}}">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                              <label for="exampleInputPassword1" class="form-label">Alternate Mobile</label>
+                                              <input type="text" class="form-control" name="al_mobile" id="exampleInputPassword1" value="{{user.Alternative_Mobile}}">
+                                            </div>
+                                        </div>
+										<hr class="dropdown-divider">
+										<h3 class="text-muted">Company Details</h3>
+
+
+										<div class="col-lg-4">
+                                            <div class="mb-3">
+                                              <label for="exampleInputPassword1" class="form-label">Company Name</label>
+                                              <input type="text" class="form-control" name="company" id="exampleInputPassword1" value="{{user.Company_Name}}">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="mb-3">
+                                              <label for="exampleInputPassword1" class="form-label">Company Address</label>
+                                              <input type="text" class="form-control" name="company_address" id="exampleInputPassword1" value="{{user.Company_Address}}">
+                                            </div>
+                                        </div>
+										<div class="col-lg-4">
+                                            <div class="mb-3">
+                                              <label for="exampleInputPassword1" class="form-label">Company URL</label>
+                                              <input type="text" class="form-control" name="Company_url" id="exampleInputPassword1" value="{{user.Company_url}}">
+                                            </div>
+                                        </div>
+										<div class="col-lg-12">
+											<div class="mb-3">
+												<label for="" class="form-label">Company Description</label>
+												<textarea name="company_about" placeholder="Write about your company , why users should opt for your service etc..." >{{user.Company_description}}</textarea>
+											</div>
+										</div>
+										<div class="col-lg-6">
+                                            <div class="mb-3">
+                                              <label for="exampleInputPassword1" class="form-label">Country</label>
+                                              <input type="text" class="form-control" id="exampleInputPassword1" value="{{user.country_name}}" disabled>
+											  <input type="hidden" name="id" value="{{user.id}}">
+                                            </div>
+                                        </div>
+										<div class="col-lg-6">
+                                            <div class="mb-3">
+                                              <label for="exampleInputPassword1" class="form-label">States</label>
+                                              <input type="text" class="form-control" id="exampleInputPassword1" value="{{user.state_name}}" disabled>
+                                            </div>
+                                        </div>
+										<hr class="dropdown-divider">
+										<h3 class="text-muted">Social Media Profiles</h3>
+										<div class="col-lg-3">
+											<div class="mb-3">
+												<label for="exampleInputPassword1" class="form-label">Facebook</label>
+												<input type="text" class="form-control" name="facebook_url" id="exampleInputPassword1" value="{{user.facebook_url}}">
+											  </div>
+										</div>
+										<div class="col-lg-3">
+											<div class="mb-3">
+												<label for="exampleInputPassword1" class="form-label">Instagram</label>
+												<input type="text" class="form-control" name="instagram_url"id="exampleInputPassword1" value="{{user.instagram_url}}">
+											  </div>
+										</div>
+										<div class="col-lg-3">
+											<div class="mb-3">
+												<label for="exampleInputPassword1" class="form-label">Twitter</label>
+												<input type="text" class="form-control" name="twitter_url" id="exampleInputPassword1" value="{{user.twitter_url}}">
+											  </div>
+										</div>
+										<div class="col-lg-3">
+											<div class="mb-3">
+												<label for="exampleInputPassword1" class="form-label">Linkedin</label>
+												<input type="text" class="form-control" name="linkedin_url" id="exampleInputPassword1" value="{{user.linkedin_url}}">
+											  </div>
+										</div>
+										
+
+
+                                        <div class="col-lg-12">
+
+                                        
+                                            
+                                            <div class="mb-3 form-check">
+                                                <input type="checkbox" name="filecheck" class="form-check-input" id="exampleCheck1">
+												<input type="hidden" name="fileval" id="fileval" value="">
+                                                <label class="form-check-label" for="exampleCheck1">Update Profile Picture</label>
+                                              </div>
+                                            </div>
+                                            <div class="col-lg-12">
+                                              <div class="mb-3" id="filediv">
+                                                <label for="exampleInputPassword1" class="form-label">Change Profile Picture</label>
+                                                <input type="file" class="form-control" name="file" id="exampleInputFile1">
+                                              </div>
+                                            </div>
+											<div class="col-lg-12">
+												<div class="mb-3">
+
+													<button type="submit" class="btn btn-primary w-25">Update</button>
+												</div>
+											</div>
+                                           
+                                            </div>
+                                          </form>
+									</div>
+
+									
+									{% comment %} <div class="d-flex align-items-start">
+										<img src="{%static 'vendor_admin1/img/avatars/avatar.jpg' %}" width="36" height="36" class="rounded-circle me-2" alt="Charles Hall">
+										<div class="flex-grow-1">
+											<small class="float-end text-navy">30m ago</small>
+											<strong>Charles Hall</strong> posted something on <strong>Christina Mason</strong>'s timeline<br />
+											<small class="text-muted">Today 7:21 pm</small>
+
+											<div class="border text-sm text-muted p-2 mt-1">
+												Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus
+												pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante.
+											</div>
+
+											<a href="#" class="btn btn-sm btn-danger mt-1"><i class="feather-sm" data-feather="heart"></i> Like</a>
+										</div>
+									</div>
+
+									<hr />
+									<div class="d-flex align-items-start">
+										<img src="{%static 'vendor_admin1/img/avatars/avatar-4.jpg' %}" width="36" height="36" class="rounded-circle me-2" alt="Christina Mason">
+										<div class="flex-grow-1">
+											<small class="float-end text-navy">1h ago</small>
+											<strong>Christina Mason</strong> posted a new blog<br />
+
+											<small class="text-muted">Today 6:35 pm</small>
+										</div>
+									</div>
+
+									<hr />
+									<div class="d-flex align-items-start">
+										<img src="{%static 'vendor_admin1/img/avatars/avatar-2.jpg' %}" width="36" height="36" class="rounded-circle me-2" alt="William Harris">
+										<div class="flex-grow-1">
+											<small class="float-end text-navy">3h ago</small>
+											<strong>William Harris</strong> posted two photos on <strong>Christina Mason</strong>'s timeline<br />
+											<small class="text-muted">Today 5:12 pm</small>
+
+											<div class="row g-0 mt-1">
+												<div class="col-6 col-md-4 col-lg-4 col-xl-3">
+													<img src="{%static 'vendor_admin1/img/photos/unsplash-1.jpg' %}" class="img-fluid pe-2" alt="Unsplash">
+												</div>
+												<div class="col-6 col-md-4 col-lg-4 col-xl-3">
+													<img src="{%static 'vendor_admin1/img/photos/unsplash-2.jpg' %}" class="img-fluid pe-2" alt="Unsplash">
+												</div>
+											</div>
+
+											<a href="#" class="btn btn-sm btn-danger mt-1"><i class="feather-sm" data-feather="heart"></i> Like</a>
+										</div>
+									</div>
+
+									<hr />
+									<div class="d-flex align-items-start">
+										<img src="{%static 'vendor_admin1/img/avatars/avatar-2.jpg' %}" width="36" height="36" class="rounded-circle me-2" alt="William Harris">
+										<div class="flex-grow-1">
+											<small class="float-end text-navy">1d ago</small>
+											<strong>William Harris</strong> started following <strong>Christina Mason</strong><br />
+											<small class="text-muted">Yesterday 3:12 pm</small>
+
+											<div class="d-flex align-items-start mt-1">
+												<a class="pe-3" href="#">
+                							<img src="{%static 'vendor_admin1/img/avatars/avatar-4.jpg' %}" width="36" height="36" class="rounded-circle me-2" alt="Christina Mason">
+              									</a>
+												<div class="flex-grow-1">
+													<div class="border text-sm text-muted p-2 mt-1">
+														Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus.
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<hr />
+									<div class="d-flex align-items-start">
+										<img src="{%static 'vendor_admin1/img/avatars/avatar-4.jpg' %}" width="36" height="36" class="rounded-circle me-2" alt="Christina Mason">
+										<div class="flex-grow-1">
+											<small class="float-end text-navy">1d ago</small>
+											<strong>Christina Mason</strong> posted a new blog<br />
+											<small class="text-muted">Yesterday 2:43 pm</small>
+										</div>
+									</div>
+
+									<hr />
+									<div class="d-flex align-items-start">
+										<img src="{%static 'vendor_admin1/img/avatars/avatar.jpg' %}" width="36" height="36" class="rounded-circle me-2" alt="Charles Hall">
+										<div class="flex-grow-1">
+											<small class="float-end text-navy">1d ago</small>
+											<strong>Charles Hall</strong> started following <strong>Christina Mason</strong><br />
+											<small class="text-muted">Yesterdag 1:51 pm</small>
+										</div>
+									</div> {% endcomment %}
+
+									
+									{% comment %} <div class="d-grid">
+										<a href="#" class="btn btn-primary">Load more</a>
+									</div> {% endcomment %}
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</main>
+
+			{% include 'vendor_admin1/footer.html' %}
+		</div>
+	</div>
+
+	{% include 'vendor_admin1/js.html' %}
+    <script>
+        $('#filediv').hide();
+        $('#exampleCheck1').change(function() {
+            var status = $(this).is(':checked');
+            if (status == true){
+                $('#filediv').show();
+				$('#fileval').val('YES');
+            }
+            else{
+                $('#filediv').hide();
+				$('#fileval').val('NO');
+
+            }
+        });
+    </script>
+	<script>
+		tinymce.init({
+		  selector: 'textarea',
+		  plugins: 'advlist autolink lists link image charmap preview anchor pagebreak',
+		  toolbar_mode: 'floating',
+		  menubar:false,
+		  statusbar:false
+		});
+	  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,29 @@
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">First</th>
+        <th scope="col">#</th>
+        {% comment %} <th scope="col">First</th> {% endcomment %}
+
+        
+      </tr>
+    </thead>
+    <tbody>
+        {% for i in tables %}
+        {% for j in i %}
+        <tr>
+          {% for key, value in j.items %}
+          {% comment %} <td>{{key}}</td> {% endcomment %}
+        <th scope="row">{{value}}</th>
+        
+
+        
+       
+        {% endfor %}
+      </tr>
+      {% endfor %}
+      {% endfor %}
+     
+    </tbody>
+  </table>

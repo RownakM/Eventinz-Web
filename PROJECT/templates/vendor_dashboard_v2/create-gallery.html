@@ -1,0 +1,257 @@
+<!doctype html>
+{% load lang_tran %}
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    {% include 'vendor_dashboard_v2/head.html' %}
+
+    <title>Dashboard Chat</title>
+</head>
+
+<body class="vendor_admin">
+   {% include 'vendor_dashboard_v2/top_header.html' %}
+
+
+    <div class="main-dash">
+        {% include 'vendor_dashboard_v2/aside.html' %}
+
+        <div class="dashboard flex-grow-1">
+
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">{{"Home"|transl:is_french}}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{"Profile"|transl:is_french}}</li>
+                </ol>
+            </nav>
+
+            <div class="profile_page">
+                <div class="user_info_col shadow-sm p-4">
+                <div class="row mb-5">
+                    <div class="col-md-12">
+                        <h2 class="heading border-0 ps-0">
+                            {{"Create A Deal"|transl:is_french}}
+                        </h2>
+                    </div>
+                    <div class="col-lg-4 my-3 d-none">
+                        <div class="pack_card">
+                            <img src="./img/packageimg1.png" alt="">
+                            <div class="packcard_contetn">
+                                <h5>I will do birthday Party  arrangement for 500 Guest</h5>
+                                <div class="ratevalid">
+                                    <div class="rate_txt">
+                                        <i class="fa fa-star"></i> 5.0 <span>(20)</span>
+                                    </div>
+                                    <div class="valdate">
+                                        Valid Till : <span>Sept. 20, 2022</span>
+                                    </div>
+                                </div>
+                                <div class="cardlastpart">
+                                    <div class="packicons">
+                                        <i class="fa fa-eye"></i>
+                                        <i class="fa fa-trash"></i>
+                                    </div>
+                                    <div class="startat">
+                                        <p>Starting At</p>
+                                        <h6>$5000.00 - 150000.00</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-12 my-3">
+                        <form action="{%url 'my_gallery_post' %}" method="POST" enctype="multipart/form-data">
+                        <div class=" pb-5">
+                            <div class="update-box pt-1">
+                                <div class="box-border">
+                                    <h5 class="detail-title mb-0">{{"Gallery Details"|transl:is_french}}</h5>
+                                        {% csrf_token %}
+                                        <div class="row">
+                                            <div class="col-xl-4 col-lg-12 col-md-4 form-group mb-3">
+                                                <label>{{"Select Category"|transl:is_french}}</label>
+                                                
+                                                <select class="form-control border-start-0 border-top-0 border-end-0 rounded-0" name="photo_category" id="event_type" >
+                                                    
+                                                    <option value="" disabled selected>--{{"Select Event Type"|transl:is_french}}--</option>
+                                                    {% for i in event_category %}
+                                                    <option value="{{i.id}}">{{i.category_name|transl:is_french}}</option>
+                                                    {% endfor %}
+                                                    
+
+                                                </select>
+                                            </div>
+                                            <div class="col-xl-4 col-lg-12 col-md-4 form-group mb-3">
+                                                <label>{{"Files"|transl:is_french}}</label>
+                                                <input type="file"
+                                                    class="form-control border-start-0 border-top-0 border-end-0 rounded-0"
+                                                    name="images" multiple>
+                                            </div>
+                                           
+                                        </div>
+                                    
+                                </div>
+                            </div>
+                            
+                            <div class="update-box">
+                                <button type="submit" class="btn update-profile-btn w-25" id="sbtn">{{"Add to Gallery"|transl:is_french}}</button>
+                            </div>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <div class="footer_sec p-0">
+        <div class="copyrights m-0 text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <p>© {{"2022 Eventinz, Inc All Rights Reserved"|transl:is_french}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+
+        <script>
+            
+        </script>
+        
+        
+          <script>
+            $('#package_type').on('change',function(){
+        
+              var event_categories=$(this).val();
+              $('#package_for').html('<option selected disabled value="">--Select Package For--</option>');
+            var settings = {
+                "url": "../get-sub-cat/?id="+event_categories,
+                "method": "GET",
+                
+              };
+              
+              $.ajax(settings).done(function (response) {
+                  //console.log(response);
+                  const obj = JSON.parse(response);
+                  console.log(obj);
+                
+                //console.log(response);
+                var table = document.getElementById('package_for');
+           for (var i = 0; i < obj.length; i++){
+               var row = `<option value="${obj[i]['fields'].sub_category_name}">${obj[i]['fields'].sub_category_name}</option>`
+               table.innerHTML += row
+        
+           }
+            })
+              });
+        
+            
+              {% comment %} $('#pack_include').keyup(function(){
+                console.log('change');
+                //var pack_name=$(this).val();
+                var pack_name=tinymce.get('pack_include').getContent();
+                alert(pack_name);
+                $('#package_include_live').html(pack_name);
+              }) {% endcomment %}
+        
+          </script>
+          <script>
+            $('#sstate_label').hide();
+            $('#scountry').on('change', function() {
+            $('#sstate_label').show();
+            $('#sstate').html('');
+              var id=this.value;
+              $.ajax({
+                  type: "GET",
+                  url: "{%url 'Get_State'%}",
+                  data: "id="+id,
+                  success: function(data){
+                      
+                      console.log(data)
+                      for (var i = 0; i < data.length; i++){
+                        console.log("LOOP");
+                          //console.log(data[i].fields)
+                          var state_id=data[i].fields.state_code;
+                          var state_name=data[i].fields.name;
+                          var option_tag=document.getElementById('sstate')
+                          console.log("GOT");
+                          var row=`<option value="${state_id}">${state_name}</option>`;
+                          var row=`<div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" name="sstate" value="${state_id}">
+                            <label class="form-check-label" for="inlineCheckbox1">${state_name}</label>
+                          </div>`;
+                          option_tag.innerHTML+=row
+                          //var row = `<tr>
+                          //				<td>${cno}</td>
+                          //				<td>${data[i].recharge_short_desc}</td>
+                          //				<td>${data[i].recharge_validity}</td>
+                          //  <td>${data[i].recharge_long_desc}</td>
+                          //  <td><button onclick="pay_now(${data[i].recharge_amount})">${data[i].recharge_amount}.00</button></td>
+                          //		  </tr>`
+                          //table.innerHTML += row
+              
+              
+                      }
+                      $('#statelabel').show();
+        
+                      $('#state_reg').show();
+                  },
+                  
+                });
+            });
+        
+          </script> 
+          <script>
+            $(document).ready(function(){
+              $('#min_package_price').val('0');
+                $('#max_package_price').val('0');
+              $('#switch2package').on('click',function(e){
+                e.preventDefault();
+                $('#min_package_price').val('');
+                $('#max_package_price').val('');
+        
+                $('#range_row').removeClass('d-none');
+                $('#range_row').addClass('d-sm-flex');
+                $('#pack_price').addClass('d-none');
+                $('#switch2fixed').removeClass('d-none');
+                $(this).addClass('d-none');
+        
+                $('#pack_price').val('0');
+        
+              });
+              $('#switch2fixed').on('click',function(e){
+                e.preventDefault();
+                $('#pack_price').val('');
+                $('#range_row').addClass('d-none');
+                $('#range_row').removeClass('d-sm-flex');
+                $('#pack_price').removeClass('d-none');
+                $('#switch2package').removeClass('d-none');
+                $(this).addClass('d-none');
+        
+                $('#min_package_price').val('0');
+                $('#max_package_price').val('0');
+              })
+            })
+          </script>
+</body>
+
+</html>

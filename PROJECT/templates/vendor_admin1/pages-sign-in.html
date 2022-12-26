@@ -1,0 +1,117 @@
+{% load socialaccount %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+	<title>Sign In | AdminKit Demo</title>
+	{% include 'vendor_admin1/head.html' %}
+</head>
+
+<body>
+	<main class="d-flex w-100">
+		<div class="container d-flex flex-column">
+			<div class="row vh-100">
+				<div class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100">
+					<div class="d-table-cell align-middle">
+
+						<div class="text-center mt-4">
+							<h1 class="h2">Welcome back, Charles</h1>
+							<p class="lead">
+								Sign in to your account to continue
+							</p>
+						</div>
+
+						<div class="card">
+							<div class="card-body">
+								<div class="m-sm-4">
+									<style>
+										.login-with-google-btn {
+											transition: background-color .3s, box-shadow .3s;
+											  
+											padding: 12px 16px 12px 42px;
+											border: none;
+											border-radius: 3px;
+											box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 1px 1px rgba(0, 0, 0, .25);
+											
+											color: #757575;
+											font-size: 14px;
+											font-weight: 500;
+											font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
+											
+											background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj48cGF0aCBkPSJNMTcuNiA5LjJsLS4xLTEuOEg5djMuNGg0LjhDMTMuNiAxMiAxMyAxMyAxMiAxMy42djIuMmgzYTguOCA4LjggMCAwIDAgMi42LTYuNnoiIGZpbGw9IiM0Mjg1RjQiIGZpbGwtcnVsZT0ibm9uemVybyIvPjxwYXRoIGQ9Ik05IDE4YzIuNCAwIDQuNS0uOCA2LTIuMmwtMy0yLjJhNS40IDUuNCAwIDAgMS04LTIuOUgxVjEzYTkgOSAwIDAgMCA4IDV6IiBmaWxsPSIjMzRBODUzIiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNNCAxMC43YTUuNCA1LjQgMCAwIDEgMC0zLjRWNUgxYTkgOSAwIDAgMCAwIDhsMy0yLjN6IiBmaWxsPSIjRkJCQzA1IiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNOSAzLjZjMS4zIDAgMi41LjQgMy40IDEuM0wxNSAyLjNBOSA5IDAgMCAwIDEgNWwzIDIuNGE1LjQgNS40IDAgMCAxIDUtMy43eiIgZmlsbD0iI0VBNDMzNSIgZmlsbC1ydWxlPSJub256ZXJvIi8+PHBhdGggZD0iTTAgMGgxOHYxOEgweiIvPjwvZz48L3N2Zz4=);
+											background-color: white;
+											background-repeat: no-repeat;
+											background-position: 12px 11px;
+											
+											&:hover {
+											  box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 2px 4px rgba(0, 0, 0, .25);
+											}
+											
+											&:active {
+											  background-color: #eeeeee;
+											}
+											
+											&:focus {
+											  outline: none;
+											  box-shadow: 
+												0 -1px 0 rgba(0, 0, 0, .04),
+												0 2px 4px rgba(0, 0, 0, .25),
+												0 0 0 3px #c8dafc;
+											}
+											
+											&:disabled {
+											  filter: grayscale(100%);
+											  background-color: #ebebeb;
+											  box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 1px 1px rgba(0, 0, 0, .25);
+											  cursor: not-allowed;
+											}
+										  }
+									</style>
+									<a type="button" name="btnOpenPopup" target="_blank" class="login-with-google-btn" href="{% provider_login_url 'google' %}">
+										Sign in with Google
+									</a>
+									<div class="text-center">
+										<img src="img/avatars/avatar.jpg" alt="Charles Hall" class="img-fluid rounded-circle" width="132" height="132" />
+									</div>
+									<form action="{%url 'vendor_login'%}" method="post">
+										{% csrf_token %}
+										<div class="mb-3">
+											<label class="form-label">Email</label>
+											<input class="form-control form-control-lg" type="email" name="email" placeholder="Enter your email" />
+										</div>
+										<div class="mb-3">
+											<label class="form-label">Password</label>
+											<input class="form-control form-control-lg" type="password" name="password" placeholder="Enter your password" />
+											<small>
+            <a href="index.html">Forgot password?</a>
+          </small>
+										</div>
+										<div>
+											<label class="form-check">
+            <input class="form-check-input" type="checkbox" value="remember-me" name="remember-me" checked>
+            <span class="form-check-label">
+              Remember me next time
+            </span>
+          </label>
+										</div>
+										<div class="text-center mt-3">
+											{% comment %} <buttton class="btn btn-lg btn-primary">Sign in</a> {% endcomment %}
+											<button type="submit" class="btn btn-lg btn-primary">Sign in</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	{% include 'vendor_admin1/js.html' %}
+
+</body>
+
+</html>

@@ -1,0 +1,1078 @@
+.notification_count {
+    padding: 4px;
+    border-radius: 100px;
+    color: white;
+    font-size: 10px;
+    background-color: red;
+    position: absolute;
+    top: -7px;
+    left: 10px;
+}
+
+.icon_btn:focus {
+    box-shadow: none;
+    border: none;
+}
+
+.icon_btn {
+    border: none;
+    box-shadow: none;
+    outline: none;
+    padding: 0;
+}
+
+
+.pers_info_txt {
+    font-family: AktivGrotesk-Regular;
+}
+
+
+.vendor_admin .left-sidebar {
+    background-color: #9f007e;
+}
+
+.vendor_admin .main-menu li a {
+    color: white !important;
+    border: none;
+}
+
+/* .vendor_admin .main-menu li a img {
+    filter: invert(100%) !important;
+} */
+
+.vendor_admin .main-menu .active a,
+.vendor_admin .main-menu li a:hover {
+    background-color: #86026b !important;
+}
+
+.vendor_admin .main-menu li:hover {
+    background-color: #86026b !important;
+}
+
+.vendor_admin .main-dash {
+    background-color: #f1f5fc;
+}
+
+.vendor_admin .breadcrumb li {
+    font-weight: 600;
+    font-size: 12px;
+}
+
+.vendor_admin .box {
+    padding: 20px;
+    background: #ffffff url(../img/vayolet.png) no-repeat center center/cover;
+
+}
+
+.vendor_admin .box img {
+    width: 60px !important;
+    height: 50px;
+
+}
+
+.vendor_admin .pink_box {
+    background: #ffffff url(../img/pink.png) no-repeat center center/cover;
+
+}
+
+.vendor_admin .green_box {
+    background: #ffffff url(../img/green.png) no-repeat center center/cover;
+
+}
+
+.vendor_admin .yello_box {
+    background: #ffffff url(../img/yello.png) no-repeat center center/cover;
+
+}
+
+.vendor_admin .box h2 {
+    font-size: 18px;
+    margin-top: 20px;
+    color: #313131;
+    font-family: "Aktiv Grotesk";
+}
+
+.vendor_admin .box h3 {
+    font-size: 24px;
+    color: #000000;
+    font-weight: bold;
+}
+
+.vendor_admin .second_row .box {
+    background: white;
+    padding: 20px;
+    height: 100%;
+}
+
+.vendor_admin .second_row .box h3 {
+    margin: 0;
+    font-size: 24px;
+    color: #000000;
+    font-weight: 500;
+}
+
+.vendor_admin .second_row .box .chart_img {
+    width: 100% !important;
+    height: auto !important;
+}
+
+.vendor_admin .second_row .box_1 {
+    background-image: linear-gradient(-84deg, #9f007f 0%, #b53799 100%);
+}
+
+.vendor_admin .second_row .box_2 {
+    background-image: linear-gradient(-84deg, #7c03ff 0%, #02b7ff 100%);
+}
+
+.vendor_admin .second_row .box_3 {
+    background-image: linear-gradient(-84deg, #ff2f09 0%, #ff553b 100%);
+}
+
+.vendor_admin .second_row .box_4 {
+    background-image: linear-gradient(-84deg, #eb1327 0%, #f95369 100%);
+}
+
+.vendor_admin .second_row .info_box {
+    padding: 20px 20px 20px 30px;
+    margin-top: 20px;
+    min-height: 135px;
+    display: grid;
+    align-items: center;
+}
+
+.vendor_admin .second_row .info_box .info h3 {
+    color: white;
+    font-size: 18px;
+    margin-left: 20px;
+    margin-bottom: 0;
+}
+
+.vendor_admin .second_row .info_box .info h4 {
+    color: white;
+    font-size: 36px;
+    margin-left: 20px;
+    font-weight: bold;
+}
+
+.vendor_admin .second_row .info_box img {
+    width: 100%;
+    height: 100%;
+}
+
+.vendor_admin .table_row .table_box {
+    background-color: white;
+    padding: 20px;
+}
+
+.vendor_admin .table_row .table_box .table_heading {
+    font-size: 24px;
+    color: #000000;
+    font-weight: 500;
+    margin: 10px 0 30px 0;
+}
+
+.vendor_admin .table_row .table th {
+    border-left: 1px solid #00000031;
+    border-right: 1px solid #00000031;
+    border-top: 1px solid #00000031;
+    border-bottom: none;
+    font-size: 16px;
+    color: #313131;
+    padding: 20px 17px;
+    font-weight: bold;
+
+}
+
+.vendor_admin .table_row .table td {
+    border: 1px solid #00000031;
+    padding: 17px;
+    border-top: 0;
+}
+
+.vendor_admin .table_row .table thead {
+    background-color: #e6eaf1;
+}
+
+.vendor_admin .table_row .table button {
+    background-color: transparent;
+    font-size: 14px;
+    color: #313131;
+    border: 1px solid gray;
+    padding: 5px 26px;
+    border-radius: 3px;
+
+}
+
+.evn_card {
+    background-color: #ffffff;
+    padding: 25px;
+    height: 100%;
+}
+
+.evcardimg {
+    height: 100%;
+    display: grid;
+    align-items: center;
+}
+
+.evcardimg img {
+    width: 100%;
+}
+
+.evntcardcont h2 {
+    font-size: 28px;
+    line-height: 30px;
+    color: #000000;
+    font-weight: 500;
+    font-family: 'AktivGrotesk-Medium';
+}
+
+.stupdt,
+.faceprb {
+    font-size: 18px;
+    line-height: 24px;
+    color: #313131;
+    font-family: AktivGrotesk-Regular;
+}
+
+button.readmorebtn {
+    width: 121px;
+    height: 37px;
+    border-radius: 3px;
+    background-color: transparent;
+    border: 1px solid rgb(0 0 0 / 60%);
+    font-size: 14px;
+    line-height: 24px;
+    color: #313131;
+    font-family: AktivGrotesk-Regular;
+}
+
+@media(max-width:992px) {
+    .vendor_admin .box {
+        margin: 20px 0;
+    }
+
+    .vendor_admin .table_row .table button {
+        padding: 8px;
+    }
+
+
+}
+
+@media(max-width:767px) {
+
+    .icon_btn {
+        margin-right: 30px !important;
+    }
+
+    input.head_Search {
+        width: 100% !important;
+    }
+
+}
+
+@media(max-width:500px) {
+
+    .evntcardcont h2 {
+        font-size: 22px;
+    }
+
+    .stupdt,
+    .faceprb {
+        font-size: 16px;
+    }
+
+}
+
+@media(max-width:320px) {
+    .icon_btn {
+        margin-right: 20px !important;
+    }
+}
+
+
+@media (max-width:1440px) {
+    .evntcardcont h2 {
+        font-size: 18px;
+    }
+
+    .stupdt,
+    .faceprb {
+        font-size: 12px;
+    }
+}
+
+
+/* request quote page design start  */
+.request_quote {
+    background-color: white;
+    padding: 30px 30px 40px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.request_quote .heading {
+    font-size: 24px;
+    color: #000000;
+    font-weight: 500;
+}
+
+.request_quote .show_drop_down h3 {
+    font-size: 14px;
+    color: #313131;
+    margin: 0;
+
+}
+
+.request_quote .show_drop_down .btn-primary:focus {
+    box-shadow: none;
+}
+
+.request_quote .show_drop_down .btn-primary {
+    background-color: transparent;
+    border: 1px solid gray;
+    font-size: 14px;
+    line-height: 24px;
+    margin-left: 10px;
+    color: #222222;
+}
+
+.request_quote .show_drop_down .btn-primary {
+    font-size: 12px;
+}
+
+.request_quote .table_row .table th {
+    border: none !important;
+    vertical-align: middle;
+}
+
+.request_quote .table_row .table td {
+    border: none !important;
+}
+
+.request_quote .table_row .table {
+    border: 1px solid #e5e5e5;
+}
+
+.border-1 {
+    border: 1px solid #e5e5e5;
+}
+
+
+.request_quote .table_row .table tr:hover {
+    background-color: #e8dce6;
+}
+
+.request_quote .pagination h3 {
+    font-size: 14px;
+    line-height: 24px;
+    color: #313131;
+    margin: 0 10px 0 0;
+}
+
+.request_quote .pagination h4 {
+    font-size: 14px;
+    line-height: 24px;
+    color: #222222;
+    margin: 0 10px;
+}
+
+.request_quote .pagination button {
+    background-color: transparent;
+    border: 1px solid #cccccc;
+    font-size: 14px;
+    line-height: 24px;
+    color: #222222;
+    padding: 7px 12px;
+    border-radius: 6px;
+}
+
+.request_quote .pagination button i {
+    font-size: 10px;
+}
+
+.request_quote .pagination .page_control {
+    margin-right: 11px;
+}
+
+
+.request_quote .pagination .page_control:hover {
+    background-color: #9f007e;
+    color: white;
+}
+
+.request_quote .table-responsive {
+    overflow-x: auto !important;
+}
+
+@media (max-width:767px) {
+    .request_quote .table {
+        white-space: nowrap;
+    }
+}
+
+@media (max-width:500px) {
+    .pagination {
+        flex-direction: column;
+    }
+}
+
+/* request quote page design end */
+
+/* profile page desing start   */
+.profile_page .profile_col {
+    background-color: white;
+    padding-bottom: 50px;
+
+}
+
+.profile_page .profile_col .orange-img {
+    height: 270px;
+    width: 100%;
+}
+
+.profile_page .profile_col .user_profile_img {
+    margin-top: -150px;
+}
+
+.profile_page .profile_col .name {
+    text-align: center;
+    font-size: 24px;
+    line-height: 24px;
+    color: #000000;
+    font-weight: 500;
+    margin: 20px 0 10px 0;
+}
+
+.profile_page .profile_col .tag_name h3 {
+    background-color: #f0f4fb;
+    border: 1px solid #d4dceb;
+    font-size: 14px;
+    line-height: 24px;
+    color: #313131;
+    font-weight: 300;
+    border-radius: 100px;
+    text-align: center;
+    padding: 2px 12px;
+}
+
+.profile_page .profile_col .tag_name {
+    margin: 0 2px;
+}
+
+.profile_page .profile_col .btn-primary {
+    font-size: 16px;
+    line-height: 24px;
+    color: #ffffff;
+    border-radius: 3px;
+    background-color: #9f007e;
+    border: none;
+
+}
+.profile_page .profile_col .btn-primary-outline {
+    font-size: 16px;
+    line-height: 24px;
+    color: #6d6e7080;
+    border-radius: 3px;
+    background-color: #ecf0f7;
+    border: none;
+
+}
+
+.profile_page .user_info_col {
+    background-color: white;
+}
+
+.profile_page .user_info_col .heading {
+    font-size: 24px;
+    line-height: 24px;
+    color: #000000;
+    padding: 20px 0 20px 40px;
+    border-bottom: 1px solid #cccccc;
+}
+
+.profile_page .user_info_col .info {
+    padding: 40px 0 40px 40px;
+}
+
+.profile_page .user_info_col .info h3 {
+    font-size: 16px;
+    line-height: 24px;
+    color: #000000;
+    font-weight: 300;
+    margin-bottom: 0;
+
+}
+
+.profile_page .user_info_col .info h4 {
+    font-size: 20px;
+    line-height: 24px;
+    color: #000000;
+    margin-bottom: 0;
+}
+
+.profile_page .user_info_col .info .social_icons a {
+    font-size: 20px;
+    color: #000000;
+}
+
+@media (max-width: 991px) {
+    .profile_page .profile_col .user_profile_img {
+        margin-top: -70px;
+    }
+
+    .profile_page .profile_col .user_profile_img img {
+        width: 150px;
+    }
+}
+
+@media (max-width: 767px) {
+    .profile_page .profile_col .orange-img {
+        height: 150px;
+        width: 100%;
+    }
+}
+
+/* profile page desing end  */
+
+
+
+
+
+/* Packages page css start */
+
+.packages_head {
+    display: flex;
+    gap: 50px;
+    align-items: center;
+}
+
+.packages_head h4 {
+    font-size: 24px;
+    line-height: 24px;
+    color: #000000;
+    font-weight: 500;
+    font-family: AktivGrotesk-Medium;
+    margin-bottom: 0;
+}
+
+.package_btns {
+    width: 112px;
+    height: 41px;
+    border-radius: 3px;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    margin-left: 8px;
+    font-size: 14px;
+    line-height: 24px;
+    color: rgb(34 34 34 / 60%);
+    font-family: "Akkurat";
+    text-align: center;
+}
+
+.package_btns.active_btn,
+.package_btns:hover {
+    background-color: #ff593f;
+    border: 1px solid #ff593f;
+    color: #ffffff;
+}
+
+.crtbtn {
+    text-align: right;
+}
+
+.crt_pack_btn {
+    border-radius: 3px;
+    background-color: #9f007e;
+    border: 1px solid #9f007e;
+    font-size: 16px;
+    line-height: 24px;
+    color: #ffffff;
+    font-family: "Akkurat";
+    text-align: center;
+    padding: 12px;
+    max-width: 250px;
+    width: 100%;
+}
+
+.crt_pack_btn:hover {
+    background-color: #86026b;
+    border-color: #86026b;
+}
+
+.package_cards {
+    margin: 2rem 0;
+}
+
+.pack_card {
+    border: 1px solid #cccccc;
+}
+
+.pack_card img {
+    min-height: 150px;
+    max-height: 150px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.rate_txt .fa-star {
+    font-size: 17px;
+    line-height: 22px;
+    color: #ff593f;
+}
+
+.rate_txt {
+    font-size: 14px;
+    line-height: 20px;
+    color: #ff593f;
+    font-weight: bold;
+    font-family: AktivGrotesk-Bold;
+}
+
+.rate_txt span {
+    font-size: 14px;
+    line-height: 20px;
+    color: rgb(49 49 49 / 80%);
+    font-family: AktivGrotesk-Regular;
+    font-weight: normal;
+}
+
+.packcard_contetn h5 {
+    font-size: 16px;
+    line-height: 22px;
+    color: #000000;
+    font-weight: 500;
+    font-family: AktivGrotesk-Medium;
+    margin: 15px;
+}
+
+.valdate {
+    font-size: 12px;
+    line-height: 20px;
+    color: rgb(49 49 49 / 80%);
+    font-family: AktivGrotesk-Regular;
+}
+
+.valdate span {
+    font-size: 14px;
+    line-height: 20px;
+    color: rgb(49 49 49 / 88%);
+    ;
+    font-weight: 500;
+    font-family: AktivGrotesk-Medium;
+}
+
+.ratevalid {
+    padding: 0 15px 15px;
+    border-bottom: 1px solid #cccccc;
+    display: flex;
+    justify-content: space-between;
+}
+
+.cardlastpart {
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.startat p {
+    font-size: 14px;
+    line-height: 20px;
+    color: #74767e;
+    text-align: right;
+    margin-bottom: 2px;
+    font-family: AktivGrotesk-Regular;
+}
+
+.startat h6 {
+    font-size: 16px;
+    line-height: 20px;
+    color: #313131;
+    font-weight: 500;
+    margin-bottom: 0;
+}
+
+.packicons i {
+    color: #74767e;
+    margin-right: 5px;
+}
+
+
+
+/* responsive */
+
+@media(max-width: 1030px) {
+    .package_cards .col-lg-3.col-md-6 {
+        width: 33.33%;
+    }
+
+    .pack_card {
+        margin-bottom: 30px;
+    }
+
+    .packages_head {
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+}
+
+@media(max-width: 780px) {
+    .package_cards .col-lg-3.col-md-6 {
+        width: 50%;
+    }
+
+    .crtbtn {
+        text-align: left;
+        margin-top: 20px;
+    }
+}
+
+@media(max-width: 680px) {
+    .package_cards .col-lg-3.col-md-6 {
+        width: 100%;
+    }
+
+    .package_btns {
+        margin-top: 10px;
+    }
+
+}
+
+/* Packages page css end */
+
+
+/* Update Profile */
+.profile_page .update-box {
+    padding: 40px 40px 0;
+}
+
+.profile_page .update-box .box-border {
+    padding: 50px 50px 36px;
+    border: 1px solid #cccccc;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.profile_page .update-box h5 {
+    font-size: 16px;
+    color: #000000;
+    line-height: 1.5;
+    font-family: AktivGrotesk-Medium;
+    position: absolute;
+    left: 42px;
+    top: -13px;
+    max-width: fit-content;
+    background-color: #ffffff;
+    padding: 0 8px;
+}
+
+.profile_page .update-box label {
+    font-size: 16px;
+    color: #000000;
+    line-height: 1.5;
+    font-family: AktivGrotesk-Light;
+}
+
+.profile_page .update-box .form-control{
+    padding: 4px 0;
+    border-bottom: 2px solid #000000;
+    font-size: 20px;
+    color: #000000;
+    line-height: 1.5;
+    font-family: AktivGrotesk-Regular;
+    height: 40px;
+}
+.profile_page .update-box .form-select{
+    padding: 4px 40px 4px 0;
+    border-bottom: 2px solid #000000;
+    font-size: 20px;
+    color: #000000;
+    line-height: 1.5;
+    font-family: AktivGrotesk-Regular;
+    
+}
+
+.profile_page .update-box input::placeholder,
+.profile_page .update-box textarea::placeholder {
+    font-family: AktivGrotesk-Regular;
+    font-size: 20px;
+    color: #000000;
+    line-height: 1.5;
+}
+
+.profile_page .update-box input:focus,
+.profile_page .update-box textarea:focus,
+.profile_page .update-box .form-select:focus {
+    box-shadow: none;
+    outline: none;
+
+}
+
+.profile_page .update-box .form-control:focus {
+    border-bottom: 2px solid #9f007e;
+}
+
+.profile_page .update-box .form-check input {
+    margin-top: 4px;
+}
+
+.profile_page .update-box .form-check-input:checked {
+    background-color: #9f007e;
+    border-color: #9f007e;
+}
+
+.update-profile-btn {
+    font-size: 16px;
+    line-height: 24px;
+    color: #ffffff;
+    border-radius: 3px;
+    background-color: #9f007e;
+}
+.profile_page .update-box .text-red{
+    font-size: 16px;
+    color: #ff593f;
+    font-family: AktivGrotesk-Regular;
+}
+
+@media (max-width: 991px) {
+    .profile_page .update-box {
+        padding: 20px 20px 0;
+    }
+
+    .profile_page .update-box h5 {
+        position: static;
+        padding: 0 0 10px;
+    }
+
+    .profile_page .update-box .box-border {
+        padding: 16px 20px 16px;
+    }
+}
+
+/* create-quote */
+.create-quote {
+    background-color: #ffffff;
+    padding: 28px;
+}
+
+.create-quote .quote-header h4 {
+    font-size: 24px;
+    font-family: AktivGrotesk-Medium;
+    color: #000000;
+    line-height: 1;
+}
+
+.create-quote .quote-body .box-1 {
+    border: 1px solid #d1d1d1;
+    background: #ffffff url('../img/boxbg-1.png');
+    background-size: cover;
+    background-position: right;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.create-quote .quote-body .id-price .id-info span {
+    font-size: 18px;
+    color: #313131;
+    line-height: 1.333;
+    font-family: AktivGrotesk-Regular;
+}
+
+.create-quote .quote-body .id-price .id-info h4 {
+    font-size: 24px;
+    color: #000000;
+    font-family: AktivGrotesk-bold;
+}
+
+.create-quote .quote-body .id-price .price-info h3 {
+    font-size: 24px;
+    color: #000000;
+    font-family: AktivGrotesk-bold;
+}
+
+.create-quote .quote-body .select-date label {
+    font-size: 14px;
+    color: #000000;
+    font-family: AktivGrotesk-Regular;
+}
+
+.create-quote .quote-body .select-date input {
+    height: 41px;
+}
+
+.create-quote .quote-body .select-date select {
+    height: 41px;
+}
+
+.create-quote .quote-body .select-date {
+    margin: 0 -9px;
+}
+
+.create-quote .quote-body .select-date .mb-3 {
+    padding: 0 9px;
+}
+
+.create-quote .quote-body .box-2 {
+    border: 1px solid #d1d1d1;
+    background: #ffffff url('../img/boxbg-2.png');
+    background-size: cover;
+    background-position: right;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.create-quote .quote-body .box-3 {
+    border: 1px solid #d1d1d1;
+    background: #ffffff url('../img/boxbg-3.png');
+    background-size: cover;
+    background-position: right;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.create-quote .quote-body .post-guests h5 {
+    font-size: 24px;
+    font-family: AktivGrotesk-Medium;
+    color: #000000;
+    margin-bottom: 0;
+}
+
+.create-quote .quote-body .post-guests p {
+    font-size: 24px;
+    font-family: AktivGrotesk-Regular;
+    color: #000000;
+    margin-bottom: 0;
+}
+
+.create-quote .quote-body .post-guests h3 {
+    font-size: 24px;
+    font-family: AktivGrotesk-Bold;
+    color: #000000;
+    padding-top: 22px;
+}
+
+.create-quote .quote-body .box-4 {
+    border: 1px solid #d1d1d1;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.create-quote .quote-body .box-4 h5 {
+    font-size: 24px;
+    font-family: AktivGrotesk-Medium;
+    color: #000000;
+    margin-bottom: 0;
+}
+
+.create-quote .quote-body .box-4 p {
+    font-size: 24px;
+    font-family: AktivGrotesk-Regular;
+    color: #000000;
+    margin-bottom: 0;
+}
+
+.create-quote .quote-body .update-box .box-border {
+    padding: 50px 50px 36px;
+    border: 1px solid #cccccc;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.create-quote .quote-body .update-box .box-border h5 {
+    font-size: 16px;
+    color: #000000;
+    line-height: 1.5;
+    font-family: AktivGrotesk-Medium;
+    position: absolute;
+    left: 42px;
+    top: -13px;
+    max-width: fit-content;
+    background-color: #ffffff;
+    padding: 0 8px;
+}
+
+.create-quote .quote-body .update-box .box-border p {
+    font-size: 16px;
+    color: #000000;
+    padding: 30px 40px;
+    border: 1px solid #d1d1d1;
+}
+
+.create-quote .quote-body .update-box .box-border form label {
+    font-size: 14px;
+    font-family: AktivGrotesk-Regular;
+    color: #000000;
+    margin-bottom: 10px;
+}
+
+.create-quote .quote-body .update-box .box-border form input,
+.create-quote .quote-body .update-box .box-border form select {
+    font-size: 14px;
+    font-family: AktivGrotesk-Regular;
+    color: #000000;
+    border-bottom: 1px solid #ced4da;
+    padding: 9px;
+}
+
+.create-quote .quote-body .update-box .box-border form input::placeholder {
+    font-size: 14px;
+    font-family: AktivGrotesk-Regular;
+    color: #000000;
+}
+
+.create-quote .quote-body .update-box .box-border form input:focus {
+    border: 1px solid #86026b;
+}
+
+.create-quote .quote-body .update-box .box-border form .form-group h4 {
+    font-size: 20px;
+    color: #000000;
+    font-family: AktivGrotesk-Medium;
+}
+
+.create-quote .quote-body .update-box .box-border form .form-group h6 {
+    font-size: 14px;
+    color: #86026b;
+    font-family: AktivGrotesk-Medium;
+}
+
+.create-quote .quote-body .update-box .box-border .btn-solid {
+    font-size: 16px;
+    line-height: 24px;
+    color: #ffffff;
+    border-radius: 3px;
+    background-color: #9f007e;
+    border: 1px solid #9f007e;
+    min-height: 50px;
+}
+
+.create-quote .quote-body .update-box .box-border .btn-line {
+    font-size: 16px;
+    line-height: 24px;
+    color: #313131cc;
+    border-radius: 3px;
+    background-color: transparent;
+    border: 1px solid #cecece;
+    min-height: 50px;
+}
+
+@media (max-width: 991px) {
+    .create-quote .quote-body .update-box .box-border {
+        padding: 16px 20px 16px;
+    }
+    .create-quote .quote-body .update-box .box-border p{
+        padding: 15px;
+    }
+    .create-quote .quote-body .update-box .box-border h5{
+        position: static;
+        padding: 0 0 10px;
+    }
+}

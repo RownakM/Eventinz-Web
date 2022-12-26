@@ -1,0 +1,57 @@
+{% load static %}
+<div class="col-md-5 col-xl-3 col-lg-5">
+    <div class="card mb-3">
+        <div class="card-header">
+            <h5 class="card-title mb-0">Profile Details</h5>
+        </div>
+        <div class="card-body text-center">
+            {% if pstat %}
+            <img src="{{BASE_URL}}/media/{{user.Profile_Img}}" alt="Christina Mason" class="img-fluid rounded-circle mb-2" width="128" height="128" />
+            
+            {% else %}
+
+            <img src="https://cambodiaict.net/wp-content/uploads/2019/12/computer-icons-user-profile-google-account-photos-icon-account.jpg " alt="Christina Mason" class="img-fluid rounded-circle mb-2" width="128" height="128" />
+            {% endif %}
+            <h5 class="card-title mb-0">{{user.First_Name}} {{user.Last_Name}}</h5>
+            
+            <div class="text-muted mb-2">{{user.User_ID}}</div>
+
+            <div>
+                {% comment %} <a class="btn btn-primary btn-sm" href="#">My Sales</a> {% endcomment %}
+                <a class="btn btn-primary btn-sm" href="#"><span data-feather="pie-chart"></span> My Sales</a>
+                <a class="btn btn-outline-primary btn-sm" href="{%url 'vendor_profile_update'%}"><span data-feather="edit-3"></span> Edit Profile</a>
+
+            </div>
+        </div>
+        <hr class="my-0" />
+        <div class="card-body">
+            <h5 class="h6 card-title">Categories</h5>
+            {% for i in li %}
+            <a href="#" class="badge bg-primary me-1 my-1">{{i}}</a>
+            
+            {% endfor %}
+            
+        </div>
+        <hr class="my-0" />
+        <div class="card-body">
+            <h5 class="h6 card-title">About</h5>
+            <ul class="list-unstyled mb-0">
+                {% comment %} <li class="mb-1"><span data-feather="home" class="feather-sm me-1"></span> Lives in <a>{{user.Company_Address}}</a></li>
+
+                <li class="mb-1"><span data-feather="briefcase" class="feather-sm me-1"></span> Works at <a href="#">GitHub</a></li> {% endcomment %}
+                <li class="mb-1">{{user.Company_description|safe}}</li>
+            </ul>
+        </div>
+        <hr class="my-0" />
+        <div class="card-body">
+            <h5 class="h6 card-title">Social Medias</h5>
+            <ul class="list-unstyled mb-0">
+                {% comment %} <li class="mb-1"><a href="#">staciehall.co</a></li> {% endcomment %}
+                <li class="mb-1"><span data-feather="twitter" class="feather-sm me-1"></span><a href="{{user.twitter_url}}" target="_blank">Twitter</a></li>
+                <li class="mb-1"><span data-feather="facebook" class="feather-sm me-1"></span><a href="{{user.facebook_url}}" target="_blank">Facebook</a></li>
+                <li class="mb-1"><span data-feather="instagram" class="feather-sm me-1"></span><a href="{{user.instagram_url}}" target="_blank">Instagram</a></li>
+                <li class="mb-1"><span data-feather="linkedin" class="feather-sm me-1"></span><a href="{{user.linkedin_url}}" target="_blank">LinkedIn</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
