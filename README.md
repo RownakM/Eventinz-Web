@@ -15,8 +15,6 @@ Through eventinz, a planner will be able to review and choose the best vendor to
 
 
 ## Screenshots
-
-![WebSite Screenshot](https://i.ibb.co/R7V88q1/screencapture-eventinz-staging-2022-12-26-03-10-58.png)
 ![WebSite Screenshot](https://i.ibb.co/nfzhyz4/vendor-dash.png)
 
 
