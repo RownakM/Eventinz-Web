@@ -22,7 +22,7 @@ from easy_thumbnails.conf import Settings as thumbnail_settings
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-i^4$7l#3bks(o8j7(1kk!cs!n%$6%^e_1eb2(_3-39w^qh5lmx'
+SECRET_KEY = 'SECURITY_KEY_HERE'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -336,10 +336,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'postgres',
-	"HOST" : 'ls-cbbf6d51272f715a15892d95ad5bb4c3cd334e4d.cntan4syrk0k.us-east-1.rds.amazonaws.com',
+	"HOST" : 'DB_HOSTNAME',
 	'PORT' : '5432',
-	'USER' : 'dbmasteruser',
-	'PASSWORD' : 'vD%ziijMTgKR=!1!`c0jr*<di3CDQiV['
+	'USER' : 'DB_USER',
+	'PASSWORD' : 'DB_PASSWORD'
 
     }
 }
@@ -385,14 +385,14 @@ JET_APP_INDEX_DASHBOARD = 'jet.dashboard.dashboard.DefaultAppIndexDashboard'
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'smtp.zoho.com'
-EMAIL_HOST = 'smtp.zeptomail.com'
+
+EMAIL_HOST = 'EMAIL_HOST'
 
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'support@eventinz.com'
-# EMAIL_HOST_PASSWORD = 'Rownak@10'
-EMAIL_HOST_PASSWORD = 'wSsVR60irEL5X64vzjD8Iew9ylQGAlKnR0p03wajuXT4SvHF9sc8kE3JBFShGKNJGWFpFzFBpO16y00G12BajY4uzFBSXCiF9mqRe1U4J3x17qnvhDzPWmVfkxCMKYgBwwVimWBmG8tu'
+EMAIL_HOST_USER = 'EMAIL_USERNAME'
+
+EMAIL_HOST_PASSWORD = 'EMAIL_PASSWORD'
 
 # Password validation 
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -494,11 +494,11 @@ SITE_ID = 2
 # LOGIN_URL = 'login'
 # LOGOUT_URL = 'logout'
 # LOGIN_REDIRECT_URL = 'home'
-SOCIAL_AUTH_GOOGLE_KEY = 'ba5e9414a8222a152d9a'
-SOCIAL_AUTH_GOOGLE_SECRET = 'e2ac3f9a818dc8082cebbd67800c05f8206bf277' 
+SOCIAL_AUTH_GOOGLE_KEY = 'GOOGLE_AUTH_KEY'
+SOCIAL_AUTH_GOOGLE_SECRET = 'GOOGLE_SECRET_KEY'
 
-SOCIAL_AUTH_FACEBOOK_KEY='429226305282959'
-SOCIAL_AUTH_FACEBOOK_SECRET='81be77b92e396afc8181c957833f0e75'
+SOCIAL_AUTH_FACEBOOK_KEY='FACEBOOK_AUTH_KEY'
+SOCIAL_AUTH_FACEBOOK_SECRET='FACEBOOK_SECRET_KEY'
 
 import os
 # # import logging
