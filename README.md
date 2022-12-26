@@ -15,7 +15,9 @@ Through eventinz, a planner will be able to review and choose the best vendor to
 
 
 ## Screenshots
+![WebSite Screenshot](https://github.com/RownakM/Eventinz-Web/blob/main/Eventinz.png)
 ![WebSite Screenshot](https://i.ibb.co/nfzhyz4/vendor-dash.png)
+
 
 
 
